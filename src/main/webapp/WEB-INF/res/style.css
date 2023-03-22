@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.icon {
+     font-size: 30px;
+}
+
+body { 
+    padding-top: 110px;
+    padding-bottom: 100px;
+    font-family: 'Pretendard-Regular';
+}
+
+div.mx-auto {
+    width: 9rem;
+}
+
+#header, #navbarHeader, #navbarFooter{
+    background-color: #dfebf6;
+}
+
+.btn-primary{
+    background-color: #287094;
+    border-color: #287094;
+}
+
+.btn-primary:hover {
+color: #fff;
+background-color: #287094;
+border-color: #287094;
+}
+
+.bi-caret-left-fill{
+    font-size: 30px;
+}
+
+.menuName {
+    border-bottom: 0.1rem solid #053847;
+    background-color: #dfebf6;
+}
+
+.navbar{
+    border-bottom: 0.1rem solid #053847;
+    background-color: #dfebf6;
+}
+
+.navigation{
+    margin-top: 60px;
+    z-index: 2;
+}
+
+.container{
+    z-index: 1;
+}
+
+

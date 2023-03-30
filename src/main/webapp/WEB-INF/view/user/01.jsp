@@ -9,17 +9,45 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='/res/style.css' rel='stylesheet'/>
 <script src='/res/navigation.js'></script>
+<script src='/res/modal.js'></script>
+<script>
+$(() => {
+	$('#loginBtn').click(e => {
+		e.preventDefault()
+		$.ajax({
+			url: 'get',
+			dataType: 'json',
+			success: users => {
+				$.each(users, (i, user) => {
+					if(user.userId == $('#userId').val()) {
+						if(user.userPw == $('#userPw').val()){
+							$('form').submit();
+						} else {
+							showOkModal('아이디 또는 비밀번호를 잘못 입력했습니다.')
+						}
+					}
+				})
+				showOkModal('아이디 또는 비밀번호를 잘못 입력했습니다.')
+			}
+		})
+	})
+})
+</script>
   <title>login</title>
 <style>
     .loginFooter{
         color: black;
     }
+    .container{
+        margin-top: 3rem;
+    }
+
 </style>
 </head>
 <body>
 <header></header>
-<div class='fixed-top navigation'>
-	<div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill'></i></div>
+<div class='navigation fixed-top'>
+	<div class='float-start ms-2 mt-3'><i class='bi bi-caret-left-fill' onclick="location.href='/'"></i></div>
 	<div class='menuName'>
 	    <h2 class='text-center pt-3'><b>로그인</b></h2>
 	</div>
@@ -33,25 +61,25 @@
                         <div class='row mb-3'>
                             <div class='col'>
                                 <input type='text' class='form-control'
-                                placeholder='아이디' name='userId'
+                                placeholder='아이디' name='userId' id='userId'
                                 value='${user.userId}'/>
                             </div>
                         </div>
                         <div class='row'>
                             <div class='col'>
-                                <input type='text' class='form-control' 
-                                	placeholder='비밀번호' name='password'/>
+                                <input type='password' class='form-control' 
+                                	placeholder='비밀번호' name='userPw' id='userPw'/>
                             </div>
                         </div>
                         <div class='row'>
                             <div class='col mb-2'>
                                 <input type='checkbox' class='mt-3' 
-                                	name='rememberId' <%= request.getAttribute("rememberId") %>/>&nbsp;<b>아이디 저장</b>
+                                	id='saveId' <%= request.getAttribute("saveId") %>/>&nbsp;<b>아이디 저장</b>
                             </div>
                         </div>
                         <div class='row'>
                             <div class='col'>
-                                <button type='submit' class='btn btn-primary form-control'
+                                <button type='submit' class='btn btn-darkBlue form-control'
                                  id='loginBtn'>
                                     <span>로그인</span>
                                 </button>
@@ -66,6 +94,17 @@
                 <a href='#' class='loginFooter'>아이디 찾기&nbsp;|</a>
                 <a href='#' class='loginFooter'>비밀번호 찾기&nbsp;|</a>
                 <a href='#' class='loginFooter'>회원가입</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='modal modal-center fade' id='modal'>
+    <div class='modal-dialog modal-smallsize'>
+        <div class='modal-content'>
+            <div class='pb-4' id='modalMsg'>
+            </div>
+            <div id='modalOk'>
+                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
             </div>
         </div>
     </div>

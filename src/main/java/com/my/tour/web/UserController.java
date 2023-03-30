@@ -1,48 +1,63 @@
 package com.my.tour.web;
 
 
-import org.springframework.stereotype.Controller;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.my.tour.domain.User;
+import com.my.tour.domain.UserDto;
+import com.my.tour.service.UserService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@Controller
+@RestController
 @RequestMapping("user")
 public class UserController {
+	@Autowired private UserService userService;
+	
 	@GetMapping("nav")
-	public String navigation() {
-		return "navigation/01";
+	public ModelAndView navigation(ModelAndView mv) {
+		mv.setViewName("navigation/01");
+		return mv;
+	}
+	
+	@GetMapping("get")
+	public List<UserDto> getUsers() {
+		return userService.getUsers();
 	}
 	
 	@GetMapping("login")
-	public String logIn(@CookieValue(required=false)String userId, 
-			@ModelAttribute("user") User user, HttpServletRequest request) {
+	public ModelAndView logIn(@CookieValue(required=false)String userId, 
+			@ModelAttribute("user") UserDto user, HttpServletRequest request,
+			ModelAndView mv) {
 		if(userId != null) {
 			user.setUserId(userId);
-			request.setAttribute("rememberId", "checked");
+			request.setAttribute("saveId", "checked");
 		}
 		request.setAttribute("previousPage", 
 				(String)request.getHeader("REFERER").substring(6));
-		return "user/01";
+		
+		mv.setViewName("user/01");
+		return mv;
 	}
 	
 	@PostMapping("login")
-	public String login(@ModelAttribute("user") User user, String rememberId,
+	public ModelAndView login(@ModelAttribute("user") UserDto user, String saveId,
 			HttpSession session, HttpServletResponse response,
-			HttpServletRequest request) {
+			HttpServletRequest request, ModelAndView mv) {
 		session.setAttribute("userId", user.getUserId());
-		session.setAttribute("nickName", "user");
 		
-		if(rememberId != null && rememberId.equals("on")) {
+		if(saveId != null && saveId.equals("on")) {
 			Cookie cookie = new Cookie("userId", user.getUserId());
 			cookie.setMaxAge(10);
 			response.addCookie(cookie);
@@ -51,13 +66,15 @@ public class UserController {
 		String url = (String)request.getAttribute("previousPage");
 		if(url == null || url.equals("localhost/user/logIn")) url = "redirect:/";
 		
-		return url;
+		mv.setViewName(url);
+		return mv;
 	}
 	
 	@GetMapping("logout")
-	public String logout(HttpSession session) {
+	public ModelAndView logout(HttpSession session, ModelAndView mv) {
 		session.invalidate();
 		
-		return "redirect:/";
+		mv.setViewName("redirect:/");
+		return mv;
 	}
 }

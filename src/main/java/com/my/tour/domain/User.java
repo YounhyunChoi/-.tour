@@ -6,12 +6,11 @@ import lombok.Data;
 
 @Data
 public class User {
-	private int userNumber;
 	private String userId;
-	private String password;
-	private String eMail;
-	private String nickName;
-	private int phoneNumber;
+	private String userPw;
+	private String email;
+	private int phoneNum;
 	private String userName;
-	private LocalDate birthDay;
+	private LocalDate birthday;
+	private String mktgAgreement;
 }

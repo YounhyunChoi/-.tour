@@ -128,7 +128,7 @@
                     <ul>
                         <li>
                             <a class='nav-link' aria-current='page' href='#'>1대1문의</a>
-                            <a class='nav-link' aria-current='page' href='#'>FAQ</a>
+                            <a class='nav-link' aria-current='page' href='/faq'>FAQ</a>
                         </li>
                     </ul>
                 </li>

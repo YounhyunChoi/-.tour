@@ -27,9 +27,10 @@ public class UserController {
 	
 	@GetMapping("nav")
 	public ModelAndView navigation(ModelAndView mv) {
-		mv.setViewName("navigation/01");
+		mv.setViewName("navigation/navigation");
 		return mv;
 	}
+	
 	
 	@GetMapping("get")
 	public List<UserDto> getUser(String userId, String userPw) {
@@ -47,7 +48,7 @@ public class UserController {
 		request.setAttribute("previousPage", 
 				(String)request.getHeader("REFERER").substring(6));
 		
-		mv.setViewName("user/01");
+		mv.setViewName("user/login");
 		return mv;
 	}
 	
@@ -57,7 +58,7 @@ public class UserController {
 			HttpServletRequest request, ModelAndView mv) {
 		session.setAttribute("userId", user.getUserId());
 		
-		if(saveId != null && saveId.equals("on")) {
+		if(saveId != null && saveId.equals("on")) {	
 			Cookie cookie = new Cookie("userId", user.getUserId());
 			cookie.setMaxAge(10);
 			response.addCookie(cookie);

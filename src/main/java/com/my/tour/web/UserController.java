@@ -32,8 +32,8 @@ public class UserController {
 	}
 	
 	@GetMapping("get")
-	public List<UserDto> getUsers() {
-		return userService.getUsers();
+	public List<UserDto> getUser(String userId, String userPw) {
+		return userService.getUser(userId, userPw);
 	}
 	
 	@GetMapping("login")

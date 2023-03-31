@@ -16,18 +16,17 @@ $(() => {
 		e.preventDefault()
 		$.ajax({
 			url: 'get',
+			data: {
+				userId: $('#userId').val(),
+				userPw: $('#userPw').val()
+			},
 			dataType: 'json',
-			success: users => {
-				$.each(users, (i, user) => {
-					if(user.userId == $('#userId').val()) {
-						if(user.userPw == $('#userPw').val()){
-							$('form').submit();
-						} else {
-							showOkModal('아이디 또는 비밀번호를 잘못 입력했습니다.')
-						}
-					}
-				})
-				showOkModal('아이디 또는 비밀번호를 잘못 입력했습니다.')
+			success: user => {
+				if(user.length) {
+					$('form').submit()
+				} else {
+					showOkModal('아이디 또는 비밀번호를 잘못 입력했습니다.')
+				}
 			}
 		})
 	})

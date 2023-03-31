@@ -1,5 +1,6 @@
 package com.my.tour.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,13 @@ public class UserServiceImpl implements UserService {
 	@Autowired private UserDao userDao;
 
 	@Override
-	public List<UserDto> getUser(String userId, String userPw) {
-		return userDao.selectUser(userId, userPw);
+	public List<UserDto> getUser(String userId) {
+		return userDao.selectUser(userId);
+	}
+	
+	@Override
+	public int addUser(String userId, String userPw, String email, int phoneNum,
+						String userName, LocalDate birthday, String mktgAgreement) {
+		return userDao.insertUser(userId, userPw, email, phoneNum, userName, birthday, mktgAgreement);
 	}
 }

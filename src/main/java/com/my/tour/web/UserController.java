@@ -1,9 +1,11 @@
 package com.my.tour.web;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.tour.domain.User;
 import com.my.tour.domain.UserDto;
 import com.my.tour.service.UserService;
 
@@ -27,27 +30,31 @@ public class UserController {
 	
 	@GetMapping("nav")
 	public ModelAndView navigation(ModelAndView mv) {
-		mv.setViewName("navigation/01");
+		mv.setViewName("navigation/navigation");
 		return mv;
 	}
 	
 	@GetMapping("get")
-	public List<UserDto> getUser(String userId, String userPw) {
-		return userService.getUser(userId, userPw);
+	public List<UserDto> getUser(String userId) {
+		return userService.getUser(userId);
 	}
 	
 	@GetMapping("login")
 	public ModelAndView logIn(@CookieValue(required=false)String userId, 
 			@ModelAttribute("user") UserDto user, HttpServletRequest request,
-			ModelAndView mv) {
-		if(userId != null) {
-			user.setUserId(userId);
-			request.setAttribute("saveId", "checked");
+			HttpSession session, ModelAndView mv) {
+		if(session.getAttribute("userId") == null) {
+			if(userId != null) {
+				user.setUserId(userId);
+				request.setAttribute("saveId", "checked");
+			}
+			request.setAttribute("previousPage", 
+					(String)request.getHeader("REFERER").substring(6));
+			
+			mv.setViewName("user/login");
+		} else {
+			mv.setViewName("redirect:/");
 		}
-		request.setAttribute("previousPage", 
-				(String)request.getHeader("REFERER").substring(6));
-		
-		mv.setViewName("user/01");
 		return mv;
 	}
 	
@@ -75,6 +82,27 @@ public class UserController {
 		session.invalidate();
 		
 		mv.setViewName("redirect:/");
+		return mv;
+	}
+	
+	@GetMapping("signUp")
+	public ModelAndView signUp(HttpSession session, ModelAndView mv) {
+		if(session.getAttribute("userId") == null) {
+			mv.setViewName("user/signUp");
+		} else {
+			mv.setViewName("redirect:/");
+		}
+		return mv;
+	}
+	
+	@PostMapping("signUp")
+	public ModelAndView signUp(String userId, String userPw, String email,
+								int phoneNum, String userName, 
+								@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate birthday, 
+								String mktgAgreement, ModelAndView mv) {
+		userService.addUser(userId, userPw, email, phoneNum, userName, birthday, mktgAgreement);
+		System.out.println(userId+ ", " + userPw + ", " + email + ", " + phoneNum + ", " + userName + ", " + birthday + ", " + mktgAgreement);
+		mv.setViewName("user/afterSignUp");
 		return mv;
 	}
 }

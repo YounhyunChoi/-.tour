@@ -13,36 +13,48 @@
 <script src='../res/modal.js'></script>
 <script>
 	$(() => {
-		$('#addComment').click(() => {
-			showConfirmModal('댓글을 등록하시겠습니까?', '댓글이 등록되었습니다.', '../review/review')
-			
-			$('#okBtn').click(() => {
-				if($('#comtContent').val()) {
-					let comment ={
-						comtContent: $('#comtContent').val(),
-						reviewNum: 0001,
-						userId: 'user'
-					}
-					
-					$.ajax({
-						url: 'add',
-						method: 'post',
-						data: comment
-					})
-				}
-			})
+        $('#fixComment').click(() => {
+        	showConfirmModal('댓글을 수정하시겠습니까?', '댓글이 수정되었습니다.', '../review/04.html')
+        	
+        	$('#okBtn').click(() => {
+        		if($('#comtContent').val()) {
+    				let comment = {
+    						comtContent: $('#comtContent').val()
+    				}
+    				
+    				$.ajax({
+    					url: 'fix',
+    					method: 'put',
+    					contentType: 'application/json',
+    					data: JSON.stringify(comment)
+    				})
+    			}
+        	})
 		})
-	})
+		
+		$('#deleteComment').click(() => {
+			showConfirmModal('댓글을 삭제하시겠습니까?', '댓글이 삭제되었습니다.', '../review/04.html')
+			$('#okBtn').click(() => {
+				$.ajax({
+					url: 'del/' + $('#comtNum').val(),
+					method: 'delete'				
+				})
+        	})
+		})
+    })
 </script>
-<title>댓글쓰기</title>
+<title>댓글수정</title>
+<style>
+   
+</style>
 </head>
 <body>
 <header>
 </header>
 <div class='navigation fixed-top'>
-   <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill' onclick="location.href='../review/04.html'"></i></div>
+   <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill' onclick="location.href='../review/04.html'"></i></div>
    <div class='menuName'>
-      <h2 class='text-center pt-3'><b>댓글쓰기</b></h2>
+      <h2 class='text-center pt-3'><b>댓글수정</b></h2>
    </div>
 </div>
 <div class='container'>
@@ -52,10 +64,10 @@
             <h3>java01</h3>
             <hr>
             <textarea class='form-control' id='comtContent'></textarea>
-            <span class='mt-2 d-flex justify-content-end'>
-                <a class='btn btn-darkBlue' data-bs-toggle='modal' 
-                id='addComment' data-bs-target='#modal'>댓글등록</a>
-            </span>
+            <span class='mt-2 gap-2 d-flex justify-content-end'>
+                <a class='btn btn-lightRed' data-bs-toggle='modal' data-bs-target='#modal' id='deleteComment'>댓글삭제</a>
+                <a class='btn btn-olive' data-bs-toggle='modal' data-bs-target='#modal' id='fixComment'>댓글수정</a>
+            </span>       
         </div>
     </div>
 </div>

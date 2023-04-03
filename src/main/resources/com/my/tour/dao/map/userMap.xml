@@ -5,6 +5,12 @@
 	<select id='selectUser' resultType='userDto'>
 		select user_id, user_pw
 		from users
-		where user_id = #{userId} and user_pw = #{userPw}
+		where user_id = #{userId}
 	</select>
+	
+	<insert id='insertUser'>
+		insert into users
+		values (#{userId}, #{userPw}, #{email}, #{phoneNum}, #{userName},
+				#{birthday}, #{mktgAgreement})
+	</insert>
 </mapper>

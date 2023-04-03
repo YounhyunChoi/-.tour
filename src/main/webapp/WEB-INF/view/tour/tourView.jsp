@@ -31,6 +31,7 @@ $(() => {
 								내용 \${tour.tourContent}<br>
 							</div>`)
 					$('#tourContent').append(tourArr.join(''))
+					$('input[name=tourNum]').val(tour.tourNum)
 				}
 			})
 		}
@@ -118,10 +119,13 @@ $(() => {
                 <i id='tourWishBtn' data-bs-toggle='modal' data-bs-target='#modal' class='bi bi-heart ms-3 btn tourWishIcon'></i>
             </div>
             <div class='row'>
-                <button type='button' class='mt-5 ms-5 w-auto btn btn-darkBlue'
-                    onclick="location.href='#'">
+            	<form action='/reservation/add'>
+            	<input type ='hidden' name='tourNum'/>
+                <button type='submit' id='reservationBtn' class='mt-5 ms-5 w-auto btn btn-darkBlue'
+                onclick="location.href=`/reservation/add`">
                     예약하기
                 </button>
+                </form>
             </div>
         </div>
     </div>

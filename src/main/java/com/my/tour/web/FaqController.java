@@ -23,8 +23,10 @@ public class FaqController {
 	}
 	
 	@GetMapping
-	public ModelAndView test(ModelAndView mv) {
+	public ModelAndView faqMain(ModelAndView mv) {
 		mv.setViewName("faq/faqMain");
 		return mv;
 	}
+	
+	
 }

@@ -101,7 +101,7 @@
                     여행
                     <ul>
                         <li>
-                            <a class='nav-link' aria-current='page' href='#'>코스보기</a>
+                            <a class='nav-link' aria-current='page' href='/tour'>코스보기</a>
                             <a class='nav-link' aria-current='page' href='#'>후기</a>
                         </li>
                     </ul>

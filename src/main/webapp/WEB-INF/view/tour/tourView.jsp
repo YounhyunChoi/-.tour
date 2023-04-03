@@ -1,4 +1,7 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%
+	String userId = (String)session.getAttribute("userId");
+%>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -39,8 +42,40 @@ $(() => {
 </script>
 <script>
     $(() => {
-        $('#tourShareBtn').click(() => showOkModal('링크가 복사되었습니다. 친구에게 공유해보세요.'))
-        $('#tourWishBtn').click(() => showOkModal('여행코스가 찜 되었습니다.'))
+        $('#tourShareBtn').click(() => {
+	        let url = ''
+	    	let textarea = document.createElement("textarea")
+	    	document.body.appendChild(textarea)
+	    	url = window.document.location.href
+	    	textarea.value = url
+	    	textarea.select()
+	    	document.execCommand("copy")
+	    	document.body.removeChild(textarea)
+	    	
+        	showOkModal('링크가 복사되었습니다. 친구에게 공유해보세요.')
+        })
+        
+        $('#tourWishBtn').click(() => {
+<%
+			if(userId != null) {
+%>
+			$.ajax({
+				url: '../../wish/add',
+				method: 'post',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					tourName: $('#tourTitle').val()
+				}),
+        		success: showOkModal('여행코스가 찜 되었습니다.')
+			})
+<%
+        	} else {
+%>
+				showOkModal('로그인 페이지로 이동합니다.', '../../user/login')
+<%
+        	}
+%>
+        })
     })
 </script>
 <title>TOUR.02 여행코스 조회</title>

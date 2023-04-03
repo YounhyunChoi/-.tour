@@ -75,7 +75,7 @@ $(() => {
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill' id='navBackBtn' onclick="location.href='../list'"></i></div>
+    <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill' id='navBackBtn' onclick="location.href='../../tour'"></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b id='tourTitle'></b></h2>
     </div>
@@ -119,7 +119,7 @@ $(() => {
             </div>
             <div class='row'>
                 <button type='button' class='mt-5 ms-5 w-auto btn btn-darkBlue'
-                    onclick="location.href='../reservation/01.html'">
+                    onclick="location.href='#'">
                     예약하기
                 </button>
             </div>
@@ -134,7 +134,7 @@ $(() => {
             <div class='row mt-2'>
                 <div class='col-4'>
                     <!-- 남이 쓴 review일 경우의 링크 -->
-                    <div class='reviewImage' onclick="location.href='../review/04.html'">후기이미지</div>
+                    <div class='reviewImage' onclick="location.href='#'">후기이미지</div>
                 </div>
                 <div class='col-6 ms-2 fs-5 text-left'>
                     제목 이쁘다<br>
@@ -158,7 +158,7 @@ $(() => {
             <div class='row mt-2'>
                 <div class='col-4'>
                     <!-- 내가 쓴 review일 경우의 링크 -->
-                    <div class='reviewImage' onclick="location.href='../review/05.html'">후기이미지</div>
+                    <div class='reviewImage' onclick="location.href='#'">후기이미지</div>
                 </div>
                 <div class='col-6 ms-2 fs-5 text-left'>
                     제목 안녕하세요<br>

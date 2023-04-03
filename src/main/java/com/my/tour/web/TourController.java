@@ -22,7 +22,7 @@ public class TourController {
 		return tourService.getTours();
 	}
 	
-	@GetMapping("list")
+	@GetMapping
 	public ModelAndView tourList(ModelAndView mv) {
 		mv.setViewName("tour/tourList");
 		return mv;

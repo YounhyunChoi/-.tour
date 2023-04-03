@@ -12,7 +12,7 @@
 <script>
 $(() => {
 	$.ajax({
-		url: 'get',
+		url: 'tour/get',
 		success: tours => {
 			const tourArr = []
 			
@@ -22,15 +22,15 @@ $(() => {
 						tourArr.push(
 							`<div class='row'>
 				                <div class='col p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-				                    <div class='border border-3 text-truncate tourImg' onclick="location.href='./view/\${tour.tourNum}'">여행코스이미지</div>
-				                    <div class='text-truncate' onclick="location.href='./view/\${tour.tourNum}'">\${tour.tourName}</div>
+				                    <div class='border border-3 text-truncate tourImg' onclick="location.href='./tour/view/\${tour.tourNum}'">여행코스이미지</div>
+				                    <div class='text-truncate' onclick="location.href='./tour/view/\${tour.tourNum}'">\${tour.tourName}</div>
 				                </div>`
 			            )
 					} else {
 						tourArr.push(
 							`<div class='col p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-			                    <div class='border border-3 text-truncate tourImg' onclick="location.href='./view/\${tour.tourNum}'">여행코스이미지</div>
-			                    <div class='text-truncate' onclick="location.href='./view/\${tour.tourNum}'">\${tour.tourName}</div>
+			                    <div class='border border-3 text-truncate tourImg' onclick="location.href='./tour/view/\${tour.tourNum}'">여행코스이미지</div>
+			                    <div class='text-truncate' onclick="location.href='./tour/view/\${tour.tourNum}'">\${tour.tourName}</div>
 			                </div>
 			            </div>`)
 					}

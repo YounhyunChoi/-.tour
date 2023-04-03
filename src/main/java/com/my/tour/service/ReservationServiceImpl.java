@@ -7,20 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.my.tour.dao.ReservationDao;
+import com.my.tour.dao.TourDao;
 import com.my.tour.domain.Reservation;
+import com.my.tour.domain.Tour;
 
 @Service
 public class ReservationServiceImpl implements ReservationService{
 	@Autowired private ReservationDao reservationDao;
+	@Autowired private TourDao tourDao;
 	
 	@Override
 	public List<Reservation> getReservations(){
 		return reservationDao.selectReservations();
 	}
 	
+	@Override
+	public List<Tour> getTours(){
+		return tourDao.selectTours();
+	}
 	
 	@Override
-	public int addReservation(int resvNum, LocalDate resvDate) {
-		return reservationDao.insertReservation(resvNum, resvDate);
+	public void addReservation(LocalDate resvDate, String userId, int tourNum) {
+		reservationDao.insertReservation(resvDate, userId, tourNum);
 	}
 }

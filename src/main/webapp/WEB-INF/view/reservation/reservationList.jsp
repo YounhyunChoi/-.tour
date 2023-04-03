@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page language='java' contentType='text/html; charset=UTF-8'  pageEncoding='UTF-8'%>
+
 <html>
 <head>
     <meta charset='utf-8'>
@@ -9,16 +10,11 @@
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
     <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
     <link href='../res/style.css' rel='stylesheet' />
-    <script>
-        $(() => {
-            sessionStorage.setItem("userId", "java01")
-        })
-    </script>
     <script src='../res/navigation.js'></script>
-    <script>
-    	
-    </script>
     <title>RESERVATION.02 예약내역</title>
+    <script>
+    
+    </script>
     <style>
         .viewDetailBtn {
             font-size: 1.5rem;

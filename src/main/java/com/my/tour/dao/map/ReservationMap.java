@@ -7,5 +7,5 @@ import com.my.tour.domain.Reservation;
 
 public interface ReservationMap {
 	List<Reservation> selectReservations();
-	int insertReservation(int resvNum, LocalDate resvDate);
+	int insertReservation(LocalDate resvDate, String userId, int tourNum);
 }

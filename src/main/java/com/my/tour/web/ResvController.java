@@ -5,20 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.tour.domain.Reservation;
 import com.my.tour.domain.Tour;
 import com.my.tour.service.ReservationService;
-import com.my.tour.service.TourService;
+
 
 @RestController
 @RequestMapping("reservation")
 public class ResvController {
 	@Autowired private ReservationService reservationService;
-	@Autowired private TourService tourService;
+	
 	
 	
 	@GetMapping("get")
@@ -26,9 +25,9 @@ public class ResvController {
 		return reservationService.getReservations();
 	}
 	
-	@GetMapping("get")
+	@GetMapping("getTours")
 	public List<Tour> getTours() {
-		return tourService.getTours();
+		return reservationService.getTours();
 	}
 	
 	@GetMapping("list")
@@ -38,7 +37,7 @@ public class ResvController {
 	}
 	
 	@GetMapping("add")
-	public ModelAndView addReservation(ModelAndView mv, @RequestParam("tourNum") int tourNum) {
+	public ModelAndView addReservation(ModelAndView mv) {
 		mv.setViewName("reservation/addReservation");
 		return mv;
 	}

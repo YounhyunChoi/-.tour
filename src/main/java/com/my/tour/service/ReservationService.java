@@ -8,5 +8,6 @@ import com.my.tour.domain.Tour;
 
 public interface ReservationService {
 	List<Reservation> getReservations();
-	int addReservation(int resvNum, LocalDate resvDate);
+	void addReservation(LocalDate resvDate, String userId, int tourNum);
+	List<Tour> getTours();
 }

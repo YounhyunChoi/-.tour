@@ -19,7 +19,7 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 	
 	@Override
-	public int insertReservation(int resvNum, LocalDate resvDate) {
-		return reservationMap.insertReservation(resvNum, resvDate);
+	public void insertReservation(LocalDate resvDate, String userId, int tourNum) {
+		 reservationMap.insertReservation(resvDate, userId, tourNum);
 	}
 }

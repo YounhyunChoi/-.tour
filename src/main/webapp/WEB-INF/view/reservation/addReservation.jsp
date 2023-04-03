@@ -14,14 +14,21 @@
 <title></title>
 <script>
 $(() => {
-	
-	
-	
-	
-	
-	
-	
-	
+	$.ajax({
+		url: 'getTours',
+		success: tours => {
+			const tourArr = []
+			$.each(tours, (i, tour) => {
+				if(tour.tourNum == <%= request.getParameter("tourNum") %>) {
+					$('#tourName').text(tour.tourName)
+					$('#tourContent').text(tour.tourContent)
+					$('.tourPrice').text(tour.tourPrice)
+					$('#termContent').text(tour.termNum)
+				}
+			})}
+		}
+	)
+		
    $('#paymentBtn').attr('disabled', 'disabled')
    $('#agreeCheckbox').change(() => {
       if ($('#agreeCheckbox').prop('checked')) $('#paymentBtn').removeAttr('disabled')
@@ -54,18 +61,18 @@ $(() => {
          </div>
          <div class='col p-2 border border-2 contents shadow-sm'>
             <b>상품명</b><br>
-            [당일여행]도심 속 역사와 예술 이야기<br>
+            <span id='tourName'></span><br>
             <b>상품내용</b><br>
-            도심 속 우리의 역사와 예술 이야기
+            <span id='tourContent'></span>
          </div>
       </div>
       <div class='row d-block'>
          <div class='col p-2'><b>금액 및 할인</b></div>
          <div class='col p-2 border border-2 contents shadow-sm'>
-            <b>총 예약 금액</b> 12,900원<br>
+            <b>총 예약 금액</b><span class='tourPrice'></span><br>
             <b>할인 금액</b> 0원<br>
             <br>
-            <b>결재 금액</b> 12,900원
+            <b>결재 금액</b><span class='tourPrice'></span>
          </div>
       </div>
       <div class='row d-block'>
@@ -73,7 +80,7 @@ $(() => {
             <b>필수안내 약관</b>
          </div>
          <div class='col p-2 border border-2 contents shadow-sm'>
-            약관내용<br>
+           	<span id='termContent'></span><br>
          </div>
          <div class='col p-2 text-left'>
             <input type='checkbox' id='agreeCheckbox' class='form-check d-inline align-middle'>
@@ -86,7 +93,7 @@ $(() => {
          <div class='col mt-5 d-flex justify-content-center'>
             <button id='paymentBtn' type='button' data-bs-toggle="modal" data-bs-target="#modal"
                class='px-5 py-2 border-0 rounded btn-lightRed text-center text-white '>
-               12,900원결제하기
+               <span class='tourPrice'></span>원결제하기
             </button>
          </div>
       </div>

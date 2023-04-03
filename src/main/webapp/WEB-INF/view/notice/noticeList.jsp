@@ -11,14 +11,8 @@
 <title>NOTICE.01 공지 목록</title>
 <script src='../res/navigation.js'></script>
 <script>
-    $(() => {
-        sessionStorage.setItem("userId", "java01")
-    })
-    
-    function listNotices() {
-    	$('notices').empty()
-    	
-    	ajax({
+$(() => {
+    	$.ajax({
     		url: 'notice/get',
     		dataType:'json',
     		success: notices => {
@@ -26,21 +20,22 @@
     				const noticeArr = []
     				
     				$.each(notices, (i, notice) => {
-    					noticeArr.unshift(
-    							`<div>
-    				        	<h4><b>\${notice.noticeTitle}</b></h4>
-    				            </div>`
-    					)
-    				})
+    					noticeArr.push(
+						        	`<div class='noticeName'><h4><b>\{notice.noticeNum}. \${notice.noticeTitle}</b></h4></div>
+						        	<span class='col noticeContent'>
+						            	<p><h5>\${notice.noticeContent}</h5></p><br>
+						            	<p>\${notice.noticeDate}</p>
+						        	</span>
+						        	<hr>`
+    							)
+    						})
     				
     				$('#notices').append(noticeArr.join(''))
     			} else $('#notices').append(
-    					'<p><h5>게시된 공지사항이 없습니다.</h5></p>')
+    					`<p><h5>게시된 공지사항이 없습니다.</h5></p>`)
     		}
     	})
-    }
-    
-	$(listNotices)
+    })
 </script>
 
 <style>
@@ -62,7 +57,7 @@
 </div>
 <div class='container'>
     <div class='row mt-5' id='notices'>
-    
+    	
     </div>
 </div>
 <footer>

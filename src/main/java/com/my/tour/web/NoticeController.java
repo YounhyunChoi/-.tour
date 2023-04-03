@@ -16,14 +16,14 @@ import com.my.tour.service.NoticeService;
 public class NoticeController {
 	@Autowired private NoticeService noticeService;
 	
-	@GetMapping
-	public ModelAndView main(ModelAndView mv) {
-		mv.setViewName("notice/getNotice");
-		return mv;
-	}
-	
 	@GetMapping("get")
 	public List<Notice> getNotices(){
 		return noticeService.getNotices();
+	}
+	
+	@GetMapping("list")
+	public ModelAndView noticeList(ModelAndView mv) {
+		mv.setViewName("notice/noticeList");
+		return mv;
 	}
 }

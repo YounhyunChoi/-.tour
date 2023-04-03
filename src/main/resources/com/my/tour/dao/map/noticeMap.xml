@@ -5,6 +5,5 @@
 	<select id='selectNotice' resultType='notice'>
 		select notice_num, notice_title, notice_content, notice_date
 		from notices
-		order by notice_num
 	</select>
 </mapper>

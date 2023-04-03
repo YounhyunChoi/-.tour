@@ -148,7 +148,7 @@ hr {
 <body>
 	<header> </header>
 	<div class='navigation fixed-top'>
-		<div class='float-start mt-2 ms-2'>
+		<div class='float-start mt-3 ms-2'>
 			<i class='bi bi-caret-left-fill'
 				onclick="location.href='../main.html'"></i>
 		</div>

@@ -30,7 +30,7 @@
 <header>
 </header>
 <div class='navigation fixed-top'>
-   <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill' onclick="location.history()"></i></div>
+   <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill' onclick="location.history()"></i></div>
    <div class='menuName'>
       <h2 class='text-center pt-3'><b>공지상세</b></h2>
    </div>

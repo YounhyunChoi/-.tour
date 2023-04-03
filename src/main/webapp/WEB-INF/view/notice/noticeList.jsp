@@ -21,7 +21,7 @@ $(() => {
     				
     				$.each(notices, (i, notice) => {
     					noticeArr.push(
-						        	`<div class='noticeName'><h4><b>\{notice.noticeNum}. \${notice.noticeTitle}</b></h4></div>
+						        	`<div class='noticeName'><h4><b>\${notice.noticeNum}. \${notice.noticeTitle}</b></h4></div>
 						        	<span class='col noticeContent'>
 						            	<p><h5>\${notice.noticeContent}</h5></p><br>
 						            	<p>\${notice.noticeDate}</p>
@@ -32,7 +32,7 @@ $(() => {
     				
     				$('#notices').append(noticeArr.join(''))
     			} else $('#notices').append(
-    					`<p><h5>게시된 공지사항이 없습니다.</h5></p>`)
+    					'<p><h5 class=text-center>게시된 공지사항이 없습니다.</h5></p><br><hr>')
     		}
     	})
     })
@@ -57,7 +57,7 @@ $(() => {
 </div>
 <div class='container'>
     <div class='row mt-5' id='notices'>
-    	
+    	<!-- 공지사항 목록-->
     </div>
 </div>
 <footer>

@@ -16,19 +16,4 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<Notice> getNotices(){
 		return noticeDao.selectNotices();
 	}
-	
-	@Override
-	public void addNotice(String noticeTitle, String noticeContent) {
-		noticeDao.insertNotice(noticeTitle, noticeContent);
-	}
-	
-	@Override
-	public void fixNotice(Notice notice) {
-		noticeDao.updateNotice(notice);
-	}
-	
-	@Override
-	public void delNotice(int noticeNum) {
-		noticeDao.deleteNotice(noticeNum);
-	}
 }

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.my.tour.domain.Notice;
 import com.my.tour.service.NoticeService;
 
-@RestController
+@RestController("noticeController")
 @RequestMapping("notice")
 public class NoticeController {
 	@Autowired private NoticeService noticeService;
@@ -21,7 +21,7 @@ public class NoticeController {
 		return noticeService.getNotices();
 	}
 	
-	@GetMapping("list")
+	@GetMapping
 	public ModelAndView noticeList(ModelAndView mv) {
 		mv.setViewName("notice/noticeList");
 		return mv;

@@ -1,6 +1,6 @@
 $(() => {
 	$.ajax({
-       	url: '../../user/nav',
+       	url: '../admin/navigation',
        	success: function(result) {
     		$('.container-fluid').append(result)
        }

@@ -36,7 +36,7 @@
 			showConfirmModal('댓글을 삭제하시겠습니까?', '댓글이 삭제되었습니다.', '../review/04.html')
 			$('#okBtn').click(() => {
 				$.ajax({
-					url: 'del' ,
+					url: 'del/' + $('#comtNum').val(),
 					method: 'delete'				
 				})
         	})

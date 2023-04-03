@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -96,12 +97,15 @@ public class UserController {
 	}
 	
 	@PostMapping("signUp")
-	public ModelAndView signUp(String userId, String userPw, String email,
-								int phoneNum, String userName, 
-								@DateTimeFormat(pattern="yyyy-MM-dd") LocalDate birthday, 
-								String mktgAgreement, ModelAndView mv) {
-		userService.addUser(userId, userPw, email, phoneNum, userName, birthday, mktgAgreement);
-		System.out.println(userId+ ", " + userPw + ", " + email + ", " + phoneNum + ", " + userName + ", " + birthday + ", " + mktgAgreement);
+	public ModelAndView signUp(@RequestBody User user, ModelAndView mv) {
+		userService.addUser(user);
+		
+		mv.setViewName("user/afterSignUp");
+		return mv;
+	}
+	
+	@GetMapping("afterSignUp")
+	public ModelAndView afterSignUp(ModelAndView mv) {
 		mv.setViewName("user/afterSignUp");
 		return mv;
 	}

@@ -19,7 +19,7 @@ $(() => {
 	let idCheck = false
 	
 	$('#duplicateCheck').click(() => {
-		regexr = /[a-z0-1]{5}/
+		regexr = /[a-z0-9]{5}/
     	$.ajax({
 			url: 'get',
 			data: {
@@ -88,26 +88,27 @@ $(() => {
     $('#signUp').click(() => {
     	regexr = /[가-힣]{3}/
     	
-        if(idCheck && passwordCheck && emailCheck.test($('#email').val()) && phoneCheck && regexr.test($('#userName').val()) && $('#birthday').val()) {
-        	showOkModal('회원가입이 완료되었습니다.')
-        	$('#modalOk').find('a').click(() => {
-        		let mktg = $('#mktg').is(':checked') ? 'Y' : 'N'
-        		console.log($('#userId').val(), $('#password1').val(), $('#email').val(), $('#phoneNum').val(), $('#userName').val(), $('#birthday').val(), mktg)
-        		
-        		$.ajax({
-                  	url: 'signUp',
-                  	method: 'post',
-                  	data: {
-                  		userId: $('#userId').val(),
-                  		userPw: $('#password1').val(),
-                  		email: $('#email').val(),
-                  		phoneNum: $('#phoneNum').val(),
-                  		userName: $('#userName').val(),
-                  		birthday: $('#birthday').val(),
-                  		mktgAgreement: mktg
-                  	}
-                })
-           	})
+        if(idCheck && passwordCheck && emailCheck.test($('#email').val()) && phoneCheck && regexr.test($('#userName').val()) && $('#birthday').val()) {        	
+    		let mktg = $('#mktg').is(':checked') ? 'Y' : 'N'
+        	
+        	$.ajax({
+              	url: 'signUp',
+              	method: 'post',
+              	contentType: 'application/json',
+              	data: JSON.stringify({
+              		userId: $('#userId').val(),
+              		userPw: $('#password1').val(),
+              		email: $('#email').val(),
+              		phoneNum: $('#phoneNum').val(),
+              		userName: $('#userName').val(),
+              		birthday: $('#birthday').val(),
+              		mktgAgreement: mktg
+              	})
+            })
+            
+            $('#modalOk').find('a').attr('data-bs-dismiss', '').attr('href', 'afterSignUp')
+            
+            showOkModal('회원가입이 완료되었습니다.')
         } else {
             showOkModal('누락된 필수 입력사항이 있거나 휴대폰 인증이 완료되지 않았습니다.')
         }
@@ -242,10 +243,6 @@ $(() => {
     <div class='modal-dialog modal-smallsize'>
         <div class='modal-content'>
             <div class='pb-4' id='modalMsg'></div>
-            <div id='modalBtn'>
-                <button type='button' class='btn btn-lightGray' data-bs-dismiss='modal'>아니오</button>
-                <button type='button' class='btn btn-darkBlue' id='okBtn'>예</button>
-            </div>
             <div id='modalOk'>
                 <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
             </div>

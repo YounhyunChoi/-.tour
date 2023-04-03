@@ -106,7 +106,7 @@ $(() => {
               	})
             })
             
-            $('#modalOk').find('a').attr('data-bs-dismiss', '').attr('href', 'afterSignUp')
+            $('#modalOk').find('a').click(() => $('form').submit())
             
             showOkModal('회원가입이 완료되었습니다.')
         } else {
@@ -136,7 +136,7 @@ $(() => {
                     *아이디
                 </div>
                 <div class='col-6'>
-                    <input type='text' class='form-control' maxlength='10' id='userId'/>
+                    <input type='text' class='form-control' maxlength='10' id='userId' name='userId'/>
                 </div>
                 <div class='col-3'>
                     <button id='duplicateCheck' type='button' class='btn btn-darkBlue'>

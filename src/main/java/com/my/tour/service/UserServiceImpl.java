@@ -17,13 +17,13 @@ public class UserServiceImpl implements UserService {
 	@Autowired private AdminDao adminDao;
 	
 	@Override
-	public List<UserDto> getUser(String userId) {
-		return userDao.selectUser(userId);
+	public List<UserDto> getUserDto(String userId) {
+		return userDao.selectUserDto(userId);
 	}
 
 	@Override
 	public List<UserDto> getUserOrAdmin(String userId) {
-		List<UserDto> user = userDao.selectUser(userId);
+		List<UserDto> user = userDao.selectUserDto(userId);
 		List<Admin> admin = adminDao.selectAdmin(userId);
 		
 		if(user.size() == 0 && admin.size() != 0) {
@@ -41,5 +41,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int addUser(User user) {
 		return userDao.insertUser(user);
+	}
+
+	@Override
+	public List<UserDto> findUserId(String userName, String email) {
+		return userDao.selectUserId(userName, email);
 	}
 }

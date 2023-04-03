@@ -19,7 +19,7 @@
         	$('#okBtn').click(() => {
         		if($('#comtContent').val()) {
     				let comment = {
-    						comtContent: $('#comtContent').val()
+    					comtContent: $('#comtContent').val()
     				}
     				
     				$.ajax({
@@ -36,8 +36,8 @@
 			showConfirmModal('댓글을 삭제하시겠습니까?', '댓글이 삭제되었습니다.', '../review/04.html')
 			$('#okBtn').click(() => {
 				$.ajax({
-					url: 'del/' + $('#comtNum').val(),
-					method: 'delete'				
+					url: 'del',
+					method: 'delete'
 				})
         	})
 		})

@@ -18,19 +18,16 @@
 <title></title>
 <script>
         $(() => {
-        	
-        	
- 
-        	
+        	 	
             let btnFunction = function (a) {
                 a.click(() => {
-                    if (a.hasClass('openBtn')) {
-                    	 a.removeClass('openBtn')
-                         a.addClass('closeBtn')
+                    if (a.hasClass('openBtn') && a.attr('aria-expanded') == 'true') {
+                    	a.removeClass('openBtn')
+                        a.addClass('closeBtn')
                         a.children().remove()
                         a.html("<span>닫기</span><i class='bi bi-caret-up-fill'></i>")
                        		                  
-                    } else if (a.hasClass('closeBtn')) {
+                    } else if (a.hasClass('closeBtn') && a.attr('aria-expanded') == 'false') {
                     	a.removeClass('closeBtn')
                         a.addClass('openBtn')
                         a.children().remove()
@@ -67,7 +64,7 @@
     					                        	\${faq.faqQuestion}
     					                        </div>
     					                        <button type='button' id='faqBtn\${++i}' class='faqBtn openBtn text-white border-0 rounded' 
-    					                            data-bs-toggle='collapse' data-bs-target='#faqContent\${i}'>
+    					                            data-bs-toggle='collapse' data-bs-target='#faqContent\${i}' aria-expanded='false'>
     					                            <span>열기</span>
     					                            <i class='bi bi-caret-down-fill'></i>
     					                        </button>

@@ -1,5 +1,7 @@
 package com.my.tour.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.tour.domain.Comment;
 import com.my.tour.service.CommentService;
 
 @RestController
@@ -27,6 +30,11 @@ public class CommentController {
 	public int addComment(String comtContent, int reviewNum, String userId) {
 		System.out.println("|" + comtContent + reviewNum + userId + "|");
 		return commentService.addComment(comtContent, reviewNum, userId);
+	}
+	
+	@PostMapping("get")
+	public List<Comment> getComments() {
+		return commentService.getComments();
 	}
 	
 	@GetMapping("fix")

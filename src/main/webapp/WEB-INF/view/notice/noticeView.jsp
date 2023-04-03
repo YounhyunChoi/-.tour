@@ -9,10 +9,29 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
+
 <script>
-    $(() => {
-        sessionStorage.setItem("userId", "java01")
-    })
+$(() => {
+	$.ajax({
+		url: 'notice/view/' + ${notice.noticeNum},
+		dataType: 'json',
+		success: notices => {
+			const noticeArr = []
+				$.each(notices, (i, notice) => {
+					notices.push(
+								`<h3 class='noticeName' value='\${notice.noticeNum}' 
+		        				id='noticeNum'><b>\{notice.noticeNum}. ${notice.noticeTitle}</b></h3>
+		        				<span class='col noticeContent'>
+		            				<p>\${notice.noticeDate}</p>
+		        				</span>
+		        				<hr>
+		        				<div class='border text-center mb-3 noticeImg'>공지사항이미지</div>
+		        				<span>\${notice.noticeContent}</span>`
+						)
+			})
+		}
+	})
+})
 </script>
 
 <title>NOTICE.02 공지 조회</title>
@@ -36,16 +55,8 @@
    </div>
 </div>
 <div class='container'>
-    <div class='row mt-5'>
-        <h3 class='noticeName'><b>3. [공지] 설 연휴 일정 변경 안내</b></h3>
-        <span class='col noticeContent'>
-            <p>작성일 2023-01-16</p>
-        </span>
-        <hr>
-        <div class='border text-center mb-3 noticeImg'>공지사항이미지</div>
-        <span>설 연휴에 따른 여행 일정 변경 안내드립니다. 
-            우리 고유 명절인 설을 맞이하면 신청한 택배가 배송지연될 수 있음을 안내드립니다...
-        </span>
+    <div class='row mt-5' id='noticeView'>
+        
     </div>
 </div>
 <footer>

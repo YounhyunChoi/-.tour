@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC './/mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.tour.dao.map.ReviewMap'>	
+	<insert id='insertReview'>
+		insert into reviews(review_num,review_title, reivew_content, score, review_date, user_id, tour_num)
+		values(review_num_seq.nextval, #{reviewTitle}, #{comtContent}, #{score}, to_date(sysdate, 'YYYY-MM-DD'), #{userId}, #{tourNum})
+	</insert>
+	
+	<update id='updateReview'>
+		update reviews
+		set review_content = #{reviewContent}, review_title = #{reviewTitle}, score = #{score}
+		where reivew_num = #{reviewNum}
+	</update>
+	
+	<delete id='deleteReview'>
+		delete reviews
+		where reivew_num = #{reviewNum}
+	</delete>
+</mapper>

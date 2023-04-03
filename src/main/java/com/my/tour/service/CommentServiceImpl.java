@@ -18,8 +18,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public int addComment(String comtContent, int reviewNum, String userId) {
-		return commentDao.insertComment(comtContent, reviewNum, userId);
+	public int addComment(String comtContent) {
+		return commentDao.insertComment(comtContent);
 	}
 	
 	@Override

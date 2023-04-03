@@ -14,14 +14,12 @@
 <script>
 	$(() => {
 		$('#addComment').click(() => {
-			showConfirmModal('댓글을 등록하시겠습니까?', '댓글이 등록되었습니다.', '../review/04.html')
+			showConfirmModal('댓글을 등록하시겠습니까?', '댓글이 등록되었습니다.', '../review/review')
 			
 			$('#okBtn').click(() => {
 				if($('#comtContent').val()) {
-					let comment ={
-						comtContent: $('#comtContent').val(),
-						reviewNum: 0,
-						userId: 'user'
+					let comment = {
+						comtContent: $('#comtContent').val()
 					}
 					
 					$.ajax({

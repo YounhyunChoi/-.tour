@@ -106,7 +106,8 @@ $(() => {
               	})
             })
             
-            $('#modalOk').find('a').click(() => $('form').submit())
+            $('#modalOk').find('a').attr('data-bs-dismiss', '')
+            .attr('href', 'afterSignUp?userId=' + $('#userId').val())
             
             showOkModal('회원가입이 완료되었습니다.')
         } else {

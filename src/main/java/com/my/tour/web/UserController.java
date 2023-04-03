@@ -103,20 +103,16 @@ public class UserController {
 	}
 	
 	@PostMapping("signUp")
-	public ModelAndView signUp(@RequestBody User user, String userId,
-							HttpServletRequest request, ModelAndView mv) {
-		if(user != null) {
-			userService.addUser(user);
-		} else {
-			request.setAttribute("userId", userId);
-		}
+	public ModelAndView signUp(@RequestBody User user, ModelAndView mv) {	
+		userService.addUser(user);		
 		
 		mv.setViewName("user/afterSignUp");
 		return mv;
 	}
 	
 	@GetMapping("afterSignUp")
-	public ModelAndView afterSignUp(ModelAndView mv) {
+	public ModelAndView afterSignUp(ModelAndView mv, HttpServletRequest request) {
+		mv.addObject("userId", request.getParameter("userId"));
 		mv.setViewName("user/afterSignUp");
 		return mv;
 	}

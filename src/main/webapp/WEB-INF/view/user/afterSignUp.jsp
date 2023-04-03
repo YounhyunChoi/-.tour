@@ -22,7 +22,7 @@
         <h1 class='mt-5'><b>가입을 환영합니다!</b></h1>
         <hr class="border border-dark border-1 opacity-50">
         <div class='mt-3 mb-3'>
-            <a>${requestScope.userId}님, 가입을 축하합니다.</a>
+            <a>${userId}님, 가입을 축하합니다.</a>
         </div>
         <div>
             <a>이젠 여행 코스를 즐겨보세요.</a>

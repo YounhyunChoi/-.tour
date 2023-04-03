@@ -43,8 +43,8 @@ public class UserController {
 	
 	@GetMapping("login")
 	public ModelAndView logIn(@CookieValue(required=false)String userId, 
-			@ModelAttribute("user") UserDto user, HttpServletRequest request,
-			HttpSession session, ModelAndView mv) {
+							@ModelAttribute("user") UserDto user, HttpServletRequest request,
+							HttpSession session, ModelAndView mv) {
 		if(session.getAttribute("userId") == null) {
 			if(userId != null) {
 				user.setUserId(userId);
@@ -67,8 +67,8 @@ public class UserController {
 	
 	@PostMapping("login")
 	public ModelAndView login(@ModelAttribute("user") UserDto user, String saveId,
-			HttpSession session, HttpServletResponse response,
-			HttpServletRequest request, ModelAndView mv) {
+							HttpSession session, HttpServletResponse response,
+							HttpServletRequest request, ModelAndView mv) {
 		session.setAttribute("userId", user.getUserId());
 		
 		if(saveId != null && saveId.equals("on")) {	
@@ -103,15 +103,16 @@ public class UserController {
 	}
 	
 	@PostMapping("signUp")
-	public ModelAndView signUp(@RequestBody User user, ModelAndView mv) {
-		userService.addUser(user);
+	public ModelAndView signUp(@RequestBody User user, ModelAndView mv) {	
+		userService.addUser(user);		
 		
 		mv.setViewName("user/afterSignUp");
 		return mv;
 	}
 	
 	@GetMapping("afterSignUp")
-	public ModelAndView afterSignUp(ModelAndView mv) {
+	public ModelAndView afterSignUp(ModelAndView mv, HttpServletRequest request) {
+		mv.addObject("userId", request.getParameter("userId"));
 		mv.setViewName("user/afterSignUp");
 		return mv;
 	}

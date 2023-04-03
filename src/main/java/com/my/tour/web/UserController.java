@@ -35,6 +35,7 @@ public class UserController {
 		return mv;
 	}
 	
+	
 	@GetMapping("get")
 	public List<UserDto> getUser(String userId) {
 		return userService.getUser(userId);
@@ -56,6 +57,11 @@ public class UserController {
 		} else {
 			mv.setViewName("redirect:/");
 		}
+
+		request.setAttribute("previousPage", 
+				(String)request.getHeader("REFERER").substring(6));
+		
+		mv.setViewName("user/login");
 		return mv;
 	}
 	
@@ -65,7 +71,7 @@ public class UserController {
 							HttpServletRequest request, ModelAndView mv) {
 		session.setAttribute("userId", user.getUserId());
 		
-		if(saveId != null && saveId.equals("on")) {
+		if(saveId != null && saveId.equals("on")) {	
 			Cookie cookie = new Cookie("userId", user.getUserId());
 			cookie.setMaxAge(10);
 			response.addCookie(cookie);

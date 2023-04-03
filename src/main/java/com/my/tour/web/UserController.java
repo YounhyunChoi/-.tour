@@ -27,7 +27,7 @@ public class UserController {
 	
 	@GetMapping("nav")
 	public ModelAndView navigation(ModelAndView mv) {
-		mv.setViewName("navigation/01");
+		mv.setViewName("navigation/navigation");
 		return mv;
 	}
 	
@@ -47,7 +47,7 @@ public class UserController {
 		request.setAttribute("previousPage", 
 				(String)request.getHeader("REFERER").substring(6));
 		
-		mv.setViewName("user/01");
+		mv.setViewName("user/login");
 		return mv;
 	}
 	

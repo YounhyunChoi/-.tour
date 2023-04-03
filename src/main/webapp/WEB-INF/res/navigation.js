@@ -1,6 +1,6 @@
 $(() => {
     $.ajax({
-       url: '/user/nav',
+       url: '../user/nav',
        success: function(result) {
           $('header').html(result)
           let header = $('header').find('#header')

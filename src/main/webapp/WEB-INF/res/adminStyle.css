@@ -1,0 +1,243 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#mainBody {
+    font-family: 'Pretendard-Regular';
+    padding-top: 10.5rem;
+    padding-left: 13.5rem;
+    margin-right: 0;
+}
+
+#adminHeader{
+    font-family: 'Pretendard-Regular';
+    background-color:  lightslategray;
+    z-index: 1;
+    border-bottom: .2rem solid white;
+    margin: 0 .7rem 0 .7rem;
+}
+
+#logo{
+    text-decoration: none;
+}
+
+#navItem li {
+    list-style-type: none;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+}
+
+#navItem {
+    padding-top: 4rem;
+   width: 170px;
+   height: 1000px;
+   position: fixed;
+   background-color: lightslategray;
+   font-family: 'Pretendard-Regular';
+}
+
+#navItem a {
+    text-decoration: none;
+    color: white;
+}
+
+#subHeader{
+    background-color: lightslategray;
+    margin: 6.2rem .7rem 0rem 11.6rem;
+    font-family: 'Pretendard-Regular';
+}
+
+.noticeList li{
+    margin-left: .5rem;
+    padding-right: 1rem;
+}
+
+.noticeList a{
+    text-decoration: none;
+    color: black;
+}
+
+#logoUp {
+    float: right;
+}
+
+.adminBody{
+    box-shadow: .4rem .4rem .2rem 0rem lightgray;
+}
+
+#subHeader a{
+    text-decoration: none;
+    color: white;
+}
+
+.btn-darkBlue {
+    color: #fff;
+    background-color: #2c80aa;
+    border-color: #2c80aa;
+}
+
+.btn-lightRed {
+    color: #fff;
+    background-color: #df2926;
+    border-color: #df2926;
+}
+
+.btn-red {
+    color: #fff;
+    background-color: #ee133b;
+    border-color: #ee133b;
+}
+
+.btn-olive {
+    color: #fff;
+    background-color: #a3ad16;
+    border-color:  #a3ad16;
+}
+
+.btn-lightGray {
+    color: #fff;
+    background-color: lightslategray;
+    border-color: lightslategray;
+}
+
+.border-darkBlue {
+    border-color: #287094;
+}
+
+.border-lightRed {
+    border-color: #df2926;
+}
+
+.border-red {
+    border-color: #ee133b;
+}
+
+.border-olive {
+    border-color: #a3ad16;
+}
+
+.border-lightGray {
+    border-color: lightslategray;
+}
+
+
+
+.btn-darkBlue:hover {
+    color: #fff;
+    background-color: #287094;
+    border-color: #287094;
+}
+
+.btn-lightRed:hover {
+    color: #fff;
+    background-color: #df2926;
+    border-color: #df2926;
+}
+
+.btn-red:hover {
+    color: #fff;
+    background-color: #ee133b;
+    border-color: #ee133b;
+}
+
+.btn-olive:hover {
+    color: #fff;
+    background-color: #a3ad16;
+    border-color: #a3ad16;
+}
+
+.btn-lightGray:hover {
+    color: #fff;
+    background-color: lightslategray;
+    border-color: lightslategray;
+}
+
+.border-darkBlue:hover {
+    border-color: #287094;
+}
+
+.border-lightRed:hover {
+    border-color: #df2926;
+}
+
+.border-red:hover {
+    border-color: #ee133b;
+}
+
+.border-olive:hover {
+    border-color: #a3ad16;
+}
+
+.border-lightGray:hover {
+    border-color: lightslategray;
+}
+
+.modal.modal-center {
+    margin-top: 18rem;
+    text-align: center;
+}
+
+.modal-dialog.modal-smallsize {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle; 
+    width: 50%;
+    height: 50%;
+    margin: 0;
+    padding: 0;
+}
+
+.modal-content {
+    padding: 1rem;
+}
+
+.table-lightGray {
+    color: #fff;
+    background-color: lightslategray;
+    border-color: lightslategray;
+}
+
+.icon {
+    font-size: 30px;
+}
+
+#indexNum a {
+    text-decoration: none;
+    color: black;
+}
+
+.reviewImage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    border: 1px solid #dee2e6;
+    border-color: #212529;
+    border-width: 2px;
+    width: 6rem;
+    height: 6rem;
+}
+
+input[type=file]::file-selector-button {
+    width: 5rem;
+    height: 2rem;
+    color: white;
+    background: lightslategray;
+    border: .1rem solid lightslategray;
+    border-radius: .3rem;
+    cursor: pointer;
+}
+
+th {
+    white-space: nowrap;
+}
+
+td {
+    font-size: 0.9rem;
+}

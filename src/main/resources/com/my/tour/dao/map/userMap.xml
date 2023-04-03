@@ -7,7 +7,12 @@
 		from users
 		where user_id = #{userId}
 	</select>
-	
+
+	<select id='selectUsers' resultType='user'>
+		select user_id, user_pw
+		from users
+	</select>
+
 	<insert id='insertUser'>
 		insert into users
 		values (#{userId}, #{userPw}, #{email}, #{phoneNum}, #{userName},

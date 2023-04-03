@@ -1,11 +1,9 @@
 package com.my.tour.web;
 
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,7 +36,7 @@ public class UserController {
 	
 	@GetMapping("get")
 	public List<UserDto> getUser(String userId) {
-		return userService.getUser(userId);
+		return userService.getUserOrAdmin(userId);
 	}
 	
 	@GetMapping("login")
@@ -70,17 +68,26 @@ public class UserController {
 							HttpSession session, HttpServletResponse response,
 							HttpServletRequest request, ModelAndView mv) {
 		session.setAttribute("userId", user.getUserId());
-		
-		if(saveId != null && saveId.equals("on")) {	
-			Cookie cookie = new Cookie("userId", user.getUserId());
-			cookie.setMaxAge(10);
-			response.addCookie(cookie);
+		if(userService.getUser(user.getUserId()).size() == 1) {
+			if(saveId != null && saveId.equals("on")) {	
+				Cookie cookie = new Cookie("userId", user.getUserId());
+				cookie.setMaxAge(10);
+				response.addCookie(cookie);
+			}
+			
+			String url = (String)request.getAttribute("previousPage");
+			
+			if(url == null || url.equals("localhost/user/logIn")) {
+				url = "redirect:/";
+			} else {
+				url = "redirect:/" + url;
+			}
+			
+			mv.setViewName(url);
+		} else {
+			mv.setViewName("redirect:/admin/main");
 		}
 		
-		String url = (String)request.getAttribute("previousPage");
-		if(url == null || url.equals("localhost/user/logIn")) url = "redirect:/";
-		
-		mv.setViewName(url);
 		return mv;
 	}
 	

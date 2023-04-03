@@ -72,7 +72,7 @@ $(() => {
                         <div class='row'>
                             <div class='col mb-2'>
                                 <input type='checkbox' class='mt-3' 
-                                	name='saveId' <%= request.getAttribute("saveId") %>/>&nbsp;<b>아이디 저장</b>
+                                	name='saveId' ${saveId}/>&nbsp;<b>아이디 저장</b>
                             </div>
                         </div>
                         <div class='row'>

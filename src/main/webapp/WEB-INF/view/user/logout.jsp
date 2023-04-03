@@ -7,9 +7,9 @@
 <link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css' rel='stylesheet'>
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
-<link href='../res/style.css' rel='stylesheet'/>
-<script src='../res/navigation.js'></script>
-<script src='../res/modal.js'></script>
+<link href='/res/style.css' rel='stylesheet'/>
+<script src='/res/navigation.js'></script>
+<script src='/res/modal.js'></script>
 <script>
 $(() => {
 	$('#loginBtn').click(e => {
@@ -17,11 +17,12 @@ $(() => {
 		$.ajax({
 			url: 'get',
 			data: {
-				userId: $('#userId').val()
+				userId: $('#userId').val(),
+				userPw: $('#userPw').val()
 			},
 			dataType: 'json',
 			success: user => {
-				if(user.length && user.at(0).userPw == $('#userPw').val()) {
+				if(user.length) {
 					$('form').submit()
 				} else {
 					showOkModal('아이디 또는 비밀번호를 잘못 입력했습니다.')
@@ -53,7 +54,7 @@ $(() => {
 <div class='container'>
     <div class='row pt-5'>
         <div class='col'>
-            <form method='post'>
+            <form action='/user/login' method='post'>
                 <div class='row'>
                     <div class='col'>
                         <div class='row mb-3'>
@@ -72,7 +73,7 @@ $(() => {
                         <div class='row'>
                             <div class='col mb-2'>
                                 <input type='checkbox' class='mt-3' 
-                                	name='saveId' <%= request.getAttribute("saveId") %>/>&nbsp;<b>아이디 저장</b>
+                                	id='saveId' <%= request.getAttribute("saveId") %>/>&nbsp;<b>아이디 저장</b>
                             </div>
                         </div>
                         <div class='row'>
@@ -91,7 +92,7 @@ $(() => {
             <div class='col text-center mt-3'>
                 <a href='#' class='loginFooter'>아이디 찾기&nbsp;|</a>
                 <a href='#' class='loginFooter'>비밀번호 찾기&nbsp;|</a>
-                <a href='signUp' class='loginFooter'>회원가입</a>
+                <a href='#' class='loginFooter'>회원가입</a>
             </div>
         </div>
     </div>

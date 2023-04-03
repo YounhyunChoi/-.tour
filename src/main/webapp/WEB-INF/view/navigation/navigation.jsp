@@ -11,7 +11,7 @@
 <%
 				if(userId == null) {
 %>            	
-	                <span><a class='btn btn-darkBlue' href='/user/login'>로그인</a></span>
+	                <span><a class='btn btn-darkBlue' href='../user/login'>로그인</a></span>
 <%
 				} else {
 %>	                
@@ -74,7 +74,7 @@
                 <li class='nav-item'>
 	                <ul>
 	                    <li>
-	                        <a class='nav-link' aria-current='page' href='/user/logout'>로그아웃</a>
+	                        <a class='nav-link' aria-current='page' href='../user/logout'>로그아웃</a>
 	                    </li>
 	                </ul>
 	            </li>

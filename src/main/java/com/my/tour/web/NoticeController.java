@@ -12,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.my.tour.domain.Notice;
 import com.my.tour.service.NoticeService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @RestController("noticeController")
 @RequestMapping("notice")
 public class NoticeController {
@@ -27,10 +30,42 @@ public class NoticeController {
 		mv.setViewName("notice/noticeList");
 		return mv;
 	}
-	
+
 	@GetMapping("view/{noticeNum}")
 	public ModelAndView noticeView(ModelAndView mv, @PathVariable int noticeNum) {
 		mv.setViewName("notice/noticeView");
 		return mv;
 	}
+	
+
+	
+	
+	
+	
+	
+	//어드민
+	@GetMapping("admin")
+	public ModelAndView adminNoticeList(ModelAndView mv, HttpSession session) {
+		mv.setViewName("admin/notice/noticeList");
+		return mv;
+	}
+	
+	@GetMapping("admin/add")
+	public ModelAndView adminAddNotice(ModelAndView mv) {
+		mv.setViewName("admin/notice/addNotice");
+		return mv;
+	}
+	
 }
+
+/*
+  @RestController
+@RequestMapping("admin/notice")
+public class NoticeAdminController {
+	@Autowired private NoticeService noticeService;
+	
+	@GetMapping
+	public ModelAndView noticeList(ModelAndView mv) {
+		mv.setViewName("admin/notice/noticeList");
+		return mv;
+	}*/

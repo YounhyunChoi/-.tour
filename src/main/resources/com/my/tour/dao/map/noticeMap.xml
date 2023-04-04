@@ -7,4 +7,15 @@
 		from notices
 		order by notice_num desc
 	</select>
+	
+	<select id='selectNotice' resultType='notice'>
+		select notice_num, notice_title, notice_content, notice_date, admin_id
+		from notices
+		where notice_num = #{noticeNum}
+	</select>
+	
+	<insert id='insertNotice'>
+		insert into notices(notice_num, notice_title, notice_content, notice_date, admin_id)
+		values(notice_num_seq.nextval, #{noticeTitle}, #{noticeContent}, to_date(sysdate, 'YYYY-MM-DD'), #{adminId)
+	</insert>
 </mapper>

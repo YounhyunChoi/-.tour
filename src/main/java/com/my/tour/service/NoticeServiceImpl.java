@@ -16,4 +16,14 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<Notice> getNotices(){
 		return noticeDao.selectNotices();
 	}
+	
+	@Override
+	public List<Notice> getNotice(int noticeNum){
+		return noticeDao.selectNotice(noticeNum);
+	}
+	
+	@Override
+	public void addNotice(String noticeTitle, String noticeContent) {
+		noticeDao.insertNotice(noticeTitle, noticeContent);
+	}
 }

@@ -29,7 +29,7 @@
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../main.html'>메인</a> > <a href='./01.html'>공지사항</a>
+                    <a href='../admin/main'>메인</a> > <a href='../notice/admin'>공지사항</a>
                 </h6>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class='col'>
                     <div class='d-flex justify-content-end'>
-                        <button type='button' class='btn btn-darkBlue' onclick="location.href='./02.html'">
+                        <button type='button' class='btn btn-darkBlue' onclick="location.href='../notice/admin/add'">
                             <i class='bi bi-plus-circle'></i>&nbsp;새글
                         </button>
                     </div>

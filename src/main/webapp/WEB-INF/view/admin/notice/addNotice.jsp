@@ -8,11 +8,17 @@
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
-<script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
 <title>ADMIN.NOTICE.02 공지 추가</title>
 <script>
-    $(() => {
+ $(() => {
+    	$.ajax({
+           	url: '../../admin/nav',
+           	success: function(result) {
+        		$('.container-fluid').append(result)
+           }
+        })
+    	
         $('#noticeRegistration').click(() => showConfirmModal('공지사항을 추가하시겠습니까?',
          '공지사항을 추가되었습니다.', '../notice/01.html'))
     })

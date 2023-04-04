@@ -15,7 +15,34 @@
 <script>
 $(() => {
     $('#findId').click(() => {
-    	
+    	$.ajax({
+			url: 'getUsers',
+			dataType: 'json',
+			success: users => {
+				let msg = null;
+				let url = null;
+				$.each(users, (i, user) => {
+					console.log(user.userName)
+					if(user.userName == $('#userName').val()) {
+						if(user.email == $('#email').val()) {
+							msg = '찾으시는 아이디는 ' + user.userId + ' 입니다.'
+							url = 'login'
+							return false;
+						} else {
+							msg = '이메일이 일치하지 않습니다.'
+						}
+					} else if(user.email == $('#email').val()) {
+						msg = '이름이 일치하지 않습니다.'
+					}
+				})
+				
+				if(msg) {
+					showOkModal(msg, url)
+				} else {
+					showOkModal('가입된 아이디가 없습니다.', 'signUp')
+				}
+			}
+		})
     })
 })
 </script>
@@ -50,17 +77,6 @@ $(() => {
         </div>
     </div>
 </div>
-</div>
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'>
-            </div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
-            </div>
-        </div>
-    </div>
 </div>
 <footer>
 </footer>

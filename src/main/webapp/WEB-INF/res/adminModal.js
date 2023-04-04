@@ -1,6 +1,6 @@
 $(() => {
 	$.ajax({
-       	url: '../user/modal',
+       	url: '../../user/modal',
        	success: function(result) {         
 			$('footer').before(result)
        	}

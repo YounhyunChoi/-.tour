@@ -35,6 +35,12 @@ public class UserController {
 		return mv;
 	}
 	
+	@GetMapping("modal")
+	public ModelAndView modal(ModelAndView mv) {
+		mv.setViewName("navigation/modal");
+		
+		return mv;
+	}
 	
 	@GetMapping("get")
 	public List<UserDto> getUser(String userId) {
@@ -121,9 +127,9 @@ public class UserController {
 		return mv;
 	}
 
-	@GetMapping("getId")
-	public List<UserDto> getId(String userName, String email) {
-		return userService.findUserId(userName, email);
+	@GetMapping("getUsers")
+	public List<User> getUsers() {
+		return userService.getUsers();
 	}
 	
 	@GetMapping("findId")

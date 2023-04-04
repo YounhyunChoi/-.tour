@@ -19,8 +19,8 @@ public class WishDaoImpl implements WishDao {
 	}
 
 	@Override
-	public void insertWish(int wishNum, String userId, int tourNum) {
-		wishMap.insertWish(wishNum, userId, tourNum);
+	public void insertWish(String userId, int tourNum) {
+		wishMap.insertWish(userId, tourNum);
 	}
 
 	@Override

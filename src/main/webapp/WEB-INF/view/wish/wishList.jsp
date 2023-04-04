@@ -11,19 +11,16 @@
 <script src='/res/navigation.js'></script>
 <script src='/res/modal.js'></script>
 <script>
-function tourName() {
-	
-}
-
-function listWishes() {
+$(() => {
 	$.ajax({
 		url: 'wish/get',
 		success: wishes => {
 			if(wishes.length) {
-				const wishArr = []
-				
 				$.each(wishes, (i, wish) => {
-					wishArr.unshift(
+					const wishArr = []
+					let wishContent = ""
+					
+					wishContent +=
 						`<div class='row mt-4 d-flex flex-column shadow-sm border border-1'>
 							<div class='col p-2 border-bottom'>
 					            <div class='row d-flex justify-content-between'>
@@ -44,38 +41,53 @@ function listWishes() {
 					                            <span>여행코스이미지</span>
 					                        </div>
 					                    </div>
-					                </div>`
-					)
+					                </div>`;
 					
 	                $.ajax({
 	            		url: 'tour/get',
 	            		success: tours => {
 	            			if(tours.length) {
 	            				$.each(tours, (i, tour) => {
-	            					if(tour.tourNum == wish.tourNum) {
-			            						wishArr.unshift(
+	            					if(wish.tourNum == tour.tourNum) {
+			            						wishContent +=
 				            						`<div class='col-5 fs-5'>
 									                    <div class='text-left'>
 									                        \${tour.tourName}
 									                    </div>
 									                </div>
 									                <div class='col-3 d-flex justify-content-center align-self-end'>
-									                    <button type='button' id='wishDelBtn' data-bs-toggle='modal' data-bs-target='#modal'
-									                    class='border border-0 rounded text-white'>삭제</button>
+									                    <button type='button' id='\${wish.wishNum}' name='wishDelBtn' value='\${wish.wishNum}'
+									                    class='border border-0 rounded text-white btn btn-lightRed'>삭제</button>
 									                </div>
 									            </div>
 									        </div>
-								        </div>`)
-							        }
+								        </div>`;
+								        
+								        wishArr.unshift(wishContent);
+								        
+										$('#wishContent').append(wishArr.join(''))
+									}
 	            				})
 	            			}
+	            			
+	            			//Wish 삭제
+	            			$('[name="wishDelBtn"]').on('click', e => {
+	            				$.ajax({
+	            					url: 'wish/del/' + e.target.value,
+	            					method: 'delete',
+	            					success: showOkModal('찜이 삭제되었습니다.')
+	            				})
+	            				
+	            				$('#modalOk').click(() => {
+	            					window.location.reload()
+	            				})
+	            			})
 	            		}
 	            	})
 				})
 				
-				$('#wishContent').append(wishArr.join(''))
 			} else {
-				const wishArr = []
+				let wishArr = []
 				
 				wishArr.unshift(
 					`<div class='row d-block my-5'>
@@ -101,21 +113,6 @@ function listWishes() {
 			}
 		}
 	})
-}
-
-$(() => {
-	//wish 조회
-	listWishes()
-
-	//wish 삭제
-	$('#wishDelBtn').click(() => {
-		$.ajax({
-			url: 'wish/del/' + wishNum,
-			method: 'delete',
-			success: showOkModal('찜이 삭제되었습니다.'),
-				listWishes
-		})
-	})
 })
 </script>
 <style>
@@ -132,12 +129,6 @@ $(() => {
 	
 	.viewDetailBtn {
 		font-size: 1.5rem;
-	}
-	
-	#wishDelBtn {
-		background-color: #d21412;
-		width: 4.5rem;
-		height: 2rem;
 	}
 	
     .heartIcon {
@@ -158,18 +149,7 @@ $(() => {
     
 </div>
 
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'></div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
-            </div>
-        </div>
-    </div>
-</div>
 <footer>
 </footer>
 </body>
-
 </html>

@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.tour.domain.Tour;
-import com.my.tour.domain.User;
 import com.my.tour.domain.Wish;
 import com.my.tour.service.WishService;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController("WishController")
 @RequestMapping("wish")
@@ -28,11 +29,6 @@ public class WishController {
 		return wishService.getWishes();
 	}
 	
-	@GetMapping("getTours")
-	public List<Tour> getTours() {
-		return wishService.getTours();
-	}
-	
 	@GetMapping
 	public ModelAndView wishList(ModelAndView mv) {
 		mv.setViewName("wish/wishList");
@@ -40,10 +36,9 @@ public class WishController {
 	}
 	
 	@PostMapping("add")
-	public void addWish(@RequestBody Wish wish,
-						@RequestBody User user,
-						@RequestBody Tour tour) {
-		wishService.addWish(wish.getWishNum(), user.getUserId(), tour.getTourNum());
+	public void addWish(@RequestBody Tour tour, HttpSession session) {
+		String userId = (String)session.getAttribute("userId");
+		wishService.addWish(userId, tour.getTourNum());
 	}
 	
 	@DeleteMapping("del/{tourNum}")

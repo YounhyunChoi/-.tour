@@ -5,6 +5,7 @@
 	<select id='selectWishes' resultType='wish'>
 		select wish_num, user_id, tour_num
 		from wishes
+		order by wish_num desc
 	</select>
 	
 	<insert id='insertWish'>

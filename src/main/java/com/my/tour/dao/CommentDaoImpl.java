@@ -18,8 +18,8 @@ public class CommentDaoImpl implements CommentDao{
 	}
 	
 	@Override
-	public int insertComment(String comtContent, int reviewNum, String userId) {
-		return commentMap.insertComment(comtContent, reviewNum, userId);
+	public int insertComment(String comtContent) {
+		return commentMap.insertComment(comtContent);
 	}
 	
 	@Override

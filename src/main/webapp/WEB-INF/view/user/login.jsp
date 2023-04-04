@@ -25,7 +25,6 @@ $(() => {
 					$('form').submit()
 				} else {
 					showOkModal('아이디 또는 비밀번호를 잘못 입력했습니다.')
-					console.log(user)
 				}
 			}
 		})
@@ -46,7 +45,7 @@ $(() => {
 <body>
 <header></header>
 <div class='navigation fixed-top'>
-	<div class='float-start ms-2 mt-3'><i class='bi bi-caret-left-fill' onclick="location.href='/'"></i></div>
+	<div class='float-start ms-2 mt-3'><i class='bi bi-caret-left-fill'></i></div>
 	<div class='menuName'>
 	    <h2 class='text-center pt-3'><b>로그인</b></h2>
 	</div>
@@ -90,20 +89,9 @@ $(() => {
         </div>
         <div class='row'>
             <div class='col text-center mt-3'>
-                <a href='#' class='loginFooter'>아이디 찾기&nbsp;|</a>
-                <a href='#' class='loginFooter'>비밀번호 찾기&nbsp;|</a>
+                <a href='findId' class='loginFooter'>아이디 찾기&nbsp;|</a>
+                <a href='findPw' class='loginFooter'>비밀번호 찾기&nbsp;|</a>
                 <a href='signUp' class='loginFooter'>회원가입</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'>
-            </div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
             </div>
         </div>
     </div>

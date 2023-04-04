@@ -22,14 +22,13 @@ public class CommentController {
 	
 	@GetMapping("add")
 	public ModelAndView addComment(ModelAndView mv) {
-		mv.setViewName("comment/addcomment");
+		mv.setViewName("comment/addComment");
 		return mv;
 	}
 	
 	@PostMapping("add")
-	public int addComment(String comtContent, int reviewNum, String userId) {
-		System.out.println("|" + comtContent + reviewNum + userId + "|");
-		return commentService.addComment(comtContent, reviewNum, userId);
+	public int addComment(String comtContent) {
+		return commentService.addComment(comtContent);
 	}
 	
 	@PostMapping("get")
@@ -39,13 +38,19 @@ public class CommentController {
 	
 	@GetMapping("fix")
 	public ModelAndView fixComment(ModelAndView mv) {
-		mv.setViewName("comment/fixcomment");
+		mv.setViewName("comment/fixComment");
 		return mv;
 	}
 	
 	@PutMapping("fix")
 	public int fixComment(String comtContent) {
 		return commentService.fixComment(comtContent);
+	}
+	
+	@GetMapping("del")
+	public ModelAndView delComment(ModelAndView mv) {
+		mv.setViewName("admin/comment/delComment");
+		return mv;
 	}
 	
 	@DeleteMapping("del")

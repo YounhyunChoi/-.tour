@@ -14,12 +14,22 @@ public class UserDaoImpl implements UserDao {
 	@Autowired private UserMap userMap;
 
 	@Override
-	public List<UserDto> selectUser(String userId) {
-		return userMap.selectUser(userId);
+	public List<UserDto> selectUserDto(String userId) {
+		return userMap.selectUserDto(userId);
 	}
 
 	@Override
 	public int insertUser(User user) {
 		return userMap.insertUser(user);
+	}
+
+	@Override
+	public List<User> selectUsers() {
+		return userMap.selectUsers();
+	}
+
+	@Override
+	public int updateUser(User user) {
+		return userMap.updateUser(user);
 	}
 }

@@ -6,7 +6,7 @@ import com.my.tour.domain.Comment;
 
 public interface CommentService {
 	List<Comment> getComments();
-	int addComment(String comtContent, int reviewNum, String userId);
+	int addComment(String comtContent);
 	int fixComment(String comtContent);
 	int delComment(int comtNum);
 }

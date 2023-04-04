@@ -6,6 +6,8 @@ import com.my.tour.domain.User;
 import com.my.tour.domain.UserDto;
 
 public interface UserMap {
-	List<UserDto> selectUser(String userId);
+	List<UserDto> selectUserDto(String userId);
 	int insertUser(User user);
+	List<User> selectUsers();
+	int updateUser(User user);
 }

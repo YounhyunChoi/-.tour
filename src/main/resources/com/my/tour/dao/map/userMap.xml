@@ -2,15 +2,10 @@
 <!DOCTYPE mapper PUBLIC './/mybatis.org//DTD Mapper 3.0//EN'
 	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='com.my.tour.dao.map.UserMap'>
-	<select id='selectUser' resultType='userDto'>
+	<select id='selectUserDto' resultType='userDto'>
 		select user_id, user_pw
 		from users
 		where user_id = #{userId}
-	</select>
-
-	<select id='selectUsers' resultType='user'>
-		select user_id, user_pw
-		from users
 	</select>
 
 	<insert id='insertUser'>
@@ -18,4 +13,22 @@
 		values (#{userId}, #{userPw}, #{email}, #{phoneNum}, #{userName},
 				#{birthday}, #{mktgAgreement})
 	</insert>
+
+	<select id='selectUsers' resultType='user'>
+		select user_id, user_pw, email, phone_num, user_name, birthday, mktg_agreement
+		from users
+	</select>
+	
+	<update id='updateUser'>
+		update users
+		<set>
+			user_pw = #{userPw}
+			<if test='email != null'>email = #{email}</if>
+			<if test='phoneNum != null'>phone_num = #{phoneNum}</if>
+			<if test='userName != null'>user_name = #{userName}</if>
+			<if test='birthday != null'>birthday = #{birthday}</if>
+			<if test='mktgAgreement != null'>mktg_agreement = #{mktgAgreement}</if>
+		</set>
+		where user_id = #{userId}
+	</update>
 </mapper>

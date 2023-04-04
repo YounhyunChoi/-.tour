@@ -63,20 +63,20 @@ $(() => {
     
     let emailCheck = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/
     
-    let authenticationNum
+    let checkNum
     let phoneCheck = false
   	$('#phoneCheck').click(() => {
   		
-  		authenticationNum = Math.floor(Math.random() * 1000000) + ''
-  		while (authenticationNum.length != 6) {
-  			authenticationNum = '0' + authenticationNum
+  		checkNum = Math.floor(Math.random() * 1000000) + ''
+  		while (checkNum.length != 6) {
+  			checkNum = '0' + checkNum
   		}
-  		console.log(authenticationNum)
+  		console.log(checkNum)
     	showOkModal('인증번호가 발송되었습니다.')
     })
     
     $('#phoneOkBtn').click(() => {
-        if($('#phoneCheckNum').val() == authenticationNum) {
+        if($('#phoneCheckNum').val() == checkNum) {
             showOkModal('인증되었습니다.')
             phoneCheck = true
         } else {
@@ -106,10 +106,9 @@ $(() => {
               	})
             })
             
-            $('#modalOk').find('a').attr('data-bs-dismiss', '')
-            .attr('href', 'afterSignUp?userId=' + $('#userId').val())
+            let url = 'afterSignUp?userId=' + $('#userId').val()
             
-            showOkModal('회원가입이 완료되었습니다.')
+            showOkModal('회원가입이 완료되었습니다.', url)
         } else {
             showOkModal('누락된 필수 입력사항이 있거나 휴대폰 인증이 완료되지 않았습니다.')
         }
@@ -239,16 +238,6 @@ $(() => {
         </form>
     </div>
 </div>
-</div>
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'></div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
-            </div>
-        </div>
-    </div>
 </div>
 <footer>
 </footer>

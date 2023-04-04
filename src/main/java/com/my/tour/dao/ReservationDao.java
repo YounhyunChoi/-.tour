@@ -1,11 +1,11 @@
-package com.my.tour.dao.map;
+package com.my.tour.dao;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import com.my.tour.domain.Reservation;
 
-public interface ReservationMap {
+public interface ReservationDao {
 	List<Reservation> selectReservations();
-	int insertReservation(LocalDate resvDate, String userId, int tourNum);
+	void insertReservation(LocalDate resvDate, String userId, int tourNum);
 }

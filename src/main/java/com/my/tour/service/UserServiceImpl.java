@@ -47,4 +47,9 @@ public class UserServiceImpl implements UserService {
 	public List<User> getUsers() {
 		return userDao.selectUsers();
 	}
+
+	@Override
+	public int fixUser(String userId, String userPw) {
+		return userDao.updateUser(userId, userPw);
+	}
 }

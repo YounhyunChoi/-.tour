@@ -11,41 +11,11 @@
 <link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
 <script src='../res/modal.js'></script>
-<title>findId</title>
+<title>fixPw</title>
 <script>
-$(() => {
-    $('#findId').click(() => {
-    	$.ajax({
-			url: 'getUsers',
-			dataType: 'json',
-			success: users => {
-				let msg = null;
-				let url = null;
-				
-				$.each(users, (i, user) => {
-					if(user.userName == $('#userName').val()) {
-						if(user.email == $('#email').val()) {
-							msg = '찾으시는 아이디는 ' + user.userId + ' 입니다.'
-							url = 'login'
-							
-							return false;
-						} else {
-							msg = '이메일이 일치하지 않습니다.'
-						}
-					} else if(user.email == $('#email').val()) {
-						msg = '이름이 일치하지 않습니다.'
-					}
-				})
-				
-				if(msg) {
-					showOkModal(msg, url)
-				} else {
-					showOkModal('가입된 아이디가 없습니다.', 'signUp')
-				}
-			}
-		})
+    $(() => {
+        $('#password').click(() => showOkModal('비밀번호가 변경되었습니다.', '../user/01.html'))
     })
-})
 </script>
 </head>
 <body>
@@ -54,26 +24,29 @@ $(() => {
 <div class='navigation fixed-top'>
    <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill'></i></div>
    <div class='menuName'>
-      <h2 class='text-center pt-3'><b>아이디 찾기</b></h2>
+      <h2 class='text-center pt-3'><b>비밀번호 재설정</b></h2>
    </div>
 </div>
 <div class='container'>
-<div class='row'>
+<div class='row mt-5'>
     <div class='row'>
         <div class='col mt-5 justify-content-center'>
-            <input type='text' class='form-control' placeholder='이름' id='userName'/>
+            <label for='password1'>비밀번호</label>
+            <input type='password' class='form-control' 
+            placeholder='6~12자리의 영문,숫자' id='password1'/>
         </div>
     </div>
     <div class='row'>
         <div class='col mt-2 justify-content-center'>
-            <input type='text' class='form-control' placeholder='이메일' id='email'/>
+            <label for='password2'>비밀번호 확인</label>
+            <input type='password' class='form-control' 
+            placeholder='6~12자리의 영문,숫자' id='password2'/>
         </div>
     </div>
-
     <div class='row'>
         <div class='col mt-2'>
-            <button type='button' class='btn btn-darkBlue form-control' id='findId'>
-                <span>아이디 찾기</span>
+            <button type='submit' class='btn btn-darkBlue form-control' id='password'>
+                <span>비밀번호 변경</span>
             </button>
         </div>
     </div>

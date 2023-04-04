@@ -27,4 +27,9 @@ public class UserDaoImpl implements UserDao {
 	public List<User> selectUsers() {
 		return userMap.selectUsers();
 	}
+
+	@Override
+	public int updateUser(String userId, String userPw) {
+		return userMap.updateUser(userId, userPw);
+	}
 }

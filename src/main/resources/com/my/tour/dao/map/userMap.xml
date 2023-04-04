@@ -18,4 +18,17 @@
 		select user_id, user_pw, email, phone_num, user_name, birthday, mktg_agreement
 		from users
 	</select>
+	
+	<update id='updateUser'>
+		update users
+		<set>
+			<if test='userPw != null'>user_pw = #{userPw}</if>
+			<if test='email != null'>email = #{email}</if>
+			<if test='phoneNum != null'>phone_num = #{phoneNum}</if>
+			<if test='userName != null'>user_name = #{userName}</if>
+			<if test='birthday != null'>birthday = #{birthday}</if>
+			<if test='mktgAgreement != null'>mktg_agreement = #{mktgAgreement}</if>
+		</set>
+		where user_id = #{userId}
+	</update>
 </mapper>

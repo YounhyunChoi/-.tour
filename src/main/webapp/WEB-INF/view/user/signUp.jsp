@@ -63,20 +63,20 @@ $(() => {
     
     let emailCheck = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/
     
-    let authenticationNum
+    let checkNum
     let phoneCheck = false
   	$('#phoneCheck').click(() => {
   		
-  		authenticationNum = Math.floor(Math.random() * 1000000) + ''
-  		while (authenticationNum.length != 6) {
-  			authenticationNum = '0' + authenticationNum
+  		checkNum = Math.floor(Math.random() * 1000000) + ''
+  		while (checkNum.length != 6) {
+  			checkNum = '0' + checkNum
   		}
-  		console.log(authenticationNum)
+  		console.log(checkNum)
     	showOkModal('인증번호가 발송되었습니다.')
     })
     
     $('#phoneOkBtn').click(() => {
-        if($('#phoneCheckNum').val() == authenticationNum) {
+        if($('#phoneCheckNum').val() == checkNum) {
             showOkModal('인증되었습니다.')
             phoneCheck = true
         } else {
@@ -123,7 +123,7 @@ $(() => {
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill'></i></div>
+    <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill'></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>회원가입</b></h2>
     </div>

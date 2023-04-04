@@ -72,7 +72,7 @@ $(() => {
                 </div>
                 <div class='col'>
                     <div class='d-flex justify-content-end'>
-                        <button type='button' class='btn btn-darkBlue' onclick="location.href='../notice/adminAdd'">
+                        <button type='button' class='btn btn-darkBlue' onclick="location.href='../notice/adminAddView'">
                             <i class='bi bi-plus-circle'></i>&nbsp;새글
                         </button>
                     </div>

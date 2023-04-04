@@ -139,4 +139,27 @@ public class UserController {
 		
 		return mv;
 	}
+	
+	@GetMapping("findPw")
+	@UserAccess
+	public ModelAndView findPw(ModelAndView mv, HttpSession session) {
+		mv.setViewName("user/findPw");
+		
+		return mv;
+	}
+	
+	@GetMapping("fixPw")
+	@UserAccess
+	public ModelAndView fixPw(ModelAndView mv, HttpSession session) {
+		mv.setViewName("user/fixPw");
+		
+		return mv;
+	}
+	
+	@PostMapping("fixPw")
+	public ModelAndView fixPw(ModelAndView mv) {
+		
+		
+		return mv;
+	}
 }

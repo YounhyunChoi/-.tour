@@ -46,7 +46,7 @@ $(() => {
 <body>
 <header></header>
 <div class='navigation fixed-top'>
-	<div class='float-start ms-2 mt-3'><i class='bi bi-caret-left-fill' onclick="location.href='/'"></i></div>
+	<div class='float-start ms-2 mt-3'><i class='bi bi-caret-left-fill'></i></div>
 	<div class='menuName'>
 	    <h2 class='text-center pt-3'><b>로그인</b></h2>
 	</div>

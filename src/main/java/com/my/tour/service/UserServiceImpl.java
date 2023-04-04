@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int fixUser(String userId, String userPw) {
-		return userDao.updateUser(userId, userPw);
+	public int fixUser(User user) {
+		return userDao.updateUser(user);
 	}
 }

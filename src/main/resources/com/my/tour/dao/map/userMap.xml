@@ -22,7 +22,7 @@
 	<update id='updateUser'>
 		update users
 		<set>
-			<if test='userPw != null'>user_pw = #{userPw}</if>
+			user_pw = #{userPw}
 			<if test='email != null'>email = #{email}</if>
 			<if test='phoneNum != null'>phone_num = #{phoneNum}</if>
 			<if test='userName != null'>user_name = #{userName}</if>

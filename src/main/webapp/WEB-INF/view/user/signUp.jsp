@@ -106,10 +106,9 @@ $(() => {
               	})
             })
             
-            $('#modalOk').find('a').attr('data-bs-dismiss', '')
-            .attr('href', 'afterSignUp?userId=' + $('#userId').val())
+            let url = 'afterSignUp?userId=' + $('#userId').val()
             
-            showOkModal('회원가입이 완료되었습니다.')
+            showOkModal('회원가입이 완료되었습니다.', url)
         } else {
             showOkModal('누락된 필수 입력사항이 있거나 휴대폰 인증이 완료되지 않았습니다.')
         }

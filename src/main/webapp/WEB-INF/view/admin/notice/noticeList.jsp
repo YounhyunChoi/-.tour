@@ -10,8 +10,33 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <title>ADMIN.NOTICE.01 공지 목록</title>
-<style>
-</style>
+<script>
+$(() => {
+	$.ajax({
+		url: 'get',
+		dataType: 'json',
+		success: notices => {
+			if(notices.length) {
+				const noticeArr = []
+				
+				$.each(notices, (i, notice) => {
+					noticeArr.push(
+							`<tr>
+                            <td><input type='radio' name='noticeHeader'/></td>
+                            <td>\${notice.noticeNum}</td>
+                            <td>\${notice.noticeTitle}</td>
+                            <td>\${notice.noticeContent}</td>
+                            <td>\${notice.noticeDate}</td>
+                        	</tr>`
+                       )
+				})
+				$('#notices').append(noticeArr.join(''))
+			} else $('#notices').append(
+					'<tr><td colspan=5 class=text-center>등록된 공지사항이 없습니다.</td></tr>')
+		}
+	})
+})
+</script>
 </head>
 <body>
 <header>
@@ -19,7 +44,7 @@
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
+                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>로고이미지</a></div>
                     <h1 class='text-center pt-3 text-white'><b>공지사항</b></h1>
                 </div>
             </div>
@@ -29,7 +54,7 @@
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../notice/admin'>공지사항</a>
+                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList'>공지사항</a>
                 </h6>
             </div>
         </div>
@@ -47,7 +72,7 @@
                 </div>
                 <div class='col'>
                     <div class='d-flex justify-content-end'>
-                        <button type='button' class='btn btn-darkBlue' onclick="location.href='../notice/admin/add'">
+                        <button type='button' class='btn btn-darkBlue' onclick="location.href='../notice/adminAdd'">
                             <i class='bi bi-plus-circle'></i>&nbsp;새글
                         </button>
                     </div>
@@ -64,42 +89,8 @@
                         <th>내용</th>
                         <th>작성일</th>
                     </thead>
-                    <tbody class='text-center'>
-                        <tr>
-                            <td><input type='radio' name='noticeHeader'/></td>
-                            <td>5</td>
-                            <td>시스템 점검</td>
-                            <td>시스템 점검 공지사항 내용</td>
-                            <td>2023-02-12</td>
-                        </tr>
-                        <tr>
-                            <td><input type='radio' name='noticeHeader'/></td>
-                            <td>4</td>
-                            <td>시스템 오류</td>
-                            <td>시스템 오류 공지사항 내용</td>
-                            <td>2023-01-26</td>
-                        </tr>
-                        <tr>
-                            <td><input type='radio'name='noticeHeader' /></td>
-                            <td>3</td>
-                            <td>화불지연 공지</td>
-                            <td>화불지연 공지사항 내용</td>
-                            <td>2022-12-02</td>
-                        </tr>
-                        <tr>
-                            <td><input type='radio' name='noticeHeader'/></td>
-                            <td>2</td>
-                            <td>시스템 업로드 공지</td>
-                            <td>시스템 업로드 공지사항 내용</td>
-                            <td>2022-11-14</td>
-                        </tr>
-                        <tr>
-                            <td><input type='radio' name='noticeHeader'/></td>
-                            <td>1</td>
-                            <td>시스템 점검</td>
-                            <td>시스템 점검 공지사항 내용</td>
-                            <td>2022-09-23</td>
-                        </tr>
+                    <tbody class='text-center' id='notices'>
+  						<!-- 공지사항 목록 -->
                     </tbody>
                 </table>
             </div>

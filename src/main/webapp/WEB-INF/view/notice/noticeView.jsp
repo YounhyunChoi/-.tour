@@ -7,30 +7,20 @@
 <link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css' rel='stylesheet'/>
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
-<link href='../../res/style.css' rel='stylesheet'/>
+<link href='../res/style.css' rel='stylesheet'/>
+<script src='../res/navigation.js'></script>
 <script>
 $(() => {
 	$.ajax({
-       url: '../../user/nav',
-       success: function(result) {
-          $('header').html(result)
-          let header = $('header').find('#header')
-          let footer = $('header').find('#footer')
-          $('header').html(header)
-          $('footer').html(footer)
-       }
-    })
-
-	$.ajax({
-		url: '../get',
+		url: 'get',
 		dataType: 'json',
 		success: notices => {
 			const noticeArr = []
 			let link = document.location.href
-			let inStr = link.replace(/[^0-9]/g, '')
+			let noticeNumber = link.replace(/[^0-9]/g, '')
 			
 			$.each(notices, (i, notice) => {
-				if(notice.noticeNum == inStr){
+				if(notice.noticeNum == noticeNumber){
 					noticeArr.push(
 					        `<h3 class='noticeName'>
 					        	<sapn id='noticeNum'><b>\${notice.noticeNum}.</b></span>

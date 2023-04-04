@@ -8,20 +8,19 @@
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
+<script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
 <title>ADMIN.NOTICE.02 공지 추가</title>
 <script>
  $(() => {
-    	$.ajax({
-           	url: '../../admin/nav',
-           	success: function(result) {
-        		$('.container-fluid').append(result)
-           }
-        })
-    	
-        $('#noticeRegistration').click(() => showConfirmModal('공지사항을 추가하시겠습니까?',
-         '공지사항을 추가되었습니다.', '../notice/01.html'))
+	 	let regexr = null
+	 	let noticeCheck = false
+	 	
+        $('#noticeRegistration').click(() => {
+        	regexr = 	
+        	//showConfirmModal('공지사항을 추가하시겠습니까?', '공지사항을 추가되었습니다.', '../notice/adminList')
     })
+ })
 </script>
 <style>
 </style>
@@ -42,7 +41,7 @@
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../main.html'>메인</a> > <a href='./01.html'>공지사항</a>  > <a href='./02.html'>공지추가</a>
+                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList'>공지사항</a>  > <a href='../notice/adminAdd'>공지추가</a>
                 </h6>
             </div>
         </div>
@@ -52,14 +51,17 @@
    <div class='col'>
         <form class='mb-4'>
             <div class='row'>
-                <div class='col pt-2 d-flex gap-3 mb-4'>
-                    <label for='noticeHeader'>
+                <div class='col pt-2 d-flex gap-3 mb-1'>
+                    <label for='noticeTitle'>
                         <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
                     </label>
                     <div class='col'>
-                        <input type='text' class='form-control' id='noticeHeader'/>
+                        <input type='text' class='form-control' id='noticeTitle'/>
                     </div>
                 </div>
+            </div>
+            <div class='row'>
+                <p id='pwMsg' class='col ms-5'><!--글자제한--></p>
             </div>
             <div class='ms-5'>
                 <div class='col border p-5 mb-3'>
@@ -69,11 +71,11 @@
             </div>
             <div class='row'>
                 <div class='col pt-2 d-flex gap-3 mb-4'>
-                    <label for='noticeHeader'>
+                    <label for='noticeContent'>
                         <h5 class='align-items-center text-nowrap pt-1'>내용</h5>
                     </label>
                     <div class='col'>
-                        <textarea class='form-control' rows='10' id='noticeHeader'></textarea>
+                        <textarea class='form-control' rows='10' id='noticeContent'></textarea>
                     </div>
                 </div>
             </div>

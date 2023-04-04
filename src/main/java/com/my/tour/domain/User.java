@@ -9,7 +9,7 @@ public class User {
 	private String userId;
 	private String userPw;
 	private String email;
-	private int phoneNum;
+	private String phoneNum;
 	private String userName;
 	private LocalDate birthday;
 	private String mktgAgreement;

@@ -1,11 +1,9 @@
 package com.my.tour.web;
 
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.tour.UserAccess;
 import com.my.tour.domain.User;
 import com.my.tour.domain.UserDto;
 import com.my.tour.service.UserService;
@@ -32,36 +31,31 @@ public class UserController {
 	@GetMapping("nav")
 	public ModelAndView navigation(ModelAndView mv) {
 		mv.setViewName("navigation/navigation");
+		
 		return mv;
 	}
 	
 	
 	@GetMapping("get")
 	public List<UserDto> getUser(String userId) {
-		return userService.getUser(userId);
+		return userService.getUserOrAdmin(userId);
 	}
 	
 	@GetMapping("login")
-	public ModelAndView logIn(@CookieValue(required=false)String userId, 
-							@ModelAttribute("user") UserDto user, HttpServletRequest request,
-							HttpSession session, ModelAndView mv) {
-		if(session.getAttribute("userId") == null) {
-			if(userId != null) {
-				user.setUserId(userId);
-				request.setAttribute("saveId", "checked");
-			}
-			request.setAttribute("previousPage", 
-					(String)request.getHeader("REFERER").substring(6));
-			
-			mv.setViewName("user/login");
-		} else {
-			mv.setViewName("redirect:/");
+	@UserAccess
+	public ModelAndView logIn(ModelAndView mv, HttpSession session,
+							@CookieValue(required=false)String userId, 
+							@ModelAttribute("user") UserDto user,
+							HttpServletRequest request) {
+		if(userId != null) {
+			user.setUserId(userId);
+			request.setAttribute("saveId", "checked");
 		}
-
 		request.setAttribute("previousPage", 
 				(String)request.getHeader("REFERER").substring(6));
 		
 		mv.setViewName("user/login");
+		
 		return mv;
 	}
 	
@@ -70,35 +64,42 @@ public class UserController {
 							HttpSession session, HttpServletResponse response,
 							HttpServletRequest request, ModelAndView mv) {
 		session.setAttribute("userId", user.getUserId());
-		
-		if(saveId != null && saveId.equals("on")) {	
-			Cookie cookie = new Cookie("userId", user.getUserId());
-			cookie.setMaxAge(10);
-			response.addCookie(cookie);
+		if(userService.getUserDto(user.getUserId()).size() == 1) {
+			if(saveId != null && saveId.equals("on")) {	
+				Cookie cookie = new Cookie("userId", user.getUserId());
+				cookie.setMaxAge(10);
+				response.addCookie(cookie);
+			}
+			
+			String url = (String)request.getAttribute("previousPage");
+			
+			if(url == null || url.equals("localhost/user/logIn")) {
+				url = "redirect:/";
+			} else {
+				url = "redirect:/" + url;
+			}
+			
+			mv.setViewName(url);
+		} else {
+			mv.setViewName("redirect:/admin/main");
 		}
 		
-		String url = (String)request.getAttribute("previousPage");
-		if(url == null || url.equals("localhost/user/logIn")) url = "redirect:/";
-		
-		mv.setViewName(url);
 		return mv;
 	}
 	
 	@GetMapping("logout")
 	public ModelAndView logout(HttpSession session, ModelAndView mv) {
 		session.invalidate();
-		
 		mv.setViewName("redirect:/");
+		
 		return mv;
 	}
 	
 	@GetMapping("signUp")
-	public ModelAndView signUp(HttpSession session, ModelAndView mv) {
-		if(session.getAttribute("userId") == null) {
-			mv.setViewName("user/signUp");
-		} else {
-			mv.setViewName("redirect:/");
-		}
+	@UserAccess
+	public ModelAndView signUp(ModelAndView mv, HttpSession session) {
+		mv.setViewName("user/signUp");
+		
 		return mv;
 	}
 	
@@ -111,9 +112,25 @@ public class UserController {
 	}
 	
 	@GetMapping("afterSignUp")
-	public ModelAndView afterSignUp(ModelAndView mv, HttpServletRequest request) {
+	@UserAccess
+	public ModelAndView afterSignUp(ModelAndView mv, HttpSession session, 
+									HttpServletRequest request) {
 		mv.addObject("userId", request.getParameter("userId"));
 		mv.setViewName("user/afterSignUp");
+		
+		return mv;
+	}
+
+	@GetMapping("getId")
+	public List<UserDto> getId(String userName, String email) {
+		return userService.findUserId(userName, email);
+	}
+	
+	@GetMapping("findId")
+	@UserAccess
+	public ModelAndView findId(ModelAndView mv, HttpSession session) {
+		mv.setViewName("user/findId");
+		
 		return mv;
 	}
 }

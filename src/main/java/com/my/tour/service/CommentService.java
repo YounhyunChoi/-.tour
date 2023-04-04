@@ -1,7 +1,12 @@
 package com.my.tour.service;
 
+import java.util.List;
+
+import com.my.tour.domain.Comment;
+
 public interface CommentService {
-	int addComment(String comtContent, int reviewNum, String userId);
+	List<Comment> getComments();
+	int addComment(String comtContent);
 	int fixComment(String comtContent);
 	int delComment(int comtNum);
 }

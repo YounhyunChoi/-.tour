@@ -14,14 +14,12 @@
 <script>
 	$(() => {
 		$('#addComment').click(() => {
-			showConfirmModal('댓글을 등록하시겠습니까?', '댓글이 등록되었습니다.', '../review/04.html')
+			showConfirmModal('댓글을 등록하시겠습니까?', '댓글이 등록되었습니다.', '../review/review')
 			
 			$('#okBtn').click(() => {
 				if($('#comtContent').val()) {
-					let comment ={
-						comtContent: $('#comtContent').val(),
-						reviewNum: 0,
-						userId: 'user'
+					let comment = {
+						comtContent: $('#comtContent').val()
 					}
 					
 					$.ajax({
@@ -40,7 +38,7 @@
 <header>
 </header>
 <div class='navigation fixed-top'>
-   <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill' onclick="location.href='../review/04.html'"></i></div>
+   <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill' onclick="location.href='../review/04.html'"></i></div>
    <div class='menuName'>
       <h2 class='text-center pt-3'><b>댓글쓰기</b></h2>
    </div>

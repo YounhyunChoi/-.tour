@@ -6,6 +6,8 @@ import com.my.tour.domain.User;
 import com.my.tour.domain.UserDto;
 
 public interface UserService {
-	List<UserDto> getUser(String userId);
+	List<UserDto> getUserDto(String userId);
+	List<UserDto> getUserOrAdmin(String userId);
 	int addUser(User user);
+	List<UserDto> findUserId(String userName, String email);
 }

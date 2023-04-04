@@ -10,8 +10,7 @@ import com.my.tour.domain.Tour;
 
 @Service("TourService")
 public class TourServiceImpl implements TourService {
-	@Autowired
-	private TourDao tourDao;
+	@Autowired private TourDao tourDao;
 
 	@Override
 	public List<Tour> getTours() {

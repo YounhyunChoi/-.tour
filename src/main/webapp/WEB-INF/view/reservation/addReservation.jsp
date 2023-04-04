@@ -20,7 +20,7 @@ $(() => {
 		url: 'getTour',
 		contentType: 'application/json',
 		data: JSON.stringify({
-			tourNum: <%= request.getParameter("tourNum") %>
+			tourNum: '<%= request.getParameter("tourNum") %>'
 		})
 		success: tour => {
 			const tourArr = []

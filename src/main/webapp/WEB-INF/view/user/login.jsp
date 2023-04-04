@@ -90,20 +90,9 @@ $(() => {
         </div>
         <div class='row'>
             <div class='col text-center mt-3'>
-                <a href='#' class='loginFooter'>아이디 찾기&nbsp;|</a>
-                <a href='#' class='loginFooter'>비밀번호 찾기&nbsp;|</a>
+                <a href='findId' class='loginFooter'>아이디 찾기&nbsp;|</a>
+                <a href='findPw' class='loginFooter'>비밀번호 찾기&nbsp;|</a>
                 <a href='signUp' class='loginFooter'>회원가입</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'>
-            </div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
             </div>
         </div>
     </div>

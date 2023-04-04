@@ -9,5 +9,5 @@ public interface UserService {
 	List<UserDto> getUserDto(String userId);
 	List<UserDto> getUserOrAdmin(String userId);
 	int addUser(User user);
-	List<UserDto> findUserId(String userName, String email);
+	List<User> getUsers();
 }

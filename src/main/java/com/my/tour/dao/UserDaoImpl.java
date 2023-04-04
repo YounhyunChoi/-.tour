@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public List<UserDto> selectUserId(String userName, String email) {
-		return userMap.selectUserId(userName, email);
+	public List<User> selectUsers() {
+		return userMap.selectUsers();
 	}
 }

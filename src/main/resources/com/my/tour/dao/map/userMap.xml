@@ -14,9 +14,8 @@
 				#{birthday}, #{mktgAgreement})
 	</insert>
 
-	<select id='selectUserId' resultType='userDto'>
-		select user_id
+	<select id='selectUsers' resultType='user'>
+		select user_id, user_pw, email, phone_num, user_name, birthday, mktg_agreement
 		from users
-		where user_name = #{userName} and email = #{email}
 	</select>
 </mapper>

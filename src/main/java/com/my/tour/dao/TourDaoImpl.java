@@ -17,4 +17,9 @@ public class TourDaoImpl implements TourDao {
 	public List<Tour> selectTours() {
 		return tourMap.selectTours();
 	}
+	
+	@Override
+	public List<Tour> selectTour() {
+		return tourMap.selectTour();
+	}
 }

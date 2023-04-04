@@ -27,6 +27,11 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 	
 	@Override
+	public List<Tour> getTour(){
+		return tourDao.selectTours();
+	}
+	
+	@Override
 	public void addReservation(LocalDate resvDate, String userId, int tourNum) {
 		reservationDao.insertReservation(resvDate, userId, tourNum);
 	}

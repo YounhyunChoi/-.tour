@@ -10,4 +10,5 @@ public interface ReservationService {
 	List<Reservation> getReservations();
 	void addReservation(LocalDate resvDate, String userId, int tourNum);
 	List<Tour> getTours();
+	List<Tour> getTour();
 }

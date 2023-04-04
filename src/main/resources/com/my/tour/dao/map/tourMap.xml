@@ -6,4 +6,10 @@
 		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id, term_num
 		from tours
 	</select>
+	
+	<select id='selectTour' resultType='tour'>
+		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id, term_num
+		from tours
+		where tour_num = #{tourNum}
+	</select>
 </mapper>

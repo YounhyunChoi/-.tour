@@ -10,25 +10,69 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../res/style.css' rel='stylesheet' />
 <script src='../res/navigation.js'></script>
-<script src='../res/modal.js'></script>
+<script src='../res/modal.js?ver=2'></script>
 <title></title>
 <script>
 $(() => {
+	let chargePrice
+	
 	$.ajax({
-		url: 'getTours',
-		success: tours => {
+		url: 'getTour',
+		contentType: 'application/json',
+		data: JSON.stringify({
+			tourNum: <%= request.getParameter("tourNum") %>
+		})
+		success: tour => {
 			const tourArr = []
 			$.each(tours, (i, tour) => {
-				if(tour.tourNum == <%= request.getParameter("tourNum") %>) {
 					$('#tourName').text(tour.tourName)
 					$('#tourContent').text(tour.tourContent)
-					$('.tourPrice').text(tour.tourPrice)
-					$('#termContent').text(tour.termNum)
-				}
-			})}
+					$('#tourPrice').text(tour.tourPrice)
+			})
+		
+				chargePrice = $('#tourPrice').text() - $('#salePrice').text()
+				$('.chargePrice').text(chargePrice)
+		}
 		}
 	)
-		
+	
+	
+	$.ajax({
+              	url: 'signUp',
+              	method: 'post',
+              	contentType: 'application/json',
+              	data: JSON.stringify({
+              		userId: $('#userId').val(),
+              		userPw: $('#password1').val(),
+              		email: $('#email').val(),
+              		phoneNum: $('#phoneNum').val(),
+              		userName: $('#userName').val(),
+              		birthday: $('#birthday').val(),
+              		mktgAgreement: mktg
+              	})
+            })
+	 $('#paymentBtn').click(() => {    
+                 		let charge = {
+                            	chargePrice: $('#tourPrice').text() - $('#salePrice').text()
+                             }
+                 		$.ajax({
+                        	url: '../charge/add',
+                        	method: 'post',
+                        	data: charge
+                        })
+                        
+                        let reservation = {
+                 			
+                 		}
+                        $.ajax({
+                        	url: 'add',
+                        	method: 'post',
+                        	data: charge
+                        })
+                 	
+                  
+        })
+	
    $('#paymentBtn').attr('disabled', 'disabled')
    $('#agreeCheckbox').change(() => {
       if ($('#agreeCheckbox').prop('checked')) $('#paymentBtn').removeAttr('disabled')
@@ -69,10 +113,10 @@ $(() => {
       <div class='row d-block'>
          <div class='col p-2'><b>금액 및 할인</b></div>
          <div class='col p-2 border border-2 contents shadow-sm'>
-            <b>총 예약 금액</b><span class='tourPrice'></span><br>
-            <b>할인 금액</b> 0원<br>
+            <b>총 예약 금액</b><span id='tourPrice'></span><br>
+            <b>할인 금액</b><span id='salePrice'>1</span>원<br>
             <br>
-            <b>결재 금액</b><span class='tourPrice'></span>
+            <b>결재 금액</b><span id='chargePrice'></span>
          </div>
       </div>
       <div class='row d-block'>
@@ -93,26 +137,12 @@ $(() => {
          <div class='col mt-5 d-flex justify-content-center'>
             <button id='paymentBtn' type='button' data-bs-toggle="modal" data-bs-target="#modal"
                class='px-5 py-2 border-0 rounded btn-lightRed text-center text-white '>
-               <span class='tourPrice'></span>원결제하기
+               <span class='chargePrice'></span>원결제하기
             </button>
          </div>
       </div>
    </div>
-   </div>
-   <div class='modal modal-center fade' id='modal'>
-      <div class='modal-dialog modal-smallsize'>
-          <div class='modal-content'>
-              <div class='pb-4' id='modalMsg'></div>
-              <div id='modalBtn'>
-                  <button type='button' class='btn btn-lightGray' data-bs-dismiss='modal'>아니오</button>
-                  <button type='button' class='btn btn-darkBlue' id='okBtn'>예</button>
-              </div>
-              <div id='modalOk'>
-                  <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
-              </div>
-          </div>
-      </div>
-  </div>
+
    <footer>
    </footer>
 </body>

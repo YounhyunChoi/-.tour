@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.my.tour.domain.Charge;
 import com.my.tour.service.ChargeService;
+
+import jakarta.servlet.http.HttpSession;
+
 
 @RestController
 @RequestMapping("charge")
@@ -23,7 +25,7 @@ public class ChargeController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView addCharge(ModelAndView mv) {
-		return mv;
+	public void addCharge(int chargePrice, HttpSession session) {
+		chargeService.addCharge(chargePrice, (String)session.getAttribute("userId"));
 	}
 }

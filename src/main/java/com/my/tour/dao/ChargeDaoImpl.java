@@ -18,7 +18,7 @@ public class ChargeDaoImpl implements ChargeDao {
 	}
 	
 	@Override
-	public void insertCharge(int chargePrice, String userId, int resvNum) {
-		chargeMap.insertCharge(chargePrice, userId, resvNum);
+	public void insertCharge(int chargePrice, String userId) {
+		chargeMap.insertCharge(chargePrice, userId);
 	}
 }

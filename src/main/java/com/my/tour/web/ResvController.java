@@ -30,6 +30,11 @@ public class ResvController {
 		return reservationService.getTours();
 	}
 	
+	@GetMapping("getTour")
+	public List<Tour> getTour() {
+		return reservationService.getTour();
+	}
+	
 	@GetMapping("list")
 	public ModelAndView ResvList(ModelAndView mv) {
 		mv.setViewName("reservation/reservationList");

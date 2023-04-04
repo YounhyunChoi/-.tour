@@ -18,7 +18,7 @@ public class ChargeServiceImpl implements ChargeService{
 	}
 	
 	@Override
-	public void addCharge(int chargePrice, String userId, int resvNum) {
-		chargeDao.insertCharge(chargePrice, userId, resvNum);
+	public void addCharge(int chargePrice, String userId) {
+		chargeDao.insertCharge(chargePrice, userId);
 	}
 }

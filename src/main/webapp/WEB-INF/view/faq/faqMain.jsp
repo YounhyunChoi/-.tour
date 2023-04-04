@@ -47,6 +47,7 @@
         		url: 'faq/get',
         		dataType: 'json',
         		success: faqs => {
+       
     		        if(faqs.length) {
     		            const faqArr = []
     		            const faqSeqArr = []
@@ -54,7 +55,8 @@
     		            
     		            $.each(faqs, (i, faq) => {
 
-  						if((faqs.length - i) > 1){
+  						if((faqs.length - i) > 0){
+  							
     		                faqArr.push(
     		                    `<div class='row mt-3'>
     					            <div class='col mt-3'>
@@ -113,16 +115,17 @@
     		            $.each(faqSeqArr, (i, seqNum) => {
     		            	btnFunction($(`#faqBtn\${seqNum}`))
     		            })
+    		            
     		        }
         		}
             })
         }
+            
             $(listFaqs)
             
             
         })
-            
-        
+                 
     </script>
 <style>
 .card {

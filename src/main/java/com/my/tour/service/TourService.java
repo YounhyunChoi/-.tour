@@ -6,4 +6,5 @@ import com.my.tour.domain.Tour;
 
 public interface TourService {
 	List<Tour> getTours();
+	List<Tour> getTour();
 }

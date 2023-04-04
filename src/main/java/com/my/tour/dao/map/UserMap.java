@@ -9,5 +9,5 @@ public interface UserMap {
 	List<UserDto> selectUserDto(String userId);
 	int insertUser(User user);
 	List<User> selectUsers();
-	int updateUser(String userId, String userPw);
+	int updateUser(User user);
 }

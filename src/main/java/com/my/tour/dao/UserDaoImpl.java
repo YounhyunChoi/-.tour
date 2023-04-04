@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int updateUser(String userId, String userPw) {
-		return userMap.updateUser(userId, userPw);
+	public int updateUser(User user) {
+		return userMap.updateUser(user);
 	}
 }

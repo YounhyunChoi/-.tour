@@ -14,7 +14,42 @@
 <title>fixPw</title>
 <script>
     $(() => {
-        $('#password').click(() => showOkModal('비밀번호가 변경되었습니다.', '../user/01.html'))
+    	let passwordCheck
+    	$('input').keyup(function () {
+        	let regexr = /[a-z0-9]{6}/
+            let pwMsg = $('#pwMsg')
+            if (($('#password1').val() !== $('#password2').val()) &&
+            		($('#password1').val() && $('#password2').val())) {
+                pwMsg.removeClass('text-success-emphasis')
+                pwMsg.addClass('text-danger-emphasis')
+                pwMsg.text('비밀번호가 일치하지 않습니다.')
+                passwordCheck = false
+            } else {
+                pwMsg.removeClass('text-danger-emphasis')
+                pwMsg.addClass('text-success-emphasis')
+                pwMsg.text('비밀번호가 일치합니다.')
+                passwordCheck = regexr.test($('#password1').val())
+            }
+            if (!($('#password1').val() && $('#password2').val())) {
+            	pwMsg.text(`\u00a0`)
+            	passwordCheck = false
+            }
+        })
+        
+        $('#fixPwBtn').click(() => {
+        	if(passwordCheck) {
+        		$.ajax({
+                  	url: 'fixPw',
+                  	method: 'post',
+                  	contentType: 'application/json',
+                  	data: JSON.stringify({
+                  		userPw: $('#password1').val()
+                  	})
+                })
+        		showOkModal('비밀번호가 변경되었습니다.', 'login')
+        	}
+        	
+        })
     })
 </script>
 </head>
@@ -32,20 +67,24 @@
     <div class='row'>
         <div class='col mt-5 justify-content-center'>
             <label for='password1'>비밀번호</label>
-            <input type='password' class='form-control' 
+            <input type='password' class='form-control' maxlength='12'
             placeholder='6~12자리의 영문,숫자' id='password1'/>
         </div>
     </div>
     <div class='row'>
         <div class='col mt-2 justify-content-center'>
             <label for='password2'>비밀번호 확인</label>
-            <input type='password' class='form-control' 
+            <input type='password' class='form-control' maxlength='12'
             placeholder='6~12자리의 영문,숫자' id='password2'/>
         </div>
     </div>
     <div class='row'>
+        <p id='pwMsg' class='text-center'>&nbsp;</p>
+    </div>
+    <div class='row'>
         <div class='col mt-2'>
-            <button type='submit' class='btn btn-darkBlue form-control' id='password'>
+            <button type='button' class='btn btn-darkBlue form-control'
+            id='fixPwBtn'>
                 <span>비밀번호 변경</span>
             </button>
         </div>

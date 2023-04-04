@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.tour.GetAccess;
 import com.my.tour.UserAccess;
 import com.my.tour.domain.User;
 import com.my.tour.domain.UserDto;
@@ -43,7 +44,8 @@ public class UserController {
 	}
 	
 	@GetMapping("get")
-	public List<UserDto> getUser(String userId) {
+	@GetAccess
+	public List<UserDto> getUser(HttpServletRequest request, String userId) {
 		return userService.getUserOrAdmin(userId);
 	}
 	
@@ -113,7 +115,6 @@ public class UserController {
 	public ModelAndView signUp(@RequestBody User user, ModelAndView mv) {	
 		userService.addUser(user);		
 		
-		mv.setViewName("user/afterSignUp");
 		return mv;
 	}
 	
@@ -128,7 +129,8 @@ public class UserController {
 	}
 
 	@GetMapping("getUsers")
-	public List<User> getUsers() {
+	@GetAccess
+	public List<User> getUsers(HttpServletRequest request) {
 		return userService.getUsers();
 	}
 	
@@ -148,6 +150,13 @@ public class UserController {
 		return mv;
 	}
 	
+	@PostMapping("findPw")
+	public ModelAndView findPw(ModelAndView mv, HttpSession session, String userId) {
+		session.setAttribute("userIdTemp", userId);
+		
+		return mv;
+	}
+	
 	@GetMapping("fixPw")
 	@UserAccess
 	public ModelAndView fixPw(ModelAndView mv, HttpSession session) {
@@ -157,9 +166,12 @@ public class UserController {
 	}
 	
 	@PostMapping("fixPw")
-	public ModelAndView fixPw(ModelAndView mv) {
-		
+	public ModelAndView fixPw(ModelAndView mv, HttpSession session, 
+							@RequestBody User user) {
+		user.setUserId((String) session.getAttribute("userIdTemp"));
+		userService.fixUser(user);
 		
 		return mv;
 	}
+	
 }

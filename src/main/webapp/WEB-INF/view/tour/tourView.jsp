@@ -1,7 +1,4 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
-<%
-	String userId = (String)session.getAttribute("userId");
-%>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -14,6 +11,18 @@
 <script src='/res/navigation.js'></script>
 <script src='/res/modal.js'></script>
 <script>
+function addWish() {
+	$.ajax({
+		url: '../wish/add',
+		method: 'post',
+		contentType: 'application/json',
+		data: JSON.stringify({
+			tourNum: ${param.tourNum}
+		}),
+		success: showOkModal('여행코스가 찜 되었습니다.')
+	})
+}
+
 $(() => {
 	$.ajax({
 		url: 'get',
@@ -21,7 +30,7 @@ $(() => {
 			const tourArr = []
 
 			$.each(tours, (i, tour) => {
-				if(tour.tourNum == <%= request.getParameter("tourNum") %>) {
+				if(tour.tourNum == ${param.tourNum}) {
 					$('#tourTitle').append(`\${tour.tourName}`)
 					
 					tourArr.push(
@@ -55,48 +64,28 @@ $(() => {
         })
         
         $('#tourWishBtn').click(() => {
-<%
-			if(userId != null) {
-%>
-			$.ajax({
-				url: '../wish/get',
-				success: wishes => {
-					if(wishes.length) {
-						$.each(wishes, (i, wish) => {
-							if(<%= request.getParameter("tourNum") %> == wish.tourNum) {
-								showOkModal('이미 찜한 여행코스입니다.')
-							} else {
-								$.ajax({
-									url: '../wish/add',
-									method: 'post',
-									contentType: 'application/json',
-									data: JSON.stringify({
-										tourNum: <%= request.getParameter("tourNum") %>
-									}),
-					        		success: showOkModal('여행코스가 찜 되었습니다.')
-								})
-							}
-						})
-					} else {
-						$.ajax({
-							url: '../wish/add',
-							method: 'post',
-							contentType: 'application/json',
-							data: JSON.stringify({
-								tourNum: <%= request.getParameter("tourNum") %>
-							}),
-			        		success: showOkModal('여행코스가 찜 되었습니다.')
-						})
+			if(`<%= (String)session.getAttribute("userId") %>`) {
+				$.ajax({
+					url: '../wish/get',
+					success: wishes => {
+						if(wishes.length) {
+							$.each(wishes, (i, wish) => {
+								let result = wishes.filter(wish => ${param.tourNum} == wish.tourNum);
+
+								if(result.length) {
+									showOkModal('이미 찜한 여행코스입니다.')
+								} else {
+									addWish()
+								}
+							})
+						} else {
+							addWish()
+						}
 					}
-				}
-			})
-<%
+				})
         	} else {
-%>
 				showOkModal('로그인 페이지로 이동합니다.', '../user/login')
-<%
         	}
-%>
         })
     })
 </script>

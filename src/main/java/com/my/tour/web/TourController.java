@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.tour.GetAccess;
 import com.my.tour.domain.Tour;
 import com.my.tour.service.TourService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController("tourController")
 @RequestMapping("tour")
@@ -17,7 +20,8 @@ public class TourController {
 	@Autowired private TourService tourService;
 	
 	@GetMapping("get")
-	public List<Tour> getTours() {
+	@GetAccess
+	public List<Tour> getTours(HttpServletRequest request) {
 		return tourService.getTours();
 	}
 	

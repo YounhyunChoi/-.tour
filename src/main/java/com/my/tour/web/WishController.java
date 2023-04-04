@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.tour.GetAccess;
 import com.my.tour.domain.Tour;
 import com.my.tour.domain.Wish;
 import com.my.tour.service.WishService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RestController("WishController")
@@ -25,7 +27,8 @@ public class WishController {
 	private WishService wishService;
 	
 	@GetMapping("get")
-	public List<Wish> getWishes() {
+	@GetAccess
+	public List<Wish> getWishes(HttpServletRequest request) {
 		return wishService.getWishes();
 	}
 	
@@ -37,8 +40,7 @@ public class WishController {
 	
 	@PostMapping("add")
 	public void addWish(@RequestBody Tour tour, HttpSession session) {
-		String userId = (String)session.getAttribute("userId");
-		wishService.addWish(userId, tour.getTourNum());
+		wishService.addWish((String)session.getAttribute("userId"), tour.getTourNum());
 	}
 	
 	@DeleteMapping("del/{tourNum}")

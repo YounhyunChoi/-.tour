@@ -18,4 +18,10 @@
 		insert into notices(notice_num, notice_title, notice_content, notice_date, admin_id)
 		values (notice_num_seq.nextval, #{noticeTitle}, #{noticeContent}, to_date(sysdate, 'YYYY-MM-DD'), #{adminId})
 	</insert>
+	
+	<update id='updateNotice'>
+		update notices
+		set notice_title = #{noticeTitle}, notice_content = #{noticeContent}, notice_date = to_date(sysdate,'YYYY-MM-DD'))
+		where notice_num = #{noticeNum}
+	</update>
 </mapper>

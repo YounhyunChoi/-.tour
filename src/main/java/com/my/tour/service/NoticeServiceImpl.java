@@ -18,8 +18,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public List<Notice> getNotice(Notice notice){
-		return noticeDao.selectNotice(notice);
+	public List<Notice> getNotice(int noticeNum){
+		return noticeDao.selectNotice(noticeNum);
 	}
 	
 	@Override

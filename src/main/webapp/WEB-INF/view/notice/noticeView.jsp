@@ -13,6 +13,9 @@
 $(() => {
 	$.ajax({
 		url: 'getNotice',
+		data: {
+			noticeNum: ${param.noticeNum}
+		},			
 		dataType: 'json',
 		success: notices => {
 			const noticeArr = []
@@ -20,7 +23,7 @@ $(() => {
 				noticeArr.push(
 			        `<h3 class='noticeName'>
 			        	<sapn id='noticeNum'><b>\${notice.noticeNum}.</b></span>
-			        	<b>\${notices.noticeTitle}</b>
+			        	<b>\${notice.noticeTitle}</b>
 			        </h3>
 			        <span class='col noticeContent'>
 			            <p>작성일 \${notice.noticeDate}</p>

@@ -11,34 +11,42 @@
 <script src='../../res/adminNavigation.js'></script>
 <title>ADMIN.NOTICE.01 공지 목록</title>
 <script>
-	function listNotices(){
-		$('#notices').empty()
-		
-		$.ajax({
-			url: 'get',
-			dataType: 'json',
-			success: notices => {
-				if(notices.length) {
-					const noticeArr = []
-					
-					$.each(notices, (i, notice) => {
-						noticeArr.push(
-								`<tr>
-	                            <td><input type='radio' name='noticeHeader'/></td>
-	                            <td>\${notice.noticeNum}</td>
-	                            <td>\${notice.noticeTitle}</td>
-	                            <td>\${notice.noticeContent}</td>
-	                            <td>\${notice.noticeDate}</td>
-	                        	</tr>`
-	                       )
-					})
-					$('#notices').append(noticeArr.join(''))
-				} else $('#notices').append(
-						'<tr><td colspan=5 class=text-center>등록된 공지사항이 없습니다.</td></tr>')
-			}
-		})
-	}
-	listNotices()
+$(() => {
+	$('#addNoticeBtn').click(() => {
+		$('#addNoticeBtn').attr('href', '../notice/adminAddView')
+	})
+	
+	$('#fixNoticeBtn').click(() => {
+		if($('#noticeNum:checked').val()){
+			$('#fixNoticeBtn').attr('href', '../notice/adminFixView?noticeNum=' + $('#noticeNum:checked').val())
+		}		
+	})
+	
+	$.ajax({
+		url: 'get',
+		dataType: 'json',
+		success: notices => {
+			$('#notices').empty()
+			if(notices.length) {
+				const noticeArr = []
+				
+				$.each(notices, (i, notice) => {
+					noticeArr.push(
+							`<tr>
+                            <td><input type='radio' name='noticeHeader' id='noticeNum' value='\${notice.noticeNum}'/></td>
+                            <td>\${notice.noticeNum}</td>
+                            <td>\${notice.noticeTitle}</td>
+                            <td>\${notice.noticeContent}</td>
+                            <td>\${notice.noticeDate}</td>
+                        	</tr>`
+                       )
+				})
+				$('#notices').append(noticeArr.join(''))
+			} else $('#notices').append(
+					'<tr><td colspan=5 class=text-center>등록된 공지사항이 없습니다.</td></tr>')
+		}
+	})
+})
 </script>
 </head>
 <body>
@@ -75,9 +83,9 @@
                 </div>
                 <div class='col'>
                     <div class='d-flex justify-content-end'>
-                        <button type='button' class='btn btn-darkBlue' onclick="location.href='../notice/adminAddView'">
+                        <a type='button' class='btn btn-darkBlue' id='addNoticeBtn'>
                             <i class='bi bi-plus-circle'></i>&nbsp;새글
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -98,10 +106,10 @@
                 </table>
             </div>
             <div class='d-flex justify-content-end'>
-                <button type='button' class='btn btn-olive' onclick="location.href='./03.html'">
+                <a type='button' class='btn btn-olive' href='#' id='fixNoticeBtn'>
                     <i class='bi bi-check-circle'></i>
                     &nbsp;수정
-                </button>
+                </a>
             </div>
             <nav aria-label='Page navigation example'>
                 <ul class='pagination d-flex justify-content-center  mt-5' id='indexNum'>

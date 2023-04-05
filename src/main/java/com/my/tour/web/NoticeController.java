@@ -3,6 +3,7 @@
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,8 +32,8 @@ public class NoticeController {
 	}
 	
 	@GetMapping("getNotice")
-	public List<Notice> getNotice(Notice notice){
-		return noticeService.getNotice(notice);
+	public List<Notice> getNotice(int noticeNum){
+		return noticeService.getNotice(noticeNum);
 	}
 	
 	@GetMapping
@@ -44,6 +45,7 @@ public class NoticeController {
 	@GetMapping("view")
 	public ModelAndView noticeView(ModelAndView mv, int noticeNum) {
 		mv.setViewName("notice/noticeView");
+		mv.addObject("noticeNum", noticeNum);
 		return mv;
 	}
 
@@ -60,6 +62,12 @@ public class NoticeController {
 		mv.setViewName("admin/notice/addNotice");
 		return mv;
 	}
+	
+	@GetMapping("adminFixView")
+	public ModelAndView adminFixNotice(ModelAndView mv) {
+		mv.setViewName("admin/notice/fixNotice");
+		return mv;
+	}
 
 	@PostMapping("adminAdd")
 	public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
@@ -69,6 +77,11 @@ public class NoticeController {
 	@PutMapping("adminFix")
 	public void fixNotice(@RequestBody Notice notice) {
 		noticeService.fixNotice(notice);
+	}
+	
+	@DeleteMapping("adminDel")
+	public void delNotice(int noticeNum) {
+		noticeService.delNotice(noticeNum);
 	}
 }
 

@@ -63,7 +63,7 @@ $(() => {
 
 	//여행코스 찜
 	$('#tourWishBtn').click(() => {
-		if(`<%= (String)session.getAttribute("userId") %>` != `null`) {
+		if(!${userId}) {
 			$.ajax({
 				url: '../wish/get',
 				success: wishes => {
@@ -85,7 +85,7 @@ $(() => {
 				}
 			})
        	} else {
-			showOkModal('로그인 페이지로 이동합니다.', '../user/login')
+       		window.location.href = '../user/login'
        	}
 	})
 })

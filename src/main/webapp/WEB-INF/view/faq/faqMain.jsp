@@ -50,13 +50,8 @@
        
     		        if(faqs.length) {
     		            const faqArr = []
-    		            const faqSeqArr = []
-    		           
-    		            
+		           		            
     		            $.each(faqs, (i, faq) => {
-
-  						if((faqs.length - i) > 0){
-  							
     		                faqArr.push(
     		                    `<div class='row mt-3'>
     					            <div class='col mt-3'>
@@ -65,13 +60,13 @@
     					                        <div class='faqQuestion'>
     					                        	\${faq.faqQuestion}
     					                        </div>
-    					                        <button type='button' id='faqBtn\${++i}' class='faqBtn openBtn text-white border-0 rounded' 
-    					                            data-bs-toggle='collapse' data-bs-target='#faqContent\${i}' aria-expanded='false'>
-    					                            <span>열기</span>
+    					                        <button type='button' id='\${faq.faqQuestion}' class='faqBtn openBtn text-white border-0 rounded' 
+    					                            data-bs-toggle='collapse' data-bs-target='#\${faq.faqQuestion}답변' aria-expanded='false'>
+    					                            <span>열기</span>	
     					                            <i class='bi bi-caret-down-fill'></i>
     					                        </button>
     					                    </div>
-    					                    <div id='faqContent\${i}' class='collapse'>
+    					                    <div id='\${faq.faqQuestion}답변' class='collapse'>
     					                        <div class='faqAnswer card-body bg-white'>
     					                        	\${faq.faqAnswer}
     					                        </div>
@@ -81,39 +76,12 @@
     					        </div>
             					<hr class='row mt-3'>`
     		                )
-    		            } else if((faqs.length - i) == 1) {
-    		            	faqArr.push(
-        		                    `<div class='row mt-3'>
-        					            <div class='col mt-3'>
-        					                <div class='card shadow-sm'>
-        					                    <div class='card-header d-flex justify-content-between'>
-        					                        <div class='faqQuestion'>
-        					                        	\${faq.faqQuestion}
-        					                        </div>
-        					                        <button type='button' id='faqBtn\${++i}' class='faqBtn openBtn text-white border-0 rounded' 
-        					                            data-bs-toggle='collapse' data-bs-target='#faqContent\${i}'>
-        					                            <span>열기</span>
-        					                            <i class='bi bi-caret-down-fill'></i>
-        					                        </button>
-        					                    </div>
-        					                    <div id='faqContent\${i}' class='collapse'>
-        					                        <div class='faqAnswer card-body bg-white'>
-        					                        	\${faq.faqAnswer}
-        					                        </div>
-        					                    </div>
-        					                </div>
-        					            </div>
-        					        </div>
-                				`
-        		                )
-    		            }
-    		              faqSeqArr.push(i)
     		            })
     		            
     		            $('#faqContainer').append(faqArr.join(''))
-    		         	
-    		            $.each(faqSeqArr, (i, seqNum) => {
-    		            	btnFunction($(`#faqBtn\${seqNum}`))
+ 						$('hr').eq($('hr').length - 1).remove()
+    		            $.each(faqs, (i, faq) => {
+    		            	btnFunction($(`#\${faq.faqQuestion}`))
     		            })
     		            
     		        }

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.my.tour.AdminAccess;
 import com.my.tour.GetAccess;
 import com.my.tour.domain.Notice;
+import com.my.tour.domain.User;
 import com.my.tour.service.NoticeService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,20 +63,21 @@ public class NoticeController {
 		mv.setViewName("admin/notice/addNotice");
 		return mv;
 	}
-	
-	@GetMapping("adminFixView")
-	public ModelAndView adminFixNotice(ModelAndView mv) {
-		mv.setViewName("admin/notice/fixNotice");
-		return mv;
-	}
 
 	@PostMapping("adminAdd")
 	public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
 		noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));	
 	}
 
+	@GetMapping("adminFixView")
+	public ModelAndView adminFixNotice(ModelAndView mv) {
+		mv.setViewName("admin/notice/fixNotice");
+		return mv;
+	}
+	
 	@PutMapping("adminFix")
-	public void fixNotice(@RequestBody Notice notice) {
+	public void fixNotice(@RequestBody Notice notice, HttpSession session) {
+		notice.setNoticeNum((int) session.getAttribute("noticeNum"));
 		noticeService.fixNotice(notice);
 	}
 	

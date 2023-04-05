@@ -12,25 +12,27 @@
 <script src='../../res/modal.js'></script>
 <title>ADMIN.NOTICE.02 공지 추가</title>
 <script>
-function init(){
-	$('#noticeRegistration').click(() => {
-	    if($('#noticeTitle').val() && $('#noticeContent').val()){
-	    	$.ajax({
-	    		url: 'adminAdd',
-	    		method:'post',
-	    		data: {
-	    			noticeTitle: $('#noticeTitle').val(),
-	    			noticeContent: $('#noticeContent').val()
-	    		}
-	    	})
-	    	showOkModal('공지사항을 추가하시겠습니까?', '../notice/adminList')
-	    	
-	    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
-	    	
-	})
-}
+$(() => {
+	$('#noticeRegistrationBtn').click(() => {
+		showConfirmModal('공지사항을 등록하시겠습니까?')
+		
+		$('#okBtn').click(() => {
+		    if($('#noticeTitle').val() && $('#noticeContent').val()){
+		    	$.ajax({
+		    		url: 'adminAdd',
+		    		method:'post',
+		    		data: {
+		    			noticeTitle: $('#noticeTitle').val(),
+		    			noticeContent: $('#noticeContent').val()
+		    		}
+		    	})
+		    	showOkModal('공지사항이 등록되었습니다.','adminList')
+		    	
+		    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
+		})
 
-$(init)
+	})
+})
 </script>
 <style>
 </style>
@@ -87,7 +89,7 @@ $(init)
                 </div>
             </div>
             <div class='d-flex justify-content-end'>
-                <button type='button' class='btn btn-darkBlue'id='noticeRegistration'>
+                <button type='button' class='btn btn-darkBlue'id='noticeRegistrationBtn'>
                     <i class='bi bi-plus-circle'></i>
                     &nbsp;등록
                 </button>

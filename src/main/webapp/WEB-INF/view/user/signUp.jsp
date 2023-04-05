@@ -183,7 +183,7 @@ $(() => {
                     *휴대폰번호
                 </div>
                 <div class='col-6'>
-                    <input type='tel' class='form-control' maxlength='11' id='phoneNum'/>
+                    <input type='text' class='form-control' maxlength='11' id='phoneNum'/>
                 </div>
                 <div class='col-3'>
                     <button id='sendCheckNumBtn' type='button' class='btn btn-darkBlue'>

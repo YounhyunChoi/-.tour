@@ -12,4 +12,5 @@ public interface UserService {
 	List<User> getUsers();
 	List<User> getUser(String userId); 
 	int fixUser(User user);
+	int deleteUser(String userId);
 }

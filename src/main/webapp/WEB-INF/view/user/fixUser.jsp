@@ -60,17 +60,16 @@ $(() => {
     })
     
     $('#fixUserBtn').click(() => {
-    	showConfirmModal('수정하시겠습니까?', 'afterFixUser')
-    	
+    	showConfirmModal('수정하시겠습니까?')
+
     	$('#okBtn').click(() => {
-        	regexr = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/
-        	
     		if(passwordCheck && regexr.test($('#email').val()) && phoneCheck) {
+    	    	regexr = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/
         		let mktg = $('#mktgAgreement').is(':checked') ? 'Y' : 'N'
         				
         		$.ajax({
         			url: 'fixUser',
-        			method: 'post',
+        			method: 'put',
         			contentType: 'application/json',
         			data: JSON.stringify({
         				userPw: $('#userPw').val(),
@@ -79,7 +78,24 @@ $(() => {
         				mktgAgreement: mktg
         			})
         		})
+        		
+        		showOkModal('회원이 수정되었습니다.', 'afterFixUser')
+        	} else {
+        		showOkModal('누락된 필수 입력사항이 있거나 휴대폰 인증이 완료되지 않았습니다.')
         	}
+    	})
+    })
+    
+    $('#delUserBtn').click(() => {
+    	showConfirmModal('정말 탈퇴하시겠습니까?')
+    	
+    	$('#okBtn').click(() => {
+    		$.ajax({
+    			url: 'delUser',
+    			method: 'delete'
+    		})
+    		
+    		showOkModal('회원이 삭제되었습니다.', 'afterDelUser')
     	})
     })
 })
@@ -159,9 +175,9 @@ $(() => {
          <div class='row mt-3 align-items-center'>
             <div class='col-4'><label for='text'>*휴대폰번호</label></div>
             <div class='col-5 p-0'><input type='tel' class='form-control' 
-            value='0${user.phoneNum}' id='sendCheckNumBtn'/></div>
+            value='${user.phoneNum}'/></div>
             <div class='col-3'>
-               <button type='button'
+               <button type='button' id='sendCheckNumBtn'
                class='btn btn-darkBlue form-control'>
                   <span>인증</span>
                </button>
@@ -169,9 +185,10 @@ $(() => {
          </div>
          <div class='row mt-3 align-items-center'>
             <div class='col-4'><label for='text'>*인증번호</label></div>
-            <div class='col-5 p-0'><input type='number' class='form-control'/></div>
+            <div class='col-5 p-0'><input type='number' class='form-control'
+             						id='phoneCheckNum'/></div>
             <div class='col-3'>
-               <button type='button' id='confirmBtn' 
+               <button type='button' id='phoneCheckBtn' 
                class='btn btn-darkBlue form-control'>
                   <span>확인</span>
                </button>

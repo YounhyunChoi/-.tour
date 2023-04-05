@@ -15,7 +15,7 @@ $(() => {
 	$('#loginBtn').click(e => {
 		e.preventDefault()
 		$.ajax({
-			url: 'get',
+			url: 'getUserDto',
 			data: {
 				userId: $('#userId').val()
 			},

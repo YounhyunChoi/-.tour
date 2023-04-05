@@ -21,7 +21,7 @@ $(() => {
 	$('#duplicateCheck').click(() => {
 		regexr = /[a-z0-9]{5}/
     	$.ajax({
-			url: 'get',
+			url: 'getUserDto',
 			data: {
 				userId: $('#userId').val()
 			},
@@ -43,8 +43,8 @@ $(() => {
     $('input').keyup(function () {
     	regexr = /[a-z0-9]{6}/
         let pwMsg = $('#pwMsg')
-        if (($('#password1').val() !== $('#password2').val()) &&
-        		($('#password1').val() && $('#password2').val())) {
+        if (($('#userPw').val() !== $('#userPwCheck').val()) &&
+        		($('#userPw').val() && $('#userPwCheck').val())) {
             pwMsg.removeClass('text-success-emphasis')
             pwMsg.addClass('text-danger-emphasis')
             pwMsg.text('비밀번호가 일치하지 않습니다.')
@@ -53,9 +53,9 @@ $(() => {
             pwMsg.removeClass('text-danger-emphasis')
             pwMsg.addClass('text-success-emphasis')
             pwMsg.text('비밀번호가 일치합니다.')
-            passwordCheck = regexr.test($('#password1').val())
+            passwordCheck = regexr.test($('#userPw').val())
         }
-        if (!($('#password1').val() && $('#password2').val())) {
+        if (!($('#userPw').val() && $('#userPwCheck').val())) {
         	pwMsg.text(`\u00a0`)
         	passwordCheck = false
         }
@@ -65,8 +65,7 @@ $(() => {
     
     let checkNum
     let phoneCheck = false
-  	$('#phoneCheck').click(() => {
-  		
+  	$('#sendCheckNumBtn').click(() => {
   		checkNum = Math.floor(Math.random() * 1000000) + ''
   		while (checkNum.length != 6) {
   			checkNum = '0' + checkNum
@@ -75,7 +74,7 @@ $(() => {
     	showOkModal('인증번호가 발송되었습니다.')
     })
     
-    $('#phoneOkBtn').click(() => {
+    $('#phoneCheckBtn').click(() => {
         if($('#phoneCheckNum').val() == checkNum) {
             showOkModal('인증되었습니다.')
             phoneCheck = true
@@ -89,7 +88,7 @@ $(() => {
     	regexr = /[가-힣]{3}/
     	
         if(idCheck && passwordCheck && emailCheck.test($('#email').val()) && phoneCheck && regexr.test($('#userName').val()) && $('#birthday').val()) {        	
-    		let mktg = $('#mktg').is(':checked') ? 'Y' : 'N'
+    		let mktg = $('#mktgAgreement').is(':checked') ? 'Y' : 'N'
         	
         	$.ajax({
               	url: 'signUp',
@@ -97,7 +96,7 @@ $(() => {
               	contentType: 'application/json',
               	data: JSON.stringify({
               		userId: $('#userId').val(),
-              		userPw: $('#password1').val(),
+              		userPw: $('#userPw').val(),
               		email: $('#email').val(),
               		phoneNum: $('#phoneNum').val(),
               		userName: $('#userName').val(),
@@ -149,7 +148,7 @@ $(() => {
                     *비밀번호
                 </div>
                 <div class='col-6'>
-                    <input id='password1' type='password' class='form-control'
+                    <input id='userPw' type='password' class='form-control'
                         placeholder=' 6~12자리의 영문,숫자' maxlength='12' required/>
                 </div>
             </div>
@@ -158,7 +157,7 @@ $(() => {
                     *비밀번호확인
                 </div>
                 <div class='col-6'>
-                    <input id='password2' type='password' class='form-control'
+                    <input id='userPwCheck' type='password' class='form-control'
                         placeholder=' 6~12자리의 영문,숫자' maxlength='12' required/>
                 </div>
             </div>
@@ -172,7 +171,10 @@ $(() => {
                 <div class='col-6'>
                     <input type='email' class='form-control' id='email'/>
                     <div class='row'>
-                        <label class='mt-1'><input type='checkbox' id='mktg'/>&nbsp; 마케팅 수신동의</label>
+                        <label class='mt-1'>
+	                        <input type='checkbox' id='mktgAgreement'/>
+	                        &nbsp; 마케팅 수신동의
+                        </label>
                     </div>
                 </div>
             </div>
@@ -181,10 +183,10 @@ $(() => {
                     *휴대폰번호
                 </div>
                 <div class='col-6'>
-                    <input type='tel' class='form-control' maxlength='11' id='phoneNum'/>
+                    <input type='text' class='form-control' maxlength='11' id='phoneNum'/>
                 </div>
                 <div class='col-3'>
-                    <button id='phoneCheck' type='button' class='btn btn-darkBlue'>
+                    <button id='sendCheckNumBtn' type='button' class='btn btn-darkBlue'>
                         인증
                     </button>
                 </div>
@@ -198,7 +200,7 @@ $(() => {
                     maxlength='6' required/>
                 </div>
                 <div class='col-3'>
-                    <button id='phoneOkBtn' type='button' class='btn btn-darkBlue'>
+                    <button id='phoneCheckBtn' type='button' class='btn btn-darkBlue'>
                         확인
                     </button>
                 </div>

@@ -16,4 +16,14 @@ public class NoticeDaoImpl implements NoticeDao {
 	public List<Notice> selectNotices(){
 		return noticeMap.selectNotices();
 	}
+	
+	@Override
+	public List<Notice> selectNotice(int noticeNum){
+		return noticeMap.selectNotice(noticeNum);
+	}
+	
+	@Override
+	public int insertNotice(String noticeTitle, String noticeContent, String adminId) {
+		return noticeMap.insertNotice(noticeTitle, noticeContent, adminId);
+	}
 }

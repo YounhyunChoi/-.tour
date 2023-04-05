@@ -8,8 +8,8 @@
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../res/style.css' rel='stylesheet'/>
-<title>NOTICE.01 공지 목록</title>
 <script src='../res/navigation.js'></script>
+<title>NOTICE.01 공지 목록</title>
 <script>
 $(() => {
     	$.ajax({
@@ -21,10 +21,10 @@ $(() => {
     				
     				$.each(notices, (i, notice) => {
     					noticeArr.push(
-						        	`<a href='notice/view?notice_num=${notice.noticeNum}' class='noticeName'><h4><b>\${notice.noticeNum}. \${notice.noticeTitle}</b></h4></a>
+						        	`<a href='./notice/view?noticeNum=\${notice.noticeNum}' class='noticeName'><h4><b>\${notice.noticeNum}. \${notice.noticeTitle}</b></h4></a>
 						        	<span class='col noticeContent'>
 						            	<p><h5>\${notice.noticeContent}</h5></p><br>
-						            	<p>\${notice.noticeDate}</p>
+						            	<p>작성일 \${notice.noticeDate}</p>
 						        	</span>
 						        	<hr>`
     							)
@@ -49,7 +49,7 @@ $(() => {
 </header>
 <div class='navigation fixed-top'>
    <div class='float-start mt-3 ms-2'>
-   		<i class='bi bi-caret-left-fill' onClick='history.back()'></i>
+   		<i class='bi bi-caret-left-fill'></i>
    </div>
    <div class='menuName'>
       <h2 class='text-center pt-3'><b>공지사항</b></h2>

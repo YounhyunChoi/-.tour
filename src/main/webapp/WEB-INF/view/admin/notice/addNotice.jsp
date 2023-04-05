@@ -12,10 +12,25 @@
 <script src='../../res/modal.js'></script>
 <title>ADMIN.NOTICE.02 공지 추가</title>
 <script>
-    $(() => {
-        $('#noticeRegistration').click(() => showConfirmModal('공지사항을 추가하시겠습니까?',
-         '공지사항을 추가되었습니다.', '../notice/01.html'))
-    })
+function init(){
+	$('#noticeRegistration').click(() => {
+	    if($('#noticeTitle').val() && $('#noticeContent').val()){
+	    	$.ajax({
+	    		url: 'adminAdd',
+	    		method:'post',
+	    		data: {
+	    			noticeTitle: $('#noticeTitle').val(),
+	    			noticeContent: $('#noticeContent').val()
+	    		}
+	    	})
+	    	showConfirmModal('공지사항을 추가하시겠습니까?', '공지사항을 추가되었습니다.', '../notice/adminList')
+	    	
+	    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
+	    	
+	})
+}
+
+$(init)
 </script>
 <style>
 </style>
@@ -36,7 +51,7 @@
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../main.html'>메인</a> > <a href='./01.html'>공지사항</a>  > <a href='./02.html'>공지추가</a>
+                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList'>공지사항</a>  > <a href='../notice/adminAddView'>공지추가</a>
                 </h6>
             </div>
         </div>
@@ -47,11 +62,12 @@
         <form class='mb-4'>
             <div class='row'>
                 <div class='col pt-2 d-flex gap-3 mb-4'>
-                    <label for='noticeHeader'>
+                    <label for='noticeTitle'>
                         <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
                     </label>
                     <div class='col'>
-                        <input type='text' class='form-control' id='noticeHeader'/>
+                        <input type='text' class='form-control' id='noticeTitle'
+                         minlength='5' maxlength='30'/>
                     </div>
                 </div>
             </div>
@@ -63,17 +79,16 @@
             </div>
             <div class='row'>
                 <div class='col pt-2 d-flex gap-3 mb-4'>
-                    <label for='noticeHeader'>
+                    <label for='noticeContent'>
                         <h5 class='align-items-center text-nowrap pt-1'>내용</h5>
                     </label>
                     <div class='col'>
-                        <textarea class='form-control' rows='10' id='noticeHeader'></textarea>
+                        <textarea class='form-control' rows='10' id='noticeContent' maxlength='300'></textarea>
                     </div>
                 </div>
             </div>
             <div class='d-flex justify-content-end'>
-                <button type='button' class='btn btn-darkBlue'
-                data-bs-toggle='modal' data-bs-target='#modal' id='noticeRegistration'>
+                <button type='button' class='btn btn-darkBlue'id='noticeRegistration'>
                     <i class='bi bi-plus-circle'></i>
                     &nbsp;등록
                 </button>
@@ -81,21 +96,7 @@
         </form>
    </div>
 </div>
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'>
-            </div>
-            <div id='modalBtn'>
-                <button type='button' class='btn btn-lightGray' data-bs-dismiss='modal'>아니오</button>
-                <button type='button' class='btn btn-darkBlue' id='okBtn'>예</button>
-            </div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
-            </div>
-        </div>
-    </div>
-</div>
+
 <footer>
 </footer>
 </body>

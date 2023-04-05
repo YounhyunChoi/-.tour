@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.tour.AdminAccess;
 import com.my.tour.service.AdminService;
 
 import jakarta.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("main")
+	@AdminAccess
 	public ModelAndView main(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/main");
 		return mv;

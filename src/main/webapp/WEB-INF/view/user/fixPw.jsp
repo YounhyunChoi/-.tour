@@ -40,7 +40,7 @@
         	if(passwordCheck) {
         		$.ajax({
                   	url: 'fixPw',
-                  	method: 'post',
+                  	method: 'put',
                   	contentType: 'application/json',
                   	data: JSON.stringify({
                   		userPw: $('#password1').val()

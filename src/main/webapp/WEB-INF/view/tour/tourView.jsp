@@ -24,6 +24,7 @@ function addWish() {
 }
 
 $(() => {
+	//여행코스 조회
 	$.ajax({
 		url: 'get',
 		success: tours => {
@@ -41,53 +42,53 @@ $(() => {
 								내용 \${tour.tourContent}<br>
 							</div>`)
 					$('#tourContent').append(tourArr.join(''))
-					/* $('input[name="tourNum"]').val(tour.tourNum) */
 				}
 			})
 		}
 	})
-})
-</script>
-<script>
-    $(() => {
-        $('#tourShareBtn').click(() => {
-	        let url = ''
-	    	let textarea = document.createElement("textarea")
-	    	document.body.appendChild(textarea)
-	    	url = window.document.location.href
-	    	textarea.value = url
-	    	textarea.select()
-	    	document.execCommand("copy")
-	    	document.body.removeChild(textarea)
-	    	
-        	showOkModal('링크가 복사되었습니다. 친구에게 공유해보세요.')
-        })
-        
-        $('#tourWishBtn').click(() => {
-			if(`<%= (String)session.getAttribute("userId") %>`) {
-				$.ajax({
-					url: '../wish/get',
-					success: wishes => {
-						if(wishes.length) {
-							$.each(wishes, (i, wish) => {
-								let result = wishes.filter(wish => ${param.tourNum} == wish.tourNum);
+	
+	//여행코스 공유
+	$('#tourShareBtn').click(() => {
+		let url = ''
+		let textarea = document.createElement("textarea")
+		document.body.appendChild(textarea)
+		url = window.document.location.href
+		textarea.value = url
+		textarea.select()
+		document.execCommand("copy")
+		document.body.removeChild(textarea)
+	
+		showOkModal('링크가 복사되었습니다. 친구에게 공유해보세요.')
+	})
 
-								if(result.length) {
-									showOkModal('이미 찜한 여행코스입니다.')
-								} else {
-									addWish()
-								}
-							})
-						} else {
-							addWish()
-						}
+	//여행코스 찜
+	$('#tourWishBtn').click(() => {
+		if(`<%= (String)session.getAttribute("userId") %>` != `null`) {
+			$.ajax({
+				url: '../wish/get',
+				success: wishes => {
+					if(wishes.length) {
+						$.each(wishes, (i, wish) => {
+							let result = wishes.filter(wish => ${param.tourNum} == wish.tourNum);
+
+							if(result.length) {
+								showOkModal('이미 찜한 여행코스입니다.')
+							} else {
+								addWish()
+								result = []
+							}
+						})
+					} else {
+						addWish()
+						result = []
 					}
-				})
-        	} else {
-				showOkModal('로그인 페이지로 이동합니다.', '../user/login')
-        	}
-        })
-    })
+				}
+			})
+       	} else {
+			showOkModal('로그인 페이지로 이동합니다.', '../user/login')
+       	}
+	})
+})
 </script>
 <title>TOUR.02 여행코스 조회</title>
 <style>

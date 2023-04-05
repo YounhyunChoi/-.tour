@@ -19,16 +19,27 @@
 		from users
 	</select>
 	
+	<select id='selectUser' resultType='user'>
+		select user_id, user_pw, email, phone_num, user_name, birthday, mktg_agreement
+		from users
+		where user_id = #{userId}
+	</select>
+	
 	<update id='updateUser'>
 		update users
 		<set>
 			user_pw = #{userPw}
-			<if test='email != null'>email = #{email}</if>
-			<if test='phoneNum != null'>phone_num = #{phoneNum}</if>
-			<if test='userName != null'>user_name = #{userName}</if>
-			<if test='birthday != null'>birthday = #{birthday}</if>
-			<if test='mktgAgreement != null'>mktg_agreement = #{mktgAgreement}</if>
+			<if test='email != null'>, email = #{email}</if>
+			<if test='phoneNum != null'>, phone_num = #{phoneNum}</if>
+			<if test='userName != null'>, user_name = #{userName}</if>
+			<if test='birthday != null'>, birthday = #{birthday}</if>
+			<if test='mktgAgreement != null'>, mktg_agreement = #{mktgAgreement}</if>
 		</set>
 		where user_id = #{userId}
 	</update>
+	
+	<delete id='deleteUser'>
+		delete users
+		where user_id = #{userId}
+	</delete>
 </mapper>

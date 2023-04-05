@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +46,7 @@ public class UserController {
 		return mv;
 	}
 	
-	@GetMapping("get")
+	@GetMapping("getUserDto")
 	@GetAccess
 	public List<UserDto> getUser(HttpServletRequest request, String userId) {
 		return userService.getUserOrAdmin(userId);
@@ -59,8 +62,11 @@ public class UserController {
 			user.setUserId(userId);
 			request.setAttribute("saveId", "checked");
 		}
-		request.setAttribute("previousPage", 
-				(String)request.getHeader("REFERER").substring(6));
+		
+		if(request.getHeader("REFERER") != null) {
+			request.setAttribute("previousPage", 
+								(String)request.getHeader("REFERER").substring(6));
+		}
 		
 		mv.setViewName("user/login");
 		
@@ -112,10 +118,8 @@ public class UserController {
 	}
 	
 	@PostMapping("signUp")
-	public ModelAndView signUp(@RequestBody User user, ModelAndView mv) {	
-		userService.addUser(user);		
-		
-		return mv;
+	public void signUp(@RequestBody User user) {	
+		userService.addUser(user);
 	}
 	
 	@GetMapping("afterSignUp")
@@ -151,10 +155,8 @@ public class UserController {
 	}
 	
 	@PostMapping("findPw")
-	public ModelAndView findPw(ModelAndView mv, HttpSession session, String userId) {
+	public void findPw(HttpSession session, String userId) {
 		session.setAttribute("userIdTemp", userId);
-		
-		return mv;
 	}
 	
 	@GetMapping("fixPw")
@@ -165,13 +167,57 @@ public class UserController {
 		return mv;
 	}
 	
-	@PostMapping("fixPw")
-	public ModelAndView fixPw(ModelAndView mv, HttpSession session, 
-							@RequestBody User user) {
+	@PutMapping("fixPw")
+	public void fixPw(ModelAndView mv, HttpSession session, 
+					@RequestBody User user) {
 		user.setUserId((String) session.getAttribute("userIdTemp"));
 		userService.fixUser(user);
+	}
+	
+	@GetMapping("fixUser")
+	public ModelAndView fixUser(ModelAndView mv, HttpSession session, 
+								HttpServletRequest request) {
+		mv.setViewName("user/fixUser");
+		User user = (userService.getUser((String) session.getAttribute("userId")).get(0));
+		mv.addObject("user", user);
+		
+		if(user.getMktgAgreement().equals("Y")) {
+			request.setAttribute("mktgAgreement", "checked");
+		}
 		
 		return mv;
 	}
 	
+	@PutMapping("fixUser")
+	public void fixUser(@RequestBody User user, HttpSession session) {
+		user.setUserId((String) session.getAttribute("userId"));
+		userService.fixUser(user);
+	}
+	
+	@DeleteMapping("delUser")
+	public void delUser(HttpSession session) {
+		userService.deleteUser((String) session.getAttribute("userId"));
+		session.invalidate();
+	}
+	
+	@GetMapping("afterFixUser")
+	public ModelAndView afterFixUser(ModelAndView mv) {
+		mv.setViewName("user/afterFixUser");
+		
+		return mv;
+	}
+	
+	@GetMapping("afterDelUser")
+	public ModelAndView afterDelUser(ModelAndView mv) {
+		mv.setViewName("user/afterDelUser");
+		
+		return mv;
+	}
+	
+	@GetMapping("myPage")
+	public ModelAndView myPage(ModelAndView mv) {
+		mv.setViewName("user/myPage");
+		
+		return mv;
+	}
 }

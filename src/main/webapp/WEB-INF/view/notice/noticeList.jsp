@@ -21,7 +21,7 @@ $(() => {
     				
     				$.each(notices, (i, notice) => {
     					noticeArr.push(
-						        	`<a href='./notice/view?noticeNum=\${notice.noticeNum}' class='noticeName'><h4><b>\${notice.noticeNum}. \${notice.noticeTitle}</b></h4></a>
+						        	`<a href='notice/view?noticeNum=\${notice.noticeNum}' class='noticeName'><h4><b>\${notice.noticeNum}. \${notice.noticeTitle}</b></h4></a>
 						        	<span class='col noticeContent'>
 						            	<p><h5>\${notice.noticeContent}</h5></p><br>
 						            	<p>작성일 \${notice.noticeDate}</p>

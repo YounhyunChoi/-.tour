@@ -83,13 +83,13 @@
 	                마이페이지
 	                <ul>
 	                    <li>
-	                        <a class='nav-link' aria-current='page' href='#'>예약내역</a>
+	                        <a class='nav-link' aria-current='page' href='../'>예약내역</a>
 	                    </li>
 	                    <li>
-	                        <a class='nav-link' aria-current='page' href='#'>찜 내역</a>  
+	                        <a class='nav-link' aria-current='page' href='../'>찜 내역</a>  
 	                    </li>
 	                    <li>
-	                        <a class='nav-link' aria-current='page' href='#'>내가 쓴 후기</a> 
+	                        <a class='nav-link' aria-current='page' href='../'>내가 쓴 후기</a> 
 	                    </li>
 	                </ul>
 	            </li>    
@@ -161,7 +161,7 @@
                 </a>
             </div>
             <div class='pe-2'>
-                <a href='#'  class='btn w-auto' type='button'>
+                <a href='../user/myPage'  class='btn w-auto' type='button'>
                     <i class='icon bi-person-fill fa-3x'></i>
                 </a>
             </div>

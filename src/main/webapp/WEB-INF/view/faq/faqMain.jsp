@@ -78,7 +78,7 @@
     		                )
     		            })
     		            
-    		            $('#faqContainer').append(faqArr.join(''))
+    		            $('#faqContainer').append(faqArr.join(''))	
  						$('hr').eq($('hr').length - 1).remove()
     		            $.each(faqs, (i, faq) => {
     		            	btnFunction($(`#\${faq.faqQuestion}`))

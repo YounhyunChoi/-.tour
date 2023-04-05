@@ -3,11 +3,12 @@ package com.my.tour.service;
 import java.util.List;
 
 import com.my.tour.domain.Reservation;
+import com.my.tour.domain.Term;
 import com.my.tour.domain.Tour;
 
 public interface ReservationService {
 	List<Reservation> getReservations(String userId);
-	void addReservation(String userId, int tourNum, int chargeNum);
-	List<Tour> getTours();
+	void addReservation(int chargePrice, String userId, int tourNum);
 	List<Tour> getTour(int tourNum);
+	Term getTerm(int tourNum);
 }

@@ -18,40 +18,32 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("reservation")
-public class ResvController {
+public class ReservationController {
 	@Autowired private ReservationService reservationService;
-	
-	
 	
 	@GetMapping("get")
 	public List<Reservation> getReservations(HttpSession session) {
 		return reservationService.getReservations((String)session.getAttribute("userId"));
 	}
 	
-	@GetMapping("getTours")
-	public List<Tour> getTours() {
-		return reservationService.getTours();
-	}
-	
-	@GetMapping("getTour")
-	public List<Tour> getTour(int tourNum) {
-		return reservationService.getTour(tourNum);
-	}
-	
 	@GetMapping("list")
-	public ModelAndView ResvList(ModelAndView mv) {
+	public ModelAndView reservationList(ModelAndView mv) {
 		mv.setViewName("reservation/reservationList");
 		return mv;
 	}
 	
 	@GetMapping("add")
-	public ModelAndView addReservation(ModelAndView mv) {
+	public ModelAndView addReservation(ModelAndView mv, int tourNum) {
+		Tour tour = reservationService.getTour(tourNum).get(0);
+		
 		mv.setViewName("reservation/addReservation");
+		mv.addObject("tour", tour);
+		mv.addObject("term", reservationService.getTerm(tour.getTermNum()));
 		return mv;
 	}
 	
 	@PostMapping("add")
-	public void addReservation(HttpSession session, int tourNum, int chargeNum) {
-		reservationService.addReservation((String)session.getAttribute("userId"), tourNum, chargeNum);
+	public void addReservation(int chargePrice, HttpSession session, int tourNum) {
+		reservationService.addReservation(chargePrice, (String)session.getAttribute("userId"), tourNum);
 	}
 }

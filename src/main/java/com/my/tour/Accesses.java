@@ -28,7 +28,7 @@ public class Accesses {
 		return mv;
 	}
 	
-	@After("execution(* com.my.tour.web.AdminController.*(..)) && args(mv, session, ..)")
+	@After("@annotation(com.my.tour.AdminAccess) && args(mv, session, ..)")
 	public ModelAndView adminAccessRight(JoinPoint jp, ModelAndView mv,
 									HttpSession session) {
 		if(session.getAttribute("userId") == null ||

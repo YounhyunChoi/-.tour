@@ -47,6 +47,11 @@ public class UserServiceImpl implements UserService {
 	public List<User> getUsers() {
 		return userDao.selectUsers();
 	}
+	
+	@Override
+	public List<User> getUser(String userId) {
+		return userDao.selectUser(userId);
+	}
 
 	@Override
 	public int fixUser(User user) {

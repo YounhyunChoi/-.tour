@@ -12,27 +12,25 @@
 <script src='../../res/modal.js'></script>
 <title>ADMIN.NOTICE.02 공지 추가</title>
 <script>
- $(() => {
-        $('#noticeRegistration').click(() => {
-        	if($('#noticeTitle').val() && $('#noticeContent') !== null){
-        	$.ajax({
-        		url: 'adminAdd',
-        		method:'post',
-        		dataType: 'application/json',
-        		data: JSON.stringify({
-        			noticeNum: '1',
-        			noticeTitle: $('#noticeTitle').val(),
-        			noticeContent: $('#noticeContent').val(),
-        			noticeDate: '2023-04-04',
-        			adminId:'admin'
-        		})
-        	})
-        	showConfirmModal('공지사항을 추가하시겠습니까?', '공지사항을 추가되었습니다.', '../notice/adminList')
-        	
-        } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
-        	
-    })
- })
+function init(){
+	$('#noticeRegistration').click(() => {
+	    if($('#noticeTitle').val() && $('#noticeContent').val()){
+	    	$.ajax({
+	    		url: 'adminAdd',
+	    		method:'post',
+	    		data: {
+	    			noticeTitle: $('#noticeTitle').val(),
+	    			noticeContent: $('#noticeContent').val()
+	    		}
+	    	})
+	    	showConfirmModal('공지사항을 추가하시겠습니까?', '공지사항을 추가되었습니다.', '../notice/adminList')
+	    	
+	    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
+	    	
+	})
+}
+
+$(init)
 </script>
 <style>
 </style>
@@ -63,17 +61,15 @@
    <div class='col'>
         <form class='mb-4'>
             <div class='row'>
-                <div class='col pt-2 d-flex gap-3 mb-1'>
+                <div class='col pt-2 d-flex gap-3 mb-4'>
                     <label for='noticeTitle'>
                         <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
                     </label>
                     <div class='col'>
-                        <input type='text' class='form-control' id='noticeTitle'/>
+                        <input type='text' class='form-control' id='noticeTitle'
+                         minlength='5' maxlength='30'/>
                     </div>
                 </div>
-            </div>
-            <div class='row'>
-                <p id='noticeTitleMsg' class='col ms-5'><!--글자제한--></p>
             </div>
             <div class='ms-5'>
                 <div class='col border p-5 mb-3'>
@@ -82,17 +78,14 @@
                 <input class='mb-4' type='file'>
             </div>
             <div class='row'>
-                <div class='col pt-2 d-flex gap-3 mb-1'>
+                <div class='col pt-2 d-flex gap-3 mb-4'>
                     <label for='noticeContent'>
                         <h5 class='align-items-center text-nowrap pt-1'>내용</h5>
                     </label>
                     <div class='col'>
-                        <textarea class='form-control' rows='10' id='noticeContent'></textarea>
+                        <textarea class='form-control' rows='10' id='noticeContent' maxlength='300'></textarea>
                     </div>
                 </div>
-            </div>
-            <div class='row'>
-                <p id='noticeContentMsg' class='col ms-5'><!--글자제한--></p>
             </div>
             <div class='d-flex justify-content-end'>
                 <button type='button' class='btn btn-darkBlue'id='noticeRegistration'>

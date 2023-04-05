@@ -23,7 +23,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public void addNotice(String noticeTitle, String noticeContent) {
-		noticeDao.insertNotice(noticeTitle, noticeContent);
+	public void addNotice(String noticeTitle, String noticeContent, String adminId) {
+		noticeDao.insertNotice(noticeTitle, noticeContent, adminId);
 	}
 }

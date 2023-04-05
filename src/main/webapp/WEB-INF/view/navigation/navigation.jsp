@@ -118,7 +118,7 @@
                 <li class='nav-item'>
                     <ul>
                         <li>
-                            <a class='nav-link' aria-current='page' href='#'>공지사항</a>
+                            <a class='nav-link' aria-current='page' href='/notice'>공지사항</a>
                         </li>
                     </ul>
                 </li>

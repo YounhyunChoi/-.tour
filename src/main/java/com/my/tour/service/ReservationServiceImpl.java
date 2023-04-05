@@ -1,6 +1,5 @@
 package com.my.tour.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,12 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 	
 	@Override
-	public void addReservation(LocalDate resvDate, String userId, int tourNum) {
-		reservationDao.insertReservation(resvDate, userId, tourNum);
+	public List<Tour> getTour(int tourNum){
+		return tourDao.selectTour(tourNum);
+	}
+	
+	@Override
+	public void addReservation(String userId, int tourNum, int chargeNum) {
+		reservationDao.insertReservation(userId, tourNum, chargeNum);
 	}
 }

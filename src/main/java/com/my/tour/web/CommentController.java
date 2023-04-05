@@ -31,7 +31,7 @@ public class CommentController {
 		return commentService.addComment(comtContent);
 	}
 	
-	@PostMapping("get")
+	@GetMapping("get")
 	public List<Comment> getComments() {
 		return commentService.getComments();
 	}
@@ -45,12 +45,6 @@ public class CommentController {
 	@PutMapping("fix")
 	public int fixComment(String comtContent) {
 		return commentService.fixComment(comtContent);
-	}
-	
-	@GetMapping("del")
-	public ModelAndView delComment(ModelAndView mv) {
-		mv.setViewName("admin/comment/delComment");
-		return mv;
 	}
 	
 	@DeleteMapping("del")

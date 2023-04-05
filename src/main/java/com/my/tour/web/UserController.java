@@ -43,7 +43,7 @@ public class UserController {
 		return mv;
 	}
 	
-	@GetMapping("get")
+	@GetMapping("getUserDto")
 	@GetAccess
 	public List<UserDto> getUser(HttpServletRequest request, String userId) {
 		return userService.getUserOrAdmin(userId);
@@ -77,7 +77,7 @@ public class UserController {
 				Cookie cookie = new Cookie("userId", user.getUserId());
 				cookie.setMaxAge(10);
 				response.addCookie(cookie);
-			}
+			} 
 			
 			String url = (String)request.getAttribute("previousPage");
 			
@@ -112,10 +112,8 @@ public class UserController {
 	}
 	
 	@PostMapping("signUp")
-	public ModelAndView signUp(@RequestBody User user, ModelAndView mv) {	
-		userService.addUser(user);		
-		
-		return mv;
+	public void signUp(@RequestBody User user) {	
+		userService.addUser(user);
 	}
 	
 	@GetMapping("afterSignUp")
@@ -151,10 +149,8 @@ public class UserController {
 	}
 	
 	@PostMapping("findPw")
-	public ModelAndView findPw(ModelAndView mv, HttpSession session, String userId) {
+	public void findPw(HttpSession session, String userId) {
 		session.setAttribute("userIdTemp", userId);
-		
-		return mv;
 	}
 	
 	@GetMapping("fixPw")
@@ -166,12 +162,28 @@ public class UserController {
 	}
 	
 	@PostMapping("fixPw")
-	public ModelAndView fixPw(ModelAndView mv, HttpSession session, 
-							@RequestBody User user) {
+	public void fixPw(ModelAndView mv, HttpSession session, 
+					@RequestBody User user) {
 		user.setUserId((String) session.getAttribute("userIdTemp"));
 		userService.fixUser(user);
+	}
+	
+	@GetMapping("fixUser")
+	public ModelAndView fixUser(ModelAndView mv, HttpSession session, 
+								HttpServletRequest request) {
+		mv.setViewName("user/fixUser");
+		User user = (userService.getUser((String) session.getAttribute("userId")).get(0));
+		mv.addObject("user", user);
+		if(user.getMktgAgreement() == "Y") {
+			request.setAttribute("mktgAgreement", "checked");
+		}
 		
 		return mv;
 	}
 	
+	@PostMapping("fixUser")
+	public void fixUser(@RequestBody User user, HttpSession session) {
+		user.setUserId((String) session.getAttribute("userId"));
+		userService.fixUser(user);
+	}
 }

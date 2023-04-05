@@ -9,6 +9,5 @@ import com.my.tour.domain.Notice;
 public interface NoticeMap {
 	List<Notice> selectNotices();
 	List<Notice> selectNotice(int noticeNum);
-	int insertNotice(@Param("noticeTitle") String noticeTitle,
-			@Param("noticeContent")String noticeContent);
+	int insertNotice(String noticeTitle, String noticeContent, String adminId);
 }

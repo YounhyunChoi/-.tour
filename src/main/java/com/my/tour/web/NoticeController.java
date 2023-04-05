@@ -42,7 +42,7 @@ public class NoticeController {
 	//어드민
 	@GetMapping("adminList")
 	public ModelAndView adminNoticeList(ModelAndView mv, HttpSession session) {
-		mv.setViewName("admin/notice/noticeList");
+		mv.setViewName("admin/notice/getNotice");
 		return mv;
 	}
 	
@@ -53,8 +53,8 @@ public class NoticeController {
 	}
 
 	@PostMapping("adminAdd")
-	public void addNotice(String noticeTitle, String noticeContent) {
-		noticeService.addNotice(noticeTitle, noticeContent);
+	public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
+		noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));	
 	}
 
 }

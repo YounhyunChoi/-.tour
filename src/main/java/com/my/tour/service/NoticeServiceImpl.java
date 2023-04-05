@@ -18,12 +18,22 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public List<Notice> getNotice(int noticeNum){
-		return noticeDao.selectNotice(noticeNum);
+	public List<Notice> getNotice(Notice notice){
+		return noticeDao.selectNotice(notice);
 	}
 	
 	@Override
 	public void addNotice(String noticeTitle, String noticeContent, String adminId) {
 		noticeDao.insertNotice(noticeTitle, noticeContent, adminId);
+	}
+	
+	@Override
+	public void fixNotice(Notice notice) {
+		noticeDao.updateNotice(notice);
+	}
+	
+	@Override
+	public void delNotice(int noticeNum) {
+		noticeDao.deleteNotice(noticeNum);
 	}
 }

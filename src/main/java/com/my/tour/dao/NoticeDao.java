@@ -6,6 +6,8 @@ import com.my.tour.domain.Notice;
 
 public interface NoticeDao {
 	List<Notice> selectNotices();
-	List<Notice> selectNotice(int noticeNum);
+	List<Notice> selectNotice(Notice notice);
 	int insertNotice(String noticeTitle, String noticeContent, String adminId);
+	int updateNotice(Notice notice);
+	int deleteNotice(int noticeNum);
 }

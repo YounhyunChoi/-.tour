@@ -12,33 +12,24 @@
 <script>
 $(() => {
 	$.ajax({
-		url: 'get',
+		url: 'getNotice',
 		dataType: 'json',
 		success: notices => {
 			const noticeArr = []
-			let link = document.location.href
-			let noticeNumber = link.replace(/[^0-9]/g, '')
-			
-			$.each(notices, (i, notice) => {
-				if(notice.noticeNum == noticeNumber){
-					noticeArr.push(
-					        `<h3 class='noticeName'>
-					        	<sapn id='noticeNum'><b>\${notice.noticeNum}.</b></span>
-					        	<b>\${notice.noticeTitle}</b>
-					        </h3>
-					        <span class='col noticeContent'>
-					            <p>작성일 \${notice.noticeDate}</p>
-					        </span>
-					        <hr>
-					        <div class='border text-center mb-3 noticeImg'>공지사항이미지</div>
-					        <span>\${notice.noticeContent}</span>`
-					      
-					  )
-					  $('#noticeView').append(noticeArr.join(''))
-				}
-	
-			})
-			
+			let notice = notices.at(0)
+				noticeArr.push(
+			        `<h3 class='noticeName'>
+			        	<sapn id='noticeNum'><b>\${notice.noticeNum}.</b></span>
+			        	<b>\${notices.noticeTitle}</b>
+			        </h3>
+			        <span class='col noticeContent'>
+			            <p>작성일 \${notice.noticeDate}</p>
+			        </span>
+			        <hr>
+			        <div class='border text-center mb-3 noticeImg'>공지사항이미지</div>
+			        <span>\${notice.noticeContent}</span>`
+			  )
+			  $('#noticeView').append(noticeArr.join(''))
 		}
 	})
 })
@@ -66,18 +57,6 @@ $(() => {
 </div>
 <div class='container'>
     <div class='row mt-5' id='noticeView'>
-    <!-- 
-		<h3 class='noticeName'>
-        	<sapn id='noticeNum'><b>\${notice.noticeNum}.</b></span>
-        	<b>\${notice.noticeTitle}</b>
-        </h3>
-        <span class='col noticeContent'>
-            <p>작성일 \${notice.noticeDate}</p>
-        </span>
-        <hr>
-        <div class='border text-center mb-3 noticeImg'>공지사항이미지</div>
-        <span>\${notice.noticeContent}</span>
-         -->
     </div>
 </div>
 <footer>

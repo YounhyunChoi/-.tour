@@ -6,6 +6,8 @@ import com.my.tour.domain.Notice;
 
 public interface NoticeService {
 	List<Notice> getNotices();
-	List<Notice> getNotice(int noticeNum);
+	List<Notice> getNotice(Notice notice);
 	void addNotice(String noticeTitle, String noticeContent, String adminId);
+	void fixNotice(Notice notice);
+	void delNotice(int noticeNum);
 }

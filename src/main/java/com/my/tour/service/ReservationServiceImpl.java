@@ -16,8 +16,8 @@ public class ReservationServiceImpl implements ReservationService{
 	@Autowired private TourDao tourDao;
 	
 	@Override
-	public List<Reservation> getReservations(){
-		return reservationDao.selectReservations();
+	public List<Reservation> getReservations(String userId){
+		return reservationDao.selectReservations(userId);
 	}
 	
 	@Override

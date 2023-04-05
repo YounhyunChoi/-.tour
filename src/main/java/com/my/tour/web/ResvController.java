@@ -24,8 +24,8 @@ public class ResvController {
 	
 	
 	@GetMapping("get")
-	public List<Reservation> getReservations() {
-		return reservationService.getReservations();
+	public List<Reservation> getReservations(HttpSession session) {
+		return reservationService.getReservations((String)session.getAttribute("userId"));
 	}
 	
 	@GetMapping("getTours")

@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
 @Component
 @Aspect
 public class Accesses {
-	@Autowired private AdminService adminService = new AdminServiceImpl();
+	@Autowired private AdminService adminService;
 	
 	@Around("@annotation(com.my.tour.UserAccess) && args(mv, session, ..)")
 	public ModelAndView userAccessRight(JoinPoint jp, ModelAndView mv,

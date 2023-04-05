@@ -10,5 +10,6 @@ public interface UserService {
 	List<UserDto> getUserOrAdmin(String userId);
 	int addUser(User user);
 	List<User> getUsers();
+	List<User> getUser(String userId); 
 	int fixUser(User user);
 }

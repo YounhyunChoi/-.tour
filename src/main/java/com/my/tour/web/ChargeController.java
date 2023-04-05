@@ -24,6 +24,10 @@ public class ChargeController {
 		return chargeService.getCharges();
 	}
 	
+	@GetMapping("getCharge")
+	public List<Charge> selectCharge(HttpSession session) {
+		return chargeService.selectCharge((String)session.getAttribute("userId"));
+	}
 	@PostMapping("add")
 	public void addCharge(int chargePrice, HttpSession session) {
 		chargeService.addCharge(chargePrice, (String)session.getAttribute("userId"));

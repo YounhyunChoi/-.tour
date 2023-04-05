@@ -19,7 +19,7 @@ public class TourDaoImpl implements TourDao {
 	}
 	
 	@Override
-	public List<Tour> selectTour() {
-		return tourMap.selectTour();
+	public List<Tour> selectTour(int tourNum) {
+		return tourMap.selectTour(tourNum);
 	}
 }

@@ -6,6 +6,7 @@ import com.my.tour.domain.Charge;
 
 public interface ChargeService {
 	List<Charge> getCharges();
+	List<Charge> selectCharge(String userId);
 	void addCharge(int chargePrice, String userId);
 	
 }

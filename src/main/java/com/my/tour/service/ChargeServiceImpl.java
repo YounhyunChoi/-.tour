@@ -18,6 +18,10 @@ public class ChargeServiceImpl implements ChargeService{
 	}
 	
 	@Override
+	public List<Charge> selectCharge(String userId) {
+		return chargeDao.selectCharge(userId);
+	}
+	@Override
 	public void addCharge(int chargePrice, String userId) {
 		chargeDao.insertCharge(chargePrice, userId);
 	}

@@ -1,6 +1,6 @@
 package com.my.tour.dao;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 	
 	@Override
-	public void insertReservation(LocalDate resvDate, String userId, int tourNum) {
-		 reservationMap.insertReservation(resvDate, userId, tourNum);
+	public void insertReservation(String userId, int tourNum, int chargeNum) {
+		 reservationMap.insertReservation(userId, tourNum, chargeNum);
 	}
 }

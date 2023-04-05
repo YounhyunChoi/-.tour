@@ -16,7 +16,10 @@ public class ChargeDaoImpl implements ChargeDao {
 	public List<Charge> selectCharges() {
 		return chargeMap.selectCharges();
 	}
-	
+	@Override
+	public List<Charge> selectCharge(String userId) {
+		return chargeMap.selectCharge(userId);
+	}
 	@Override
 	public void insertCharge(int chargePrice, String userId) {
 		chargeMap.insertCharge(chargePrice, userId);

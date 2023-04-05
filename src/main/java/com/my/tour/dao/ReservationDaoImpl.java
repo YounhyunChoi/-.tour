@@ -19,7 +19,7 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 	
 	@Override
-	public void insertReservation(String userId, int tourNum, int chargeNum) {
-		 reservationMap.insertReservation(userId, tourNum, chargeNum);
+	public void insertReservation(int chargePrice, String userId, int tourNum) {
+		 reservationMap.insertReservation(chargePrice, userId, tourNum);
 	}
 }

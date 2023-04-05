@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC './/mybatis.org//DTD Mapper 3.0//EN'
 	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='com.my.tour.dao.map.TermMap'>
-	<select id='selectTerm' resultType='Term'>
+	<select id='selectTerm' resultType='term'>
 		select term_num, term_name, term_content
 		from terms
 		where term_num = #{termNum}

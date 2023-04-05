@@ -62,6 +62,8 @@ function wishList() {
 						                        \${tour.tourName}
 						                    </div>
 						                </div>`;
+						                
+						                console.log(wishText)
 										}
 									})
 								}

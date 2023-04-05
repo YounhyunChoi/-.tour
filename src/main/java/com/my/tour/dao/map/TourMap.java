@@ -6,4 +6,5 @@ import com.my.tour.domain.Tour;
 
 public interface TourMap {
 	List<Tour> selectTours();
+	List<Tour> selectTour(int tourNum);
 }

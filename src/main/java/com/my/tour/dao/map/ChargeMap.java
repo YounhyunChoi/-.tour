@@ -6,5 +6,6 @@ import com.my.tour.domain.Charge;
 
 public interface ChargeMap {
 	List<Charge> selectCharges();
-	int insertCharge(int chargePrice, String userId, int resvNum);
+	List<Charge> selectCharge(String userId);
+	int insertCharge(int chargePrice, String userId);
 }

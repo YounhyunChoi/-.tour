@@ -6,5 +6,6 @@ import com.my.tour.domain.Charge;
 
 public interface ChargeDao {
 	List<Charge> selectCharges();
-	void insertCharge(int chargePrice, String userId, int resvNum);
+	List<Charge> selectCharge(String userId);
+	void insertCharge(int chargePrice, String userId);
 }

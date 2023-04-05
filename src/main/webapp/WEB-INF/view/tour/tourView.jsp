@@ -11,16 +11,26 @@
 <script src='/res/navigation.js'></script>
 <script src='/res/modal.js'></script>
 <script>
+function addWish() {
+	$.ajax({
+		url: '../wish/add',
+		method: 'post',
+		contentType: 'application/json',
+		data: JSON.stringify({
+			tourNum: ${param.tourNum}
+		}),
+		success: showOkModal('여행코스가 찜 되었습니다.')
+	})
+}
+
 $(() => {
 	$.ajax({
-		url: '../get',
+		url: 'get',
 		success: tours => {
 			const tourArr = []
-			let link = document.location.href
-			let intStr = link.replace(/[^0-9]/g, '')
-			
+
 			$.each(tours, (i, tour) => {
-				if(tour.tourNum == intStr) {
+				if(tour.tourNum == ${param.tourNum}) {
 					$('#tourTitle').append(`\${tour.tourName}`)
 					
 					tourArr.push(
@@ -31,7 +41,7 @@ $(() => {
 								내용 \${tour.tourContent}<br>
 							</div>`)
 					$('#tourContent').append(tourArr.join(''))
-					$('input[name=tourNum]').val(tour.tourNum)
+					/* $('input[name="tourNum"]').val(tour.tourNum) */
 				}
 			})
 		}
@@ -40,8 +50,43 @@ $(() => {
 </script>
 <script>
     $(() => {
-        $('#tourShareBtn').click(() => showOkModal('링크가 복사되었습니다. 친구에게 공유해보세요.'))
-        $('#tourWishBtn').click(() => showOkModal('여행코스가 찜 되었습니다.'))
+        $('#tourShareBtn').click(() => {
+	        let url = ''
+	    	let textarea = document.createElement("textarea")
+	    	document.body.appendChild(textarea)
+	    	url = window.document.location.href
+	    	textarea.value = url
+	    	textarea.select()
+	    	document.execCommand("copy")
+	    	document.body.removeChild(textarea)
+	    	
+        	showOkModal('링크가 복사되었습니다. 친구에게 공유해보세요.')
+        })
+        
+        $('#tourWishBtn').click(() => {
+			if(`<%= (String)session.getAttribute("userId") %>`) {
+				$.ajax({
+					url: '../wish/get',
+					success: wishes => {
+						if(wishes.length) {
+							$.each(wishes, (i, wish) => {
+								let result = wishes.filter(wish => ${param.tourNum} == wish.tourNum);
+
+								if(result.length) {
+									showOkModal('이미 찜한 여행코스입니다.')
+								} else {
+									addWish()
+								}
+							})
+						} else {
+							addWish()
+						}
+					}
+				})
+        	} else {
+				showOkModal('로그인 페이지로 이동합니다.', '../user/login')
+        	}
+        })
     })
 </script>
 <title>TOUR.02 여행코스 조회</title>
@@ -174,20 +219,6 @@ $(() => {
                 <p class='text-end'>
                     작성일 2023-02-17
                 </p>
-            </div>
-        </div>
-    </div>
-</div>
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'></div>
-            <div id='modalBtn'>
-                <button type='button' class='btn btn-lightGray' data-bs-dismiss='modal'>아니오</button>
-                <button type='button' class='btn btn-darkBlue' id='okBtn'>예</button>
-            </div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
             </div>
         </div>
     </div>

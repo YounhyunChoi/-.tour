@@ -77,7 +77,7 @@ public class UserController {
 				Cookie cookie = new Cookie("userId", user.getUserId());
 				cookie.setMaxAge(10);
 				response.addCookie(cookie);
-			}
+			} 
 			
 			String url = (String)request.getAttribute("previousPage");
 			

@@ -3,19 +3,25 @@
 	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='com.my.tour.dao.map.NoticeMap'>
 	<select id='selectNotices' resultType='notice'>
-		select notice_num, notice_title, notice_content, notice_date, admin_id
+		select notice_num, notice_title, notice_content, notice_date
 		from notices
 		order by notice_num desc
 	</select>
 	
 	<select id='selectNotice' resultType='notice'>
-		select notice_num, notice_title, notice_content, notice_date, admin_id
+		select notice_num, notice_title, notice_content, notice_date
 		from notices
 		where notice_num = #{noticeNum}
 	</select>
 	
 	<insert id='insertNotice'>
-		insert into notices(notice_num, notice_title, notice_content, notice_date, admin_id)
-		values (notice_num_seq.nextval, #{noticeTitle}, #{noticeContent}, to_date(sysdate, 'YYYY-MM-DD'), #{adminId})
+		insert into notices(notice_num, notice_title, notice_content, notice_date)
+		values (notice_num_seq.nextval, #{noticeTitle}, #{noticeContent}, to_date(sysdate, 'YYYY-MM-DD'))
 	</insert>
+	
+	<update id='updateNotice'>
+		update notices
+		set notice_title = #{noticeTitle}, notice_content = #{noticeContent}, notice_date = to_date(sysdate,'YYYY-MM-DD'))
+		where notice_num = #{noticeNum}
+	</update>
 </mapper>

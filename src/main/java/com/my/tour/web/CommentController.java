@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.my.tour.domain.Comment;
 import com.my.tour.service.CommentService;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("comment")
 public class CommentController {
@@ -27,8 +29,8 @@ public class CommentController {
 	}
 	
 	@PostMapping("add")
-	public int addComment(String comtContent) {
-		return commentService.addComment(comtContent);
+	public int addComment(String comtContent, HttpSession session) {
+		return commentService.addComment(comtContent, (String) session.getAttribute("userId"), 1);
 	}
 	
 	@GetMapping("get")
@@ -43,8 +45,8 @@ public class CommentController {
 	}
 	
 	@PutMapping("fix")
-	public int fixComment(String comtContent) {
-		return commentService.fixComment(comtContent);
+	public int fixComment(String comtContent, int comtNum) {
+		return commentService.fixComment(comtContent, comtNum);
 	}
 	
 	@DeleteMapping("del")

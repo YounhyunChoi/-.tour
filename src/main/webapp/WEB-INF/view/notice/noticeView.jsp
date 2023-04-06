@@ -12,33 +12,56 @@
 <script>
 $(() => {
 	$.ajax({
-		url: 'get',
+		url: 'getNotice',
+		data: {
+			noticeNum: ${param.noticeNum}
+		},			
 		dataType: 'json',
 		success: notices => {
 			const noticeArr = []
-			let link = document.location.href
-			let noticeNumber = link.replace(/[^0-9]/g, '')
-			
-			$.each(notices, (i, notice) => {
-				if(notice.noticeNum == noticeNumber){
-					noticeArr.push(
-					        `<h3 class='noticeName'>
-					        	<sapn id='noticeNum'><b>\${notice.noticeNum}.</b></span>
-					        	<b>\${notice.noticeTitle}</b>
-					        </h3>
-					        <span class='col noticeContent'>
-					            <p>작성일 \${notice.noticeDate}</p>
-					        </span>
-					        <hr>
-					        <div class='border text-center mb-3 noticeImg'>공지사항이미지</div>
-					        <span>\${notice.noticeContent}</span>`
-					      
-					  )
-					  $('#noticeView').append(noticeArr.join(''))
-				}
-	
-			})
-			
+			let notice = notices.at(0)
+				noticeArr.push(
+			        `<h3 class='noticeName'>
+			        	<sapn id='noticeNum'><b>\${notice.noticeNum}.</b></span>
+			        	<b>\${notice.noticeTitle}</b>
+			        </h3>
+			        <span class='col noticeContent'>
+			            <p>작성일 \${notice.noticeDate}</p>
+			        </span>
+			        <hr>
+			        <div class='row mb-2'>
+		            <div class='col'>
+		                <div class='row py-5 me-0' id='noticeImg'>
+		                    <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
+		                        <div class='carousel-inner'>
+		                            <div class='carousel-item active'>
+		                            	<img src='<c:url value="/attach/${noticeimageName}"/>'/>
+		                            </div>
+		                            <div class='carousel-item'>
+		                            	<img src='<c:url value="/attach/${noticeimageName}"/>'/>
+		                            </div>
+		                            <div class='carousel-item'>
+		                            	<img src='<c:url value="/attach/${noticeimageName}"/>'/>
+		                            </div>
+		                            <div class='carousel-item'>
+	                            		<img src='<c:url value="/attach/${noticeimageName}"/>'/>
+	                            	</div>
+		                        </div>
+		                        <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+		                            <i class="bi bi-chevron-left tourCarouselBtn"></i>
+		                            <div class="visually-hidden">Previous</div>
+		                        </a>
+		                        <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
+		                            <i class="bi bi-chevron-right tourCarouselBtn"></i>
+		                            <div class="visually-hidden">Next</div>
+		                        </a>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+			    <span>\${notice.noticeContent}</span>`
+			  )
+			  $('#noticeView').append(noticeArr.join(''))
 		}
 	})
 })
@@ -46,13 +69,15 @@ $(() => {
 </script>
 <title>NOTICE.02 공지 조회</title>
 <style>
-    .noticeName{
-        color: black;
-   }
+   #noticeImg {
+        border: .1rem solid lightgray;
+        margin: 1rem;
+        text-align: center;
+    }
 
-   .noticeImg{
-        padding:5rem;
-   }
+    .tourCarouselBtn {
+        color: black;
+    }
 </style>
 </head>
 <body>
@@ -66,18 +91,6 @@ $(() => {
 </div>
 <div class='container'>
     <div class='row mt-5' id='noticeView'>
-    <!-- 
-		<h3 class='noticeName'>
-        	<sapn id='noticeNum'><b>\${notice.noticeNum}.</b></span>
-        	<b>\${notice.noticeTitle}</b>
-        </h3>
-        <span class='col noticeContent'>
-            <p>작성일 \${notice.noticeDate}</p>
-        </span>
-        <hr>
-        <div class='border text-center mb-3 noticeImg'>공지사항이미지</div>
-        <span>\${notice.noticeContent}</span>
-         -->
     </div>
 </div>
 <footer>

@@ -13,22 +13,19 @@
 <title>ADMIN.NOTICE.03 공지 수정</title>
 <script>
  $(() => {
-	 $.ajax({
-		 url: 'getNotice',
-		 data: {
-			 ${param.noticeNum}
-		 },
-		 dataType: 'json',
-		 success: 
-	 })
-	$('#fixNoticeBtn').click(() => {
-		showConfirModal('공지사항을 수정하시겠습니까?')
-		
-		
-	})
+
 })
 </script>
 <style>
+    #noticeImg {
+        border: .1rem solid lightgray;
+        margin: 1rem;
+        text-align: center;
+    }
+
+    .tourCarouselBtn {
+        color: black;
+    }
 </style>
 </head>
 <body>
@@ -47,7 +44,7 @@
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../main.html'>메인</a> > <a href='./01.html'>공지사항</a>  > <a href='./03.html'>공지수정</a>
+                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList''>공지사항</a>  > <a href='../notice/adminFixView'>공지수정</a>
                 </h6>
             </div>
         </div>
@@ -66,11 +63,25 @@
                     </div>
                 </div>
             </div>
-            <div class='ms-5'>
-                <div class='col border p-5 mb-3'>
-                    <h5 class='text-center'>공지사항이미지</h5>
+			<div class='row ms-4'>
+                <div class='col'>
+                    <div class='row py-5 me-0' id='noticeImg'>
+                        <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
+                            <div class='carousel-inner' id='noticeImages'>
+									<!-- 공지사항 이미지 -->
+                            </div>
+                            <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+                                <i class="bi bi-chevron-left tourCarouselBtn"></i>
+                                <div class="visually-hidden">Previous</div>
+                            </a>
+                            <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
+                                <i class="bi bi-chevron-right tourCarouselBtn"></i>
+                                <div class="visually-hidden">Next</div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <input class='mb-4' type='file'>
+                <input class='mb-4 ms-3' type='file' id='noticeImageUp'>
             </div>
             <div class='row'>
                 <div class='col pt-2 d-flex gap-3 mb-4'>
@@ -78,7 +89,7 @@
                         <h5 class='align-items-center text-nowrap pt-1'>내용</h5>
                     </label>
                     <div class='col'>
-                        <textarea class='form-control' rows='10' id='noticeContent' value='${notice.noticeContent}'></textarea>
+                        <textarea class='form-control' rows='10' id='noticeContent'>${notice.noticeContent}</textarea>
                     </div>
                 </div>
             </div>

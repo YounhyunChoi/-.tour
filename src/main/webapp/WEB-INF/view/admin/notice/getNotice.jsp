@@ -33,11 +33,13 @@ $(() => {
 				$.each(notices, (i, notice) => {
 					noticeArr.push(
 							`<tr>
-                            <td><input type='radio' name='noticeHeader' id='noticeNum' value='\${notice.noticeNum}'/></td>
-                            <td>\${notice.noticeNum}</td>
-                            <td>\${notice.noticeTitle}</td>
-                            <td>\${notice.noticeContent}</td>
-                            <td>\${notice.noticeDate}</td>
+	                            <td class='align-middle'>
+	                            	<input type='radio' name='noticeHeader' id='noticeNum' value='\${notice.noticeNum}'/>
+	                            </td>
+	                            <td>\${notice.noticeNum}</td>
+	                            <td>\${notice.noticeTitle}</td>
+	                            <td>\${notice.noticeContent}</td>
+	                            <td>\${notice.noticeDate}</td>
                         	</tr>`
                        )
 				})

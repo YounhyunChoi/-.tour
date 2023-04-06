@@ -2,6 +2,7 @@
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,9 +57,16 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@GetMapping("getNoticeImages")
-	public List<NoticeImage> getNoticeImages(){
-		return noticeService.getNoticeImages();
+	@GetMapping("getNoticeImage")
+	public List<String> getNoticeImages(int noticeNum){
+		List<String> noticeImageName = new ArrayList<String>();
+		if(noticeService.getNoticeImages(noticeNum).size() != 0) {
+			for(NoticeImage noticeImage : noticeService.getNoticeImages(noticeNum)) {
+				noticeImageName.add(noticeImage.getNoticeImageName());			
+			}
+		}
+		
+		return noticeImageName;
 	}
 	
 	@PostMapping("addNoticeImage")

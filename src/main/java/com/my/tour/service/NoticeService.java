@@ -11,6 +11,6 @@ public interface NoticeService {
 	void addNotice(String noticeTitle, String noticeContent);
 	void fixNotice(Notice notice);
 	void delNotice(int noticeNum);
-	List<NoticeImage> getNoticeImages();
+	List<NoticeImage> getNoticeImages(int noticeNum);
 	int addNoticeImage(String noticeImageName);
 }

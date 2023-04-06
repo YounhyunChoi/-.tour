@@ -8,22 +8,22 @@
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='/res/style.css' rel='stylesheet'/>
-<script src='/res/navigation.js'></script>
-<script src='/res/modal.js'></script>
+<script src='../res/navigation.js'></script>
+<script src='../res/modal.js'></script>
 <script>
 function addWish() {
 	$.ajax({
 		url: '../wish/add',
 		method: 'post',
-		contentType: 'application/json',
-		data: JSON.stringify({
+		data: {
 			tourNum: ${param.tourNum}
-		}),
+		},
 		success: showOkModal('여행코스가 찜 되었습니다.')
 	})
 }
 
 $(() => {
+	//여행코스 조회
 	$.ajax({
 		url: 'get',
 		success: tours => {
@@ -45,7 +45,6 @@ $(() => {
 			})
 		}
 	})
-<<<<<<< HEAD
 	
 	//여행코스 공유
 	$('#tourShareBtn').click(() => {
@@ -63,95 +62,32 @@ $(() => {
 
 	//여행코스 찜
 	$('#tourWishBtn').click(() => {
-		if(!${userId}) {
+		if('${userId}' != '') {
 			$.ajax({
 				url: '../wish/get',
 				success: wishes => {
 					if(wishes.length) {
+						let result = []
+						
 						$.each(wishes, (i, wish) => {
-							let result = wishes.filter(wish => ${param.tourNum} == wish.tourNum);
-
-							if(result.length) {
-								showOkModal('이미 찜한 여행코스입니다.')
-							} else {
-								addWish()
-								result = []
-=======
-})
-</script>	
-<script>
-    $(() => {   		
-    	if(`<%= (String)session.getAttribute("userId") %>` != `null`) {
-    		if($('#reservationBtn').attr('onclick')){
-		   			$('#reservationBtn').removeAttr('onclick')
-		   			$.ajax({
-					url: '../reservation/get',
-					success: reservations => {
-						$.each(reservations, (i, reservation) => {
-							if((reservation.tourNum == ${param.tourNum}) && (reservation.userId == `<%= (String)session.getAttribute("userId") %>`)) {
-								$('#reservationBtn').click(() => {
-				    				showOkModal('예약하신 여행코스입니다.')
-				    			})
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
-							}
+							result = wishes.filter(wish => ${param.tourNum} == wish.tourNum);
 						})
-					}
-					})
-    		}else{
-    			$('#reservationBtn').attr('onclick', "location.href= `/reservation/add?tourNum=${param.tourNum}`")
-    		}
-		} else {
-			$('#reservationBtn').click(() => {
-				showOkModal('로그인 페이지로 이동합니다.', '../user/login')
-			})
-<<<<<<< HEAD
-       	} else {
-       		window.location.href = '../user/login'
-       	}
-	})
-})
-=======
-		}
-    	
-        $('#tourShareBtn').click(() => {
-	        let url = ''
-	    	let textarea = document.createElement("textarea")
-	    	document.body.appendChild(textarea)
-	    	url = window.document.location.href
-	    	textarea.value = url
-	    	textarea.select()
-	    	document.execCommand("copy")
-	    	document.body.removeChild(textarea)
-	    	
-        	showOkModal('링크가 복사되었습니다. 친구에게 공유해보세요.')
-        })
-        
-        $('#tourWishBtn').click(() => {
-			if(`<%= (String)session.getAttribute("userId") %>`) {
-				$.ajax({
-					url: '../wish/get',
-					success: wishes => {
-						if(wishes.length) {
-							$.each(wishes, (i, wish) => {
-								let result = wishes.filter(wish => ${param.tourNum} == wish.tourNum);
-
-								if(result.length) {
-									showOkModal('이미 찜한 여행코스입니다.')
-								} else {
-									addWish()
-								}
-							})
+						
+						if(result.length) {
+							showOkModal('이미 찜한 여행코스입니다.')
 						} else {
 							addWish()
 						}
+					} else {
+						addWish()
 					}
-				})
-        	} else {
-				showOkModal('로그인 페이지로 이동합니다.', '../user/login')
-        	}
-        })
-    })
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
+				}
+			})
+       	} else {
+       		location.href = '../user/login'
+       	}
+	})
+})
 </script>
 <title>TOUR.02 여행코스 조회</title>
 <style>
@@ -185,7 +121,7 @@ $(() => {
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill' id='navBackBtn' onclick="location.href='../../tour'"></i></div>
+    <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill' id='navBackBtn' onclick="location.href='../tour'"></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b id='tourTitle'></b></h2>
     </div>
@@ -228,11 +164,13 @@ $(() => {
                 <i id='tourWishBtn' data-bs-toggle='modal' data-bs-target='#modal' class='bi bi-heart ms-3 btn tourWishIcon'></i>
             </div>
             <div class='row'>
-
-                <button type='submit' id='reservationBtn' class='mt-5 ms-5 w-auto btn btn-darkBlue'>
+            	<form action='/reservation/add'>
+            	<input type ='hidden' name='tourNum'/>
+                <button type='submit' id='reservationBtn' class='mt-5 ms-5 w-auto btn btn-darkBlue'
+                onclick="location.href=`/reservation/add`">
                     예약하기
                 </button>
-
+                </form>
             </div>
         </div>
     </div>

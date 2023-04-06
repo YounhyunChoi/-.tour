@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.tour.AdminAccess;
 import com.my.tour.GetAccess;
 import com.my.tour.domain.Tour;
 import com.my.tour.service.TourService;
@@ -41,14 +42,16 @@ public class TourController {
 	@GetMapping("view")
 	public ModelAndView tourView(ModelAndView mv, HttpSession session) {
 		mv.setViewName("tour/tourView");
-		mv.addObject("userId", (String)session.getAttribute("userId"));
+		mv.addObject("userId", session.getAttribute("userId"));
 		return mv;
 	}
 	
 	//admin
 	@PostMapping("adminAdd")
-	public void addTour(@RequestBody Tour tour) {
-		tourService.addTour(tour.getTourName(), tour.getTourContent(), tour.getTourSDate(), tour.getTourEDate(), tour.getTourPrice());
+	public void addTour(@RequestBody Tour tour, HttpSession session) {
+		tourService.addTour(tour.getTourName(), tour.getTourContent(), 
+				tour.getTourSDate(), tour.getTourEDate(), tour.getTourPrice(),
+				(String)session.getAttribute("userId"), tour.getTermNum());
 	}
 	
 	@PutMapping("adminFix")
@@ -62,19 +65,23 @@ public class TourController {
 	}
 	
 	@GetMapping("adminList")
-	public ModelAndView adminTourList(ModelAndView mv) {
+	@AdminAccess
+	public ModelAndView adminTourList(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/tour/tourList");
 		return mv;
 	}
 	
 	@GetMapping("adminAddView")
-	public ModelAndView adminAddTour(ModelAndView mv) {
+	@AdminAccess
+	public ModelAndView adminAddTour(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/tour/addTour");
+		mv.addObject("adminId", session.getAttribute("userId"));
 		return mv;
 	}
 	
 	@GetMapping("adminFixView")
-	public ModelAndView adminFixTour(ModelAndView mv) {
+	@AdminAccess
+	public ModelAndView adminFixTour(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/tour/fixTour");
 		return mv;
 	}

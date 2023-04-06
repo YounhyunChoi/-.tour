@@ -13,6 +13,14 @@
 <title>ADMIN.NOTICE.03 공지 수정</title>
 <script>
  $(() => {
+	 $.ajax({
+		 url: 'getNotice',
+		 data: {
+			 ${param.noticeNum}
+		 },
+		 dataType: 'json',
+		 success: 
+	 })
 	$('#fixNoticeBtn').click(() => {
 		showConfirModal('공지사항을 수정하시겠습니까?')
 		

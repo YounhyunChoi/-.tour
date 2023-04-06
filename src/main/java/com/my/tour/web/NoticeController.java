@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.my.tour.AdminAccess;
 import com.my.tour.GetAccess;
 import com.my.tour.domain.Notice;
-import com.my.tour.domain.User;
 import com.my.tour.service.NoticeService;
 
 import jakarta.servlet.http.HttpServletRequest;

@@ -17,17 +17,14 @@
 	        $('#okBtn').click(() => {
 	        	$.ajax({
 	        		url: 'del',
-	        		method: 'delete',
-	        		data: {
-	        			comtContent: $('#comtContent').val()
-	        		}
+	        		method: 'delete'
 	        	})
 	        })
         })
     	
         $('#editComment').click(() => {
 	        showConfirmModal('댓글을 수정하시겠습니까?', '댓글이 수정되었습니다.', '../review/get')
-	        $('okBtn').click(() => {
+	        $('#okBtn').click(() => {
 	        	if($('#comtContent').val()){
 	        		$.ajax({
 	        			url: 'fix',

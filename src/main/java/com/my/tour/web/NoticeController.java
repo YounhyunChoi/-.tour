@@ -90,8 +90,8 @@ public class NoticeController {
 	}
 
 	@PostMapping("adminAdd")
-	public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
-		noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));	
+	public void addNotice(String noticeTitle, String noticeContent) {
+		noticeService.addNotice(noticeTitle, noticeContent);	
 	}
 
 	@GetMapping("adminFixView")

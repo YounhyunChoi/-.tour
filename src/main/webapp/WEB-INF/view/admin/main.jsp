@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta charset='utf-8'>
@@ -8,6 +9,35 @@
 <link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css' rel='stylesheet'/>
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+function showLogo() {
+	$.ajax({
+		url: 'getLogos',
+		method: 'get',
+		dataType: 'json',
+		success: logos => {
+			$('img').attr('src', '<c:url value="/attach/' + logos.at(0).logoName + '"/>')
+		}
+	})
+}
+
+$(() => {
+	showLogo()
+	
+	$('#logoUp').change(() => {
+		let formData = new FormData($('#logoUp')[0])
+		
+		$.ajax({
+			url: 'addLogo',
+			method: 'post',
+			contentType : false,
+	        processData : false,  
+			data: formData,
+			success: showLogo
+		})
+	})
+})
+</script>
 <title>admin main</title>
 <style>
     @font-face {
@@ -118,14 +148,16 @@
       <div class='col-9 mt-4' id='subBody'>
             <div class='row'>
                 <div class='col'>
-                    <div class='border border-dark p-5 mt-3  text-center'>
-                        로고이미지
+                    <div class='border border-dark p-5 mt-3 text-center'>
+                        <img src='<c:url value="/attach/${logoName}"/>'/>
                     </div>
                 </div>
             </div>
             <div class='row'>
                 <div class='col pt-2'>
-                    <input type='file' id='logoUp'/>
+	                <form id='logoUp'>
+	                    <input type='file' name='logoImage' id='logoImage'/>
+	                </form>
                 </div>
             </div>
             <div class='row pt-5'>

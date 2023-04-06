@@ -26,13 +26,24 @@ public class Accesses {
 		}
 		
 		return mv;
+	}	
+	
+	@After("@annotation(com.my.tour.LoginAccess) && args(mv, session, ..)")
+	public ModelAndView loginAccessRight(JoinPoint jp, ModelAndView mv,
+									HttpSession session) {
+		if(session.getAttribute("userId") == null) {
+			mv.setViewName("redirect:/user/login");
+		}
+		
+		return mv;
 	}
 	
 	@After("@annotation(com.my.tour.AdminAccess) && args(mv, session, ..)")
 	public ModelAndView adminAccessRight(JoinPoint jp, ModelAndView mv,
 									HttpSession session) {
-		if(session.getAttribute("userId") == null ||
-				adminService.getAdmin((String) session.getAttribute("userId")).size() == 0) {
+		if(session.getAttribute("userId") == null) {
+			mv.setViewName("redirect:/user/login");
+		} else if(adminService.getAdmin((String) session.getAttribute("userId")).size() == 0) {
 			mv.setViewName("redirect:/");
 		}
 		

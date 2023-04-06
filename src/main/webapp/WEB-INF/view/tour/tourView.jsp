@@ -45,7 +45,6 @@ $(() => {
 			})
 		}
 	})
-<<<<<<< HEAD
 	
 	//여행코스 공유
 	$('#tourShareBtn').click(() => {
@@ -76,43 +75,33 @@ $(() => {
 							} else {
 								addWish()
 								result = []
-=======
+
 })
 </script>	
 <script>
-    $(() => {   		
+    $(() => {
     	if(`<%= (String)session.getAttribute("userId") %>` != `null`) {
-    		if($('#reservationBtn').attr('onclick')){
-		   			$('#reservationBtn').removeAttr('onclick')
 		   			$.ajax({
 					url: '../reservation/get',
 					success: reservations => {
 						$.each(reservations, (i, reservation) => {
-							if((reservation.tourNum == ${param.tourNum}) && (reservation.userId == `<%= (String)session.getAttribute("userId") %>`)) {
-								$('#reservationBtn').click(() => {
+							if((reservation.tourNum == ${param.tourNum}) && (reservation.userId == `<%= (String)session.getAttribute("userId") %>`)) {		
+				    			$('#reservationBtn').click(() => {
+
 				    				showOkModal('예약하신 여행코스입니다.')
-				    			})
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
+				    				})
 							}
 						})
 					}
-					})
-    		}else{
-    			$('#reservationBtn').attr('onclick', "location.href= `/reservation/add?tourNum=${param.tourNum}`")
-    		}
+					})		
+    		
 		} else {
 			$('#reservationBtn').click(() => {
 				showOkModal('로그인 페이지로 이동합니다.', '../user/login')
 			})
-<<<<<<< HEAD
-       	} else {
-       		window.location.href = '../user/login'
+
        	}
-	})
-})
-=======
-		}
-    	
+	 	
         $('#tourShareBtn').click(() => {
 	        let url = ''
 	    	let textarea = document.createElement("textarea")
@@ -151,7 +140,6 @@ $(() => {
         	}
         })
     })
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
 </script>
 <title>TOUR.02 여행코스 조회</title>
 <style>
@@ -229,7 +217,8 @@ $(() => {
             </div>
             <div class='row'>
 
-                <button type='submit' id='reservationBtn' class='mt-5 ms-5 w-auto btn btn-darkBlue'>
+                <button type='button' id='reservationBtn' class='mt-5 ms-5 w-auto btn btn-darkBlue'
+                	onclick="location.href=`../reservation/add?tourNum=${param.tourNum}`">
                     예약하기
                 </button>
 

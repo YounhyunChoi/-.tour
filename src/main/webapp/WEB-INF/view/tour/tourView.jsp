@@ -57,6 +57,7 @@ $(() => {
 		document.execCommand("copy")
 		document.body.removeChild(textarea)
 	
+		
 		showOkModal('링크가 복사되었습니다. 친구에게 공유해보세요.')
 	})
 

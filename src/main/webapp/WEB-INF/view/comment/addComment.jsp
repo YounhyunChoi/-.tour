@@ -16,15 +16,13 @@
         $('#addComment').click(() => {
 	        showConfirmModal('댓글을 등록하시겠습니까?', '댓글이 등록되었습니다.', '../review/get')
 	        $('#okBtn').click(() => {
-	        	if($('comtContent').val()) {
-	        		let comment = {
-	        				comtContent: $('comtContent').val()
-	        		}
-	        		
-	        		$ajax({
+	        	if($('#comtContent').val()) {
+	        		$.ajax({
 	        			url: 'add',
 	        			method: 'post',
-	        			data: comment
+	        			data: {
+	        				comtContent: $('#comtContent').val()
+	        			}
 	        		})
 	        	}
 	        })
@@ -37,7 +35,7 @@
 <header>
 </header>
 <div class='navigation fixed-top'>
-   <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill' onclick="location.href='../review/04.html'"></i></div>
+   <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill'></i></div>
    <div class='menuName'>
       <h2 class='text-center pt-3'><b>댓글쓰기</b></h2>
    </div>
@@ -50,27 +48,11 @@
             <hr>
             <textarea class='form-control' id='comtContent'></textarea>
             <span class='mt-2 d-flex justify-content-end'>
-                <a class='btn btn-darkBlue' data-bs-toggle='modal' 
-                id='addComment' data-bs-target='#modal'>댓글등록</a>
+                <a class='btn btn-darkBlue' id='addComment'>댓글등록</a>
             </span>
         </div>
     </div>
 </div>
-</div>
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'>
-            </div>
-            <div id='modalBtn'>
-                <button type='button' class='btn btn-lightGray' data-bs-dismiss='modal'>아니오</button>
-                <button type='button' class='btn btn-darkBlue' id='okBtn'>예</button>
-            </div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
-            </div>
-        </div>
-    </div>
 </div>
 <footer>
 </footer>

@@ -21,14 +21,7 @@
 <script>
 $(() => {
 	
-    $.ajax({
-		url: 'add',
-		method: 'post',
-		data: {
-			tourNum: ${tour.tourNum},
-			chargePrice: ${tour.tourPrice}
-		}
-   })
+	
          		
    $('#paymentBtn').attr('disabled', 'disabled')
    $('#agreeCheckbox').change(() => {
@@ -36,7 +29,16 @@ $(() => {
       else if (!$('#agreeCheckbox').prop('checked')) $('#paymentBtn').attr('disabled', 'disabled')
    })
    $('#paymentBtn').click(() => {
-      showOkModal('여행코스가 예약되었습니다.', '02.html')
+	   $.ajax({
+			url: 'add',
+			method: 'post',
+			data: {
+				tourNum: ${tour.tourNum},
+				chargePrice: ${tour.tourPrice}
+			}
+	   })
+      showOkModal('여행코스가 예약되었습니다.', 'list')
+      
    })
    
    

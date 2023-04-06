@@ -28,7 +28,7 @@ public class WishController {
 	
 	@GetMapping("get")
 	@GetAccess
-	public List<Wish> getWishes(HttpServletRequest request) {
+	public List<Wish> getWishes(HttpServletRequest request, HttpSession session) {
 		return wishService.getWishes();
 	}
 	

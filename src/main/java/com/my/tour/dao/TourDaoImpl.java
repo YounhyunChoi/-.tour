@@ -1,5 +1,6 @@
 package com.my.tour.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,21 @@ public class TourDaoImpl implements TourDao {
 	@Override
 	public List<Tour> selectTour(int tourNum) {
 		return tourMap.selectTour(tourNum);
+	}
+
+	@Override
+	public void insertTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate,
+			int tourPrice) {
+		tourMap.insertTour(tourName, tourContent, tourSDate, tourEDate, tourPrice);
+	}
+
+	@Override
+	public void updateTour(Tour tour) {
+		tourMap.updateTour(tour);
+	}
+
+	@Override
+	public void deleteTour(int tourId) {
+		tourMap.deleteTour(tourId);
 	}
 }

@@ -22,21 +22,27 @@ $(() => {
 						tourArr.push(
 							`<div class='row'>
 				                <div class='col p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-				                    <div class='border border-3 text-truncate tourImg' onclick="location.href='./tour/view?tourNum=\${tour.tourNum}'">여행코스이미지</div>
-				                    <div class='text-truncate' onclick="location.href='./tour/view?tourNum=\${tour.tourNum}'">\${tour.tourName}</div>
+				                    <div class='border border-3 text-truncate tourImg'>여행코스이미지</div>
+				                    <div class='text-truncate'>\${tour.tourName}</div>
 				                </div>`
 			            )
 					} else {
 						tourArr.push(
 							`<div class='col p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-			                    <div class='border border-3 text-truncate tourImg' onclick="location.href='./tour/view?tourNum=\${tour.tourNum}'">여행코스이미지</div>
-			                    <div class='text-truncate' onclick="location.href='./tour/view?tourNum=\${tour.tourNum}'">\${tour.tourName}</div>
+			                    <div class='border border-3 text-truncate tourImg'>여행코스이미지</div>
+			                    <div class='text-truncate'>\${tour.tourName}</div>
 			                </div>
 			            </div>`)
 					}
 				})
 				
 				$('#tourContainer').append(tourArr.join(''))
+				
+				$.each(tours, (i, tour) => {
+					$(`#tourItem\${tour.tourNum}`).click(() => {
+						location.href = `tour/view?tourNum=\${tour.tourNum}`
+					})
+				})
 			}
 		}
 	})

@@ -14,12 +14,12 @@ public class ReservationDaoImpl implements ReservationDao{
 	@Autowired private ReservationMap reservationMap;
 	
 	@Override
-	public List<Reservation> selectReservations(){
-		return reservationMap.selectReservations();
+	public List<Reservation> selectReservations(String userId){
+		return reservationMap.selectReservations(userId);
 	}
 	
 	@Override
-	public void insertReservation(String userId, int tourNum, int chargeNum) {
-		 reservationMap.insertReservation(userId, tourNum, chargeNum);
+	public void insertReservation(int chargePrice, String userId, int tourNum) {
+		 reservationMap.insertReservation(chargePrice, userId, tourNum);
 	}
 }

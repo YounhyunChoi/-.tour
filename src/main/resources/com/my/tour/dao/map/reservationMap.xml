@@ -2,8 +2,14 @@
 <!DOCTYPE mapper PUBLIC './/mybatis.org//DTD Mapper 3.0//EN'
 	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='com.my.tour.dao.map.ReservationMap'>
+	<select id='selectReservations' resultType='reservation'>
+		select resv_num, charge_price, user_id, tour_num
+		from reservations
+		where user_id = #{userId}
+	</select>
+	
 	<insert id='insertReservation'>
 		insert into reservations
-		values (resv_num_seq.nextval, #{userId}, #{tourNum}, #{chargeNum})
+		values (resv_num_seq.nextval, #{chargePrice}, #{userId}, #{tourNum})
 	</insert>
 </mapper>

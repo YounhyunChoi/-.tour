@@ -5,6 +5,6 @@ import java.util.List;
 import com.my.tour.domain.Reservation;
 
 public interface ReservationDao {
-	List<Reservation> selectReservations();
-	void insertReservation(String userId, int tourNum, int chargeNum);
+	List<Reservation> selectReservations(String userId);
+	void insertReservation(int chargePrice, String userId, int tourNum);
 }

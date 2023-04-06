@@ -20,62 +20,16 @@
 <title></title>
 <script>
 $(() => {
-	$.ajax({
-		url: 'getTour',
-		data: {
-			tourNum: ${param.tourNum}
-		},
-		dataType: 'json',
-		success: tour => {
-				console.log(tour)
-				$('#tourName').text(tour[0].tourName)
-				$('#tourContent').text(tour[0].tourContent)
-				$('#tourPrice').text(tour[0].tourPrice)
-				let chargePrice = $('#tourPrice').text() - $('#salePrice').text()
-				$('.chargePrice').text(chargePrice)
-				
-				$.ajax({
-					url: '../term/get',
-					data: {
-						termNum: tour[0].termNum
-					},
-					dataType: 'json',
-					success: term => {
-						$('#termContent').text(term.termContent)
-					}
-				})
-				
-				 $('#paymentBtn').click(() => {    
-	           		let charge = {
-	                      	chargePrice: $('#tourPrice').text() - $('#salePrice').text()
-	                       }
-	           		
-	           		$.ajax({
-	                  	url: '../charge/add',
-	                  	method: 'post',
-	                  	data: charge
-	                  }).then((arg) => {
-	                	  $.ajax({
-	    	           			url: '../charge/getCharge',
-	    	           			dataType: 'json',
-	    	           			success: charges => {
-	    	           				console.log(charges[charges.length - 1])
-	    	           				$.ajax({
-	    	           					url: 'add',
-	    	           					method: 'post',
-	    	           					data: {
-	    	           						tourNum: tour[0].tourNum,
-	    	           						chargeNum: charges[charges.length - 1].chargeNum
-	    	           					}
-	    	           				})
-	    	           			}
-	    	           		})
-	                  })                                            
-        })	
-		}
-		}
-	)
 	
+    $.ajax({
+		url: 'add',
+		method: 'post',
+		data: {
+			tourNum: ${tour.tourNum},
+			chargePrice: ${tour.tourPrice}
+		}
+   })
+         		
    $('#paymentBtn').attr('disabled', 'disabled')
    $('#agreeCheckbox').change(() => {
       if ($('#agreeCheckbox').prop('checked')) $('#paymentBtn').removeAttr('disabled')
@@ -97,7 +51,7 @@ $(() => {
 	<div class='navigation fixed-top'>
 		<div class='float-start mt-2 ms-2'>
 			<i class='bi bi-caret-left-fill'></i>
-		</div>
+		</div>	
 		<div class='menuName'>
 			<h2 class='text-center pt-3'>
 				<b>예약하기</b>
@@ -110,8 +64,8 @@ $(() => {
 				<b>상품 확인</b>
 			</div>
 			<div class='col p-2 border border-2 contents shadow-sm'>
-				<b>상품명</b><br> <span id='tourName'></span><br> <b>상품내용</b><br>
-				<span id='tourContent'></span>
+				<b>상품명</b><br> <span id='tourName'>${tour.tourName}</span><br><b>상품내용</b><br>
+				<span id='tourContent'>${tour.tourContent}</span>
 			</div>
 		</div>
 		<div class='row d-block'>
@@ -119,9 +73,9 @@ $(() => {
 				<b>금액 및 할인</b>
 			</div>
 			<div class='col p-2 border border-2 contents shadow-sm'>
-				<b>총 예약 금액</b><span id='tourPrice'></span><br>
+				<b>코스 금액</b><span id='tourPrice'>${tour.tourPrice}</span><br>
 				<b>할인 금액</b><span id='salePrice'>1</span>원<br><br>
-				<b>결재 금액</b><span class='chargePrice'></span>
+				<b>총 결제 금액</b><span class='chargePrice'></span>
 			</div>
 		</div>
 		<div class='row d-block'>
@@ -129,7 +83,7 @@ $(() => {
 				<b>필수안내 약관</b>
 			</div>
 			<div class='col p-2 border border-2 contents shadow-sm'>
-				<span id='termContent'></span><br>
+				<span id='termContent'>${term.termContent}</span><br>
 			</div>
 			<div class='col p-2 text-left'>
 				<input type='checkbox' id='agreeCheckbox'

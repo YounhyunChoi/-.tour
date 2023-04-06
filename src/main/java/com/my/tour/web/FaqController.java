@@ -19,7 +19,6 @@ import jakarta.servlet.http.HttpServletRequest;
 public class FaqController {
 	@Autowired private FaqService faqService;
 	
-	
 	@GetMapping("get")
 	@GetAccess
 	public List<Faq> getFaqs(HttpServletRequest request) {
@@ -31,6 +30,4 @@ public class FaqController {
 		mv.setViewName("faq/faqMain");
 		return mv;
 	}
-	
-	
 }

@@ -7,10 +7,41 @@
 <link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css' rel='stylesheet'/>
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
-<link href='/res/adminStyle.css' rel='stylesheet'/>
-<script src='/res/adminNavigation.js'></script>
+<link href='../../res/adminStyle.css' rel='stylesheet'/>
+<script src='../../res/adminNavigation.js'></script>
 <script>
-
+$(() => {
+	$.ajax({
+		url: 'get',
+		success: tours => {
+			const tourArr = []
+			let tourText = ""
+			
+			if(tours.length) {
+				$.each(tours, (i, tour) => {
+					tourText += 
+						`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
+			                <div class='py-5 border border-3 text-nowrap'>여행코스이미지</div>
+			                <div class='text-truncate'>\${tour.tourName}</div>
+			            </div>`
+				})
+				
+				tourArr.unshift(tourText)
+				$('#tourContent').append(tourArr.join(''))
+				
+				$.each(tours, (i, tour) => {
+					$(`#tourItem\${tour.tourNum}`).click(() => {
+						location.href = `adminFixView?tourNum=\${tour.tourNum}`
+					})
+				})
+			}
+		}
+	})
+	
+	$('#tourAddBtn').click(() => {
+		location.href = '../tour/adminAddView'
+	})
+})
 </script>
 <title>상품목록</title>
 <style>
@@ -36,7 +67,7 @@
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
+                    <div class='float-start m-4 ms-4'><a class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
                     <h1 class='text-center pt-3 text-white'><b>상품목록</b></h1>
                 </div>
             </div>
@@ -46,7 +77,7 @@
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../main.html'>메인</a> > <a href='./01.html'>상품목록</a>
+                    <a href='../admin/main'>메인</a> > <a href='../tour/adminList'>상품목록</a>
                 </h6>
             </div>
         </div>
@@ -54,7 +85,7 @@
 </header>
 <div class='row' id='mainBody'>
     <div class='col'>
-        <form>
+        <form class='mb-4'>
             <div class='row'>
                 <div class='col-10 pe-0 pt-2'>
                     <input type='text' class='form-control'/>
@@ -64,35 +95,9 @@
                 </div>
             </div>
         </form>
-        <div class='row mt-4'>
-            <div class='col-3 p-1 d-flex-column tourText' id='tourItem1'>
-                <div class='py-5 border border-3 text-truncate' onclick="location.href='./03.html'">여행코스이미지</div>
-                <div class='text-truncate' onclick="location.href='./03.html'">도심 속 역사와 예술 이야기</div>
-            </div>
-            <div class='col-3 p-1 d-flex-column tourText' id='tourItem2'>
-                <div class='py-5 border border-3 text-truncate' onclick="location.href='#'">여행코스이미지</div>
-                <div class='text-truncate' onclick="location.href='#'">전통주 체험</div>
-            </div>
-            <div class='col-3 p-1 d-flex-column tourText' id='tourItem3'>
-                <div class='py-5 border border-3 text-truncate' onclick="location.href='#'">여행코스이미지</div>
-                <div class='text-truncate' onclick="location.href='#'">서울시티투어 버스</div>
-            </div>
-        </div>
-        <div class='row'>
-            <div class='col-3 p-1 d-flex-column tourText' id='tourItem4'>
-                <div class='py-5 border border-3 text-truncate' onclick="location.href='#'">여행코스이미지</div>
-                <div class='text-truncate' onclick="location.href='#'">아쿠아리움으로 떠나는 여행</div>
-            </div>
-            <div class='col-3 p-1 d-flex-column tourText' id='tourItem5'>
-                <div class='py-5 border border-3 text-truncate' onclick="location.href='#'">여행코스이미지</div>
-                <div class='text-truncate' onclick="location.href='#'">서울의 주경, 야경 여행코스</div>
-            </div>
-            <div class='col-3 p-1 d-flex-column tourText' id='tourItem6'>
-                <div class='py-5 border border-3 text-truncate' onclick="location.href='#'">여행코스이미지</div>
-                <div class='text-truncate' onclick="location.href='#'">서울의 놀거리, 볼거리를 하루에</div>
-            </div>
-        </div>
+		<div class='row' id='tourContent'>
 
+        </div>
         <div class='row'>
             <div class='col-10'>
                 <nav aria-label='Page navigation example'>
@@ -126,7 +131,7 @@
                 </nav>
             </div>
             <div class='col-2 align-self-center'>
-                <button type='button' class='btn btn-darkBlue' onclick="location.href='./02.html'">
+                <button type='button' class='btn btn-darkBlue' id='tourAddBtn'>
                     <span class='bi bi-plus-circle text-truncate'>&nbsp;등록</span>
                 </button>
             </div>

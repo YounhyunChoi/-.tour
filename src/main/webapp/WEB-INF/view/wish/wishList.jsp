@@ -7,17 +7,11 @@
 <link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css' rel='stylesheet'/>
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
-<link href='/res/style.css' rel='stylesheet'/>
-<script src='/res/navigation.js'></script>
-<script src='/res/modal.js'></script>
+<link href='../res/style.css' rel='stylesheet'/>
+<script src='../res/navigation.js'></script>
+<script src='../res/modal.js'></script>
 <script>
-//개발중 멘붕.
-
 function wishList() {
-	if(`<%= (String)session.getAttribute("userId") %>` == `null`) {
-		showOkModal('로그인 페이지로 이동합니다.', '../user/login')
-	}
-	
 	$.ajax({
 		url: 'wish/get',
 		success: wishes => {
@@ -25,65 +19,60 @@ function wishList() {
 				let wishArr = []
 				let wishText = ""
 				
-				$.each(wishes, (i, wish) => {
-					if(`<%= (String)session.getAttribute("userId") %>` == wish.userId) {
-						wishText =
-							`<div class='row mt-4 d-flex flex-column shadow-sm border border-1'>
-								<div class='col p-2 border-bottom'>
-						            <div class='row d-flex justify-content-between'>
-						                <div class='col-4 fs-4 text-center'>찜번호 \${wish.wishNum}</div>
-						                <div class='col-4 text-end'>
-						                    <button type='button' class='border-0 bg-white' onclick="location.href='./tour/view/\${wish.tourNum}'">
-						                        <span class='fs-5'>상세보기</span>
-						                        <i class='bi bi-chevron-right viewDetailBtn'></i>
-						                    </button>
-						                </div>
-						            </div>
-						        </div>
-						        <div class='col my-3'>
-						            <div class='row'>
-						                <div class='col-4'>
-						                    <div class='d-flex flex-column align-items-center'>
-						                        <div class='d-flex image'>
-						                            <span>여행코스이미지</span>
-						                        </div>
-						                    </div>
-										</div>`;
+				$.ajax({
+					url: 'tour/get',
+					success: tours => {
+						$.each(wishes, (i, wish) => {
+							wishText =
+								`<div class='row mt-4 d-flex flex-column shadow-sm border border-1'>
+									<div class='col p-2 border-bottom'>
+							            <div class='row d-flex justify-content-between'>
+							                <div class='col-4 fs-4 text-center'>찜번호 \${wish.wishNum}</div>
+							                <div class='col-4 text-end'>
+							                    <button type='button' class='border-0 bg-white' onclick="location.href='./tour/view/\${wish.tourNum}'">
+							                        <span class='fs-5'>상세보기</span>
+							                        <i class='bi bi-chevron-right viewDetailBtn'></i>
+							                    </button>
+							                </div>
+							            </div>
+							        </div>
+							        <div class='col my-3'>
+							            <div class='row'>
+							                <div class='col-4'>
+							                    <div class='d-flex flex-column align-items-center'>
+							                        <div class='d-flex image'>
+							                            <span>여행코스이미지</span>
+							                        </div>
+							                    </div>
+											</div>`;
 
-						$.ajax({
-							url: 'tour/get',
-							success: tours => {
-								if(tours.length) {
-									$.each(tours, (i, tour) => {
-										if(wish.tourNum == tour.tourNum) {
-											wishText += 
-										`<div class='col-5 fs-5'>
-						                    <div class='text-left'>
-						                        \${tour.tourName}
-						                    </div>
-						                </div>`;
-						                
-						                console.log(wishText)
-										}
-									})
-								}
+							if(tours.length) {
+								$.each(tours, (i, tour) => {
+									if(wish.tourNum == tour.tourNum) {
+										wishText += 
+											`<div class='col-5 fs-5'>
+							                    <div class='text-left' name='checkDouble'>
+							                        \${tour.tourName}
+							                    </div>
+							                </div>
+											<div class='col-3 d-flex justify-content-center align-self-end'>
+							                    <button type='button' id='\${wish.wishNum}' name='wishDelBtn' value='\${wish.wishNum}'
+							                    class='border border-0 rounded text-white btn btn-lightRed'>삭제</button>
+							                </div>
+							            </div>
+							        </div>
+								</div>`;
+								
+										wishArr.unshift(wishText)
+									}
+								})
 							}
 						})
-						
-						wishText += 
-										`<div class='col-3 d-flex justify-content-center align-self-end'>
-						                    <button type='button' id='\${wish.wishNum}' name='wishDelBtn' value='\${wish.wishNum}'
-						                    class='border border-0 rounded text-white btn btn-lightRed'>삭제</button>
-						                </div>
-						            </div>
-						        </div>
-							</div>`;
-							
-						wishArr.unshift(wishText)
+
+						$('#wishContent').append(wishArr.join(''))
 					}
 				})
 				
-				$('#wishContent').append(wishArr.join(''))
 			} else {
 				let wishArr = []
 				
@@ -126,6 +115,7 @@ function wishList() {
 		}
 	})
 }
+
 
 $(wishList)
 </script>

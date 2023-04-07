@@ -11,6 +11,37 @@
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
 <script>
+function showTourImages() {
+	$.ajax({
+		url: 'getTourImages',
+		method: 'get',
+		dataType: 'json',
+		success: tourImages => {
+			$.each(tourImages, (i, tourImage) => {
+				
+				$('img').attr('src', '<c:url value="/attach/' + tourImages.at(0).tourImageName + '"/>')
+			})
+		}
+	})
+}
+
+$(() => {
+	showTourImages()
+	
+	$('#tourImageUp').change(() => {
+		let formData = new FormData($('#tourImageUp')[0])
+		
+		$.ajax({
+			url: 'addTourImage',
+			method: 'post',
+			contentType : false,
+	        processData : false,  
+			data: formData,
+			success: showTourImages
+		})
+	})
+})
+
 function showConfirmModal() {
 	$('#modalMsg').text('여행코스를 등록하시겠습니까?')
 	$('#modalBtn').show()
@@ -94,27 +125,31 @@ $(() => {
                     <div class='carousel slide py-5' id='tourCarousel' data-ride='carousel'>
                         <div class='carousel-inner'>
                             <div class='carousel-item active'>
-                                <div class='items'>여행코스이미지</div>
+                                <div class='items'>
+                                	<img src='<c:url value="/attach/${tourImageName}"/>'/>
+                                </div>
                             </div>
                         </div>
                         <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
-                            <i class="bi bi-chevron-left tourCarouselBtn"></i>
-                            <div class="visually-hidden">Previous</div>
+                            <i class='bi bi-chevron-left tourCarouselBtn'></i>
+                            <div class='visually-hidden'>Previous</div>
                         </a>
                         <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
-                            <i class="bi bi-chevron-right tourCarouselBtn"></i>
-                            <div class="visually-hidden">Next</div>
+                            <i class='bi bi-chevron-right tourCarouselBtn'></i>
+                            <div class='visually-hidden'>Next</div>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-        <form>
-            <div class='row'>
-                <div class='col'>
-                    <input type='file'/>
-                </div>
+        <div class='row'>
+            <div class='col'>
+            	<form id='tourImageUp'>
+					<input type='file' name='tourImage' id='tourImage'/>
+				</form>
             </div>
+        </div>
+		<form>
             <div class='row mt-2 align-items-center'>
                 <div class='col-1 text-end text-nowrap fs-5'>
                     제목

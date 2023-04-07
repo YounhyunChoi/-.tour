@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.my.tour.dao.TourDao;
+import com.my.tour.dao.TourImageDao;
 import com.my.tour.domain.Tour;
+import com.my.tour.domain.TourImage;
 
 @Service("TourService")
 public class TourServiceImpl implements TourService {
 	@Autowired private TourDao tourDao;
+	@Autowired private TourImageDao tourImageDao;
 
 	@Override
 	public List<Tour> getTours() {
@@ -37,5 +40,15 @@ public class TourServiceImpl implements TourService {
 	@Override
 	public void delTour(int tourId) {
 		tourDao.deleteTour(tourId);
+	}
+
+	@Override
+	public List<TourImage> getTourImages() {
+		return tourImageDao.selectTourImages();
+	}
+
+	@Override
+	public int addTourImage(String tourImageName) {
+		return tourImageDao.insertTourImage(tourImageName);
 	}
 }

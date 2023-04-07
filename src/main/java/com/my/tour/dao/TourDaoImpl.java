@@ -11,8 +11,7 @@ import com.my.tour.domain.Tour;
 
 @Repository("TourDao")
 public class TourDaoImpl implements TourDao {
-	@Autowired
-	private TourMap tourMap;
+	@Autowired private TourMap tourMap;
 
 	@Override
 	public List<Tour> selectTours() {

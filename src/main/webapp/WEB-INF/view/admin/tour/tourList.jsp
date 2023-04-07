@@ -31,7 +31,7 @@ $(() => {
 				
 				$.each(tours, (i, tour) => {
 					$(`#tourItem\${tour.tourNum}`).click(() => {
-						location.href = `adminFixView?tourNum=\${tour.tourNum}`
+						location.href = `adminFixDelView?tourNum=\${tour.tourNum}`
 					})
 				})
 			}

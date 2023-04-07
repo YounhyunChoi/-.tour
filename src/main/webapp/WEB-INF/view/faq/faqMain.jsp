@@ -37,10 +37,7 @@
             }
             
             function listFaqs() {
-            	let replaceClass = function(a, b, c) {
-                    a.removeClass(`${b}`)
-                    a.addClass(`${c}`)
-                }
+            	
             	
             	
             $.ajax({

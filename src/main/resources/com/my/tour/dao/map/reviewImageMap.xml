@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC './/mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.tour.dao.map.ReviewImageMap'>
+	<select id='selectReviewImages' resultType='reviewImage'>
+		select reviewimage_id, reviewimage_name
+		from review_images
+		where review_num = #{reviewNum}
+		order by reviewimage_id
+	</select>
+	
+	<select id='selectReviewImage' resultType='reviewImage'>
+		select reviewimage_id, reviewimage_name
+		from reviewImages
+		where review_num = #{reviewNum} and reviewimage_id = 1
+	</select>
+</mapper>

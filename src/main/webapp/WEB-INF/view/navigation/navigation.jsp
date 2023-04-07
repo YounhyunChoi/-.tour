@@ -83,7 +83,7 @@
 	                마이페이지
 	                <ul>
 	                    <li>
-	                        <a class='nav-link' aria-current='page' href='../'>예약내역</a>
+	                        <a class='nav-link' aria-current='page' href='../reservation/list'>예약내역</a>
 	                    </li>
 	                    <li>
 	                        <a class='nav-link' aria-current='page' href='../'>찜 내역</a>  

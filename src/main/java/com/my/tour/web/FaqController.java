@@ -13,6 +13,7 @@ import com.my.tour.domain.Faq;
 import com.my.tour.service.FaqService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("faq")
@@ -24,10 +25,14 @@ public class FaqController {
 	public List<Faq> getFaqs(HttpServletRequest request) {
 		return faqService.getFaqs();
 	}
-	
 	@GetMapping
 	public ModelAndView faqMain(ModelAndView mv) {
 		mv.setViewName("faq/faqMain");
 		return mv;
+	}
+	
+	@GetMapping("../admin/faq/list")
+	public void addFaq(String faqQuestion, String faqAnswer, HttpSession session) {
+		faqService.addFaq(faqQuestion, faqAnswer, (String)session.getAttribute("adminId"));
 	}
 }

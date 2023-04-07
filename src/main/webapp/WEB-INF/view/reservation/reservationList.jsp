@@ -45,7 +45,7 @@
 										            <div class='row align-items-center'>	
 										                <div class='col-8 fs-6 tourDate'>여행기간:\${tour.tourSDate} ~ \${tour.tourEDate}</div>
 										                <div class='col-4 text-end'>
-										                    <button type='button' class='border-0 bg-white' onclick="location.href='../tour/02.html'">
+										                    <button type='button' class='border-0 bg-white'>
 										                        <span class='fs-5'>상세보기</span>
 										                        <i class='bi bi-chevron-right viewDetailBtn'></i>
 										                    </button>
@@ -73,23 +73,22 @@
 									}
 								})
 							})
-							$('#reservationContainer').append(reservationArr.join(''))
+							$('#reservationContainer').append(reservationArr.reverse().join(''))
 							for(let i =0; i < $('.resvNum').length; i++){
 								$('.resvNum').eq(i).text($('.resvNum').eq(i).text().padStart(4, '0'))
 							}
 							$.each(tours, (i, tour) => {
 								if(presentDate.getTime() > changeToDate(tour.tourEDate).getTime()){						
 									$(`#resvBtnContainer\${tour.tourNum}`).html(
-										`<button type='button' id='reviewAddBtn'
+										`<button type='button' id='reviewAddBtn\${tour.tourNum}'
 				                        class='border border-0 rounded text-white reviewAddBtn'>후기등록</button>`
 				                        )
 									}
+								$(`#reviewAddBtn\${tour.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${tour.tourNum}`})
 							}) 
-							$('.reviewAddBtn').click(() => {console.log('review')})
 						}	
 					})
-				}
-				
+				}				
 			}
 		})
 	})
@@ -99,7 +98,7 @@
        font-size: 1.5rem;
    }
 
-   #reviewAddBtn {
+   .reviewAddBtn {
        background-color: #287094;
        width: 6rem;
        height: 2rem;

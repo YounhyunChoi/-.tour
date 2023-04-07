@@ -16,4 +16,9 @@ public class FaqServiceImpl implements FaqService {
 	public List<Faq> getFaqs(){
 		return faqDao.selectFaqs();
 	}
+	
+	@Override
+	public void addFaq(String faqQuestion, String faqAnswer, String adminId) {
+		faqDao.insertFaq(faqQuestion, faqAnswer, adminId);
+	}
 }

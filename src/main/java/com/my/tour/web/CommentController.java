@@ -29,8 +29,8 @@ public class CommentController {
 	}
 	
 	@PostMapping("add")
-	public int addComment(String comtContent, HttpSession session) {
-		return commentService.addComment(comtContent, (String) session.getAttribute("userId"), 1);
+	public int addComment(String comtContent, HttpSession session, int reviewNum) {
+		return commentService.addComment(comtContent, (String) session.getAttribute("userId"), reviewNum);
 	}
 	
 	@GetMapping("get")

@@ -41,8 +41,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public List<NoticeImage> getNoticeImages(){
-		return noticeImagesDao.selectNoticeImages();
+	public List<NoticeImage> getNoticeImages(int noticeNum){
+		return noticeImagesDao.selectNoticeImages(noticeNum);
 	}
 	
 	@Override

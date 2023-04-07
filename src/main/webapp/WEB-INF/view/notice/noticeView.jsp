@@ -15,7 +15,7 @@ $(() => {
 		url: 'getNotice',
 		data: {
 			noticeNum: ${param.noticeNum}
-		},			
+		},
 		dataType: 'json',
 		success: notices => {
 			const noticeArr = []
@@ -29,24 +29,30 @@ $(() => {
 			            <p>작성일 \${notice.noticeDate}</p>
 			        </span>
 			        <hr>
-			        <div class='row mb-2'>
-		            <div class='col'>
-		                <div class='row py-5 me-0' id='noticeImg'>
-		                    <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
-		                        <div class='carousel-inner'>
-		                            <div class='carousel-item active'>
+			        <div class='row mb-2' id='cardImg'>
+		            	<div class='col'>
+		                	<div class='row py-5 me-0' id='noticeImg'>`)
+		  	$.ajax({
+		  		url: 'getNoticeImage',
+		  		data: {
+		  			noticeNum: ${param.noticeNum}
+		  		},
+		  		dataType: 'json',
+		  		success: noticeImageNames => {
+		  			if(!noticeImageNames.length) {
+		  				$(() => {
+		  					$('#noticeImg').hide()
+		  				})
+		  			} else if(noticeImageNames.length != 1) {
+		  				noticeArr.push(
+				  				`<div class='carousel slide' id='tourCarousel' data-ride='carousel'>
+		                        <div class='carousel-inner'>`)
+		                $.each(noticeImageNames, (i, noticeImageName) => {
+		                	noticeArr.push(`<div class='carousel-item active'>
 		                            	<img src='<c:url value="/attach/${noticeimageName}"/>'/>
-		                            </div>
-		                            <div class='carousel-item'>
-		                            	<img src='<c:url value="/attach/${noticeimageName}"/>'/>
-		                            </div>
-		                            <div class='carousel-item'>
-		                            	<img src='<c:url value="/attach/${noticeimageName}"/>'/>
-		                            </div>
-		                            <div class='carousel-item'>
-	                            		<img src='<c:url value="/attach/${noticeimageName}"/>'/>
-	                            	</div>
-		                        </div>
+		                            </div>`)
+		                })
+		                noticeArr.push(`</div>
 		                        <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
 		                            <i class="bi bi-chevron-left tourCarouselBtn"></i>
 		                            <div class="visually-hidden">Previous</div>
@@ -55,13 +61,18 @@ $(() => {
 		                            <i class="bi bi-chevron-right tourCarouselBtn"></i>
 		                            <div class="visually-hidden">Next</div>
 		                        </a>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
-			    <span>\${notice.noticeContent}</span>`
-			  )
-			  $('#noticeView').append(noticeArr.join(''))
+		                    </div>`)
+		  			} else {
+		  				noticeArr.push(`<img src='<c:url value="/attach/${noticeimageName}"/>'/>`)
+		  			}
+		  			noticeArr.push(`
+	  							</div>
+				            </div>
+				        </div>
+					    <span>\${notice.noticeContent}</span>`)
+					$('#noticeView').append(noticeArr.join(''))
+		  		}
+		  	})
 		}
 	})
 })

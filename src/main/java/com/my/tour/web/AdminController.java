@@ -55,8 +55,8 @@ public class AdminController {
 	}
 	
 	@PostMapping("addLogo")
-	public void addLogo(LogoDto logoDto, Logo logo) {
-		String filename = logoDto.getLogoImage().getOriginalFilename();
+	public void addLogo(LogoDto logoDto) {
+		String filename = "logo" + logoDto.getLogoImage().getOriginalFilename();
 		saveFile(attachPath + "/" + filename, logoDto.getLogoImage());
 		
 		adminService.addLogo(filename);

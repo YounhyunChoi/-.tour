@@ -5,7 +5,8 @@
 	<select id='selectNoticeImages' resultType='noticeImage'>
 		select *
 		from notice_images
-		order by noticeImage_id desc
+		where notice_num = #{noticeNum}
+		order by noticeImage_id
 	</select>
 	
 	<insert id='insertNoticeImages'>

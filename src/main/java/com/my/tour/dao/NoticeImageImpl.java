@@ -13,8 +13,8 @@ public class NoticeImageImpl implements NoticeImageDao {
 	@Autowired NoticeImageMap noticeImagesMap;
 	
 	@Override
-	public List<NoticeImage> selectNoticeImages(){
-		return noticeImagesMap.selectNoticeImages();
+	public List<NoticeImage> selectNoticeImages(int noticeNum){
+		return noticeImagesMap.selectNoticeImages(noticeNum);
 	}
 	
 	@Override

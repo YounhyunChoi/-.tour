@@ -3,21 +3,33 @@
 	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='com.my.tour.dao.map.ReviewMap'>
 	<select id='selectReviews' resultType='review'>
-		select review_num, tour_num, review_title, score, user_id, 
-			   review_date, review_content, reviewimage_name
-		from reviews 
+		select review_num, review_title, review_content, score, review_date,
+				user_id, tour_num
+		from reviews
+		order by review_num desc
 	</select>
+	
+	<select id='selectMyReviews' resultType='reviewDto'>
+		select review_num, tour_name, review_title, score, review_date, user_id
+		from reviews join tours
+		using (tour_num)
+		where user_id = #{userId}
+		order by review_num desc
+	</select>
+	
 	<insert id='insertReview'>
 		insert into reviews(review_num, review_title, score, 
 		         review_date, review_content, reviewimage_id, user_id, tour_num)
 		values(review_num_seq.nextval, #{review_title}, #{score},
 				to_date(sysdate, 'YYYY-MM-DD'), #{review_content}, #{reviewimage_id}, #{user_id}, #{tour_num})
 	</insert>	
+	
 	<update id='updateReview'>
 		update reviews
 		set review_title = #{reviewTitle}, review_content = #{reviewContent}, score = #{Score}
 		where review_num = #{reviewNum}
 	</update>	
+	
 	<delete id='deleteReview'>
 		delete reviews
 		where review_num = #{reviewNum}

@@ -19,22 +19,14 @@ function showNoticeImage() {
 		method: 'get',
 		dataType: 'json',
 		success: noticeImages => {
-			if(noticeImages.length > 1){
-				const noticeImageArr = []
-				
-				$.each(noticeImages, (i, noticeImage) => {
-					noticeImageArr.unshift(
-                        `<div class='carousel-item active'>
-                            <img src='<c:url value="/attach/${noticeimageName}"/>'/>
-                        </div>`		
-					)	
+			const noticeImageArr = []
+			if(!noticeImages.length){
+				$(() =>{
+					$('#noticeImg').hide()
 				})
-				$('#noticeImages').append(noticeImageArr.join(''))
-			} else $('#noticeImages').append(
-                `<div class='carousel-item active'>
-                    <div class='items py-5 fs-4'>공지사항이미지</div>
-                </div>`
-					)
+			} else if(!noticeImages.length == 1){
+				
+			}
 		}
 	})
 }
@@ -82,7 +74,7 @@ $(() => {
         text-align: center;
     }
 
-    .tourCarouselBtn {
+    .noticeCarouselBtn {
         color: black;
     }
 </style>
@@ -125,22 +117,22 @@ $(() => {
             <div class='row ms-4'>
                 <div class='col'>
                     <div class='row py-5 me-0' id='noticeImg'>
-                        <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
+                        <div class='carousel slide' id='noticeCarousel' data-ride='carousel'>
                             <div class='carousel-inner' id='noticeImages'>
 									<!-- 공지사항 이미지 -->
                             </div>
-                            <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
-                                <i class="bi bi-chevron-left tourCarouselBtn"></i>
+                            <a href='#noticeCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+                                <i class="bi bi-chevron-left noticeCarouselBtn"></i>
                                 <div class="visually-hidden">Previous</div>
                             </a>
-                            <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
-                                <i class="bi bi-chevron-right tourCarouselBtn"></i>
+                            <a href='#noticeCarousel' class='carousel-control-next' data-bs-slide='next'>
+                                <i class="bi bi-chevron-right noticeCarouselBtn"></i>
                                 <div class="visually-hidden">Next</div>
                             </a>
                         </div>
                     </div>
                 </div>
-                <input class='mb-4 ms-3' type='file' id='noticeImageUp'>
+                <form><input class='ms-3' type='file' id='noticeImageUp'></form>
             </div>
             <div class='row'>
                 <div class='col pt-2 d-flex gap-3 mb-4'>

@@ -15,7 +15,7 @@
 	</select>
 	<insert id='insertComment'>
 		insert into comments
-		values(comt_num_seq.nextval, #{comtContent}, to_date(sysdate, 'YYYY-MM-DD'), 0001, #{userId})
+		values(comt_num_seq.nextval, #{comtContent}, to_date(sysdate, 'YYYY-MM-DD'), #{reviewNum}, #{userId})
 	</insert>
 	
 	<update id='updateComment'>

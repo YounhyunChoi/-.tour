@@ -5,6 +5,6 @@ import java.util.List;
 import com.my.tour.domain.NoticeImage;
 
 public interface NoticeImageMap {
-	List<NoticeImage> selectNoticeImages();
+	List<NoticeImage> selectNoticeImages(int noticeNum);
 	int insertNoticeImage(String noticeImageName);
 }

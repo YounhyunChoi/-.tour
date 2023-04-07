@@ -21,4 +21,8 @@ public class FaqServiceImpl implements FaqService {
 	public void addFaq(String faqQuestion, String faqAnswer, String adminId) {
 		faqDao.insertFaq(faqQuestion, faqAnswer, adminId);
 	}
+	@Override
+	public void delFaq(String faqQuestion) {
+		faqDao.deleteFaq(faqQuestion);
+	}
 }

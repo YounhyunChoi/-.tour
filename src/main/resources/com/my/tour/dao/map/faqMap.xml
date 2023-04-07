@@ -6,4 +6,14 @@
 		select faq_question, faq_answer, admin_id
 		from faqs
 	</select>
+	
+	<insert id='insertFaq'>
+		insert into faqs(faq_Question, faq_answer, admin_id)
+		values (#{faqQuestion}, #{faqAnswer}, #{adminId})
+	</insert>
+	<delete id='deleteFaq'>
+		delete faqs
+		where faq_Question = #{paramFaqQuestion}
+	</delete>
+	
 </mapper>

@@ -11,13 +11,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.tour.LoginAccess;
 import com.my.tour.domain.Review;
+import com.my.tour.domain.ReviewDto;
 import com.my.tour.service.ReviewService;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("review")
 public class ReviewController {
 	@Autowired private ReviewService reviewService;
+	
+	@GetMapping("my")
+	@LoginAccess
+	public ModelAndView my(ModelAndView mv, HttpSession session) {
+		mv.setViewName("review/myReview");
+		
+		return mv;
+	}
+	
+	@GetMapping("getMyReviews")
+	public List<ReviewDto> getMyReviews(HttpSession session) {
+		List<ReviewDto> reviews = reviewService.getMyReviews((String) session.getAttribute("userId"));
+		for(ReviewDto review : reviews) {
+			if(reviewService.getReviewImage(review.getReviewNum()).size() != 0) {
+				review.setReviewImageName(
+						reviewService.getReviewImage(review.getReviewNum()).get(0).getReviewImageName());
+			}
+		}
+		
+		return reviews;
+	}
 	
 	@GetMapping("add")
 	public ModelAndView addReview(ModelAndView mv) {

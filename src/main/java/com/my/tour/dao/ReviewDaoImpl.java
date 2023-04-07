@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.my.tour.dao.map.ReviewMap;
 import com.my.tour.domain.Review;
+import com.my.tour.domain.ReviewDto;
 
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
@@ -15,6 +16,11 @@ public class ReviewDaoImpl implements ReviewDao {
 	@Override
 	public List<Review> selectReviews() {
 		return reviewMap.selectReviews();
+	}
+
+	@Override
+	public List<ReviewDto> selectMyReviews(String userId) {
+		return reviewMap.selectMyReviews(userId);
 	}
 	
 	@Override

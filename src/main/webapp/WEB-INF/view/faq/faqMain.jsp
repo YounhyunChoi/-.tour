@@ -37,6 +37,12 @@
             }
             
             function listFaqs() {
+<<<<<<< HEAD
+            	
+            	
+            	
+=======
+>>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
             $.ajax({
         		url: 'faq/get',
         		dataType: 'json',

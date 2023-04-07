@@ -77,7 +77,7 @@
                 <h2 class='m-0'>내가 쓴 후기</h2>
             </div>
             <div class='col-2'>
-                <a href='../review/01.html'>
+                <a href='../review/my'>
                     <i class='bi bi-chevron-right myPageIcon'></i>
                 </a>
             </div>

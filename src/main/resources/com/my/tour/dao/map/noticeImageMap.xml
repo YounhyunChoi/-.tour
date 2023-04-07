@@ -6,11 +6,16 @@
 		select *
 		from notice_images
 		where notice_num = #{noticeNum}
-		order by noticeImage_id
+		order by noticeImage_num
 	</select>
 	
-	<insert id='insertNoticeImages'>
+	<insert id='insertNoticeImage'>
 		insert into notice_images
-		values (#{noticeImageId}, #{noticeImageName}, #{noticeNum})
+		values (noticeimage_num_seq.nextval, #{noticeImageName}, #{noticeNum})
 	</insert>
+	
+	<delete id='deleteNoticeImage'>
+		delete notice_images
+		where notice_num = #{noticeNum}
+	</delete>
 </mapper>

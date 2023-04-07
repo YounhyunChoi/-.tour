@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +22,6 @@ import com.my.tour.AdminAccess;
 import com.my.tour.GetAccess;
 import com.my.tour.domain.Notice;
 import com.my.tour.domain.NoticeImage;
-import com.my.tour.domain.NoticeImageDto;
 import com.my.tour.service.NoticeService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -69,12 +69,18 @@ public class NoticeController {
 		return noticeImageName;
 	}
 	
-	@PostMapping("addNoticeImage")
-	public void addNoticeImage(NoticeImageDto noticeImageDto, NoticeImage noticeImage) {
-		String filename = noticeImageDto.getNoticeImage().getOriginalFilename();
-		saveFile(attachPath + "/" + filename, noticeImageDto.getNoticeImage());
+	@PostMapping("addNoticeImages")
+	public void addNoticeImages(@RequestParam("noticeImage") List<MultipartFile> noticeImage) {
+		int noticeNum = noticeService.getAllNotices().get(0).getNoticeNum();
+		String filename = "";
 		
-		noticeService.addNoticeImage(filename);
+		noticeService.delNoticeImage(noticeNum);
+		
+		for(MultipartFile multipartfile: noticeImage) {
+			filename = "notice" + multipartfile.getOriginalFilename();
+			saveFile(attachPath + "/" + filename, multipartfile);
+			noticeService.addNoticeImage(filename, noticeNum);
+		}
 	}
 
 	private void saveFile(String filename, MultipartFile file) {
@@ -82,7 +88,12 @@ public class NoticeController {
 			file.transferTo(new File(filename));
 		} catch(IOException e) {}
 	}
-
+	
+	@DeleteMapping("delNoticeImages")
+	public void delNoticeImages(int noticeNum) {
+		noticeService.delNoticeImage(noticeNum);
+	}
+	
 	//어드민
 	@GetMapping("adminList")
 	@AdminAccess
@@ -92,22 +103,33 @@ public class NoticeController {
 	}
 	
 	@GetMapping("adminAddView")
-	public ModelAndView adminAddNotice(ModelAndView mv) {
+	public ModelAndView adminAddNotice(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/notice/addNotice");
+		
+		if(noticeService.getAllNotices().size() == 0 ||
+			!noticeService.getAllNotices().get(0).getNoticeTitle().equals("temp")) {
+			noticeService.addNoticeTemp((String) session.getAttribute("userId"), noticeService.getAllNotices().size());
+		}
+		
+		mv.addObject("noticeNum", noticeService.getAllNotices().get(0).getNoticeNum());
+		
 		return mv;
 	}
 
 	@PostMapping("adminAdd")
-	public void addNotice(String noticeTitle, String noticeContent) {
-		noticeService.addNotice(noticeTitle, noticeContent);	
+	public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
+		noticeService.delNotice(noticeService.getAllNotices().get(0).getNoticeNum());
+		
+		noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));	
 	}
 
 	@GetMapping("adminFixView")
 	public ModelAndView adminFixNotice(ModelAndView mv, HttpSession session, 
 										HttpServletRequest request) {
 		mv.setViewName("admin/notice/fixNotice");
-		Notice notice = (noticeService.getNotice((Integer) session.getAttribute("noticeNum")).get(0));
-		mv.addObject("notice", notice);
+		
+		Notice noticeNum = (noticeService.getNotice((Integer) session.getAttribute("noticeNum")).get(0));
+		mv.addObject("noticeNum", noticeNum);
 		return mv;
 	}
 	

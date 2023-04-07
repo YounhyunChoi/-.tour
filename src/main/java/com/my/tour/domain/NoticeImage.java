@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class NoticeImage {
-	private int noticeImageId;
+	private int noticeImageNum;
 	private String noticeImageName;
 	private int noticeNum;
 }

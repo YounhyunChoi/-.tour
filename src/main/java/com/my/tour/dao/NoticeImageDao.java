@@ -6,5 +6,6 @@ import com.my.tour.domain.NoticeImage;
 
 public interface NoticeImageDao {
 	List<NoticeImage> selectNoticeImages(int noticeNum);
-	int insertNoticeImage(String noticeImageName);
+	int insertNoticeImage(String noticeImageName, int noticeNum);
+	int deleteNoticeImage(int notiecNum);
 }

@@ -37,12 +37,6 @@
             }
             
             function listFaqs() {
-<<<<<<< HEAD
-            	
-            	
-            	
-=======
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
             $.ajax({
         		url: 'faq/get',
         		dataType: 'json',
@@ -52,7 +46,7 @@
     		            $.each(faqs, (i, faq) => {
     		                faqArr.push(
     		                    `<div class='row mt-3'>
-    					            <div class='col mt-3'>
+    					            <div class='col'>
     					                <div class='card shadow-sm'>
     					                    <div class='card-header d-flex justify-content-between'>
     					                        <div class='faqQuestion'>

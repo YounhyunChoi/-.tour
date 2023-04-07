@@ -7,8 +7,8 @@
 <link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css' rel='stylesheet'/>
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
-<link href='/res/style.css' rel='stylesheet'/>
-<script src='/res/navigation.js'></script>
+<link href='../res/style.css' rel='stylesheet'/>
+<script src='../res/navigation.js'></script>
 <script>
 $(() => {
 	$.ajax({
@@ -22,14 +22,14 @@ $(() => {
 						tourArr.push(
 							`<div class='row'>
 				                <div class='col p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-				                    <div class='border border-3 text-truncate tourImg'>여행코스이미지</div>
+				                    <div class='border border-3 text-nowrap tourImg'>여행코스이미지</div>
 				                    <div class='text-truncate'>\${tour.tourName}</div>
 				                </div>`
 			            )
 					} else {
 						tourArr.push(
 							`<div class='col p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-			                    <div class='border border-3 text-truncate tourImg'>여행코스이미지</div>
+			                    <div class='border border-3 text-nowrap tourImg'>여행코스이미지</div>
 			                    <div class='text-truncate'>\${tour.tourName}</div>
 			                </div>
 			            </div>`)

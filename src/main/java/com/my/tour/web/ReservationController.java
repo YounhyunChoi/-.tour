@@ -1,5 +1,6 @@
 package com.my.tour.web;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class ReservationController {
 		return reservationService.getReservations((String)session.getAttribute("userId"));
 	}
 	
+	@GetMapping("tours")
+	public List<Tour> getTours(){
+		return reservationService.getTours();
+	}
+	
 	@GetMapping("list")
 	public ModelAndView reservationList(ModelAndView mv) {
 		mv.setViewName("reservation/reservationList");
@@ -35,7 +41,6 @@ public class ReservationController {
 	@GetMapping("add")
 	public ModelAndView addReservation(ModelAndView mv, int tourNum) {
 		Tour tour = reservationService.getTour(tourNum).get(0);
-		
 		mv.setViewName("reservation/addReservation");
 		mv.addObject("tour", tour);
 		mv.addObject("term", reservationService.getTerm(tour.getTermNum()));

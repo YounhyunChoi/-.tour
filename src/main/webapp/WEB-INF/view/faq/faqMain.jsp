@@ -37,20 +37,12 @@
             }
             
             function listFaqs() {
-            	let replaceClass = function(a, b, c) {
-                    a.removeClass(`${b}`)
-                    a.addClass(`${c}`)
-                }
-            	
-            	
             $.ajax({
         		url: 'faq/get',
         		dataType: 'json',
         		success: faqs => {
-       
     		        if(faqs.length) {
-    		            const faqArr = []
-		           		            
+    		            const faqArr = []        
     		            $.each(faqs, (i, faq) => {
     		                faqArr.push(
     		                    `<div class='row mt-3'>
@@ -76,22 +68,34 @@
     					        </div>
             					<hr class='row mt-3'>`
     		                )
-    		            })
-    		            
+    		            })       
     		            $('#faqContainer').append(faqArr.join(''))	
  						$('hr').eq($('hr').length - 1).remove()
     		            $.each(faqs, (i, faq) => {
     		            	btnFunction($(`#\${faq.faqQuestion}`))
     		            })
-    		            
+    		        } else {
+    		        	$('#faqContainer').html(`
+    		        			<div class='row d-block my-5'>
+    		                     <div class='col text-center pt-4'>
+    		                         <h3 class='my-3'>
+    		                             자주묻는 질문이 없습니다.
+    		                         </h3>
+    		                     </div>
+    		                     <div class='col text-center mt-5'>
+    		                         <button id='mypageBtn' type='button' class='px-5 py-2 border-0 rounded text-center text-white btn-darkBlue'
+    		                            onclick="location.href='../user/mypage'">
+    		                            마이 페이지로 가기
+    		                         </button>
+    		                     </div>
+    		               </div>
+    		        	`
+    		        	)
     		        }
         		}
             })
-        }
-            
-            $(listFaqs)
-            
-            
+        }     
+            $(listFaqs)         
         })
                  
     </script>

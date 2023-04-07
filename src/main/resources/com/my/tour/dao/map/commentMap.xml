@@ -6,10 +6,16 @@
 		select user_id, comt_num, comt_content, comt_date
 		from comments
 		order by comt_date
+	</select> 
+	<select id='selectComment' resultType='comment'>
+		select user_id, comt_num, comt_content, comt_date
+		from comments
+		where review_num = #{review_num}
+		order by comt_date
 	</select>
 	<insert id='insertComment'>
-		insert into comments(comt_num, comt_content, comt_date)
-		values(comt_num_seq.nextval, #{comtContent}, to_date(sysdate, 'YYYY-MM-DD'))
+		insert into comments
+		values(comt_num_seq.nextval, #{comtContent}, to_date(sysdate, 'YYYY-MM-DD'), #{reviewNum}, #{userId})
 	</insert>
 	
 	<update id='updateComment'>

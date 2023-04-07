@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.my.tour.dao.map.CommentMap;
 import com.my.tour.domain.Comment;
 
+import jakarta.servlet.http.HttpSession;
+
 @Repository
 public class CommentDaoImpl implements CommentDao{
 	@Autowired private CommentMap commentMap;
@@ -18,13 +20,13 @@ public class CommentDaoImpl implements CommentDao{
 	}
 	
 	@Override
-	public int insertComment(String comtContent) {
-		return commentMap.insertComment(comtContent);
+	public int insertComment(String comtContent, String userId, int reviewNum) {
+		return commentMap.insertComment(comtContent, userId, reviewNum);
 	}
 	
 	@Override
-	public int updateComment(String comtContent) {
-		return commentMap.updateComment(comtContent);
+	public int updateComment(String comtContent, int comtNum) {
+		return commentMap.updateComment(comtContent, comtNum);
 	}
 	
 	@Override

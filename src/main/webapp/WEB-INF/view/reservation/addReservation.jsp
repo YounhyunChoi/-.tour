@@ -20,28 +20,29 @@
 <title></title>
 <script>
 $(() => {
-	
-	
-         		
    $('#paymentBtn').attr('disabled', 'disabled')
    $('#agreeCheckbox').change(() => {
       if ($('#agreeCheckbox').prop('checked')) $('#paymentBtn').removeAttr('disabled')
       else if (!$('#agreeCheckbox').prop('checked')) $('#paymentBtn').attr('disabled', 'disabled')
    })
+
+   $('.chargePrice').text($('#tourPrice').text() - $('#salePrice').text())
+   console.log($('.chargePrice').eq(0).text())
    $('#paymentBtn').click(() => {
+	   if(`${userId}`){
 	   $.ajax({
 			url: 'add',
 			method: 'post',
 			data: {
 				tourNum: ${tour.tourNum},
-				chargePrice: ${tour.tourPrice}
+				chargePrice: $('.chargePrice').eq(0).text()
 			}
 	   })
-      showOkModal('여행코스가 예약되었습니다.', 'list')
-      
-   })
-   
-   
+      	showOkModal('여행코스가 예약되었습니다.', 'list')
+   	   } else {
+	   	showOkModal('로그인페이지로 이동합니다.', '../user/login')
+   	}
+	})
 })
 </script>
 <style>
@@ -104,7 +105,6 @@ $(() => {
 			</div>
 		</div>
 	</div>
-
 	<footer> </footer>
 </body>
 

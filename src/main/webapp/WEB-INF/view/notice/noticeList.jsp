@@ -29,7 +29,6 @@ $(() => {
 						        	<hr>`
     							)
     						})
-    				
     				$('#notices').append(noticeArr.join(''))
     			} else $('#notices').append(
     					'<p><h5 class=text-center>게시된 공지사항이 없습니다.</h5></p><br><hr>')

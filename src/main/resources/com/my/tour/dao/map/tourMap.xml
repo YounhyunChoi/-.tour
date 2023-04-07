@@ -12,4 +12,9 @@
 		from tours
 		where tour_num = #{tourNum}
 	</select>
+	
+	<insert id='insertTour'>
+		insert into tours(tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id, term_num)
+		values(tour_num_seq.nextval, #{tourName}, #{tourContent}, #{tourSDate}, #{tourEDate}, #{tourPrice}, #{adminId}, #{termNum})
+	</insert>
 </mapper>

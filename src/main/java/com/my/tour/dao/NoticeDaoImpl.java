@@ -23,7 +23,17 @@ public class NoticeDaoImpl implements NoticeDao {
 	}
 	
 	@Override
-	public int insertNotice(String noticeTitle, String noticeContent, String adminId) {
-		return noticeMap.insertNotice(noticeTitle, noticeContent, adminId);
+	public int insertNotice(String noticeTitle, String noticeContent) {
+		return noticeMap.insertNotice(noticeTitle, noticeContent);
+	}
+	
+	@Override
+	public int updateNotice(Notice notice) {
+		return noticeMap.updateNotice(notice);
+	}
+	
+	@Override
+	public int deleteNotice(int noticeNum) {
+		return noticeMap.deleteNotice(noticeNum);
 	}
 }

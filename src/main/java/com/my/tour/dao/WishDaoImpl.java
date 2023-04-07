@@ -14,8 +14,8 @@ public class WishDaoImpl implements WishDao {
 	private WishMap wishMap;
 
 	@Override
-	public List<Wish> selectWishes() {
-		return wishMap.selectWishes();
+	public List<Wish> selectWishes(String userId) {
+		return wishMap.selectWishes(userId);
 	}
 
 	@Override

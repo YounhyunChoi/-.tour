@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.my.tour.dao.CommentDao;
 import com.my.tour.domain.Comment;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class CommentServiceImpl implements CommentService{
 	@Autowired private CommentDao commentDao;
@@ -18,13 +20,13 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public int addComment(String comtContent) {
-		return commentDao.insertComment(comtContent);
+	public int addComment(String comtContent, String userId, int reviewNum) {
+		return commentDao.insertComment(comtContent, userId, reviewNum);
 	}
 	
 	@Override
-	public int fixComment(String comtContent) {
-		return commentDao.updateComment(comtContent);
+	public int fixComment(String comtContent, int comtNum) {
+		return commentDao.updateComment(comtContent, comtNum);
 	}
 	
 	@Override

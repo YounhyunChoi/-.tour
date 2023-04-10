@@ -71,7 +71,7 @@ $(() => {
 		                        </a>
 		                    </div>`)                   
 		  			} else {
-		  				noticeArr.push(`<img src='<c:url value="/attach/` + noticeImages[0] + `"/>' style="max-width:100%; height:100%;/>`)
+		  				noticeArr.push(`<img src='<c:url value="/attach/` + noticeImages[0] + `"/>' style="max-width:100%; height:100%;"/>`)
 		  			}
 		  			noticeArr.push(`
 	  							</div>

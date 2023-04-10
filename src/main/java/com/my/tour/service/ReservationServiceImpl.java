@@ -24,9 +24,20 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 	
 	@Override
+	public void addReservation(int chargePrice, String userId, int tourNum) {
+		reservationDao.insertReservation(chargePrice, userId, tourNum);
+	}
+	
+	@Override
+	public void delReservation(int resvNum, String userId) {
+		reservationDao.deleteReservation(resvNum, userId);
+	}
+	
+	@Override
 	public List<Tour> getTour(int tourNum){
 		return tourDao.selectTour(tourNum);
 	}
+	
 	@Override
 	public 	List<Tour> getTours(){
 		return tourDao.selectTours();
@@ -37,8 +48,4 @@ public class ReservationServiceImpl implements ReservationService{
 		return termDao.selectTerm(tourNum);
 	}
 	
-	@Override
-	public void addReservation(int chargePrice, String userId, int tourNum) {
-		reservationDao.insertReservation(chargePrice, userId, tourNum);
-	}
 }

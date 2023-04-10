@@ -22,4 +22,9 @@ public class ReservationDaoImpl implements ReservationDao{
 	public void insertReservation(int chargePrice, String userId, int tourNum) {
 		 reservationMap.insertReservation(chargePrice, userId, tourNum);
 	}
+	
+	@Override
+	public void deleteReservation(int resvNum, String userId) {
+		reservationMap.deleteReservation(resvNum, userId);
+	}
 }

@@ -78,8 +78,10 @@ public class NoticeController {
 		
 		for(MultipartFile multipartfile: noticeImage) {
 			filename = "notice" + multipartfile.getOriginalFilename();
-			saveFile(attachPath + "/" + filename, multipartfile);
-			noticeService.addNoticeImage(filename, noticeNum);
+			if(!filename.equals("notice")) {
+				saveFile(attachPath + "/" + filename, multipartfile);
+				noticeService.addNoticeImage(filename, noticeNum);
+			}
 		}
 	}
 
@@ -97,13 +99,13 @@ public class NoticeController {
 	//어드민
 	@GetMapping("adminList")
 	@AdminAccess
-	public ModelAndView adminList(ModelAndView mv, HttpSession session) {
+	public ModelAndView adminNoticeList(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/notice/adminNoticeList");
 		return mv;
 	}
 	
-	@GetMapping("add")
-	public ModelAndView add(ModelAndView mv, HttpSession session) {
+	@GetMapping("addNotice")
+	public ModelAndView addNotice(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/notice/addNotice");
 		
 		if(noticeService.getAllNotices().size() == 0 ||
@@ -116,15 +118,15 @@ public class NoticeController {
 		return mv;
 	}
 
-	@PostMapping("add")
-	public void add(String noticeTitle, String noticeContent, HttpSession session) {
+	@PostMapping("addNotice")
+	public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
 		noticeService.delNotice(noticeService.getAllNotices().get(0).getNoticeNum());
 		
 		noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));	
 	}
 
-	@GetMapping("adminFixView")
-	public ModelAndView adminFixNotice(ModelAndView mv, HttpSession session, 
+	@GetMapping("fixNotice")
+	public ModelAndView fixNotice(ModelAndView mv, HttpSession session, 
 										HttpServletRequest request) {
 		mv.setViewName("admin/notice/fixNotice");
 		
@@ -133,13 +135,13 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@PutMapping("adminFix")
+	@PutMapping("fixNotice")
 	public void fixNotice(@RequestBody Notice notice, HttpSession session) {
 		notice.setNoticeNum((Integer) session.getAttribute("noticeNum"));
 		noticeService.fixNotice(notice);
 	}
 	
-	@DeleteMapping("adminDel")
+	@DeleteMapping("delNotice")
 	public void delNotice(int noticeNum) {
 		noticeService.delNotice(noticeNum);
 	}

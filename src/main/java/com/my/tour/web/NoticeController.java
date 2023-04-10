@@ -1,4 +1,4 @@
-	package com.my.tour.web;
+package com.my.tour.web;
 
 import java.io.File;
 import java.io.IOException;
@@ -78,8 +78,10 @@ public class NoticeController {
 		
 		for(MultipartFile multipartfile: noticeImage) {
 			filename = "notice" + multipartfile.getOriginalFilename();
-			saveFile(attachPath + "/" + filename, multipartfile);
-			noticeService.addNoticeImage(filename, noticeNum);
+			if(!filename.equals("notice")) {
+				saveFile(attachPath + "/" + filename, multipartfile);
+				noticeService.addNoticeImage(filename, noticeNum);
+			}
 		}
 	}
 
@@ -97,19 +99,13 @@ public class NoticeController {
 	//어드민
 	@GetMapping("adminList")
 	@AdminAccess
-	public ModelAndView adminList(ModelAndView mv, HttpSession session) {
+	public ModelAndView adminNoticeList(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/notice/adminNoticeList");
 		return mv;
 	}
 	
-<<<<<<< HEAD
-	@GetMapping("adminAddView")
-	@AdminAccess
-	public ModelAndView adminAddNotice(ModelAndView mv, HttpSession session) {
-=======
-	@GetMapping("add")
-	public ModelAndView add(ModelAndView mv, HttpSession session) {
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
+	@GetMapping("addNotice")
+	public ModelAndView addNotice(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/notice/addNotice");
 		
 		if(noticeService.getAllNotices().size() == 0 ||
@@ -122,28 +118,31 @@ public class NoticeController {
 		return mv;
 	}
 
-	@PostMapping("add")
-	public void add(String noticeTitle, String noticeContent, HttpSession session) {
+	@PostMapping("addNotice")
+	public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
 		noticeService.delNotice(noticeService.getAllNotices().get(0).getNoticeNum());
+		
 		noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));	
 	}
 
-	@GetMapping("adminFixView")
-	@AdminAccess
-	public ModelAndView adminFixNotice(ModelAndView mv, int noticeNum) {
+	@GetMapping("fixNotice")
+	public ModelAndView fixNotice(ModelAndView mv, HttpSession session, 
+										HttpServletRequest request) {
 		mv.setViewName("admin/notice/fixNotice");
+		
+		Notice noticeNum = (noticeService.getNotice((Integer) session.getAttribute("noticeNum")).get(0));
 		mv.addObject("noticeNum", noticeNum);
 		return mv;
 	}
 	
-	@PutMapping("adminFix")
-	public void fixNotice(@RequestBody Notice notice) {
+	@PutMapping("fixNotice")
+	public void fixNotice(@RequestBody Notice notice, HttpSession session) {
+		notice.setNoticeNum((Integer) session.getAttribute("noticeNum"));
 		noticeService.fixNotice(notice);
 	}
 	
-	@DeleteMapping("adminDel")
+	@DeleteMapping("delNotice")
 	public void delNotice(int noticeNum) {
 		noticeService.delNotice(noticeNum);
 	}
 }
-

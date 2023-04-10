@@ -24,9 +24,7 @@ function showNoticeImage() {
 		dataType: 'json',
 		success: noticeImages => {
 			const noticeImageArr = []
-			if(!noticeImages.length){
-				$('#noticeImg').hide()
-			} else if(noticeImages.length != 1){
+			if(noticeImages.length != 1){
 				$.each(noticeImages, (i, noticeImage) => {
 					if(i == 1) {
 						noticeImageArr.push(
@@ -48,6 +46,7 @@ function showNoticeImage() {
 	                        <img src='<c:url value="/attach/` + noticeImages[0] + `"/>'style="max-width:100%; height:100%;"/>
 	                    </div>`)
 			}
+			$('#noticeImages').empty()
 			$('#noticeImages').append(noticeImageArr.join(''))
 		}
 	})
@@ -66,14 +65,14 @@ $(() => {
 		})
 	})
 	
-	
 	$('#noticeRegistrationBtn').click(() => {
 		showConfirmModal('공지사항을 등록하시겠습니까?')
 		
 		$('#okBtn').click(() => {
-		    if($('#noticeTitle').val() && $('#noticeContent').val()){
+			let regexr = /[가-힣a-zA-Z0-9]{5}/
+		    if(regexr.test($('#noticeTitle').val()) && $('#noticeContent').val()){
     			$.ajax({
-		    		url: 'adminAdd',
+		    		url: 'addNotice',
 		    		method:'post',
 		    		data: {
 		    			noticeTitle: $('#noticeTitle').val(),
@@ -117,7 +116,7 @@ $(() => {
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
+                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>로고이미지</a></div>
                     <h1 class='text-center pt-3 text-white'><b>공지추가</b></h1>
                 </div>
             </div>

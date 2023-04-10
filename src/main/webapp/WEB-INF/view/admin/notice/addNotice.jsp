@@ -31,12 +31,12 @@ function showNoticeImage() {
 					if(i == 1) {
 						noticeImageArr.push(
 								`<div class='carousel-item active'>
-			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'/>
+			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'style="max-width:100%; height:100%;"/>
 			                    </div>`)
 					} else {
 						noticeImageArr.push(
 								`<div class='carousel-item'>
-			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'/>
+			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'style="max-width:100%; height:100%;"/>
 			                    </div>`)
 					}
 				})
@@ -45,7 +45,7 @@ function showNoticeImage() {
 			
 				noticeImageArr.push(
 						`<div class='carousel-item active'>
-	                        <img src='<c:url value="/attach/` + noticeImages[0] + `"/>'/>
+	                        <img src='<c:url value="/attach/` + noticeImages[0] + `"/>'style="max-width:100%; height:100%;"/>
 	                    </div>`)
 			}
 			$('#noticeImages').append(noticeImageArr.join(''))

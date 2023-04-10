@@ -102,14 +102,14 @@ public class NoticeController {
 		return mv;
 	}
 	
-<<<<<<< HEAD
-	@GetMapping("adminAddView")
-	@AdminAccess
-	public ModelAndView adminAddNotice(ModelAndView mv, HttpSession session) {
-=======
+//
+//	@GetMapping("adminAddView")
+//	@AdminAccess
+//	public ModelAndView adminAddNotice(ModelAndView mv, HttpSession session) {
+//	}
 	@GetMapping("add")
 	public ModelAndView add(ModelAndView mv, HttpSession session) {
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
+
 		mv.setViewName("admin/notice/addNotice");
 		
 		if(noticeService.getAllNotices().size() == 0 ||

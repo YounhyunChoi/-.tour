@@ -27,7 +27,6 @@ $(() => {
    })
 
    $('.chargePrice').text($('#tourPrice').text() - $('#salePrice').text())
-   console.log($('.chargePrice').eq(0).text())
    $('#paymentBtn').click(() => {
 	   if(`${userId}`){
 	   $.ajax({

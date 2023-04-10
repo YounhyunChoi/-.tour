@@ -10,7 +10,6 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <title></title>
-<<<<<<< HEAD
 <script>
         $(() => {
         	 	
@@ -94,8 +93,6 @@
         })
                  
     </script>
-=======
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
 <style>
     .form-control {
         height: 5.2rem;

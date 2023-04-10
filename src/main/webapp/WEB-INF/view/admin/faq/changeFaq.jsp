@@ -25,7 +25,6 @@ $.ajax({
 	}	
 })
 $(() => {
-	console.log(`${param.faqQuestion}`)
 	$('#faqFixBtn').click(() => {
 		showConfirmModal('FAQ를 수정하시겠습니까?')
 		

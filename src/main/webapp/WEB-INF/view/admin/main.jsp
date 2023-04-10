@@ -26,8 +26,6 @@ $(() => {
 	
 	$('#logoUp').change(() => {
 		let formData = new FormData($('#logoUp')[0])
-		console.log($('#logoUp')[0])
-		
 		$.ajax({
 			url: 'addLogo',
 			method: 'post',
@@ -60,9 +58,10 @@ $(() => {
         margin: 0 .7rem 0 .7rem;
    }
 
-   #logo{
-        text-decoration: none;
-   }
+   #logo {
+		max-width: 100%;
+		height: 100%;
+	}
 
     #navItem li {
         list-style-type: none;
@@ -120,7 +119,11 @@ $(() => {
         <div class='col'>
             <header>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='#' id='logo'>로고이미지</a></div>
+                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
+                    	<a href='#'>
+                    		<img id='logo'/>
+                    	</a>
+                    </div>
                     <h1 class='text-center pt-3 text-white'><b>MAIN</b></h1>
                 </div>
             </header>
@@ -150,7 +153,7 @@ $(() => {
             <div class='row'>
                 <div class='col'>
                     <div class='border border-dark p-5 mt-3 text-center'>
-                        <img src='<c:url value="/attach/${logoName}"/>'/>
+                        <img />
                     </div>
                 </div>
             </div>

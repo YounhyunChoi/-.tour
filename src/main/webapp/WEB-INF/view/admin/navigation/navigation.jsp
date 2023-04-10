@@ -4,7 +4,7 @@
         <nav class='nav'>
             <div id='navItem'>
                 <ul class='mt-5'>
-                    <li><a class='nav-link' href='../../user/01.html' onclick='javascript:sessionStorage.removeItem("userId")'>로그아웃</a></li>
+                    <li><a class='nav-link' href='../admin/logout'>로그아웃</a></li>
                     <li><a class='nav-link' href='../user/01.html'>회원목록</a></li>
                     <li><a class='nav-link' href='../tour/01.html'>상품목록</a></li>
                     <li class='mt-4 text-decoration-underline'>게시판</li>
@@ -13,7 +13,7 @@
                     <li><a class='nav-link' href='../notice/adminList'>공지사항</a></li>
                     <li><a class='nav-link' href='../event/01.html'>이벤트</a></li>
                     <li class='mt-4 text-decoration-underline'>고객센터</li>
-                    <li><a class='nav-link' href='../faq/01.html'>FAQ</a></li>
+                    <li><a class='nav-link' href='../faq/adminFaqList'>FAQ</a></li>
                     <li><a class='nav-link' href='../report/01.html'>신고목록</a></li>
                 </ul>
             </div>

@@ -1,9 +1,11 @@
 package com.my.tour.web;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,11 @@ public class ReservationController {
 		return reservationService.getReservations((String)session.getAttribute("userId"));
 	}
 	
+	@GetMapping("adminGet")
+	public List<Reservation> getReservations(String userId) {
+		return reservationService.getReservations(userId);
+	}
+	
 	@GetMapping("tours")
 	public List<Tour> getTours(){
 		return reservationService.getTours();
@@ -48,7 +55,20 @@ public class ReservationController {
 	}
 	
 	@PostMapping("add")
-	public void addReservation(int chargePrice, HttpSession session, int tourNum) {
-		reservationService.addReservation(chargePrice, (String)session.getAttribute("userId"), tourNum);
+	public void addReservation(int chargePrice, LocalDate resvDate, String whetherToCancel, HttpSession session, int tourNum) {
+		resvDate = LocalDate.now();
+		whetherToCancel = "N";
+		reservationService.addReservation(chargePrice, resvDate, whetherToCancel, (String)session.getAttribute("userId"), tourNum);
+	}
+	
+	@GetMapping("del")
+	public ModelAndView delReservation(ModelAndView mv) {
+		mv.setViewName("admin/reservation/delReservation");
+		return mv;
+	}
+	
+	@DeleteMapping("del")
+	public void delReservation(int resvNum, String userId) {
+		reservationService.delReservation(resvNum, userId);
 	}
 }

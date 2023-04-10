@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.tour.GetAccess;
+import com.my.tour.LoginAccess;
 import com.my.tour.UserAccess;
 import com.my.tour.domain.User;
 import com.my.tour.domain.UserDto;
@@ -174,6 +175,7 @@ public class UserController {
 	}
 	
 	@GetMapping("fixUser")
+	@LoginAccess
 	public ModelAndView fixUser(ModelAndView mv, HttpSession session, 
 								HttpServletRequest request) {
 		mv.setViewName("user/fixUser");
@@ -200,21 +202,24 @@ public class UserController {
 	}
 	
 	@GetMapping("afterFixUser")
-	public ModelAndView afterFixUser(ModelAndView mv) {
+	@LoginAccess
+	public ModelAndView afterFixUser(ModelAndView mv, HttpSession session) {
 		mv.setViewName("user/afterFixUser");
 		
 		return mv;
 	}
 	
 	@GetMapping("afterDelUser")
-	public ModelAndView afterDelUser(ModelAndView mv) {
+	@LoginAccess
+	public ModelAndView afterDelUser(ModelAndView mv, HttpSession session) {
 		mv.setViewName("user/afterDelUser");
 		
 		return mv;
 	}
 	
 	@GetMapping("myPage")
-	public ModelAndView myPage(ModelAndView mv) {
+	@LoginAccess
+	public ModelAndView myPage(ModelAndView mv, HttpSession session) {
 		mv.setViewName("user/myPage");
 		
 		return mv;

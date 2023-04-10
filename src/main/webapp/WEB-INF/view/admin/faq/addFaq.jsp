@@ -15,19 +15,25 @@
 $(() => {
 	$('#faqAddBtn').click(() => {
 		showConfirmModal('FAQ를 추가하시겠습니까?')
-		
 		$('#okBtn').click(() => {
-		    if($('#questionInput').val() && $('#answerInput').val()){
+			let questionRegExp = /[가-힣a-zA-Z0-9]{5,30}/
+		    if(questionRegExp.test($('#questionInput').val()) && $('#answerInput').val()){
 		    	$.ajax({
 		    		url: 'add',
-		    		method:'post',
+		    		method:'post', 
 		    		data: {
 		    			faqQuestion: $('#questionInput').val(),
 		    			faqAnswer: $('#answerInput').val()
 		    		}
 		    	})
 		    	showOkModal('FAQ가 등록되었습니다.','adminFaqList')
-		    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
+		    } else if($('#questionInput').val() == '' && $('#answerInput').val() == '') {
+		    	showOkModal('제목과 내용을 입력해주세요.')
+		    } else if($('#answerInput').val() == ''){
+		    	showOkModal('내용을 입력해주세요.')
+		    } else if(!questionRegExp.test($('#questionInput').val())){
+		    	showOkModal('제목을 5~30자의 영문, 한글, 숫자로 구성된 형태로 입력해주세요.')
+		    }
 		})
 	})
 })
@@ -88,8 +94,7 @@ $(() => {
                 </div>
             </div>
             <div class='d-flex justify-content-end'>
-                <button type='button' id='faqAddBtn' class='btn btn-darkBlue'
-                data-bs-toggle='modal' data-bs-target='#modal'>
+                <button type='button' id='faqAddBtn' class='btn btn-darkBlue'>
                     <i class='bi bi-plus-circle'></i>
                     &nbsp;등록
                 </button>

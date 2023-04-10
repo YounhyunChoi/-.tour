@@ -20,8 +20,9 @@
     margin: 0 .7rem 0 .7rem;
 }
 
-#logo{
-    text-decoration: none;
+#logo {
+	max-height: 100%;
+	width: 100%;
 }
 
 #navItem li {

@@ -7,10 +7,13 @@ import com.my.tour.domain.NoticeImage;
 
 public interface NoticeService {
 	List<Notice> getNotices();
+	List<Notice> getAllNotices();
 	List<Notice> getNotice(int noticeNum);
-	void addNotice(String noticeTitle, String noticeContent);
+	void addNoticeTemp(String adminId, int noticeSize);
+	void addNotice(String noticeTitle, String noticeContent, String adminId);
 	void fixNotice(Notice notice);
 	void delNotice(int noticeNum);
 	List<NoticeImage> getNoticeImages(int noticeNum);
-	int addNoticeImage(String noticeImageName);
+	int addNoticeImage(String noticeImageName, int noticeNum);
+	int delNoticeImage(int noticeNum);
 }

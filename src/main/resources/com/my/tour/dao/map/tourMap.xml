@@ -17,4 +17,16 @@
 		insert into tours(tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id, term_num)
 		values(tour_num_seq.nextval, #{tourName}, #{tourContent}, #{tourSDate}, #{tourEDate}, #{tourPrice}, #{adminId}, #{termNum})
 	</insert>
+		
+	<update id='updateTour'>
+		update tours
+		set tour_name = #{tourName}, tour_content = #{tourContent}, tour_sdate = #{tourSDate}, tour_edate = #{tourEDate},
+			tour_price = #{tourPrice}, admin_id = #{adminId}, term_num = #{termNum}
+		where tour_num = #{tourNum}
+	</update>
+	
+	<delete id='deleteTour'>
+		delete tours
+		where tour_num = #{tourNum}
+	</delete>
 </mapper>

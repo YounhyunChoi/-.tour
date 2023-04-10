@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -15,29 +16,48 @@
 
 function showNoticeImage() {
 	$.ajax({
-		url: 'getNoticeImages',
+		url: 'getNoticeImage',
 		method: 'get',
+		data: {
+			noticeNum: ${noticeNum}
+		},
 		dataType: 'json',
 		success: noticeImages => {
 			const noticeImageArr = []
 			if(!noticeImages.length){
-				$(() =>{
-					$('#noticeImg').hide()
+				$('#noticeImg').hide()
+			} else if(noticeImages.length != 1){
+				$.each(noticeImages, (i, noticeImage) => {
+					if(i == 1) {
+						noticeImageArr.push(
+								`<div class='carousel-item active'>
+			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'/>
+			                    </div>`)
+					} else {
+						noticeImageArr.push(
+								`<div class='carousel-item'>
+			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'/>
+			                    </div>`)
+					}
 				})
-			} else if(!noticeImages.length == 1){
-				
+			} else {
+				$('.bi').hide()
+			
+				noticeImageArr.push(
+						`<div class='carousel-item active'>
+	                        <img src='<c:url value="/attach/` + noticeImages[0] + `"/>'/>
+	                    </div>`)
 			}
+			$('#noticeImages').append(noticeImageArr.join(''))
 		}
 	})
 }
+
 $(() => {
-	showNoticeImage()
-	
-	$('#noticeImageUp').change(() => {
+	$('#noticeImageUp').find('input').change(() => {
 		let formData = new FormData($('#noticeImageUp')[0])	
-		
 		$.ajax({
-			url: 'addNoticeImage',
+			url: 'addNoticeImages',
 			method: 'post',
 			contentType: false,
 			processData: false,
@@ -46,20 +66,42 @@ $(() => {
 		})
 	})
 	
+	
 	$('#noticeRegistrationBtn').click(() => {
 		showConfirmModal('공지사항을 등록하시겠습니까?')
 		
 		$('#okBtn').click(() => {
 		    if($('#noticeTitle').val() && $('#noticeContent').val()){
 		    	$.ajax({
-		    		url: 'adminAdd',
-		    		method:'post',
+		    		url: 'delNoticeImages',
+		    		method: 'delete',
 		    		data: {
-		    			noticeTitle: $('#noticeTitle').val(),
-		    			noticeContent: $('#noticeContent').val()
+		    			noticeNum: ${noticeNum}
+		    		},
+		    		success: () => {
+		    			$.ajax({
+				    		url: 'adminAdd',
+				    		method:'post',
+				    		data: {
+				    			noticeTitle: $('#noticeTitle').val(),
+				    			noticeContent: $('#noticeContent').val()
+				    		},
+				    		success: () => {
+				    			let formData = new FormData($('#noticeImageUp')[0])	
+				    			$.ajax({
+				    				url: 'addNoticeImages',
+				    				method: 'post',
+				    				contentType: false,
+				    				processData: false,
+				    				data: formData
+				    			})
+				    		}
+				    	})
 		    		}
 		    	})
-		    	showOkModal('공지사항이 등록되었습니다.','adminList')
+		    	
+			    	
+			    	showOkModal('공지사항이 등록되었습니다.','adminList')
 		    	
 		    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
 		})
@@ -103,54 +145,54 @@ $(() => {
 </header>
 <div class='row' id='mainBody'>
    <div class='col'>
-        <form class='mb-5'>
-            <div class='row'>
-                <div class='col pt-2 d-flex gap-3 mb-4'>
-                    <label for='noticeTitle'>
-                        <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
-                    </label>
-                    <div class='col shadow-sm'>
-                        <input type='text' class='form-control' id='noticeTitle' maxlength='30'/>
-                    </div>
+        <div class='row'>
+            <div class='col pt-2 d-flex gap-3 mb-4'>
+                <label for='noticeTitle'>
+                    <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
+                </label>
+                <div class='col shadow-sm'>
+                    <input type='text' class='form-control' id='noticeTitle' maxlength='30'/>
                 </div>
             </div>
-            <div class='row ms-4'>
-                <div class='col'>
-                    <div class='row py-5 me-0' id='noticeImg'>
-                        <div class='carousel slide' id='noticeCarousel' data-ride='carousel'>
-                            <div class='carousel-inner' id='noticeImages'>
-									<!-- 공지사항 이미지 -->
-                            </div>
-                            <a href='#noticeCarousel' class='carousel-control-prev' data-bs-slide='prev'>
-                                <i class="bi bi-chevron-left noticeCarouselBtn"></i>
-                                <div class="visually-hidden">Previous</div>
-                            </a>
-                            <a href='#noticeCarousel' class='carousel-control-next' data-bs-slide='next'>
-                                <i class="bi bi-chevron-right noticeCarouselBtn"></i>
-                                <div class="visually-hidden">Next</div>
-                            </a>
+        </div>
+        <div class='row ms-4'>
+            <div class='col'>
+                <div class='row py-5 me-0' id='noticeImg'>
+                    <div class='carousel slide' id='noticeCarousel' data-ride='carousel'>
+                        <div class='carousel-inner' id='noticeImages'>
+					<!-- 공지사항 이미지 -->
                         </div>
-                    </div>
-                </div>
-                <form><input class='ms-3' type='file' id='noticeImageUp'></form>
-            </div>
-            <div class='row'>
-                <div class='col pt-2 d-flex gap-3 mb-4'>
-                    <label for='noticeContent'>
-                        <h5 class='align-items-center text-nowrap pt-1'>내용</h5>
-                    </label>
-                    <div class='col'>
-                        <textarea class='form-control shadow-sm' rows='10' id='noticeContent' maxlength='300'></textarea>
+                        <a href='#noticeCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+                            <i class="bi bi-chevron-left noticeCarouselBtn"></i>
+                            <div class="visually-hidden">Previous</div>
+                        </a>
+                        <a href='#noticeCarousel' class='carousel-control-next' data-bs-slide='next'>
+                            <i class="bi bi-chevron-right noticeCarouselBtn"></i>
+                            <div class="visually-hidden">Next</div>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class='d-flex justify-content-end'>
-                <button type='button' class='btn btn-darkBlue'id='noticeRegistrationBtn'>
-                    <i class='bi bi-plus-circle'></i>
-                    &nbsp;등록
-                </button>
+    		<form id='noticeImageUp'>
+            	<input class='ms-3' type='file' name='noticeImage' multiple/>
+            </form>	
+        </div>
+        <div class='row'>
+            <div class='col pt-2 d-flex gap-3 mb-4'>
+                <label for='noticeContent'>
+                    <h5 class='align-items-center text-nowrap pt-1'>내용</h5>
+                </label>
+                <div class='col'>
+                    <textarea class='form-control shadow-sm' rows='10' id='noticeContent' maxlength='300'></textarea>
+                </div>
             </div>
-        </form>
+        </div>
+        <div class='d-flex justify-content-end'>
+            <button type='button' class='btn btn-darkBlue'id='noticeRegistrationBtn'>
+                <i class='bi bi-plus-circle'></i>
+                &nbsp;등록
+            </button>
+        </div>
    </div>
 </div>
 <footer>

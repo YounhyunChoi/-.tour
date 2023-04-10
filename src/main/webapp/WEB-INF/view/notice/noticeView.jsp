@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -38,32 +39,39 @@ $(() => {
 		  			noticeNum: ${param.noticeNum}
 		  		},
 		  		dataType: 'json',
-		  		success: noticeImageNames => {
-		  			if(!noticeImageNames.length) {
+		  		success: noticeImages => {
+		  			if(!noticeImages.length) {
 		  				$(() => {
 		  					$('#noticeImg').hide()
 		  				})
-		  			} else if(noticeImageNames.length != 1) {
-		  				noticeArr.push(
-				  				`<div class='carousel slide' id='tourCarousel' data-ride='carousel'>
-		                        <div class='carousel-inner'>`)
-		                $.each(noticeImageNames, (i, noticeImageName) => {
-		                	noticeArr.push(`<div class='carousel-item active'>
-		                            	<img src='<c:url value="/attach/${noticeimageName}"/>'/>
-		                            </div>`)
-		                })
+		  			} else if(noticeImages.length != 1) {
+		  				noticeArr.push(`<div class='carousel slide' id='noticeCarousel' data-ride='carousel'>
+		                        <div class='carousel-inner noticeImg' style='height: 8rem;'>`)
+						$.each(noticeImages, (i, noticeImage) => {
+							if(i == 1) {
+								noticeArr.push(
+										`<div class='carousel-item active'>
+					                        <img src='<c:url value="/attach/` + noticeImage + `"/>' style="max-width:100%; max-height:100%;"/>
+					                    </div>`)
+							} else {
+								noticeArr.push(
+										`<div class='carousel-item'>
+					                        <img src='<c:url value="/attach/` + noticeImage + `"/>' style="max-width:100%; max-height:100%;"/>
+					                    </div>`)
+							}
+						})
 		                noticeArr.push(`</div>
-		                        <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+		                        <a href='#noticeCarousel' class='carousel-control-prev' data-bs-slide='prev'>
 		                            <i class="bi bi-chevron-left tourCarouselBtn"></i>
 		                            <div class="visually-hidden">Previous</div>
 		                        </a>
-		                        <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
+		                        <a href='#noticeCarousel' class='carousel-control-next' data-bs-slide='next'>
 		                            <i class="bi bi-chevron-right tourCarouselBtn"></i>
 		                            <div class="visually-hidden">Next</div>
 		                        </a>
-		                    </div>`)
+		                    </div>`)                   
 		  			} else {
-		  				noticeArr.push(`<img src='<c:url value="/attach/${noticeimageName}"/>'/>`)
+		  				noticeArr.push(`<img src='<c:url value="/attach/` + noticeImages[0] + `"/>' style="max-width:100%; height:100%;/>`)
 		  			}
 		  			noticeArr.push(`
 	  							</div>

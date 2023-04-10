@@ -26,6 +26,7 @@ $(() => {
 	
 	$('#logoUp').change(() => {
 		let formData = new FormData($('#logoUp')[0])
+		console.log($('#logoUp')[0])
 		
 		$.ajax({
 			url: 'addLogo',

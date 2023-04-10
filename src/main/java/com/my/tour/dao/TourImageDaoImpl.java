@@ -18,8 +18,8 @@ public class TourImageDaoImpl implements TourImageDao {
 	}
 
 	@Override
-	public int insertTourImage(String tourImageName) {
-		return tourImageMap.insertTourImage(tourImageName);
+	public int insertTourImage(String tourImageName, int tourNum) {
+		return tourImageMap.insertTourImage(tourImageName, tourNum);
 	}
 
 }

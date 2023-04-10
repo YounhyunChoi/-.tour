@@ -10,6 +10,92 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <title></title>
+<<<<<<< HEAD
+<script>
+        $(() => {
+        	 	
+            let btnFunction = function (a) {
+                a.click(() => {
+                    if (a.hasClass('openBtn') && a.attr('aria-expanded') == 'true') {
+                    	a.removeClass('openBtn')
+                        a.addClass('closeBtn')
+                        a.children().remove()
+                        a.html("<span>닫기</span><i class='bi bi-caret-up-fill'></i>")
+                       		                  
+                    } else if (a.hasClass('closeBtn') && a.attr('aria-expanded') == 'false') {
+                    	a.removeClass('closeBtn')
+                        a.addClass('openBtn')
+                        a.children().remove()
+                        a.html("<span>열기</span><i class='bi bi-caret-down-fill'></i>")
+                    }
+                })
+            }
+            
+            function listFaqs() {
+            $.ajax({
+        		url: 'faq/get',
+        		dataType: 'json',
+        		success: faqs => {
+    		        if(faqs.length) {
+    		            const faqArr = []        
+    		            $.each(faqs, (i, faq) => {
+    		                faqArr.push(
+    		                    `<div class='row mt-3'>
+    					            <div class='col'>
+    					                <div class='card shadow-sm'>
+    					                    <div class='card-header d-flex justify-content-between'>
+    					                        <div class='faqQuestion'>
+    					                        	\${faq.faqQuestion}
+    					                        </div>
+    					                        <button type='button' id='\${faq.faqQuestion}' class='faqBtn openBtn text-white border-0 rounded' 
+    					                            data-bs-toggle='collapse' data-bs-target='#\${faq.faqQuestion}답변' aria-expanded='false'>
+    					                            <span>열기</span>	
+    					                            <i class='bi bi-caret-down-fill'></i>
+    					                        </button>
+    					                    </div>
+    					                    <div id='\${faq.faqQuestion}답변' class='collapse'>
+    					                        <div class='faqAnswer card-body bg-white'>
+    					                        	\${faq.faqAnswer}
+    					                        </div>
+    					                    </div>
+    					                </div>
+    					            </div>
+    					        </div>
+            					<hr class='row mt-3'>`
+    		                )
+    		            })       
+    		            $('#faqContainer').append(faqArr.join(''))	
+ 						$('hr').eq($('hr').length - 1).remove()
+    		            $.each(faqs, (i, faq) => {
+    		            	btnFunction($(`#\${faq.faqQuestion}`))
+    		            })
+    		        } else {
+    		        	$('#faqContainer').html(`
+    		        			<div class='row d-block my-5'>
+    		                     <div class='col text-center pt-4'>
+    		                         <h3 class='my-3'>
+    		                             자주묻는 질문이 없습니다.
+    		                         </h3>
+    		                     </div>
+    		                     <div class='col text-center mt-5'>
+    		                         <button id='mypageBtn' type='button' class='px-5 py-2 border-0 rounded text-center text-white btn-darkBlue'
+    		                            onclick="location.href='../user/mypage'">
+    		                            마이 페이지로 가기
+    		                         </button>
+    		                     </div>
+    		               </div>
+    		        	`
+    		        	)
+    		        }
+        		}
+            })
+        }     
+            $(listFaqs)         
+        })
+                 
+    </script>
+=======
+>>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
 <style>
     .form-control {
         height: 5.2rem;

@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 public class TourImageDto {
-	private int tourImageId;
+	private int tourImageNum;
 	private MultipartFile tourImage;
-	private int tourNum;
 }

@@ -11,11 +11,7 @@
 <script src='../../res/adminNavigation.js'></script>
 <title>ADMIN.NOTICE.01 공지 목록</title>
 <script>
-$(() => {
-	$('#addNoticeBtn').click(() => {
-		$('#addNoticeBtn').attr('href', '../notice/adminAddView')
-	})
-	
+$(() => {	
 	$('#fixNoticeBtn').click(() => {
 		if($('#noticeNum:checked').val()){
 			$('#fixNoticeBtn').attr('href', '../notice/adminFixView?noticeNum=' + $('#noticeNum:checked').val())
@@ -85,7 +81,7 @@ $(() => {
                 </div>
                 <div class='col'>
                     <div class='d-flex justify-content-end'>
-                        <a type='button' class='btn btn-darkBlue' id='addNoticeBtn'>
+                        <a type='button' class='btn btn-darkBlue' id='addNoticeBtn' href='add'>
                             <i class='bi bi-plus-circle'></i>&nbsp;새글
                         </a>
                     </div>
@@ -126,10 +122,6 @@ $(() => {
                         </a>
                     </li>
                     <li class='page-item'><a class='page-link' href='#'>1</a></li>
-                    <li class='page-item'><a class='page-link' href='#'>2</a></li>
-                    <li class='page-item'><a class='page-link' href='#'>3</a></li>
-                    <li class='page-item'><a class='page-link' href='#'>4</a></li>
-                    <li class='page-item'><a class='page-link' href='#'>5</a></li>
                     <li class='page-item'>
                         <a class='page-link' href='#' aria-label='Next'>
                             <span aria-hidden='true'>&rsaquo;</span>

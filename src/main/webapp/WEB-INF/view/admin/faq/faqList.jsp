@@ -16,7 +16,7 @@ $.ajax({
 	dataType: 'json',
 	success: faqs => {
 		let faqQuestion
-	
+		if(faqs.length){	
 		const faqArr = []
 		$.each(faqs, (i, faq)=>{
 			faqQuestion = `\${faq.faqQuestion}`
@@ -34,10 +34,21 @@ $.ajax({
 		$.each(faqs, (i, faq) => {
 			faqQuestion = `\${faq.faqQuestion}`.replace(/ /gi, "")
 			$(`#\${faqQuestion}`).click(() => {
-				console.log("success")
 				location.href=`change?faqQuestion=\${faq.faqQuestion}`
 				})
 		})
+		} else{
+			$('#faqContainer').html(`
+        			<div class='row d-block my-5'>
+                    <div class='col text-center pt-4'>
+                        <h3 class='my-3'>
+                            FAQ가 없습니다.
+                        </h3>
+                    </div>
+              </div>
+       	`
+       	)
+		}
 		$('#faqAddBtn').click(() => location.href='add')
 	}	
 })

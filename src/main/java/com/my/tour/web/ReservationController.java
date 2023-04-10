@@ -1,6 +1,7 @@
 package com.my.tour.web;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,10 @@ public class ReservationController {
 	}
 	
 	@PostMapping("add")
-	public void addReservation(int chargePrice, HttpSession session, int tourNum) {
-		reservationService.addReservation(chargePrice, (String)session.getAttribute("userId"), tourNum);
+	public void addReservation(int chargePrice, LocalDate resvDate, String whetherToCancel, HttpSession session, int tourNum) {
+		resvDate = LocalDate.now();
+		whetherToCancel = "N";
+		reservationService.addReservation(chargePrice, resvDate, whetherToCancel, (String)session.getAttribute("userId"), tourNum);
 	}
 	
 	@GetMapping("del")

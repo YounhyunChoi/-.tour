@@ -33,8 +33,8 @@ $(() => {
 			url: 'add',
 			method: 'post',
 			data: {
-				tourNum: ${tour.tourNum},
-				chargePrice: $('.chargePrice').eq(0).text()
+				chargePrice: $('.chargePrice').eq(0).text(),
+				tourNum: ${tour.tourNum}
 			}
 	   })
       	showOkModal('여행코스가 예약되었습니다.', 'list')

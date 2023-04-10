@@ -13,15 +13,49 @@
 <title></title>
 <script>
 $.ajax({
-	url: 'adminGet',
+	url: 'tours',
 	dataType: 'json',
-	data: {
-		userId: `${param.userId}`
-	},
-	success: reservations => {
-		
+	success: tours => {
+		$.ajax({
+			url: 'adminGet',
+			dataType: 'json',
+			data: {
+				userId: `${param.userId}`
+			},
+			success: reservations => {
+				const resvArr = []
+				let tourName
+				if(reservations.length){
+					$.each(reservations, (i, reservation) => {
+						$.each(tours, (i, tour) => {
+							if(`\${tour.tourNum}` == `\${reservation.tourNum}`){
+								tourName = `\${tour.tourName}`
+							}
+						})
+						resvArr.push(
+						`
+						 <tr>
+		                    <td>\${reservation.resvNum}</td>
+		                    <td>\${reservation.resvDate}</td>
+		                    <td>` + tourName + `</td>
+		                    <td>\${reservation.chargePrice}</td>
+		                    <td>
+		                        <a id='cancel' class='btn btn-lightRed' 
+		                        data-bs-toggle='modal' data-bs-target='#modal'>취소</a>
+		                    </td>
+		                </tr>
+						`
+						)	
+					})
+					$('tbody').append(resvArr.reverse().join(''))
+				}else{
+					$('table').remove()
+					console.log('예약내역이 없습니다.')
+				}
+			}
+			
+		})
 	}
-	
 })
 
 $(() => {
@@ -67,16 +101,6 @@ $(() => {
                 </tr>
             </thead>
             <tbody class='align-middle'>
-                <tr>
-                    <td>0005</td>
-                    <td>2023-03-21</td>
-                    <td>[당일여행] 도심 속 역사와 예술 이야기</td>
-                    <td>99,999원</td>
-                    <td>
-                        <a id='cancel' class='btn btn-lightRed' 
-                        data-bs-toggle='modal' data-bs-target='#modal'>취소</a>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
@@ -109,21 +133,6 @@ $(() => {
             </li>
         </ul>
     </nav>
-</div>
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'>
-            </div>
-            <div id='modalBtn'>
-                <button type='button' class='btn btn-lightGray' data-bs-dismiss='modal'>아니오</button>
-                <button type='button' class='btn btn-darkBlue' id='okBtn'>예</button>
-            </div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
-            </div>
-        </div>
-    </div>
 </div>
 <footer>
 </footer>

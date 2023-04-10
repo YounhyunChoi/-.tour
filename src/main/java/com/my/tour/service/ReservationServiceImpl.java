@@ -1,5 +1,6 @@
 package com.my.tour.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 	
 	@Override
-	public void addReservation(int chargePrice, String userId, int tourNum) {
-		reservationDao.insertReservation(chargePrice, userId, tourNum);
+	public void addReservation(int chargePrice, LocalDate resvDate, String whetherToCancel, String userId, int tourNum) {
+		reservationDao.insertReservation(chargePrice, resvDate, whetherToCancel, userId, tourNum);
 	}
 	
 	@Override

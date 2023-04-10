@@ -12,9 +12,23 @@
 <script src='../../res/modal.js'></script>
 <title>ADMIN.NOTICE.03 공지 수정</title>
 <script>
- $(() => {
+$(() => {
+	$.ajax({
+		url: 'getNotice',
+		data: {
+			noticeNum: ${param.noticeNum}
+		},
+		dataType: 'json',
+		success: notices => {
+			const noticeArr = []
+			let notice = notices.at(0)
+				noticeArr.push(
+			        ``)
 
+		}
+	})
 })
+
 </script>
 <style>
     #noticeImg {
@@ -52,58 +66,58 @@
 </header>
 <div class='row' id='mainBody'>
    <div class='col'>
-        <form class='mb-4'>
-            <div class='row'>
-                <div class='col pt-2 d-flex gap-3 mb-4'>
-                    <label for='noticeTitle'>
-                        <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
-                    </label>
-                    <div class='col'>
-                        <input type='text' class='form-control' id='noticeTitle' value='${notice.noticeTitle}'/>
-                    </div>
-                </div>
-            </div>
-			<div class='row ms-4'>
-                <div class='col'>
-                    <div class='row py-5 me-0' id='noticeImg'>
-                        <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
-                            <div class='carousel-inner' id='noticeImages'>
-									<!-- 공지사항 이미지 -->
-                            </div>
-                            <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
-                                <i class="bi bi-chevron-left tourCarouselBtn"></i>
-                                <div class="visually-hidden">Previous</div>
-                            </a>
-                            <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
-                                <i class="bi bi-chevron-right tourCarouselBtn"></i>
-                                <div class="visually-hidden">Next</div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <input class='mb-4 ms-3' type='file' id='noticeImageUp'>
-            </div>
-            <div class='row'>
-                <div class='col pt-2 d-flex gap-3 mb-4'>
-                    <label for='noticeContent'>
-                        <h5 class='align-items-center text-nowrap pt-1'>내용</h5>
-                    </label>
-                    <div class='col'>
-                        <textarea class='form-control' rows='10' id='noticeContent'>${notice.noticeContent}</textarea>
-                    </div>
-                </div>
-            </div>
-            <div class='d-flex gap-2 justify-content-end'>
-                <button type='button' class='btn btn-olive'id='fixNoticeBtn'>
-                    <i class='bi bi-check-circle'></i>
-                    &nbsp;수정
-                </button>
-                <button type='button' class='btn btn-lightRed'id='delNoticeBtn'>
-                    <i class='bi bi-x-circle'></i>
-                    &nbsp;삭제
-                </button>
-            </div>
-        </form>
+  		<div class='row'>
+           <div class='col pt-2 d-flex gap-3 mb-4'>
+               <label for='noticeTitle'>
+                   <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
+               </label>
+               <div class='col shadow-sm'>
+                   <input type='text' class='form-control' id='noticeTitle' maxlength='30' value='${notice.noticeTitle}'/>
+               </div>
+           </div>
+       </div>
+       <div class='row ms-4'>
+           <div class='col'>
+               <div class='row py-5 me-0' id='noticeImg'>
+                   <div class='carousel slide' id='noticeCarousel' data-ride='carousel'>
+                       <div class='carousel-inner' id='noticeImages'>
+							<!-- 공지사항 이미지 -->	
+                       </div>
+                       <a href='#noticeCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+                           <i class="bi bi-chevron-left noticeCarouselBtn"></i>
+                           <div class="visually-hidden">Previous</div>
+                       </a>
+                       <a href='#noticeCarousel' class='carousel-control-next' data-bs-slide='next'>
+                           <i class="bi bi-chevron-right noticeCarouselBtn"></i>
+                           <div class="visually-hidden">Next</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+   		<form id='noticeImageUp'>
+           	<input class='ms-3' type='file' name='noticeImage' multiple/>
+       </form>	
+       </div>
+       <div class='row'>
+           <div class='col pt-2 d-flex gap-3 mb-4'>
+               <label for='noticeContent'>
+                   <h5 class='align-items-center text-nowrap pt-1'>내용</h5>
+               </label>
+               <div class='col'>
+                   <textarea class='form-control shadow-sm' rows='10' id='noticeContent' maxlength='300'>${notice.notcieContent}</textarea>
+               </div>
+           </div>
+       </div>
+       <div class='d-flex gap-2 justify-content-end'>
+           <button type='button' class='btn btn-olive'id='fixNoticeBtn'>
+               <i class='bi bi-check-circle'></i>
+               &nbsp;수정
+           </button>
+           <button type='button' class='btn btn-lightRed'id='delNoticeBtn'>
+               <i class='bi bi-x-circle'></i>
+               &nbsp;삭제
+           </button>
+       </div>
    </div>
 </div>
 <footer>

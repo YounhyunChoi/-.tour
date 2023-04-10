@@ -1,5 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
-<html>
+<html id='twbsPagination'>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'/>
@@ -9,32 +9,56 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
+<script src='../../res/twbsPagination.js'></script>
 <script>
 $(() => {
 	$.ajax({
 		url: 'get',
 		success: tours => {
-			const tourArr = []
-			let tourText = ""
+			//하나의 페이지에 보여줄 상품 수
+			let pageSize = 6;
+			//상품의 총 개수
+			let totalCount = tours.length;
+			//전체 페이지 수
+			let totalPages = Math.ceil(totalCount / pageSize);
 			
-			if(tours.length) {
-				$.each(tours, (i, tour) => {
-					tourText += 
-						`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-			                <div class='py-5 border border-3 text-nowrap'>여행코스이미지</div>
-			                <div class='text-truncate'>\${tour.tourName}</div>
-			            </div>`
+			//검색
+			/* --- */
+			
+			//페이지
+				$('#indexNum').twbsPagination({
+					totalPages: totalPages,
+					first: '<span aria-hidden="true">&laquo;</span>',
+					prev: '<span aria-hidden="true">&lsaquo;</span>',
+					next: '<span aria-hidden="true">&rsaquo;</span>',
+			        last: '<span aria-hidden="true">&raquo;</span>',
+					onPageClick: function (e, page) {
+						$('#tourContent').empty()
+						const tourArr = []
+						let tourText = ""
+						
+						if(totalCount) {
+							$.each(tours, (i, tour) => {
+								if(Math.floor(i / pageSize) == page - 1) {
+									tourText += 
+										`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
+							                <div class='py-5 border border-3 text-nowrap'>여행코스이미지</div>
+							                <div class='text-truncate'>\${tour.tourName}</div>
+							            </div>`
+								}
+							})
+						}
+						
+						tourArr.unshift(tourText)
+						$('#tourContent').append(tourArr.join(''))
+						
+						$.each(tours, (i, tour) => {
+							$(`#tourItem\${tour.tourNum}`).click(() => {
+								location.href = `adminFixDelView?tourNum=\${tour.tourNum}`
+							})
+						})
+					}
 				})
-				
-				tourArr.unshift(tourText)
-				$('#tourContent').append(tourArr.join(''))
-				
-				$.each(tours, (i, tour) => {
-					$(`#tourItem\${tour.tourNum}`).click(() => {
-						location.href = `adminFixDelView?tourNum=\${tour.tourNum}`
-					})
-				})
-			}
 		}
 	})
 	
@@ -88,10 +112,10 @@ $(() => {
         <form class='mb-4'>
             <div class='row'>
                 <div class='col-10 pe-0 pt-2'>
-                    <input type='text' class='form-control'/>
+                    <input type='text' class='form-control' id='tourSearch'/>
                 </div>
                 <div class='col-2 p-0'>
-                    <a href='#' type='button' class='btn'><i class='icon bi bi-search'></i></a>
+                    <a href='#' type='button' class='btn' id='searchBtn'><i class='icon bi bi-search'></i></a>
                 </div>
             </div>
         </form>
@@ -101,33 +125,7 @@ $(() => {
         <div class='row'>
             <div class='col-10'>
                 <nav aria-label='Page navigation example'>
-                    <ul class='pagination d-flex justify-content-center mt-5' id='indexNum'>
-                        <li class='page-item'>
-                            <a class='page-link' href='#' aria-label='Previous'>
-                                <span aria-hidden='true'>&laquo;</span>
-                            </a>
-                        </li>
-                        <li class='page-item'>
-                            <a class='page-link' href='#' aria-label='Previous'>
-                                <span aria-hidden='true'>&lsaquo;</span>
-                            </a>
-                        </li>
-                        <li class='page-item'><a class='page-link' href='#'>1</a></li>
-                        <li class='page-item'><a class='page-link' href='#'>2</a></li>
-                        <li class='page-item'><a class='page-link' href='#'>3</a></li>
-                        <li class='page-item'><a class='page-link' href='#'>4</a></li>
-                        <li class='page-item'><a class='page-link' href='#'>5</a></li>
-                        <li class='page-item'>
-                            <a class='page-link' href='#' aria-label='Next'>
-                                <span aria-hidden='true'>&rsaquo;</span>
-                            </a>
-                        </li>
-                        <li class='page-item'>
-                            <a class='page-link' href='#' aria-label='Next'>
-                                <span aria-hidden='true'>&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <ul class='pagination d-flex justify-content-center mt-5' id='indexNum'></ul>
                 </nav>
             </div>
             <div class='col-2 align-self-center'>

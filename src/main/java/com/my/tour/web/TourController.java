@@ -1,8 +1,11 @@
 package com.my.tour.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,11 +14,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.tour.AdminAccess;
 import com.my.tour.GetAccess;
 import com.my.tour.domain.Tour;
+import com.my.tour.domain.TourImage;
+import com.my.tour.domain.TourImageDto;
 import com.my.tour.service.TourService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,6 +31,7 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("tour")
 public class TourController {
 	@Autowired private TourService tourService;
+	@Value("${attachPath}") private String attachPath;
 	
 	//user
 	@GetMapping("get")
@@ -59,9 +66,9 @@ public class TourController {
 		tourService.fixTour(tour);
 	}
 	
-	@DeleteMapping("adminDel/{tourId}")
-	public void delTour(@PathVariable int tourId) {
-		tourService.delTour(tourId);
+	@DeleteMapping("adminDel/{tourNum}")
+	public void delTour(@PathVariable int tourNum) {
+		tourService.delTour(tourNum);
 	}
 	
 	@GetMapping("adminList")
@@ -79,10 +86,31 @@ public class TourController {
 		return mv;
 	}
 	
-	@GetMapping("adminFixView")
+	@GetMapping("adminFixDelView")
 	@AdminAccess
-	public ModelAndView adminFixTour(ModelAndView mv, HttpSession session) {
-		mv.setViewName("admin/tour/fixTour");
+	public ModelAndView adminFixDelTour(ModelAndView mv, HttpSession session) {
+		mv.setViewName("admin/tour/fixDelTour");
+		mv.addObject("adminId", session.getAttribute("userId"));
 		return mv;
+	}
+	
+	//images
+	@GetMapping("getTourImages")
+	public List<TourImage> getTourImages() {
+		return tourService.getTourImages();
+	}
+	
+	@PostMapping("addTourImage")
+	public void addTourImage(TourImageDto tourImageDto, Tour tour) {
+		String filename = tourImageDto.getTourImage().getOriginalFilename();
+		saveFile(attachPath + "/" + filename, tourImageDto.getTourImage());
+		
+		tourService.addTourImage(filename, tour.getTourNum());
+	}
+	
+	private void saveFile(String filename, MultipartFile file) {
+		try {
+			file.transferTo(new File(filename));
+		} catch(IOException e) {}
 	}
 }

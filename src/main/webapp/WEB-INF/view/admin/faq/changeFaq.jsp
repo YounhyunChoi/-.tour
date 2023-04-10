@@ -25,7 +25,6 @@ $.ajax({
 	}	
 })
 $(() => {
-	console.log(`${param.faqQuestion}`)
 	$('#faqFixBtn').click(() => {
 		showConfirmModal('FAQ를 수정하시겠습니까?')
 		
@@ -46,17 +45,17 @@ $(() => {
 	})
 	
 	 $('#faqDelBtn').click(() => {
-	        showConfirmModal('FAQ를 삭제하시겠습니까?', 'FAQ가 삭제되었습니다.', 'adminFaqList')
-	        $('#okBtn').click(() => {
-	        	$.ajax({
-	        		url: 'del',
-	        		method: 'delete',
-	        		data: {
-	        			faqQuestion: `${param.faqQuestion}`
-	        		}
-	        	})
-	        })
+        showConfirmModal('FAQ를 삭제하시겠습니까?', 'FAQ가 삭제되었습니다.', 'adminFaqList')
+        $('#okBtn').click(() => {
+        	$.ajax({
+        		url: 'del',
+        		method: 'delete',
+        		data: {
+        			faqQuestion: `${param.faqQuestion}`
+        		}
+        	})
         })
+   })
 })
 </script>
 <style>

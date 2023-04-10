@@ -30,7 +30,7 @@ $.ajax({
 			`
 			)
 		})
-		$('#faqContainer').append(faqArr.reverse().join(''))
+		$('#faqContainer').append(faqArr.join(''))
 		$.each(faqs, (i, faq) => {
 			faqQuestion = `\${faq.faqQuestion}`.replace(/ /gi, "")
 			$(`#\${faqQuestion}`).click(() => {

@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.tour.AdminAccess;
 import com.my.tour.domain.Comment;
 import com.my.tour.service.CommentService;
 
@@ -51,6 +53,25 @@ public class CommentController {
 	
 	@DeleteMapping("del")
 	public int delComent(@PathVariable int comtNum) {
+		return commentService.delComment(comtNum);
+	}
+	
+	//admin
+	@GetMapping("adminList")
+	@AdminAccess
+	public ModelAndView adminCommentList(ModelAndView mv, HttpSession session) {
+		mv.setViewName("admin/comment/commentList");
+		return mv;
+	}
+	
+	@GetMapping("adminDel")
+	public ModelAndView delComment(ModelAndView mv) {
+		mv.setViewName("admin/comment/delComment");
+		return mv;
+	}
+	
+	@DeleteMapping("adminDel")
+	public int admindelComent(@PathVariable int comtNum) {
 		return commentService.delComment(comtNum);
 	}
 }

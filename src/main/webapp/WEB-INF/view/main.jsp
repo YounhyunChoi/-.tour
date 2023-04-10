@@ -25,22 +25,18 @@ $(() => {
     #noticeBar{
         color:white
     }
-
     #navBackBtn {
         cursor: pointer;
     }
-
     #tourImg, #eventImg {
         border: .1rem solid;
         margin: 1rem;
         box-shadow: .1rem .1rem .1rem .1rem lightgray;
         text-align: center;
     }
-
     #tourImg{
         padding: 10rem 0 10rem 0;
     }
-
     .tourCarouselBtn {
         color: black;
     }

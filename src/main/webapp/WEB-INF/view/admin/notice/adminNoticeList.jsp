@@ -81,7 +81,7 @@ $(() => {
                 </div>
                 <div class='col'>
                     <div class='d-flex justify-content-end'>
-                        <a type='button' class='btn btn-darkBlue' id='addNoticeBtn' href='add'>
+                        <a type='button' class='btn btn-darkBlue' id='addNoticeBtn' href='addNotice'>
                             <i class='bi bi-plus-circle'></i>&nbsp;새글
                         </a>
                     </div>

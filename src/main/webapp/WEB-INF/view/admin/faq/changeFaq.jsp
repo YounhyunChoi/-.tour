@@ -29,7 +29,8 @@ $(() => {
 		showConfirmModal('FAQ를 수정하시겠습니까?')
 		
 		$('#okBtn').click(() => {
-		    if($('#questionInput').val() && $('#answerInput').val()){
+			let questionRegExp = /[가-힣ㄱ-ㅎa-zA-Z0-9]{5,30}/
+		    if(questionRegExp.test($('#questionInput').val()) && $('#answerInput').val()){
 		    	$.ajax({
 		    		url: 'change',
 		    		method:'post',
@@ -40,7 +41,13 @@ $(() => {
 		    		}
 		    	})
 		    	showOkModal('FAQ가 수정되었습니다.','adminFaqList')
-		    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
+		    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
+		    	showOkModal('제목과 내용을 입력해주세요.')
+		    } else if(!$('#answerInput').val()){
+		    	showOkModal('내용을 입력해주세요.')
+		    } else if(!questionRegExp.test($('#questionInput').val())){
+		    	showOkModal('제목을 5~30자의 영문, 한글, 숫자로 구성된 형태로 입력해주세요.')
+		    }
 		})
 	})
 	
@@ -74,7 +81,9 @@ $(() => {
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
+                    <div class='float-start m-4 ms-4'>
+                        <a class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>로고이미지</a>
+                    </div>
                     <h1 class='text-center pt-3 text-white'><b>FAQ수정</b></h1>
                 </div>
             </div>
@@ -84,7 +93,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../main.tml'>메인</a> > <a href='01.html'>FAQ</a> > <a href='03.html'>FAQ수정</a>
+                    <a href='../admin/main'>메인</a> > <a href='../faq/adminFaqList'>FAQ</a> > <a href=''>FAQ수정</a>
                 </h6>
             </div>
         </div>

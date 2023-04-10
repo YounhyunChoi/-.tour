@@ -71,7 +71,7 @@ $.ajax({
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
                     <div class='float-start m-4 ms-4'>
-                        <a class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a>
+                        <a class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>로고이미지</a>
                     </div>
                     <h1 class='text-center pt-3 text-white'><b>FAQ</b></h1>
                 </div>
@@ -82,7 +82,7 @@ $.ajax({
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../main.html'>메인</a> > <a href='01.html'>FAQ</a>
+                    <a href='../admin/main'>메인</a> > <a href='../faq/adminFaqList'>FAQ</a>
                 </h6>
             </div>
         </div>

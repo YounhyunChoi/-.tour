@@ -15,17 +15,16 @@ $(() => {
 	$.ajax({
 		url: 'get',
 		success: tours => {
+			//검색
+			/* --- */
+			
+			//페이지네이션
 			//하나의 페이지에 보여줄 상품 수
 			let pageSize = 6;
 			//상품의 총 개수
 			let totalCount = tours.length;
 			//전체 페이지 수
 			let totalPages = Math.ceil(totalCount / pageSize);
-			
-			//검색
-			/* --- */
-			
-			//페이지
 				$('#indexNum').twbsPagination({
 					totalPages: totalPages,
 					first: '<span aria-hidden="true">&laquo;</span>',

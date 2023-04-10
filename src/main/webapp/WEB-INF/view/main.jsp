@@ -50,7 +50,7 @@ $(() => {
 <header></header>
 <div class='row m-0 bg-danger'>
     <div class='col pt-1'>
-        <p><a href='./notice/02.jsp' id='noticeBar'><h4 class='text-center'>공지사항</h4></a></p>
+        <p><a href='notice' id='noticeBar'><h4 class='text-center'>공지사항</h4></a></p>
     </div>
 </div>
 <div class='row m-0'>
@@ -85,13 +85,13 @@ $(() => {
         <div class='row mt-4' id='tourImg'>
             <div class='carousel slide' id='tourCarousel2' data-ride='carousel'>
                 <div class='carousel-inner'>
-                    <div class='carousel-item active' onclick="location.href='./tour/02.jsp'">
+                    <div class='carousel-item active' onclick="location.href='tour'">
                         <div class='items py-5 fs-4'>여행코스이미지</div>
                     </div>
-                    <div class='carousel-item' onclick="location.href='./tour/02.jsp'">
+                    <div class='carousel-item' onclick="location.href='tour'">
                         <div class='items py-5 fs-4' >여행코스이미지</div>
                     </div>
-                    <div class='carousel-item' onclick="location.href='./tour/02.jsp'">
+                    <div class='carousel-item' onclick="location.href='tour'">
                         <div class='items py-5 fs-4'>여행코스이미지</div>
                     </div>
                 </div>

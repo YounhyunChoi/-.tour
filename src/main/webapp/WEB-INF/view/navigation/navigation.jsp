@@ -1,12 +1,15 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%
 	String userId = (String)session.getAttribute("userId");
 %>
 <div class='container' id='header'>
     <div class='row' id='navbarHeader'>
         <nav class='navbar fixed-top' id='navbarHeader'>
-            <div class='container-fluid'>
-            	<a class='navbar-brand mb-2 border border-dark' href='/'>로고이미지</a>            	
+            <div class='container-fluid mb-2' style='height: 45px;'>
+            	<a class='navbar-brand' href='/'>
+	            	<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+            	</a>            	
 	            <div>
 <%
 				if(userId == null) {

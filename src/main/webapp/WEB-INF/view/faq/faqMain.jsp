@@ -7,30 +7,29 @@
 <link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css' rel='stylesheet' />
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
-<link href='../res/style.css' rel='stylesheet' />
+<link href='../res/style.css?ver=1' rel='stylesheet' />
 <script src='../res/navigation.js'></script>
 <title></title>
 <script>
-$(() => {
-    let btnFunction = function (a) {
-        a.click(() => {
-            if (a.hasClass('openBtn') && a.attr('aria-expanded') == 'true') {
-            	a.removeClass('openBtn')
-                a.addClass('closeBtn')
-                a.children().remove()
-                a.html("<span>닫기</span><i class='bi bi-caret-up-fill'></i>")
-               		                  
-            } else if (a.hasClass('closeBtn') && a.attr('aria-expanded') == 'false') {
-            	a.removeClass('closeBtn')
-                a.addClass('openBtn')
-                a.children().remove()
-                a.html("<span>열기</span><i class='bi bi-caret-down-fill'></i>")
-            }
-        })
-    }
+let btnFunction = function (a) {
+    a.click(() => {
+        if (a.hasClass('openBtn') && a.attr('aria-expanded') == 'true') {
+        	a.removeClass('openBtn')
+            a.addClass('closeBtn')
+            a.children().remove()
+            a.html("<span>닫기</span><i class='bi bi-caret-up-fill'></i>")
+           		                  
+        } else if (a.hasClass('closeBtn') && a.attr('aria-expanded') == 'false') {
+        	a.removeClass('closeBtn')
+            a.addClass('openBtn')
+            a.children().remove()
+            a.html("<span>열기</span><i class='bi bi-caret-down-fill'></i>")
+        }
+    })
+}
     
-    function listFaqs() {
-    $.ajax({
+$(() => {
+	$.ajax({
 		url: 'faq/get',
 		dataType: 'json',
 		success: faqs => {
@@ -63,7 +62,7 @@ $(() => {
 	                )
 	            })       
 	            $('#faqContainer').append(faqArr.join(''))	
-					$('hr').eq($('hr').length - 1).remove()
+				$('hr').eq($('hr').length - 1).remove()
 	            $.each(faqs, (i, faq) => {
 	            	btnFunction($(`#\${faq.faqQuestion}`))
 	            })
@@ -76,19 +75,15 @@ $(() => {
 	                         </h3>
 	                     </div>
 	                     <div class='col text-center mt-5'>
-	                         <button id='mypageBtn' type='button' class='px-5 py-2 border-0 rounded text-center text-white btn-darkBlue'
-	                            onclick="location.href='../user/mypage'">
-	                            마이 페이지로 가기
-	                         </button>
+	                         <a id='mypageBtn' type='button' class='px-5 py-2 border-0 rounded text-center text-white btn-darkBlue'
+	                            href='/'>
+	                            메인으로 가기
+	                         </a>
 	                     </div>
-	               </div>
-	        	`
-	        	)
+	               </div>`)
 	        }
 		}
     })
-}     
-    $(listFaqs)         
 })
 </script>
 <style>
@@ -116,7 +111,7 @@ $(() => {
     <header>
     </header>
     <div class='navigation fixed-top'>
-        <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill' onclick="location.href='../main'"></i></div>
+        <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill' onclick="location.href='../main'"></i></div>
         <div class='menuName'>
             <h2 class='text-center pt-3'><b>자주묻는질문</b></h2>
         </div>

@@ -97,13 +97,13 @@ public class NoticeController {
 	//어드민
 	@GetMapping("adminList")
 	@AdminAccess
-	public ModelAndView adminNoticeList(ModelAndView mv, HttpSession session) {
-		mv.setViewName("admin/notice/getNotice");
+	public ModelAndView adminList(ModelAndView mv, HttpSession session) {
+		mv.setViewName("admin/notice/adminNoticeList");
 		return mv;
 	}
 	
-	@GetMapping("adminAddView")
-	public ModelAndView adminAddNotice(ModelAndView mv, HttpSession session) {
+	@GetMapping("add")
+	public ModelAndView add(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/notice/addNotice");
 		
 		if(noticeService.getAllNotices().size() == 0 ||
@@ -116,8 +116,8 @@ public class NoticeController {
 		return mv;
 	}
 
-	@PostMapping("adminAdd")
-	public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
+	@PostMapping("add")
+	public void add(String noticeTitle, String noticeContent, HttpSession session) {
 		noticeService.delNotice(noticeService.getAllNotices().get(0).getNoticeNum());
 		
 		noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));	

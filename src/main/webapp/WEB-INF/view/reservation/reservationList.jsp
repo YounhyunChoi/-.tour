@@ -45,7 +45,7 @@
 										            <div class='row align-items-center'>	
 										                <div class='col-8 fs-6 tourDate'>여행기간:\${tour.tourSDate} ~ \${tour.tourEDate}</div>
 										                <div class='col-4 text-end'>
-										                    <button type='button' class='border-0 bg-white'>
+										                    <button type='button' id=tourViewBtn\${tour.tourNum} class='border-0 bg-white'>
 										                        <span class='fs-5'>상세보기</span>
 										                        <i class='bi bi-chevron-right viewDetailBtn'></i>
 										                    </button>
@@ -85,10 +85,28 @@
 				                        )
 									}
 								$(`#reviewAddBtn\${tour.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${tour.tourNum}`})
+								$(`#tourViewBtn\${tour.tourNum}`).click(() => {location.href=`../tour/view?tourNum=\${tour.tourNum}`})
 							}) 
 						}	
 					})
-				}				
+				}else {
+					$('#reservationContainer').html(`
+		        			<div class='row d-block my-5'>
+		                     <div class='col text-center pt-4'>
+		                         <h3 class='my-3'>
+		                             예약 내역이 없습니다.
+		                         </h3>
+		                     </div>
+		                     <div class='col text-center mt-5'>
+		                         <button id='mypageBtn' type='button' class='px-5 py-2 border-0 rounded text-center text-white btn-darkBlue'
+		                            onclick="location.href='../tour'">
+		                            여행코스 보러 가기
+		                         </button>
+		                     </div>
+		               </div>
+		        	`
+		        	)
+				}		
 			}
 		})
 	})

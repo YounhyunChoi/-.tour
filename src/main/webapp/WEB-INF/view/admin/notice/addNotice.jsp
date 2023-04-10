@@ -31,12 +31,12 @@ function showNoticeImage() {
 					if(i == 1) {
 						noticeImageArr.push(
 								`<div class='carousel-item active'>
-			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'/>
+			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'style="max-width:100%; height:100%;"/>
 			                    </div>`)
 					} else {
 						noticeImageArr.push(
 								`<div class='carousel-item'>
-			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'/>
+			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'style="max-width:100%; height:100%;"/>
 			                    </div>`)
 					}
 				})
@@ -45,7 +45,7 @@ function showNoticeImage() {
 			
 				noticeImageArr.push(
 						`<div class='carousel-item active'>
-	                        <img src='<c:url value="/attach/` + noticeImages[0] + `"/>'/>
+	                        <img src='<c:url value="/attach/` + noticeImages[0] + `"/>'style="max-width:100%; height:100%;"/>
 	                    </div>`)
 			}
 			$('#noticeImages').append(noticeImageArr.join(''))
@@ -72,36 +72,26 @@ $(() => {
 		
 		$('#okBtn').click(() => {
 		    if($('#noticeTitle').val() && $('#noticeContent').val()){
-		    	$.ajax({
-		    		url: 'delNoticeImages',
-		    		method: 'delete',
+    			$.ajax({
+		    		url: 'adminAdd',
+		    		method:'post',
 		    		data: {
-		    			noticeNum: ${noticeNum}
+		    			noticeTitle: $('#noticeTitle').val(),
+		    			noticeContent: $('#noticeContent').val()
 		    		},
 		    		success: () => {
+		    			let formData = new FormData($('#noticeImageUp')[0])	
 		    			$.ajax({
-				    		url: 'adminAdd',
-				    		method:'post',
-				    		data: {
-				    			noticeTitle: $('#noticeTitle').val(),
-				    			noticeContent: $('#noticeContent').val()
-				    		},
-				    		success: () => {
-				    			let formData = new FormData($('#noticeImageUp')[0])	
-				    			$.ajax({
-				    				url: 'addNoticeImages',
-				    				method: 'post',
-				    				contentType: false,
-				    				processData: false,
-				    				data: formData
-				    			})
-				    		}
-				    	})
+		    				url: 'addNoticeImages',
+		    				method: 'post',
+		    				contentType: false,
+		    				processData: false,
+		    				data: formData
+		    			})
 		    		}
 		    	})
 		    	
-			    	
-			    	showOkModal('공지사항이 등록되었습니다.','adminList')
+		    	showOkModal('공지사항이 등록되었습니다.','adminList')
 		    	
 		    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
 		})

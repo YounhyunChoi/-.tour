@@ -150,7 +150,7 @@ $(() => {
             <div class='row'>
                 <div class='col'>
                     <div class='border border-dark p-5 mt-3 text-center'>
-                        <img src='<c:url value="/attach/${logoName}"/>'/>
+                        <img/>
                     </div>
                 </div>
             </div>

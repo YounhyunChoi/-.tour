@@ -13,7 +13,7 @@ import com.my.tour.domain.NoticeImage;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 	@Autowired private NoticeDao noticeDao;
-	@Autowired private NoticeImageDao noticeImagesDao;
+	@Autowired private NoticeImageDao noticeImageDao;
 	
 	@Override
 	public List<Notice> getNotices(){
@@ -21,13 +21,23 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public List<Notice> getNotice(int noticeNum){
-		return noticeDao.selectNotice(noticeNum);
+	public List<Notice> getAllNotices(){
+		return noticeDao.selectAllNotices();
 	}
 	
 	@Override
-	public void addNotice(String noticeTitle, String noticeContent) {
-		noticeDao.insertNotice(noticeTitle, noticeContent);
+	public List<Notice> getNotice(int noticeNum){
+		return noticeDao.selectNotice(noticeNum);
+	}
+
+	@Override
+	public void addNoticeTemp(String adminId, int noticeSize) {
+		noticeDao.insertNoticeTemp(adminId, noticeSize);
+	}
+	
+	@Override
+	public void addNotice(String noticeTitle, String noticeContent, String adminId) {
+		noticeDao.insertNotice(noticeTitle, noticeContent, adminId);
 	}
 	
 	@Override
@@ -42,11 +52,16 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public List<NoticeImage> getNoticeImages(int noticeNum){
-		return noticeImagesDao.selectNoticeImages(noticeNum);
+		return noticeImageDao.selectNoticeImages(noticeNum);
 	}
 	
 	@Override
-	public int addNoticeImage(String noticeImageName) {
-		return noticeImagesDao.insertNoticeImage(noticeImageName);
+	public int addNoticeImage(String noticeImageName, int noticeNum) {
+		return noticeImageDao.insertNoticeImage(noticeImageName, noticeNum);
+	}
+
+	@Override
+	public int delNoticeImage(int noticeNum) {
+		return noticeImageDao.deleteNoticeImage(noticeNum);
 	}
 }

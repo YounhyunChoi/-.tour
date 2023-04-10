@@ -66,9 +66,9 @@ public class TourController {
 		tourService.fixTour(tour);
 	}
 	
-	@DeleteMapping("adminDel/{tourId}")
-	public void delTour(@PathVariable int tourId) {
-		tourService.delTour(tourId);
+	@DeleteMapping("adminDel/{tourNum}")
+	public void delTour(@PathVariable int tourNum) {
+		tourService.delTour(tourNum);
 	}
 	
 	@GetMapping("adminList")
@@ -86,10 +86,11 @@ public class TourController {
 		return mv;
 	}
 	
-	@GetMapping("adminFixView")
+	@GetMapping("adminFixDelView")
 	@AdminAccess
-	public ModelAndView adminFixTour(ModelAndView mv, HttpSession session) {
-		mv.setViewName("admin/tour/fixTour");
+	public ModelAndView adminFixDelTour(ModelAndView mv, HttpSession session) {
+		mv.setViewName("admin/tour/fixDelTour");
+		mv.addObject("adminId", session.getAttribute("userId"));
 		return mv;
 	}
 	
@@ -100,11 +101,11 @@ public class TourController {
 	}
 	
 	@PostMapping("addTourImage")
-	public void addTourImage(TourImageDto tourImageDto, TourImage tourImage) {
+	public void addTourImage(TourImageDto tourImageDto, Tour tour) {
 		String filename = tourImageDto.getTourImage().getOriginalFilename();
 		saveFile(attachPath + "/" + filename, tourImageDto.getTourImage());
 		
-		tourService.addTourImage(filename);
+		tourService.addTourImage(filename, tour.getTourNum());
 	}
 	
 	private void saveFile(String filename, MultipartFile file) {

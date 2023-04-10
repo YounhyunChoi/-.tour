@@ -10,15 +10,20 @@ import com.my.tour.domain.NoticeImage;
 
 @Repository
 public class NoticeImageImpl implements NoticeImageDao {
-	@Autowired NoticeImageMap noticeImagesMap;
+	@Autowired NoticeImageMap noticeImageMap;
 	
 	@Override
 	public List<NoticeImage> selectNoticeImages(int noticeNum){
-		return noticeImagesMap.selectNoticeImages(noticeNum);
+		return noticeImageMap.selectNoticeImages(noticeNum);
 	}
 	
 	@Override
-	public int insertNoticeImage(String noticeImageName) {
-		return noticeImagesMap.insertNoticeImage(noticeImageName);
+	public int insertNoticeImage(String noticeImageName, int noticeNum) {
+		return noticeImageMap.insertNoticeImage(noticeImageName, noticeNum);
+	}
+
+	@Override
+	public int deleteNoticeImage(int notiecNum) {
+		return noticeImageMap.deleteNoticeImage(notiecNum);
 	}
 }

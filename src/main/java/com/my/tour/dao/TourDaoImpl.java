@@ -35,7 +35,7 @@ public class TourDaoImpl implements TourDao {
 	}
 
 	@Override
-	public void deleteTour(int tourId) {
-		tourMap.deleteTour(tourId);
+	public void deleteTour(int tourNum) {
+		tourMap.deleteTour(tourNum);
 	}
 }

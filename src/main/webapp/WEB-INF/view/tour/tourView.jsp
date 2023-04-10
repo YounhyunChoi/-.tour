@@ -28,7 +28,6 @@ $(() => {
 		url: 'get',
 		success: tours => {
 			const tourArr = []
-
 			$.each(tours, (i, tour) => {
 				if(tour.tourNum == ${param.tourNum}) {
 					$('#tourTitle').append(`\${tour.tourName}`)
@@ -43,6 +42,29 @@ $(() => {
 					$('#tourContent').append(tourArr.join(''))
 				}
 			})
+			$('#reservationBtn').click(e => {	
+				if(`${userId}`){
+					$.ajax({
+						url: '../reservation/get',
+						success: reservations => {
+							let msg
+							$.each(reservations, (i, reservation) => {
+								if(${param.tourNum} == reservation.tourNum){
+									msg = '이미 예약한 코스입니다.'
+								}						
+							})
+							if(msg) {
+								showOkModal(msg);
+							} else {
+								location.href=`../reservation/add?tourNum=${param.tourNum}`
+							}
+						}
+					})
+				}else{
+					showOkModal('로그인페이지로 이동합니다.', '../user/login')
+				}
+			})
+			
 		}
 	})
 	
@@ -165,10 +187,7 @@ $(() => {
                 <i id='tourWishBtn' data-bs-toggle='modal' data-bs-target='#modal' class='bi bi-heart ms-3 btn tourWishIcon'></i>
             </div>
             <div class='row'>
-            	<form action='/reservation/add'>
-            	<input type ='hidden' name='tourNum'/>
-                <button type='submit' id='reservationBtn' class='mt-5 ms-5 w-auto btn btn-darkBlue'
-                onclick="location.href=`/reservation/add`">
+                <button type='button' id='reservationBtn' class='mt-5 ms-5 w-auto btn btn-darkBlue'>
                     예약하기
                 </button>
                 </form>

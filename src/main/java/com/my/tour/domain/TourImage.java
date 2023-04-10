@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class TourImage {
-	private int tourImageId;
+	private int tourImageNum;
 	private String tourImageName;
 	private int tourNum;
 }

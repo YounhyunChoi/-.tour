@@ -26,6 +26,7 @@ $(() => {
 	
 	$('#logoUp').change(() => {
 		let formData = new FormData($('#logoUp')[0])
+		console.log($('#logoUp')[0])
 		
 		$.ajax({
 			url: 'addLogo',
@@ -139,7 +140,7 @@ $(() => {
                         <li><a class='nav-link' href='../notice/adminList'>공지사항</a></li>
                         <li><a class='nav-link' href='./event/01.html'>이벤트</a></li>
                         <li class='mt-4 text-decoration-underline'>고객센터</li>
-                        <li><a class='nav-link' href='./faq/faqList'>FAQ</a></li>
+                        <li><a class='nav-link' href='../faq/adminFaqList'>FAQ</a></li>
                         <li><a class='nav-link' href='./report/01.html'>신고목록</a></li>
                     </ul>
                 </div>

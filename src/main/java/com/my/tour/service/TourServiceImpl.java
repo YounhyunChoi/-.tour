@@ -38,8 +38,8 @@ public class TourServiceImpl implements TourService {
 	}
 
 	@Override
-	public void delTour(int tourId) {
-		tourDao.deleteTour(tourId);
+	public void delTour(int tourNum) {
+		tourDao.deleteTour(tourNum);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class TourServiceImpl implements TourService {
 	}
 
 	@Override
-	public int addTourImage(String tourImageName) {
-		return tourImageDao.insertTourImage(tourImageName);
+	public int addTourImage(String tourImageName, int tourNum) {
+		return tourImageDao.insertTourImage(tourImageName, tourNum);
 	}
 }

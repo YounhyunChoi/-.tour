@@ -1,20 +1,14 @@
-<%@ page language='java' contentType='text/html; charset=utf-8'
-	pageEncoding='utf-8'%>
+<%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8'%>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link
-	href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css'
-	rel='stylesheet' />
-<link rel='stylesheet'
-	href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css' />
-<link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css'
-	rel='stylesheet' />
-<script
-	src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
+<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'/>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css'/>
+<link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css' rel='stylesheet'/>
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
-<link href='../res/style.css' rel='stylesheet' />
-<script src='../res/navigation.js'></script>
+<link href='../../res/adminStyle.css' rel='stylesheet'/>
+<script src='../../res/adminNavigation.js'></script>
 <title></title>
 <script>
         $(() => {
@@ -37,12 +31,6 @@
             }
             
             function listFaqs() {
-<<<<<<< HEAD
-            	
-            	
-            	
-=======
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
             $.ajax({
         		url: 'faq/get',
         		dataType: 'json',
@@ -52,7 +40,7 @@
     		            $.each(faqs, (i, faq) => {
     		                faqArr.push(
     		                    `<div class='row mt-3'>
-    					            <div class='col mt-3'>
+    					            <div class='col'>
     					                <div class='card shadow-sm'>
     					                    <div class='card-header d-flex justify-content-between'>
     					                        <div class='faqQuestion'>
@@ -90,8 +78,8 @@
     		                     </div>
     		                     <div class='col text-center mt-5'>
     		                         <button id='mypageBtn' type='button' class='px-5 py-2 border-0 rounded text-center text-white btn-darkBlue'
-    		                            onclick="location.href='../'">
-    		                            메인 페이지로 가기
+    		                            onclick="location.href='../user/mypage'">
+    		                            마이 페이지로 가기
     		                         </button>
     		                     </div>
     		               </div>
@@ -106,42 +94,72 @@
                  
     </script>
 <style>
-.card {
-	background-color: lightblue;
-}
-
-.openBtn {
-	background-color: #287094;
-}
-
-.closeBtn {
-	background-color: #d21412;
-}
-
-hr {
-	color: black;
-	opacity: 1;
-}
+    .form-control {
+        height: 5.2rem;
+        border-radius: 0 !important;
+    }
+    .title{
+        background-color: lightslategray
+    }
 </style>
-
 </head>
-
 <body>
-	<header> </header>
-	<div class='navigation fixed-top'>
-		<div class='float-start mt-3 ms-2'>
-			<i class='bi bi-caret-left-fill'
-				onclick="location.href='../main.html'"></i>
-		</div>
-		<div class='menuName'>
-			<h2 class='text-center pt-3'>
-				<b>자주묻는질문</b>
-			</h2>
-		</div>
-	</div>
-	
-	<div id='faqContainer' class='container mt-5'></div>
-	<footer> </footer>
+<header>
+    <div class='container-fluid'>
+        <div class='row'>
+            <div class='col'>
+                <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
+                    <div class='float-start m-4 ms-4'>
+                        <a class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a>
+                    </div>
+                    <h1 class='text-center pt-3 text-white'><b>FAQ</b></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+   <div class='row'>
+        <div class='col'>
+            <div class='navigation fixed-top pt-2' id='subHeader'>
+                <h6 class='text-white p-2'>
+                    <a href='../main.html'>메인</a> > <a href='01.html'>FAQ</a>
+                </h6>
+            </div>
+        </div>
+    </div>
+</header>
+<div class='row' id='mainBody'>
+    <div class='container mt-5 d-flex flex-column justify-content-center align-items-center text-center'>
+        <div class='col-1 title form-control d-flex justify-content-center'>
+            <b class='fs-1 text-white'>제목</b>
+        </div>
+        <div class='col-1 form-control d-flex justify-content-center '>
+            <span class='fs-2 align-self-center' 
+                   onclick="location.href='03.html'">
+                   예약을 취소하고 싶어요.
+            </span>
+        </div>
+        <div class='col-1 form-control d-flex justify-content-center'>
+            <span class='fs-2  align-self-center' 
+                  onclick="location.href='03.html'">
+                  리뷰는 어떻게 등록할 수 있나요?
+            </span>
+        </div>
+        <div class='col-1 form-control d-flex justify-content-center'>
+            <span class='fs-2  align-self-center' 
+                  onclick="location.href='03.html'">
+                  아이디와 비밀번호를 잊었어요.
+            </span>
+        </div>
+        <div class='col-1 form-control d-flex justify-content-end align-items-center border border-0 '>
+            <button type='button' class='btn btn-darkBlue' 
+                    onclick="location.href='02.html'">
+                <i class='bi bi-plus-circle'></i>
+                <span>등록</span>
+            </button>
+        </div>
+    </div>
+</div>
+<footer>
+</footer>
 </body>
-
 </html>

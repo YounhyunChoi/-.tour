@@ -6,7 +6,5 @@ import lombok.Data;
 
 @Data
 public class NoticeImageDto {
-	private int noticeImageId;
 	private MultipartFile noticeImage;
-	private int noticeNum;
 }

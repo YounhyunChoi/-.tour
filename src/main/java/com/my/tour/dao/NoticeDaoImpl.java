@@ -16,6 +16,11 @@ public class NoticeDaoImpl implements NoticeDao {
 	public List<Notice> selectNotices(){
 		return noticeMap.selectNotices();
 	}
+
+	@Override
+	public List<Notice> selectAllNotices(){
+		return noticeMap.selectAllNotices();
+	}
 	
 	@Override
 	public List<Notice> selectNotice(int noticeNum){
@@ -23,8 +28,13 @@ public class NoticeDaoImpl implements NoticeDao {
 	}
 	
 	@Override
-	public int insertNotice(String noticeTitle, String noticeContent) {
-		return noticeMap.insertNotice(noticeTitle, noticeContent);
+	public int insertNoticeTemp(String adminId, int noticeSize) {
+		return noticeMap.insertNoticeTemp(adminId, noticeSize);
+	}
+	
+	@Override
+	public int insertNotice(String noticeTitle, String noticeContent, String adminId) {
+		return noticeMap.insertNotice(noticeTitle, noticeContent, adminId);
 	}
 	
 	@Override

@@ -12,33 +12,66 @@
 <script src='../../res/modal.js'></script>
 <script>
 $(() => {
-	$('#tourAddBtn').click(() => {
-		if($('#tourName').val() && $('#tourContent').val() &&
-				$('#tourSDate').val() && $('#tourEDate').val() && $('#tourPrice').val()) {
-			showConfirmModal('여행코스를 등록하시겠습니까?', '여행코스가 등록되었습니다.', '../tour/adminList')
+	//여행코스 값을 폼에 불러오기
+	$.ajax({
+		url: 'get',
+		success: tours => {
+			$.each(tours, (i, tour) => {
+				if(tour.tourNum == ${param.tourNum}) {
+					$('#tourName').val(`\${tour.tourName}`)
+					$('#tourSDate').val(`\${tour.tourSDate}`)
+					$('#tourEDate').val(`\${tour.tourEDate}`)
+					$('#tourPrice').val(`\${tour.tourPrice}`)
+					$('#tourContent').val(`\${tour.tourContent}`)
+				}
+			})
+		}
+	})
+	
+	//여행코스 수정
+	$('#tourFixBtn').click(() => {
+		if($('#tourName').val() && $('#tourSDate').val() &&
+				$('#tourEDate').val() && $('#tourPrice').val() && $('#tourContent').val()) {
+			showConfirmModal('여행코스를 수정하시겠습니까?', '여행코스가 수정되었습니다.', '../tour/adminList')
 			
 			$('#okBtn').click(() => {
+				let tour = {
+					tourNum: ${param.tourNum},
+					tourName: $('#tourName').val(),
+					tourContent: $('#tourContent').val(),
+					tourSDate: $('#tourSDate').val(),
+					tourEDate: $('#tourEDate').val(),
+					tourPrice: $('#tourPrice').val(),
+					adminId: `${adminId}`,
+					termNum: 1
+				}
+				
 				$.ajax({
-					url: '../tour/adminAdd',
-					method: 'post',
+					url: '../tour/adminFix',
+					method: 'put',
 					contentType: 'application/json',
-					data: JSON.stringify({
-						tourName: $('#tourName').val(),
-						tourContent: $('#tourContent').val(),
-						tourSDate: $('#tourSDate').val(),
-						tourEDate: $('#tourEDate').val(),
-						tourPrice: $('#tourPrice').val(),
-						termNum: 1
-					})
+					data: JSON.stringify(tour)
 				})
 			})
 		} else {
 			showOkModal('필수 입력사항을 채워주세요.')
 		}
 	})
+	
+	//여행코스 삭제
+	$('#tourDelBtn').click(() => {
+		showConfirmModal('여행코스를 삭제하시겠습니까?', '여행코스가 삭제되었습니다.', '../tour/adminList')
+		
+		$('#okBtn').click(() => {
+			$.ajax({
+				url: '../tour/adminDel/' + `${param.tourNum}`,
+				method: 'delete'
+			})
+		})
+    })
 })
 </script>
-<title>상품추가</title>
+<title>상품수정</title>
 <style>
     #tourImg {
         border: .1rem solid;
@@ -50,10 +83,6 @@ $(() => {
     .tourCarouselBtn {
         color: black;
     }
-    
-	textarea {
-		resize: none;
-	}
 </style>
 </head>
 <body>
@@ -63,7 +92,7 @@ $(() => {
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
                     <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
-                    <h1 class='text-center pt-3 text-white'><b>상품추가</b></h1>
+                    <h1 class='text-center pt-3 text-white'><b>상품수정</b></h1>
                 </div>
             </div>
         </div>
@@ -72,7 +101,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../tour/adminList'>상품목록</a> > <a href='../tour/adminAddView'>상품추가</a>
+                    <a href='../main.html'>메인</a> > <a href='./01.html'>상품목록</a> > <a href='./03.html'>상품수정</a>
                 </h6>
             </div>
         </div>
@@ -110,7 +139,7 @@ $(() => {
 				</form>
             </div>
         </div>
-		<form>
+        <form>
             <div class='row mt-2 align-items-center'>
                 <div class='col-1 text-end text-nowrap fs-5'>
                     제목
@@ -148,9 +177,12 @@ $(() => {
                 </div>
             </div>
             <div class='row justify-content-end me-5 mt-2'>
-                <div class='col-2 align-self-center'>
-                    <button id='tourAddBtn' type='button' class='btn btn-darkBlue' data-bs-toggle='modal' data-bs-target='#modal'>
-                        <span class='bi bi-plus-circle text-nowrap'>&nbsp;등록</span>
+                <div class='col-4 d-flex flex-nowrap align-self-center'>
+                    <button id='tourFixBtn' type='button' class='btn btn-olive' data-bs-toggle='modal' data-bs-target='#modal'>
+                        <span class='bi bi-check-circle text-nowrap'>&nbsp;수정</span>
+                    </button>
+                    <button id='tourDelBtn' type='button' class='btn btn-lightRed ms-2' data-bs-toggle='modal' data-bs-target='#modal'>
+                        <span class='bi bi-x-circle text-nowrap'>&nbsp;삭제</span>
                     </button>
                 </div>
             </div>

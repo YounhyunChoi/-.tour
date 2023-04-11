@@ -11,7 +11,58 @@
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
 <script>
+function showTourImage() {
+	$.ajax({
+		url: 'getTourImages',
+		method: 'get',
+		data: {
+			tourNum: ${tourNum}
+		},
+		dataType: 'json',
+		success: tourImages => {
+			const tourImageArr = []
+			if(!tourImages.length){
+				$('#tourImg').hide()
+			} else if(tourImages.length != 1){
+				$.each(tourImages, (i, tourImage) => {
+					if(i == 1) {
+						tourImageArr.push(
+								`<div class='carousel-item active'>
+			                        <img src='<c:url value="/attach/` + tourImage + `"/>'style="max-width:100%; height:100%;"/>
+			                    </div>`)
+					} else {
+						tourImageArr.push(
+								`<div class='carousel-item'>
+			                        <img src='<c:url value="/attach/` + tourImage + `"/>'style="max-width:100%; height:100%;"/>
+			                    </div>`)
+					}
+				})
+			} else {
+				$('.bi').hide()
+			
+				tourImageArr.push(
+						`<div class='carousel-item active'>
+	                        <img src='<c:url value="/attach/` + tourImages[0] + `"/>'style="max-width:100%; height:100%;"/>
+	                    </div>`)
+			}
+			$('#tourImages').append(tourImageArr.join(''))
+		}
+	})
+}
+
 $(() => {
+	$('#tourImageUp').find('input').change(() => {
+		let formData = new FormData($('#tourImageUp')[0])	
+		$.ajax({
+			url: 'addTourImages',
+			method: 'post',
+			contentType: false,
+			processData: false,
+			data: formData,
+			success: showTourImage
+		})
+	})
+	
 	$('#tourAddBtn').click(() => {
 		if($('#tourName').val() && $('#tourContent').val() &&
 				$('#tourSDate').val() && $('#tourEDate').val() && $('#tourPrice').val()) {
@@ -29,11 +80,21 @@ $(() => {
 						tourEDate: $('#tourEDate').val(),
 						tourPrice: $('#tourPrice').val(),
 						termNum: 1
-					})
+					}),
+					success: () => {
+		    			let formData = new FormData($('#tourImageUp')[0])	
+		    			$.ajax({
+		    				url: 'addTourImages',
+		    				method: 'post',
+		    				contentType: false,
+		    				processData: false,
+		    				data: formData
+		    			})
+		    		}
 				})
 			})
 		} else {
-			showOkModal('필수 입력사항을 채워주세요.')
+			showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
 		}
 	})
 })
@@ -84,12 +145,8 @@ $(() => {
             <div class='col-6'>
                 <div class='row py-5 mt-4' id='tourImg'>
                     <div class='carousel slide py-5' id='tourCarousel' data-ride='carousel'>
-                        <div class='carousel-inner'>
-                            <div class='carousel-item active'>
-                                <div class='items'>
-                                	<img src='<c:url value="#"/>'/>
-                                </div>
-                            </div>
+                        <div class='carousel-inner' id='tourImages'>
+                            <!-- 여행코스 이미지 -->
                         </div>
                         <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
                             <i class='bi bi-chevron-left tourCarouselBtn'></i>
@@ -106,7 +163,7 @@ $(() => {
         <div class='row'>
             <div class='col'>
             	<form id='tourImageUp'>
-					<input type='file' name='tourImage' id='tourImage' accept='image/*' multiple/>
+					<input type='file' name='tourImage' accept='image/*' multiple/>
 				</form>
             </div>
         </div>

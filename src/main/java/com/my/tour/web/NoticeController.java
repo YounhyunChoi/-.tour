@@ -65,13 +65,8 @@ public class NoticeController {
 		return mv;
 	}
 
-//	@GetMapping("adminAddView")
-//	@AdminAccess
-//	public ModelAndView adminAddNotice(ModelAndView mv, HttpSession session) {
-//		mv.setViewName("admin/notice/addNotice);
-//	}
-
 	@GetMapping("addNotice")
+	@AdminAccess
 	public ModelAndView addNotice(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/notice/addNotice");
 		
@@ -91,9 +86,9 @@ public class NoticeController {
 		noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));	
 	}
 
-	@GetMapping("fixDelNotice")
+	@GetMapping("fixNotice")
 	public ModelAndView fixNotice(ModelAndView mv, int noticeNum) {
-		mv.setViewName("admin/notice/fixDelNotice");
+		mv.setViewName("admin/notice/fixNotice");
 		mv.addObject("noticeNum",noticeNum);
 		return mv;
 	}

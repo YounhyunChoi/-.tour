@@ -25,6 +25,11 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 	
 	@Override
+	public void updateReservation(int resvNum, String whetherToCancel) {
+		reservationMap.updateReservation(resvNum, whetherToCancel);
+	}
+	
+	@Override
 	public void deleteReservation(int resvNum, String userId) {
 		reservationMap.deleteReservation(resvNum, userId);
 	}

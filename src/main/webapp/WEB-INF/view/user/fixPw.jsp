@@ -43,6 +43,7 @@
                   	method: 'put',
                   	contentType: 'application/json',
                   	data: JSON.stringify({
+                  		userId: '${param.userId}',
                   		userPw: $('#password1').val()
                   	})
                 })

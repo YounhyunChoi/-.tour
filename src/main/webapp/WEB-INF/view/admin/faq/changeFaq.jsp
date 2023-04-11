@@ -25,43 +25,39 @@ $.ajax({
 	}	
 })
 $(() => {
-	$('#faqFixBtn').click(() => {
-		showConfirmModal('FAQ를 수정하시겠습니까?')
-		
-		$('#okBtn').click(() => {
-			let questionRegExp = /[가-힣ㄱ-ㅎa-zA-Z0-9]{5,30}/
-		    if(questionRegExp.test($('#questionInput').val()) && $('#answerInput').val()){
-		    	$.ajax({
-		    		url: 'change',
-		    		method:'post',
-		    		data: {
-		    			oldFaqQuestion: `${param.faqQuestion}`,
-		    			newFaqQuestion: $('#questionInput').val(),
-		    			newFaqAnswer: $('#answerInput').val()
-		    		}
-		    	})
-		    	showOkModal('FAQ가 수정되었습니다.','adminFaqList')
-		    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
-		    	showOkModal('제목과 내용을 입력해주세요.')
-		    } else if(!$('#answerInput').val()){
-		    	showOkModal('내용을 입력해주세요.')
-		    } else if(!questionRegExp.test($('#questionInput').val())){
-		    	showOkModal('제목을 5~30자의 영문, 한글, 숫자로 구성된 형태로 입력해주세요.')
-		    }
-		})
-	})
+$('#faqFixBtn').click(() => {
+		let questionRegExp = /[가-힣ㄱ-ㅎa-zA-Z0-9]{5,30}/
+	    if(questionRegExp.test($('#questionInput').val()) && $('#answerInput').val()){
+	    	$.ajax({
+	    		url: 'change',
+	    		method:'post',
+	    		data: {
+	    			oldFaqQuestion: `${param.faqQuestion}`,
+	    			newFaqQuestion: $('#questionInput').val(),
+	    			newFaqAnswer: $('#answerInput').val()
+	    		}
+	    	})
+	    	showOkModal('FAQ가 수정되었습니다.','adminFaqList')
+	    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
+	    	showOkModal('제목과 내용을 입력해주세요.')
+	    } else if(!$('#answerInput').val()){
+	    	showOkModal('내용을 입력해주세요.')
+	    } else if(!questionRegExp.test($('#questionInput').val())){
+	    	showOkModal('제목을 5~30자의 영문, 한글, 숫자로 구성된 형태로 입력해주세요.')
+	    }
+})
 	
-	 $('#faqDelBtn').click(() => {
-        showConfirmModal('FAQ를 삭제하시겠습니까?', 'FAQ가 삭제되었습니다.', 'adminFaqList')
-        $('#okBtn').click(() => {
-        	$.ajax({
-        		url: 'del',
-        		method: 'delete',
-        		data: {
-        			faqQuestion: `${param.faqQuestion}`
-        		}
-        	})
-        })
+$('#faqDelBtn').click(() => {
+      showConfirmModal('FAQ를 삭제하시겠습니까?', 'FAQ가 삭제되었습니다.', 'adminFaqList')
+      $('#okBtn').click(() => {
+      	$.ajax({
+      		url: 'del',
+      		method: 'delete',
+      		data: {
+      			faqQuestion: `${param.faqQuestion}`
+      		}
+      	})
+      })
    })
 })
 </script>

@@ -54,13 +54,13 @@ $(() => {
         <div class='row py-5 mt-4' id='eventImg'>
             <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
                 <div class='carousel-inner'>
-                    <div class='carousel-item active' onclick="location.href='./event/02.jsp'">
-                            <div class='items py-5 fs-4'>이벤트이미지</div>
+                    <div class='carousel-item active'>
+                    	<div class='items py-5 fs-4'>이벤트이미지</div>
                     </div>
-                    <div class='carousel-item' onclick="location.href='./event/02.jsp'">
+                    <div class='carousel-item'>
                         <div class='items py-5 fs-4'>이벤트이미지</div>
                     </div>
-                    <div class='carousel-item' onclick="location.href='./event/02.jsp'">
+                    <div class='carousel-item'>
                         <div class='items py-5 fs-4'>이벤트이미지</div>
                     </div>
                 </div>
@@ -81,13 +81,13 @@ $(() => {
         <div class='row mt-4' id='tourImg'>
             <div class='carousel slide' id='tourCarousel2' data-ride='carousel'>
                 <div class='carousel-inner'>
-                    <div class='carousel-item active' onclick="location.href='./tour/02.jsp'">
+                    <div class='carousel-item active'>
                         <div class='items py-5 fs-4'>여행코스이미지</div>
                     </div>
-                    <div class='carousel-item' onclick="location.href='./tour/02.jsp'">
+                    <div class='carousel-item'>
                         <div class='items py-5 fs-4' >여행코스이미지</div>
                     </div>
-                    <div class='carousel-item' onclick="location.href='./tour/02.jsp'">
+                    <div class='carousel-item'>
                         <div class='items py-5 fs-4'>여행코스이미지</div>
                     </div>
                 </div>

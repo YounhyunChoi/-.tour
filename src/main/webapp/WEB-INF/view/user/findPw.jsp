@@ -53,16 +53,9 @@ $(() => {
     	if(checkNum == $('#emailCheckNum').val()) {
     		showOkModal('인증되었습니다.')
     		
-    		$.ajax({
-    			url: 'findPw',
-    			method: 'post',
-    			data: {
-    				userId: $('#userId').val()
-    			}
+    		$('#modalOk').find('a').click(() => {
+    			$('form').submit()
     		})
-    		
-    		$('#modalOk').find('a').attr('data-bs-dismiss', '')
-            .attr('href', 'fixPw')
     	} else {
     		showOkModal('인증번호가 일치하지 않습니다.')
     	}
@@ -82,40 +75,42 @@ $(() => {
 <div class='container'>
 <div class='row'>
     <div class='col'>
-        <div class='row'>
-            <div class='col mt-5 justify-content-center'>
-                <input type='text' class='form-control' placeholder='아이디'
-                id='userId' name='userId'/>
-            </div>
-        </div>
-        <div class='row'>
-            <div class='col mt-2 justify-content-center'>
-                <input type='text' class='form-control' placeholder='이메일'
-				id='email'/>
-            </div>
-        </div>
-        <div class='row'>
-            <div class='col mt-2'>
-                <button type='button' class='btn btn-darkBlue form-control'
-				id='sendCheckNum'>
-                    <span>인증번호 발송</span>
-                </button>
-            </div>
-        </div>
-        <div class='row'>
-            <div class='col mt-2 justify-content-center'>
-                <input type='text' class='form-control' placeholder='인증번호'
-				id='emailCheckNum'/>
-            </div>
-        </div>
-        <div class='row'>
-            <div class='col mt-2'>
-                <button type='button' class='btn btn-darkBlue form-control'
-                id='fixPw'>
-                    <span>비밀번호 변경</span>
-                </button>
-            </div>
-        </div>
+    	<form action='findPw' method='post'>
+    		<div class='row'>
+	            <div class='col mt-5 justify-content-center'>
+	                <input type='text' class='form-control' placeholder='아이디'
+	                id='userId' name='userId'/>
+	            </div>
+	        </div>
+	        <div class='row'>
+	            <div class='col mt-2 justify-content-center'>
+	                <input type='text' class='form-control' placeholder='이메일'
+					id='email'/>
+	            </div>
+	        </div>
+	        <div class='row'>
+	            <div class='col mt-2'>
+	                <button type='button' class='btn btn-darkBlue form-control'
+					id='sendCheckNum'>
+	                    <span>인증번호 발송</span>
+	                </button>
+	            </div>
+	        </div>
+	        <div class='row'>
+	            <div class='col mt-2 justify-content-center'>
+	                <input type='text' class='form-control' placeholder='인증번호'
+					id='emailCheckNum'/>
+	            </div>
+	        </div>
+	        <div class='row'>
+	            <div class='col mt-2'>
+	                <button type='button' class='btn btn-darkBlue form-control'
+	                id='fixPw'>
+	                    <span>비밀번호 변경</span>
+	                </button>
+	            </div>
+	        </div>
+    	</form>
     </div>
 </div>
 </div>

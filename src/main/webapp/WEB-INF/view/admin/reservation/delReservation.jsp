@@ -12,6 +12,13 @@
 <script src='../../res/modal.js'></script>
 <title></title>
 <script>
+let changeToDate = function(date){
+	date = date.replaceAll('-', '')
+	let year = date.slice(0,4)
+	let month = date.slice(5,6)
+	let day = date.slice(7,8)
+	return new Date(year, month, day)
+}
 $.ajax({
 	url: 'tours',
 	dataType: 'json',
@@ -25,11 +32,15 @@ $.ajax({
 			success: reservations => {
 				const resvArr = []
 				let tourName
+				let tourEDate
+				let presentDate = new Date()
+				
 				if(reservations.length){
 					$.each(reservations, (i, reservation) => {
 						$.each(tours, (i, tour) => {
 							if(`\${tour.tourNum}` == `\${reservation.tourNum}`){
 								tourName = `\${tour.tourName}`
+								tourEDate = `\${tour.tourEDate}`
 							}
 						})
 						resvArr.push(
@@ -40,14 +51,55 @@ $.ajax({
 		                    <td>` + tourName + `</td>
 		                    <td>\${reservation.chargePrice}</td>
 		                    <td>
-		                        <a id='cancel' class='btn btn-lightRed' 
-		                        data-bs-toggle='modal' data-bs-target='#modal'>취소</a>
+		                        <button type='button' id= \${reservation.resvNum} class='btn cancelBtn btn-lightRed' edate=` + tourEDate + `
+		                       	whetherToCancel=\${reservation.whetherToCancel}></button>
 		                    </td>
 		                </tr>
 						`
 						)	
 					})
 					$('tbody').append(resvArr.reverse().join(''))
+					
+					$.each(reservations, (i, reservation) => {
+						
+					})
+					
+					$('.cancelBtn').each(function(){
+						if($(this).attr('whethertocancel') == 'Y'){
+							$(this).text('취소됨')
+							$(this).removeClass('btn-lightRed')	
+							$(this).addClass('btn-lightGray')
+							$(this).attr('disabled', 'disabled')	
+						}
+						if(presentDate.getTime() > changeToDate($(this).attr('edate')).getTime()){
+							$(this).text('취소불가')
+							$(this).removeClass('btn-lightRed')	
+							$(this).addClass('btn-lightGray')
+							$(this).attr('disabled', 'disabled')
+						}else if($(this).attr('whethertocancel') == 'N'){
+							$(this).text('취소')
+							$(this).addClass('btn-lightRed')
+							$(this).click(() => {
+								showConfirmModal('예약 취소 하시겠습니까?', '예약이 취소되었습니다.')
+								$('#okBtn').click(() => {
+									$.ajax({
+										url:'fix',
+										method: 'put',
+										data: {
+											resvNum: $(this).attr('id'),
+											whetherToCancel: 'Y'
+										},
+										success: () => {
+											$(this).text('취소됨')
+											$(this).removeClass('btn-lightRed')	
+											$(this).addClass('btn-lightGray')
+											$(this).attr('disabled', 'disabled')	
+										}
+									})
+								})
+							})
+						}
+					})
 				}else{
 					$('table').remove()
 					console.log('예약내역이 없습니다.')
@@ -57,13 +109,13 @@ $.ajax({
 		})
 	}
 })
-
-$(() => {
-    $('#cancel').click(() => showConfirmModal('예약 취소 하시겠습니까?', '예약이 취소되었습니다.'))
-})
 </script>
 <style>
-   
+.btn-lightGray {
+	color: #fff !important;
+    background-color: lightslategray !important;
+    border-color: lightslategray !important;
+}
 </style>
 </head>
 <body>

@@ -12,4 +12,10 @@
 		insert into reservations
 		values (resv_num_seq.nextval, #{chargePrice}, #{resvDate}, #{whetherToCancel}, #{userId}, #{tourNum})
 	</insert>
+	
+	<update id='updateReservation'>
+		update reservations
+		set whether_to_cancel = #{whetherToCancel}
+		where resv_num = #{resvNum}
+	</update>
 </mapper>

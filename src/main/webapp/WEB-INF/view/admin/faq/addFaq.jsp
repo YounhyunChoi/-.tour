@@ -13,29 +13,26 @@
 <title></title>
 <script>
 $(() => {
-	$('#faqAddBtn').click(() => {
-		showConfirmModal('FAQ를 추가하시겠습니까?')
-		$('#okBtn').click(() => {
-			let questionRegExp = /[가-힣ㄱ-ㅎa-zA-Z0-9]{5,30}/
-		    if(questionRegExp.test($('#questionInput').val()) && $('#answerInput').val()){
-		    	$.ajax({
-		    		url: 'add',
-		    		method:'post', 
-		    		data: {
-		    			faqQuestion: $('#questionInput').val(),
-		    			faqAnswer: $('#answerInput').val()
-		    		}
-		    	})
-		    	showOkModal('FAQ가 등록되었습니다.','adminFaqList')
-		    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
-		    	showOkModal('제목과 내용을 입력해주세요.')
-		    } else if(!$('#answerInput').val()){
-		    	showOkModal('내용을 입력해주세요.')
-		    } else if(!questionRegExp.test($('#questionInput').val())){
-		    	showOkModal('제목을 5~30자의 영문, 한글, 숫자로 구성된 형태로 입력해주세요.')
-		    }
-		})
-	})
+$('#faqAddBtn').click(() => {
+		let questionRegExp = /[가-힣ㄱ-ㅎa-zA-Z0-9]{5,30}/
+	    if(questionRegExp.test($('#questionInput').val()) && $('#answerInput').val()){
+	    	$.ajax({
+	    		url: 'add',
+	    		method:'post', 
+	    		data: {
+	    			faqQuestion: $('#questionInput').val(),
+	    			faqAnswer: $('#answerInput').val()
+	    		}
+	    	})
+	    	showOkModal('FAQ가 등록되었습니다.','adminFaqList')
+	    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
+	    	showOkModal('제목과 내용을 입력해주세요.')
+	    } else if(!$('#answerInput').val()){
+	    	showOkModal('내용을 입력해주세요.')
+	    } else if(!questionRegExp.test($('#questionInput').val())){
+	    	showOkModal('제목을 5~30자의 영문, 한글, 숫자로 구성된 형태로 입력해주세요.')
+	    }
+})
 })
 </script>
 <style>

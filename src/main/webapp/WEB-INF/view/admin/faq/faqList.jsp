@@ -44,7 +44,7 @@ $.ajax({
                             FAQ가 없습니다.
                         </h3>
                     </div>
-              </div>`)
+              		</div>`)
 		}
 		$('#faqAddBtn').click(() => location.href='add')
 	}	

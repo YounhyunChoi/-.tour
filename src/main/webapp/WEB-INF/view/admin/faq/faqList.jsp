@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=UTF-8' pageEncoding='UTF-8'%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -17,26 +18,24 @@ $.ajax({
 	success: faqs => {
 		let faqQuestion
 		if(faqs.length){	
-		const faqArr = []
-		$.each(faqs, (i, faq)=>{
-			faqQuestion = `\${faq.faqQuestion}`
-			faqArr.push(
-			`
-			<div class='row form-control d-flex justify-content-center'>
-	            <span id=` + faqQuestion.replace(/ /gi, "") +  ` class='fs-2 align-self-center'>
-	                   \${faq.faqQuestion}
-	            </span>
-	        </div>
-			`
-			)
-		})
-		$('#faqContainer').append(faqArr.join(''))
-		$.each(faqs, (i, faq) => {
-			faqQuestion = `\${faq.faqQuestion}`.replace(/ /gi, "")
-			$(`#\${faqQuestion}`).click(() => {
-				location.href=`change?faqQuestion=\${faq.faqQuestion}`
+			const faqArr = []
+			$.each(faqs, (i, faq)=>{
+				faqQuestion = `\${faq.faqQuestion}`
+				faqArr.push(`
+					<div class='row form-control d-flex justify-content-center'>
+			            <span id=` + faqQuestion.replace(/ /gi, "") +  ` class='fs-2 align-self-center'>
+			                   \${faq.faqQuestion}
+			            </span>
+			        </div>
+					`)
+			})
+			$('#faqContainer').append(faqArr.join(''))
+			$.each(faqs, (i, faq) => {
+				faqQuestion = `\${faq.faqQuestion}`.replace(/ /gi, "")
+				$(`#\${faqQuestion}`).click(() => {
+					location.href=`change?faqQuestion=\${faq.faqQuestion}`
 				})
-		})
+			})
 		} else{
 			$('#faqContainer').html(`
         			<div class='row d-block my-5'>
@@ -45,9 +44,7 @@ $.ajax({
                             FAQ가 없습니다.
                         </h3>
                     </div>
-              </div>
-       	`
-       	)
+              </div>`)
 		}
 		$('#faqAddBtn').click(() => location.href='add')
 	}	
@@ -61,7 +58,6 @@ $.ajax({
     .title{
         background-color: lightslategray
     }
-    
 </style>
 </head>
 <body>
@@ -70,9 +66,20 @@ $.ajax({
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'>
-                        <a class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>로고이미지</a>
-                    </div>
+                    <c:if test='${logoName != null}'>
+	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
+		           			<a href='#'>
+	                    		<img id='logo'/>
+	                    	</a>
+                    	</div>
+					</c:if>
+					<c:if test='${logoName == null}'>
+						<div class='float-start m-4 ms-4'>
+							<a  class='border border-dark text-white p-2 mt-1' href='#' id='logo'>
+								로고이미지
+							</a>
+						</div>
+					</c:if>
                     <h1 class='text-center pt-3 text-white'><b>FAQ</b></h1>
                 </div>
             </div>

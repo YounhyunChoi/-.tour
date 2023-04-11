@@ -57,9 +57,11 @@ public class AdminController {
 	@PostMapping("addLogo")
 	public void addLogo(LogoDto logoDto) {
 		String filename = "logo" + logoDto.getLogoImage().getOriginalFilename();
-		saveFile(attachPath + "/" + filename, logoDto.getLogoImage());
-		
-		adminService.addLogo(filename);
+		if(!filename.equals("logo")) {
+			saveFile(attachPath + "/" + filename, logoDto.getLogoImage());
+			
+			adminService.addLogo(filename);
+		}
 	}
 	
 	private void saveFile(String filename, MultipartFile file) {

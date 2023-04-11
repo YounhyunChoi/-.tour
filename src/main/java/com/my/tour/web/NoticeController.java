@@ -103,13 +103,6 @@ public class NoticeController {
 		mv.setViewName("admin/notice/adminNoticeList");
 		return mv;
 	}
-	
-
-//
-//	@GetMapping("adminAddView")
-//	@AdminAccess
-//	public ModelAndView adminAddNotice(ModelAndView mv, HttpSession session) {
-//	}
 
 	@GetMapping("addNotice")
 	public ModelAndView addNotice(ModelAndView mv, HttpSession session) {

@@ -39,18 +39,26 @@ $(() => {
     })
 	
 	let checkNum
+	let phoneNum
 	let phoneCheck = false
+	
+	$('#phoneNum').change(() => {
+		phoneCheck = false
+	})
+	
 	$('#sendCheckNumBtn').click(() => {
 		checkNum = Math.floor(Math.random() * 1000000) + ''
-  		while (checkNum.length != 6) {
+		while (checkNum.length != 6) {
   			checkNum = '0' + checkNum
   		}
+		
+		phoneNum = $('#phoneNum').val()
   		console.log(checkNum)
     	showOkModal('인증번호가 발송되었습니다.')
 	})
 	
 	$('#phoneCheckBtn').click(() => {
-        if($('#phoneCheckNum').val() == checkNum) {
+        if($('#phoneCheckNum').val() == checkNum && phoneNum == $('#phoneNum').val()) {
             showOkModal('인증되었습니다.')
             phoneCheck = true
         } else {
@@ -60,6 +68,8 @@ $(() => {
     })
     
     $('#fixUserBtn').click(() => {
+    	$('#okBtn').off('click')
+    	
     	showConfirmModal('수정하시겠습니까?')
 
     	$('#okBtn').click(() => {
@@ -72,6 +82,7 @@ $(() => {
         			method: 'put',
         			contentType: 'application/json',
         			data: JSON.stringify({
+        				userId: '${user.userId}',
         				userPw: $('#userPw').val(),
         				email: $('#email').val(),
         				phoneNum: $('#phoneNum').val(),
@@ -99,19 +110,6 @@ $(() => {
     	})
     })
 })
-	
-/*     $('#userFixBtn').click(() => {
-       showConfirmModal('수정하시겠습니까?', '회원이 수정되었습니다.', '08.html')
-    })
-    $('#userDelBtn').click(() => {
-       showConfirmModal('정말 탈퇴하시겠습니까?', '회원이 삭제되었습니다.', '09.html')
-    })
-    $('#phoneCertificationBtn').click(() => {
-       showOkModal('인증번호가 발송되었습니다.')
-    })
-    $('#confirmBtn').click(() => {
-       showOkModal('인증되었습니다.')
-    }) */
 </script>
 <style>
   .userBtn {
@@ -175,7 +173,7 @@ $(() => {
          <div class='row mt-3 align-items-center'>
             <div class='col-4'><label for='text'>*휴대폰번호</label></div>
             <div class='col-5 p-0'><input type='tel' class='form-control' 
-            value='${user.phoneNum}'/></div>
+            value='${user.phoneNum}' id='phoneNum'/></div>
             <div class='col-3'>
                <button type='button' id='sendCheckNumBtn'
                class='btn btn-darkBlue form-control'>

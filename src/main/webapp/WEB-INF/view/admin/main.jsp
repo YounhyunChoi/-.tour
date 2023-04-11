@@ -16,7 +16,25 @@ function showLogo() {
 		method: 'get',
 		dataType: 'json',
 		success: logos => {
-			$('img').attr('src', '<c:url value="/attach/' + logos.at(0).logoName + '"/>')
+			if(logos.length) {
+				$('#adminHeader').html(`
+						<div class='float-start ms-4 mt-1' style='height: 50px;'>
+		           			<a href='#'>
+	                    		<img id='logo'/>
+	                    	</a>
+	                	</div>
+	                	<h1 class='text-center pt-3 text-white'><b>MAIN</b></h1>`)
+	                	
+	        	$('img').attr('src', '<c:url value="/attach/' + logos.at(0).logoName + '"/>')
+			} else {
+				$('#adminHeader').html(`
+						<div class='float-start m-4 ms-4'>
+							<a  class='border border-dark text-white p-2 mt-1' href='#' id='logo'>
+								로고이미지
+							</a>
+						</div>
+						<h1 class='text-center pt-3 text-white'><b>MAIN</b></h1>`)
+			}
 		}
 	})
 }
@@ -59,6 +77,7 @@ $(() => {
    }
 
    #logo {
+   		text-decoration: none;  
 		max-width: 100%;
 		height: 100%;
 	}
@@ -119,12 +138,7 @@ $(() => {
         <div class='col'>
             <header>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
-                    	<a href='#'>
-                    		<img id='logo'/>
-                    	</a>
-                    </div>
-                    <h1 class='text-center pt-3 text-white'><b>MAIN</b></h1>
+                
                 </div>
             </header>
         </div>

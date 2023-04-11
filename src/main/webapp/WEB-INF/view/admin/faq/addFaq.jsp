@@ -54,14 +54,14 @@ $('#faqAddBtn').click(() => {
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
                     <c:if test='${logoName != null}'>
 	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
-		           			<a href='#'>
+		           			<a href='../admin/main'>
 	                    		<img id='logo'/>
 	                    	</a>
                     	</div>
 					</c:if>
 					<c:if test='${logoName == null}'>
 						<div class='float-start m-4 ms-4'>
-							<a  class='border border-dark text-white p-2 mt-1' href='#' id='logo'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>
 								로고이미지
 							</a>
 						</div>

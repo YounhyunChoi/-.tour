@@ -66,35 +66,29 @@ $(() => {
 	})
 	
 	$('#noticeRegistrationBtn').click(() => {
-		showConfirmModal('공지사항을 등록하시겠습니까?')
-		
-		$('#okBtn').click(() => {
-			let regexr = /[가-힣a-zA-Z0-9]{5}/
-		    if(regexr.test($('#noticeTitle').val()) && $('#noticeContent').val()){
-    			$.ajax({
-		    		url: 'addNotice',
-		    		method:'post',
-		    		data: {
-		    			noticeTitle: $('#noticeTitle').val(),
-		    			noticeContent: $('#noticeContent').val()
-		    		},
-		    		success: () => {
-		    			let formData = new FormData($('#noticeImageUp')[0])	
-		    			$.ajax({
-		    				url: 'addNoticeImages',
-		    				method: 'post',
-		    				contentType: false,
-		    				processData: false,
-		    				data: formData
-		    			})
-		    		}
-		    	})
-		    	
-		    	showOkModal('공지사항이 등록되었습니다.','adminList')
-		    	
-		    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
-		})
-
+		let regexr = /[가-힣a-zA-Z0-9]{5}/
+	    if(regexr.test($('#noticeTitle').val()) && $('#noticeContent').val()){
+   			$.ajax({
+	    		url: 'addNotice',
+	    		method:'post',
+	    		data: {
+	    			noticeTitle: $('#noticeTitle').val(),
+	    			noticeContent: $('#noticeContent').val()
+	    		},
+	    		success: () => {
+	    			let formData = new FormData($('#noticeImageUp')[0])	
+	    			$.ajax({
+	    				url: 'addNoticeImages',
+	    				method: 'post',
+	    				contentType: false,
+	    				processData: false,
+	    				data: formData
+	    			})
+	    		}
+	    	})
+	    	showOkModal('공지사항이 등록되었습니다.','adminList')
+	    	
+	    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
 	})
 })
 </script>
@@ -118,14 +112,14 @@ $(() => {
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
                     <c:if test='${logoName != null}'>
 	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
-		           			<a href='#'>
+		           			<a href='../admin/main'>
 	                    		<img id='logo'/>
 	                    	</a>
                     	</div>
 					</c:if>
 					<c:if test='${logoName == null}'>
 						<div class='float-start m-4 ms-4'>
-							<a  class='border border-dark text-white p-2 mt-1' href='#' id='logo'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>
 								로고이미지
 							</a>
 						</div>

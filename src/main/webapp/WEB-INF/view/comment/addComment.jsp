@@ -14,8 +14,6 @@
 <script>
     $(() => {
         $('#addComment').click(() => {
-	        showConfirmModal('댓글을 등록하시겠습니까?', '댓글이 등록되었습니다.', '../review/get')
-	        $('#okBtn').click(() => {
 	        	if($('#comtContent').val()) {
 	        		$.ajax({
 	        			url: 'add',
@@ -27,7 +25,6 @@
 	        	}
 	        })
 	    })
-	})
 </script>
 <title>댓글쓰기</title>
 </head>

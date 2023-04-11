@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.my.tour.AdminAccess;
-import com.my.tour.GetAccess;
 import com.my.tour.domain.Tour;
 import com.my.tour.domain.TourImage;
 import com.my.tour.domain.TourImageDto;

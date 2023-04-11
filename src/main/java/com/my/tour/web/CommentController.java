@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.my.tour.AdminAccess;
 import com.my.tour.domain.Comment;
 import com.my.tour.service.CommentService;
 
@@ -64,13 +63,13 @@ public class CommentController {
 		return mv;
 	}
 	
-	@GetMapping("adminDel")
+	@GetMapping("admindel")
 	public ModelAndView delComment(ModelAndView mv) {
 		mv.setViewName("admin/comment/delComment");
 		return mv;
 	}
 	
-	@DeleteMapping("adminDel")
+	@DeleteMapping("admindel")
 	public int admindelComent(@PathVariable int comtNum) {
 		return commentService.delComment(comtNum);
 	}

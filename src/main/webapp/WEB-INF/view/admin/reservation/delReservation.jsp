@@ -19,6 +19,12 @@ let changeToDate = function(date){
 	let day = date.slice(7,8)
 	return new Date(year, month, day)
 }
+let changeAttr = function(component, text, removeClass, addClass, attrName, attrValue){
+	component.text(text)
+	component.removeClass(removeClass)	
+	component.addClass(addClass)
+	component.attr(attrName, attrValue)
+}
 $.ajax({
 	url: 'tours',
 	dataType: 'json',
@@ -58,24 +64,13 @@ $.ajax({
 						`
 						)	
 					})
-					$('tbody').append(resvArr.reverse().join(''))
-					
-					$.each(reservations, (i, reservation) => {
-						
-					})
+					$('tbody').append(resvArr.join(''))	
 					
 					$('.cancelBtn').each(function(){
 						if($(this).attr('whethertocancel') == 'Y'){
-							$(this).text('취소됨')
-							$(this).removeClass('btn-lightRed')	
-							$(this).addClass('btn-lightGray')
-							$(this).attr('disabled', 'disabled')	
-						}
-						if(presentDate.getTime() > changeToDate($(this).attr('edate')).getTime()){
-							$(this).text('취소불가')
-							$(this).removeClass('btn-lightRed')	
-							$(this).addClass('btn-lightGray')
-							$(this).attr('disabled', 'disabled')
+							changeAttr($(this), '취소됨', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
+						}else if(presentDate.getTime() > changeToDate($(this).attr('edate')).getTime()){
+							changeAttr($(this), '취소불가', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
 						}else if($(this).attr('whethertocancel') == 'N'){
 							$(this).text('취소')
 							$(this).addClass('btn-lightRed')
@@ -90,10 +85,7 @@ $.ajax({
 											whetherToCancel: 'Y'
 										},
 										success: () => {
-											$(this).text('취소됨')
-											$(this).removeClass('btn-lightRed')	
-											$(this).addClass('btn-lightGray')
-											$(this).attr('disabled', 'disabled')	
+											changeAttr($(this), '취소됨', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
 										}
 									})
 								})
@@ -101,8 +93,7 @@ $.ajax({
 						}
 					})
 				}else{
-					$('table').remove()
-					console.log('예약내역이 없습니다.')
+					$('tbody').html("<td class='fs-1' colspan='5'>예약내역이 없습니다.</td>")
 				}
 			}
 			

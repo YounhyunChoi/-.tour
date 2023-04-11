@@ -3,6 +3,7 @@ package com.my.tour;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -50,7 +51,7 @@ public class Accesses {
 		return mv;
 	}
 	
-	@After("@annotation(com.my.tour.GetAccess) && args(request, ..)")
+	@Around("@annotation(com.my.tour.GetAccess) && args(request, ..)")
 	public Object getAccessRight(JoinPoint jp, HttpServletRequest request) throws Throwable {
 		Object obj = ((ProceedingJoinPoint) jp).proceed();
 

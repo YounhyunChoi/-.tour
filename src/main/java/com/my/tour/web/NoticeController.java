@@ -65,7 +65,6 @@ public class NoticeController {
       return mv;
    }
 
-<<<<<<< HEAD
 	@GetMapping("addNotice")
 	@AdminAccess
 	public ModelAndView addNotice(ModelAndView mv, HttpSession session) {
@@ -80,27 +79,6 @@ public class NoticeController {
 		
 		return mv;
 	}
-=======
-//   @GetMapping("adminAddView")
-//   @AdminAccess
-//   public ModelAndView adminAddNotice(ModelAndView mv, HttpSession session) {
-//      mv.setViewName("admin/notice/addNotice);
-//   }
-
-   @GetMapping("addNotice")
-   public ModelAndView addNotice(ModelAndView mv, HttpSession session) {
-      mv.setViewName("admin/notice/addNotice");
-      
-      if(noticeService.getAllNotices().size() == 0 ||
-         !noticeService.getAllNotices().get(0).getNoticeTitle().equals("temp")) {
-         noticeService.addNoticeTemp((String) session.getAttribute("userId"), noticeService.getAllNotices().size());
-      }
-      
-      mv.addObject("noticeNum", noticeService.getAllNotices().get(0).getNoticeNum());
-      
-      return mv;
-   }
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
 
    @PostMapping("addNotice")
    public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
@@ -108,7 +86,6 @@ public class NoticeController {
       noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));   
    }
 
-<<<<<<< HEAD
 	@GetMapping("fixNotice")
 	public ModelAndView fixNotice(ModelAndView mv, int noticeNum) {
 		mv.setViewName("admin/notice/fixNotice");
@@ -154,53 +131,6 @@ public class NoticeController {
 			}
 		}
 	}
-=======
-   @GetMapping("fixDelNotice")
-   public ModelAndView fixNotice(ModelAndView mv, int noticeNum) {
-      mv.setViewName("admin/notice/fixDelNotice");
-      mv.addObject("noticeNum",noticeNum);
-      return mv;
-   }
-   
-   @PutMapping("fixNotice")
-   public void fixNotice(@RequestBody Notice notice) {
-      noticeService.fixNotice(notice);
-   }
-   
-   @DeleteMapping("delNotice")
-   public void delNotice(int noticeNum) {
-      noticeService.delNotice(noticeNum);
-   }
-   
-   //images
-   @GetMapping("getNoticeImage")
-   public List<String> getNoticeImages(int noticeNum){
-      List<String> noticeImageName = new ArrayList<String>();
-      if(noticeService.getNoticeImages(noticeNum).size() != 0) {
-         for(NoticeImage noticeImage : noticeService.getNoticeImages(noticeNum)) {
-            noticeImageName.add(noticeImage.getNoticeImageName());         
-         }
-      }
-      
-      return noticeImageName;
-   }
-   
-   @PostMapping("addNoticeImages")
-   public void addNoticeImages(@RequestParam("noticeImage") List<MultipartFile> noticeImage) {
-      int noticeNum = noticeService.getAllNotices().get(0).getNoticeNum();
-      String filename = "";
-      
-      noticeService.delNoticeImage(noticeNum);
-      
-      for(MultipartFile multipartfile: noticeImage) {
-         filename = "notice" + multipartfile.getOriginalFilename();
-         if(!filename.equals("notice")) {
-            saveFile(attachPath + "/" + filename, multipartfile);
-            noticeService.addNoticeImage(filename, noticeNum);
-         }
-      }
-   }
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
 
    private void saveFile(String filename, MultipartFile file) {
       try {

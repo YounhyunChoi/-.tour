@@ -12,21 +12,20 @@
 <script src='../../res/modal.js'></script>
 <title>ADMIN.NOTICE.03 공지 수정</title>
 <script>
+$.ajax({
+	url: 'getNotice',
+	data: {
+		noticeNum: ${param.noticeNum}
+	},
+	dataType: 'json',
+	success: notices => {
+		let notice = notices.at(0)
+		$('#noticeTitle').val(`\${notice.noticeTitle}`)
+		$('#noticeContent').val(`\${notice.noticeContent}`)
+		
+	}
+})
 $(() => {
-	$.ajax({
-		url: 'getNotice',
-		data: {
-			noticeNum: ${param.noticeNum}
-		},
-		dataType: 'json',
-		success: notices => {
-			let notice = notices.at(0)
-			$('#noticeTitle').val(`\${notice.noticeTitle}`)
-			$('#noticeContent').val(`\${notice.noticeContent}`)
-			
-		}
-	})
-	
 	$('#fixNoticeBtn').click(() => {
 		let regexr = /[가-힣a-zA-Z0-9]{5}/
 		if(regexr.test($('#noticeTitle').val()) && $('#notcieContent').val()) {

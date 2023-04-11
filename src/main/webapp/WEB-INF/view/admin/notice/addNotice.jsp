@@ -66,7 +66,7 @@ $(() => {
 	})
 	
 	$('#noticeRegistrationBtn').click(() => {
-		let regexr = /[가-힣a-zA-Z0-9]{5}/
+		let regexr = /[가-힣a-zA-Z0-9\s]{5}/
 	    if(regexr.test($('#noticeTitle').val()) && $('#noticeContent').val()){
    			$.ajax({
 	    		url: 'addNotice',

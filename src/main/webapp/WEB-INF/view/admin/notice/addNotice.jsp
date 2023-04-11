@@ -15,7 +15,6 @@
 <script>
 
 function showNoticeImage() {
-	console.log("작동중")
 	$.ajax({
 		url: 'getNoticeImage',
 		method: 'get',

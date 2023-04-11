@@ -242,3 +242,7 @@ th {
 td {
     font-size: 0.9rem;
 }
+
+textarea {
+	resize: none;
+}

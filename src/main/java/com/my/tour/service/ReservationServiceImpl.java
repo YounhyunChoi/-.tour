@@ -30,6 +30,10 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 	
 	@Override
+	public void fixReservation(int resvNum, String whetherToCancel) {
+		reservationDao.updateReservation(resvNum, whetherToCancel);
+	}
+	@Override
 	public void delReservation(int resvNum, String userId) {
 		reservationDao.deleteReservation(resvNum, userId);
 	}

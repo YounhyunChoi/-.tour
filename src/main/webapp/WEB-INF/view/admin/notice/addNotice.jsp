@@ -15,6 +15,7 @@
 <script>
 
 function showNoticeImage() {
+	console.log("작동중")
 	$.ajax({
 		url: 'getNoticeImage',
 		method: 'get',
@@ -24,9 +25,7 @@ function showNoticeImage() {
 		dataType: 'json',
 		success: noticeImages => {
 			const noticeImageArr = []
-			if(noticeImages.length > 4) {
-				showOkModal('이미지는 4장까지 업로드 할 수 있습니다.')
-			} else if(noticeImages.length != 1){
+			if(noticeImages.length != 1){
 				$('.bi').show()
 				
 				$.each(noticeImages, (i, noticeImage) => {
@@ -65,7 +64,10 @@ $(() => {
 			contentType: false,
 			processData: false,
 			data: formData,
-			success: showNoticeImage
+			success: isGood => {
+				if(isGood) showNoticeImage()
+				else showOkModal('이미지는 4장까지 등록 할 수 있습니다.')
+			}
 		})
 	})
 	

@@ -12,6 +12,48 @@
 <script src='../../res/modal.js'></script>
 <title>ADMIN.NOTICE.03 공지 수정</title>
 <script>
+function showNoticeImage() {
+	$.ajax({
+		url: 'getNoticeImage',
+		method: 'get',
+		data: {
+			noticeNum: ${noticeNum}
+		},
+		dataType: 'json',
+		success: noticeImages => {
+			const noticeImageArr = []
+			if(noticeImages.length > 4) {
+				showOkModal('이미지는 4장까지 업로드 할 수 있습니다.')
+			} else if(noticeImages.length != 1){
+				$('.bi').show()
+				
+				$.each(noticeImages, (i, noticeImage) => {
+					if(i == 1) {
+						noticeImageArr.push(
+								`<div class='carousel-item active'>
+			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'style="max-width:100%; height:100%;"/>
+			                    </div>`)
+					} else {
+						noticeImageArr.push(
+								`<div class='carousel-item'>
+			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'style="max-width:100%; height:100%;"/>
+			                    </div>`)
+					}
+				})
+			} else {
+				$('.bi').hide()
+			
+				noticeImageArr.push(
+						`<div class='carousel-item active'>
+	                        <img src='<c:url value="/attach/` + noticeImages[0] + `"/>'style="max-width:100%; height:100%;"/>
+	                    </div>`)
+			}
+			$('#noticeImages').empty()
+			$('#noticeImages').append(noticeImageArr.join(''))
+		}
+	})
+}
+
 $.ajax({
 	url: 'getNotice',
 	data: {
@@ -26,6 +68,8 @@ $.ajax({
 	}
 })
 $(() => {
+	showNoticeImage()
+	
 	$('#fixNoticeBtn').click(() => {
 		let regexr = /[가-힣a-zA-Z0-9\s]{5}/
 		if(regexr.test($('#noticeTitle').val()) && $('#notcieContent').val()) {
@@ -36,7 +80,9 @@ $(() => {
 					noticeNum: `%{param.noticeNum}`,
 					noticeTitle: $('#noticeTitle').val(),
 					noticeContent: $('#noticeContent').val()
+					
 				}
+
 			})
 			showOkModal('공지사항이 수정되었습니다.', 'adminList')
 			

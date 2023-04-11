@@ -115,20 +115,25 @@ public class NoticeController {
 	}
 	
 	@PostMapping("addNoticeImages")
-	public void addNoticeImages(@RequestParam("noticeImage") List<MultipartFile> noticeImage) {
-		int noticeNum = noticeService.getAllNotices().get(0).getNoticeNum();
-		String filename = "";
-		
-		noticeService.delNoticeImage(noticeNum);
-		
-		for(MultipartFile multipartfile: noticeImage) {
-			filename = "notice" + multipartfile.getOriginalFilename();
-			if(!filename.equals("notice")) {
-				saveFile(attachPath + "/" + filename, multipartfile);
-				noticeService.addNoticeImage(filename, noticeNum);
-			}
-		}
-	}
+	   public boolean addNoticeImages(@RequestParam("noticeImage") List<MultipartFile> noticeImage) {
+	      if(noticeImage.size() > 4) {
+	         return false;
+	      } else {
+	         int noticeNum = noticeService.getAllNotices().get(0).getNoticeNum();
+	         String filename = "";
+	         
+	         noticeService.delNoticeImage(noticeNum);
+	         
+	         for(MultipartFile multipartfile: noticeImage) {
+	            filename = "notice" + multipartfile.getOriginalFilename();
+	            if(!filename.equals("notice")) {
+	               saveFile(attachPath + "/" + filename, multipartfile);
+	               noticeService.addNoticeImage(filename, noticeNum);
+	            }
+	         }
+	         return true;
+	      }
+	   }
 
    private void saveFile(String filename, MultipartFile file) {
       try {

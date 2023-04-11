@@ -22,9 +22,7 @@ $(() => {
 		success: notices => {
 			const noticeArr = []
 			let notice = notices.at(0)
-				noticeArr.push(
-			        ``)
-
+			
 		}
 	})
 })

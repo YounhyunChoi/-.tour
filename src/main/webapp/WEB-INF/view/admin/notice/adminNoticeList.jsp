@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -14,7 +15,7 @@
 $(() => {	
 	$('#fixNoticeBtn').click(() => {
 		if($('#noticeNum:checked').val()){
-			$('#fixNoticeBtn').attr('href', '../notice/adminFixView?noticeNum=' + $('#noticeNum:checked').val())
+			$('#fixNoticeBtn').attr('href', '../notice/fixDelNotice?noticeNum=' + $('#noticeNum:checked').val())
 		}		
 	})
 	
@@ -53,7 +54,20 @@ $(() => {
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>로고이미지</a></div>
+                    <c:if test='${logoName != null}'>
+	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
+		           			<a href='../admin/main'>
+	                    		<img id='logo'/>
+	                    	</a>
+                    	</div>
+					</c:if>
+					<c:if test='${logoName == null}'>
+						<div class='float-start m-4 ms-4'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>
+								로고이미지
+							</a>
+						</div>
+					</c:if>
                     <h1 class='text-center pt-3 text-white'><b>공지사항</b></h1>
                 </div>
             </div>

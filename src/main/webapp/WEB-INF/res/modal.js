@@ -7,21 +7,21 @@ $(() => {
     })
 })
 
-function showConfirmModal(confirmModal, okModal, url) {
-   $('#modalMsg').text(confirmModal)
-   $('#modalBtn').show()
-   $('#modalOk').hide()
-   $('#okBtn').click(() => showOkModal(okModal, url))
-   $('#modal').modal('show')
+function showConfirmModal(confirmMsg, okMsg, url) {
+   	$('#modalMsg').text(confirmMsg)
+   	$('#modalBtn').show()
+   	$('#modalOk').hide()
+   	$('#okBtn').click(() => showOkModal(okMsg, url))
+   	$('#modal').modal('show')
 }
  
-function showOkModal(okModal, url) {
-   $('#modalMsg').text(okModal)
-   $('#modalBtn').hide()
-   $('#modalOk').show()
-   if(url) {
-      $('#modalOk').find('.btn-darkBlue').attr('href', url)
-      $('#modalOk').find('.btn-darkBlue').attr('data-bs-dismiss', '')
-   }
-   $('#modal').modal('show')
+function showOkModal(okMsg, url) {
+   	$('#modalMsg').text(okMsg)
+   	$('#modalBtn').hide()
+   	$('#modalOk').show()
+   	if(url) {
+      	$('#modalOk').find('.btn-darkBlue').attr('href', url)
+      	$('#modalOk').find('.btn-darkBlue').attr('data-bs-dismiss', '')
+   	}
+   	$('#modal').modal('show')
 }

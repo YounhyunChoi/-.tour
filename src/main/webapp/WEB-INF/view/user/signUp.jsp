@@ -18,6 +18,10 @@ $(() => {
 	
 	let idCheck = false
 	
+	$('#userId').change(() => {
+		idCheck = false
+	})
+	
 	$('#duplicateCheck').click(() => {
 		regexr = /[a-z0-9]{5}/
     	$.ajax({
@@ -64,18 +68,26 @@ $(() => {
     let emailCheck = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/
     
     let checkNum
+    let phoneNum
     let phoneCheck = false
+    
+    $('#phoneNum').change(() => {
+    	phoneCheck = false
+    })
+    
   	$('#sendCheckNumBtn').click(() => {
   		checkNum = Math.floor(Math.random() * 1000000) + ''
   		while (checkNum.length != 6) {
   			checkNum = '0' + checkNum
   		}
+  		
+    	phoneNum = $('#phoneNum').val()
   		console.log(checkNum)
     	showOkModal('인증번호가 발송되었습니다.')
     })
     
     $('#phoneCheckBtn').click(() => {
-        if($('#phoneCheckNum').val() == checkNum) {
+        if($('#phoneCheckNum').val() == checkNum && phoneNum == $('#phoneNum').val()) {
             showOkModal('인증되었습니다.')
             phoneCheck = true
         } else {
@@ -87,7 +99,8 @@ $(() => {
     $('#signUp').click(() => {
     	regexr = /[가-힣]{3}/
     	
-        if(idCheck && passwordCheck && emailCheck.test($('#email').val()) && phoneCheck && regexr.test($('#userName').val()) && $('#birthday').val()) {        	
+        if(idCheck && passwordCheck && emailCheck.test($('#email').val()) && 
+        		phoneCheck && regexr.test($('#userName').val()) && $('#birthday').val()) {        	
     		let mktg = $('#mktgAgreement').is(':checked') ? 'Y' : 'N'
         	
         	$.ajax({

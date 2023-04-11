@@ -3,13 +3,19 @@
 <%
 	String userId = (String)session.getAttribute("userId");
 %>
+		
 <div class='container' id='header'>
     <div class='row' id='navbarHeader'>
         <nav class='navbar fixed-top' id='navbarHeader'>
             <div class='container-fluid mb-2' style='height: 45px;'>
-            	<a class='navbar-brand' href='/'>
-	            	<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
-            	</a>            	
+				<c:if test='${logoName != null}'>
+           			<a class='navbar-brand' href='/'>
+            			<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+           			</a>          
+				</c:if>
+				<c:if test='${logoName == null}'>
+					<a class='navbar-brand mb-2 border border-dark' href='/'>로고이미지</a>
+				</c:if>  	
 	            <div>
 <%
 				if(userId == null) {

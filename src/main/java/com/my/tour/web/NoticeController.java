@@ -57,6 +57,58 @@ public class NoticeController {
 		return mv;
 	}
 	
+	//어드민
+	@GetMapping("adminList")
+	@AdminAccess
+	public ModelAndView adminNoticeList(ModelAndView mv, HttpSession session) {
+		mv.setViewName("admin/notice/adminNoticeList");
+		return mv;
+	}
+	
+//	@GetMapping("adminAddView")
+//	@AdminAccess
+//	public ModelAndView adminAddNotice(ModelAndView mv, HttpSession session) {
+//		mv.setViewName("admin/notice/addNotice);
+//	}
+
+	@GetMapping("addNotice")
+	public ModelAndView addNotice(ModelAndView mv, HttpSession session) {
+		mv.setViewName("admin/notice/addNotice");
+		
+		if(noticeService.getAllNotices().size() == 0 ||
+			!noticeService.getAllNotices().get(0).getNoticeTitle().equals("temp")) {
+			noticeService.addNoticeTemp((String) session.getAttribute("userId"), noticeService.getAllNotices().size());
+		}
+		
+		mv.addObject("noticeNum", noticeService.getAllNotices().get(0).getNoticeNum());
+		
+		return mv;
+	}
+
+	@PostMapping("addNotice")
+	public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
+		noticeService.delNotice(noticeService.getAllNotices().get(0).getNoticeNum());
+		noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));	
+	}
+
+	@GetMapping("fixDelNotice")
+	public ModelAndView fixNotice(ModelAndView mv, int noticeNum) {
+		mv.setViewName("admin/notice/fixDelNotice");
+		mv.addObject("noticeNum",noticeNum);
+		return mv;
+	}
+	
+	@PutMapping("fixNotice")
+	public void fixNotice(@RequestBody Notice notice) {
+		noticeService.fixNotice(notice);
+	}
+	
+	@DeleteMapping("delNotice")
+	public void delNotice(int noticeNum) {
+		noticeService.delNotice(noticeNum);
+	}
+	
+	//images
 	@GetMapping("getNoticeImage")
 	public List<String> getNoticeImages(int noticeNum){
 		List<String> noticeImageName = new ArrayList<String>();
@@ -96,6 +148,8 @@ public class NoticeController {
 		noticeService.delNoticeImage(noticeNum);
 	}
 	
+<<<<<<< HEAD
+=======
 	//어드민
 	@GetMapping("adminList")
 	@AdminAccess
@@ -103,13 +157,6 @@ public class NoticeController {
 		mv.setViewName("admin/notice/adminNoticeList");
 		return mv;
 	}
-	
-
-//
-//	@GetMapping("adminAddView")
-//	@AdminAccess
-//	public ModelAndView adminAddNotice(ModelAndView mv, HttpSession session) {
-//	}
 
 	@GetMapping("addNotice")
 	public ModelAndView addNotice(ModelAndView mv, HttpSession session) {
@@ -152,4 +199,5 @@ public class NoticeController {
 	public void delNotice(int noticeNum) {
 		noticeService.delNotice(noticeNum);
 	}
+>>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
 }

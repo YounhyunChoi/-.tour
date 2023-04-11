@@ -64,13 +64,13 @@ public class CommentController {
 		return mv;
 	}
 	
-	@GetMapping("adminDel")
+	@GetMapping("admindel")
 	public ModelAndView delComment(ModelAndView mv) {
 		mv.setViewName("admin/comment/delComment");
 		return mv;
 	}
 	
-	@DeleteMapping("adminDel")
+	@DeleteMapping("admindel")
 	public int admindelComent(@PathVariable int comtNum) {
 		return commentService.delComment(comtNum);
 	}

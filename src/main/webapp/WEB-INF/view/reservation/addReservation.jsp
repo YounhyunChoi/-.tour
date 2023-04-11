@@ -19,14 +19,18 @@
 <script src='../res/modal.js?ver=2'></script>
 <title></title>
 <script>
+let addComma = function(component, value){
+	component.text(Number(value).toLocaleString('en').split(".")[0])
+}
 $(() => {
+   addComma($('.chargePrice'), $('#tourPrice').text() - $('#salePrice').text())
+   addComma($('#tourPrice'), $('#tourPrice').text())
+   addComma($('#salePrice'), $('#salePrice').text())
    $('#paymentBtn').attr('disabled', 'disabled')
    $('#agreeCheckbox').change(() => {
       if ($('#agreeCheckbox').prop('checked')) $('#paymentBtn').removeAttr('disabled')
       else if (!$('#agreeCheckbox').prop('checked')) $('#paymentBtn').attr('disabled', 'disabled')
    })
-
-   $('.chargePrice').text($('#tourPrice').text() - $('#salePrice').text())
    $('#paymentBtn').click(() => {
 	   if(`${userId}`){
 	   $.ajax({

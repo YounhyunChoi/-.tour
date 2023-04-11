@@ -73,7 +73,7 @@
 									}
 								})
 							})
-							$('#reservationContainer').append(reservationArr.reverse().join(''))
+							$('#reservationContainer').append(reservationArr.join(''))
 							for(let i =0; i < $('.resvNum').length; i++){
 								$('.resvNum').eq(i).text($('.resvNum').eq(i).text().padStart(4, '0'))
 							}

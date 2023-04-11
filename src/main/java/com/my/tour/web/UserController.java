@@ -105,7 +105,7 @@ public class UserController {
 			
 			mv.setViewName(url);
 		} else {
-			mv.setViewName("redirect:/admin/main");
+			mv.setViewName("redirect:/user/adminMain");
 		}
 		
 		return mv;

@@ -27,22 +27,17 @@ $.ajax({
 })
 $(() => {
 	$('#fixNoticeBtn').click(() => {
-		let regexr = /[가-힣a-zA-Z0-9]{5}/
+		let regexr = /[가-힣a-zA-Z0-9\s]{5}/
 		if(regexr.test($('#noticeTitle').val()) && $('#notcieContent').val()) {
-			let notice = {
-				noticeNum: $('#noticeNum').val(),
-				noticeTitle: $('#noticeTitle').val(),
-				noticeContent: $('#noticeContent').val()
-			}
-			
 			$.ajax({
 				url: 'fixNotice',
 				method: 'put',
-              	contentType: 'application/json',
-              	data: JSON.stringify(notice),
-              	success: listNotices
+				data: {
+					noticeNum: `%{param.noticeNum}`,
+					noticeTitle: $('#noticeTitle').val(),
+					noticeContent: $('#noticeContent').val()
+				}
 			})
-			
 			showOkModal('공지사항이 수정되었습니다.', 'adminList')
 			
 		} else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')

@@ -26,7 +26,7 @@ $.ajax({
 })
 $(() => {
 $('#faqFixBtn').click(() => {
-		let questionRegExp = /[가-힣ㄱ-ㅎa-zA-Z0-9]{5,30}/
+		let questionRegExp = /[가-힣ㄱ-ㅎa-zA-Z0-9\s]{5,30}/
 	    if(questionRegExp.test($('#questionInput').val()) && $('#answerInput').val()){
 	    	$.ajax({
 	    		url: 'change',

@@ -20,13 +20,36 @@ $(() => {
 		},
 		dataType: 'json',
 		success: notices => {
-			const noticeArr = []
 			let notice = notices.at(0)
+			$('#noticeTitle').val(`\${notice.noticeTitle}`)
+			$('#noticeContent').val(`\${notice.noticeContent}`)
 			
 		}
 	})
-})
+	
+	$('#fixNoticeBtn').click(() => {
+		let regexr = /[가-힣a-zA-Z0-9]{5}/
+		if(regexr.test($('#noticeTitle').val()) && $('#notcieContent').val()) {
+			let notice = {
+				noticeNum: $('#noticeNum').val(),
+				noticeTitle: $('#noticeTitle').val(),
+				noticeContent: $('#noticeContent').val()
+			}
+			
+			$.ajax({
+				url: 'fixNotice',
+				method: 'put',
+              	contentType: 'application/json',
+              	data: JSON.stringify(notice),
+              	success: listNotices
+			})
+			
+			showOkModal('공지사항이 수정되었습니다.', 'adminList')
+			
+		} else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
 
+	})
+})
 </script>
 <style>
     #noticeImg {
@@ -56,7 +79,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList''>공지사항</a>  > <a href='../notice/adminFixView'>공지수정</a>
+                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList'>공지사항</a>  > <a href='../notice/adminFixView'>공지수정</a>
                 </h6>
             </div>
         </div>
@@ -70,7 +93,7 @@ $(() => {
                    <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
                </label>
                <div class='col shadow-sm'>
-                   <input type='text' class='form-control' id='noticeTitle' maxlength='30' value='${notice.noticeTitle}'/>
+                   <input type='text' class='form-control' id='noticeTitle' maxlength='30'/>
                </div>
            </div>
        </div>
@@ -102,7 +125,7 @@ $(() => {
                    <h5 class='align-items-center text-nowrap pt-1'>내용</h5>
                </label>
                <div class='col'>
-                   <textarea class='form-control shadow-sm' rows='10' id='noticeContent' maxlength='300'>${notice.notcieContent}</textarea>
+                   <textarea class='form-control shadow-sm' rows='10' id='noticeContent' maxlength='300'></textarea>
                </div>
            </div>
        </div>

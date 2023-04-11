@@ -38,7 +38,7 @@
 	
 	<update id='updateNotice'>
 		update notices
-		set notice_title = #{noticeTitle}, notice_content = #{noticeContent})
+		set notice_title = #{noticeTitle}, notice_content = #{noticeContent}, #{adminId})
 		where notice_num = #{noticeNum}
 	</update>
 	

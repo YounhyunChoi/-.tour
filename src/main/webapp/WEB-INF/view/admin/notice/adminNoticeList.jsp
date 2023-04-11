@@ -57,7 +57,7 @@ $(() => {
                     <c:if test='${logoName != null}'>
 	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
 		           			<a href='../admin/main'>
-	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+	                    		<img id='logo'/>
 	                    	</a>
                     	</div>
 					</c:if>

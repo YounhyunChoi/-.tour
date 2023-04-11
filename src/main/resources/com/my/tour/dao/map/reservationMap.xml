@@ -6,6 +6,7 @@
 		select resv_num, charge_price, resv_Date, whether_to_cancel, user_id, tour_num
 		from reservations
 		where user_id = #{userId}
+		order by resv_num desc
 	</select>
 	
 	<insert id='insertReservation'>

@@ -19,21 +19,25 @@
 <script src='../res/modal.js?ver=2'></script>
 <title></title>
 <script>
+let addComma = function(component, value){
+	component.text(Number(value).toLocaleString('en').split(".")[0])
+}
 $(() => {
+   addComma($('.chargePrice'), $('#tourPrice').text() - $('#salePrice').text())
+   addComma($('#tourPrice'), $('#tourPrice').text())
+   addComma($('#salePrice'), $('#salePrice').text())
    $('#paymentBtn').attr('disabled', 'disabled')
    $('#agreeCheckbox').change(() => {
       if ($('#agreeCheckbox').prop('checked')) $('#paymentBtn').removeAttr('disabled')
       else if (!$('#agreeCheckbox').prop('checked')) $('#paymentBtn').attr('disabled', 'disabled')
    })
-
-   $('.chargePrice').text($('#tourPrice').text() - $('#salePrice').text())
    $('#paymentBtn').click(() => {
 	   if(`${userId}`){
 	   $.ajax({
 			url: 'add',
 			method: 'post',
 			data: {
-				chargePrice: $('.chargePrice').eq(0).text(),
+				chargePrice: $('.chargePrice').eq(0).text().replace(',', ''),
 				tourNum: ${tour.tourNum}
 			}
 	   })
@@ -47,64 +51,62 @@ $(() => {
 <style>
 </style>
 </head>
-
 <body>
-	<header> </header>
-	<div class='navigation fixed-top'>
-		<div class='float-start mt-2 ms-2'>
-			<i class='bi bi-caret-left-fill'></i>
-		</div>	
-		<div class='menuName'>
-			<h2 class='text-center pt-3'>
-				<b>예약하기</b>
-			</h2>
+<header></header>
+<div class='navigation fixed-top'>
+	<div class='float-start mt-2 ms-2'>
+		<i class='bi bi-caret-left-fill'></i>
+	</div>	
+	<div class='menuName'>
+		<h2 class='text-center pt-3'>
+			<b>예약하기</b>
+		</h2>
+	</div>
+</div>
+<div class='container px-4 mt-4'>
+	<div class='row d-block'>
+		<div class='col p-2'>
+			<b>상품 확인</b>
+		</div>
+		<div class='col p-2 border border-2 contents shadow-sm'>
+			<b>상품명</b><br> <span id='tourName'>${tour.tourName}</span><br><b>상품내용</b><br>
+			<span id='tourContent'>${tour.tourContent}</span>
 		</div>
 	</div>
-	<div class='container px-4 mt-4'>
-		<div class='row d-block'>
-			<div class='col p-2'>
-				<b>상품 확인</b>
-			</div>
-			<div class='col p-2 border border-2 contents shadow-sm'>
-				<b>상품명</b><br> <span id='tourName'>${tour.tourName}</span><br><b>상품내용</b><br>
-				<span id='tourContent'>${tour.tourContent}</span>
-			</div>
+	<div class='row d-block'>
+		<div class='col p-2'>
+			<b>금액 및 할인</b>
 		</div>
-		<div class='row d-block'>
-			<div class='col p-2'>
-				<b>금액 및 할인</b>
-			</div>
-			<div class='col p-2 border border-2 contents shadow-sm'>
-				<b>코스 금액</b><span id='tourPrice'>${tour.tourPrice}</span><br>
-				<b>할인 금액</b><span id='salePrice'>1</span>원<br><br>
-				<b>총 결제 금액</b><span class='chargePrice'></span>
-			</div>
-		</div>
-		<div class='row d-block'>
-			<div class='col p-2'>
-				<b>필수안내 약관</b>
-			</div>
-			<div class='col p-2 border border-2 contents shadow-sm'>
-				<span id='termContent'>${term.termContent}</span><br>
-			</div>
-			<div class='col p-2 text-left'>
-				<input type='checkbox' id='agreeCheckbox'
-					class='form-check d-inline align-middle'> <label
-					for='agreeCheckbox' class='form-check-label align-middle'>
-					상기 필수안내 약관에 동의합니다. </label>
-			</div>
-		</div>
-		<div class='row'>
-			<div class='col mt-5 d-flex justify-content-center'>
-				<button id='paymentBtn' type='button' data-bs-toggle="modal"
-					data-bs-target="#modal"
-					class='px-5 py-2 border-0 rounded btn-lightRed text-center text-white '>
-					<span class='chargePrice'></span>원결제하기
-				</button>
-			</div>
+		<div class='col p-2 border border-2 contents shadow-sm'>
+			<b>코스 금액</b><span id='tourPrice'>${tour.tourPrice}</span><br>
+			<b>할인 금액</b><span id='salePrice'>1</span>원<br><br>
+			<b>총 결제 금액</b><span class='chargePrice'></span>
 		</div>
 	</div>
-	<footer> </footer>
+	<div class='row d-block'>
+		<div class='col p-2'>
+			<b>필수안내 약관</b>
+		</div>
+		<div class='col p-2 border border-2 contents shadow-sm'>
+			<span id='termContent'>${term.termContent}</span><br>
+		</div>
+		<div class='col p-2 text-left'>
+			<input type='checkbox' id='agreeCheckbox'
+				class='form-check d-inline align-middle'> <label
+				for='agreeCheckbox' class='form-check-label align-middle'>
+				상기 필수안내 약관에 동의합니다. </label>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='col mt-5 d-flex justify-content-center'>
+			<button id='paymentBtn' type='button' data-bs-toggle="modal"
+				data-bs-target="#modal"
+				class='px-5 py-2 border-0 rounded btn-lightRed text-center text-white '>
+				<span class='chargePrice'></span>원결제하기
+			</button>
+		</div>
+	</div>
+</div>
+<footer></footer>
 </body>
-
 </html>

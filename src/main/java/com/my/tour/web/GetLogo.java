@@ -1,4 +1,4 @@
-package com.my.tour;
+package com.my.tour.web;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -8,19 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.my.tour.service.AdminService;
+import com.my.tour.service.UserService;
 
 @Component
 @Aspect
 public class GetLogo {
-	@Autowired private AdminService adminService;
+	@Autowired private UserService userService;
 	
 	@Around("execution(org.springframework.web.servlet.ModelAndView com.my.tour.web..*(..))")
 	public ModelAndView getLogo(JoinPoint jp) throws Throwable {
 		ModelAndView mv = (ModelAndView) ((ProceedingJoinPoint) jp).proceed();
 		
-		if(adminService.getLogos().size() != 0) {
-			mv.addObject("logoName", adminService.getLogos().get(0).getLogoName());
+		if(userService.getLogos().size() != 0) {
+			mv.addObject("logoName", userService.getLogos().get(0).getLogoName());
 		}
 		
 		return mv;

@@ -15,7 +15,7 @@
 $(() => {	
 	$('#fixNoticeBtn').click(() => {
 		if($('#noticeNum:checked').val()){
-			$('#fixNoticeBtn').attr('href', '../notice/fixDelNotice?noticeNum=' + $('#noticeNum:checked').val())
+			$('#fixNoticeBtn').attr('href', '../notice/fixNotice?noticeNum=' + $('#noticeNum:checked').val())
 		}		
 	})
 	

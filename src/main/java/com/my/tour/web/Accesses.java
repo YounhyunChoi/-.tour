@@ -1,14 +1,15 @@
-package com.my.tour;
+package com.my.tour.web;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.my.tour.service.AdminService;
+import com.my.tour.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -16,9 +17,9 @@ import jakarta.servlet.http.HttpSession;
 @Component
 @Aspect
 public class Accesses {
-	@Autowired private AdminService adminService;
+	@Autowired private UserService userService;
 	
-	@After("@annotation(com.my.tour.UserAccess) && args(mv, session, ..)")
+	@After("@annotation(com.my.tour.web.UserAccess) && args(mv, session, ..)")
 	public ModelAndView userAccessRight(JoinPoint jp, ModelAndView mv,
 									HttpSession session) {
 		if(session.getAttribute("userId") != null) {
@@ -28,7 +29,7 @@ public class Accesses {
 		return mv;
 	}	
 	
-	@After("@annotation(com.my.tour.LoginAccess) && args(mv, session, ..)")
+	@After("@annotation(com.my.tour.web.LoginAccess) && args(mv, session, ..)")
 	public ModelAndView loginAccessRight(JoinPoint jp, ModelAndView mv,
 									HttpSession session) {
 		if(session.getAttribute("userId") == null) {
@@ -38,22 +39,22 @@ public class Accesses {
 		return mv;
 	}
 	
-	@After("@annotation(com.my.tour.AdminAccess) && args(mv, session, ..)")
+	@After("@annotation(com.my.tour.web.AdminAccess) && args(mv, session, ..)")
 	public ModelAndView adminAccessRight(JoinPoint jp, ModelAndView mv,
 									HttpSession session) {
 		if(session.getAttribute("userId") == null) {
 			mv.setViewName("redirect:/user/login");
-		} else if(adminService.getAdmin((String) session.getAttribute("userId")).size() == 0) {
+		} else if(userService.getAdmin((String) session.getAttribute("userId")).size() == 0) {
 			mv.setViewName("redirect:/");
 		}
 		
 		return mv;
 	}
 	
-	@After("@annotation(com.my.tour.GetAccess) && args(request, ..)")
+	@Around("@annotation(com.my.tour.web.GetAccess) && args(request, ..)")
 	public Object getAccessRight(JoinPoint jp, HttpServletRequest request) throws Throwable {
 		Object obj = ((ProceedingJoinPoint) jp).proceed();
-
+		
 		if (request.getHeader("REFERER") == null){
 			obj = null;
 		}

@@ -36,6 +36,7 @@ $(() => {
 	        if(faqs.length) {
 	            const faqArr = []        
 	            $.each(faqs, (i, faq) => {
+	            	let faqQuestion = `\${faq.faqQuestion}`
 	                faqArr.push(
 	                    `<div class='row mt-3'>
 				            <div class='col'>
@@ -44,13 +45,13 @@ $(() => {
 				                        <div class='faqQuestion'>
 				                        	\${faq.faqQuestion}
 				                        </div>
-				                        <button type='button' id='\${faq.faqQuestion}' class='faqBtn openBtn text-white border-0 rounded' 
-				                            data-bs-toggle='collapse' data-bs-target='#\${faq.faqQuestion}답변' aria-expanded='false'>
+				                        <button type='button' id='` + faqQuestion.replace(/ /gi, "") +  `' class='faqBtn openBtn text-white border-0 rounded' 
+				                            data-bs-toggle='collapse' data-bs-target='#` + faqQuestion.replace(/ /gi, "") + `답변' aria-expanded='false'>
 				                            <span>열기</span>	
 				                            <i class='bi bi-caret-down-fill'></i>
 				                        </button>
 				                    </div>
-				                    <div id='\${faq.faqQuestion}답변' class='collapse'>
+				                    <div id='` + faqQuestion.replace(/ /gi, "") + `답변' + class='collapse'>
 				                        <div class='faqAnswer card-body bg-white'>
 				                        	\${faq.faqAnswer}
 				                        </div>
@@ -64,7 +65,7 @@ $(() => {
 	            $('#faqContainer').append(faqArr.join(''))	
 				$('hr').eq($('hr').length - 1).remove()
 	            $.each(faqs, (i, faq) => {
-	            	btnFunction($(`#\${faq.faqQuestion}`))
+	            	btnFunction($(`#\${faq.faqQuestion}`.replace(/ /gi, "").replace(/\?/, "\\\?")))
 	            })
 	        } else {
 	        	$('#faqContainer').html(`

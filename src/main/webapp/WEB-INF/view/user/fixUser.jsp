@@ -68,33 +68,26 @@ $(() => {
     })
     
     $('#fixUserBtn').click(() => {
-    	$('#okBtn').off('click')
-    	
-    	showConfirmModal('수정하시겠습니까?')
-
-    	$('#okBtn').click(() => {
-    		if(passwordCheck && regexr.test($('#email').val()) && phoneCheck) {
-    	    	regexr = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/
-        		let mktg = $('#mktgAgreement').is(':checked') ? 'Y' : 'N'
-        				
-        		$.ajax({
-        			url: 'fixUser',
-        			method: 'put',
-        			contentType: 'application/json',
-        			data: JSON.stringify({
-        				userId: '${user.userId}',
-        				userPw: $('#userPw').val(),
-        				email: $('#email').val(),
-        				phoneNum: $('#phoneNum').val(),
-        				mktgAgreement: mktg
-        			})
-        		})
-        		
-        		showOkModal('회원이 수정되었습니다.', 'afterFixUser')
-        	} else {
-        		showOkModal('누락된 필수 입력사항이 있거나 휴대폰 인증이 완료되지 않았습니다.')
-        	}
-    	})
+    	if(passwordCheck && regexr.test($('#email').val()) && phoneCheck) {
+	    	regexr = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/
+    		let mktg = $('#mktgAgreement').is(':checked') ? 'Y' : 'N'
+    				
+    		$.ajax({
+    			url: 'fixUser',
+    			method: 'put',
+    			contentType: 'application/json',
+    			data: JSON.stringify({
+    				userId: '${user.userId}',
+    				userPw: $('#userPw').val(),
+    				email: $('#email').val(),
+    				phoneNum: $('#phoneNum').val(),
+    				mktgAgreement: mktg
+    			})
+    		})
+    		showOkModal('회원이 수정되었습니다.', 'afterFixUser')
+   		} else {
+       		showOkModal('누락된 필수 입력사항이 있거나 휴대폰 인증이 완료되지 않았습니다.')
+       	}
     })
     
     $('#delUserBtn').click(() => {

@@ -23,7 +23,7 @@ $.ajax({
 				faqQuestion = `\${faq.faqQuestion}`
 				faqArr.push(`
 					<div class='row form-control d-flex justify-content-center'>
-			            <span id=` + faqQuestion.replace(/ /gi, "") +  ` class='fs-2 align-self-center'>
+			            <span id='` + faqQuestion.replace(/ /gi, "") +  `' class='fs-2 align-self-center'>
 			                   \${faq.faqQuestion}
 			            </span>
 			        </div>
@@ -31,7 +31,7 @@ $.ajax({
 			})
 			$('#faqContainer').append(faqArr.join(''))
 			$.each(faqs, (i, faq) => {
-				faqQuestion = `\${faq.faqQuestion}`.replace(/ /gi, "")
+				faqQuestion = `\${faq.faqQuestion}`.replace(/ /gi, "").replace(/\?/, "\\\?")
 				$(`#\${faqQuestion}`).click(() => {
 					location.href=`change?faqQuestion=\${faq.faqQuestion}`
 				})
@@ -46,7 +46,6 @@ $.ajax({
                     </div>
               		</div>`)
 		}
-		$('#faqAddBtn').click(() => location.href='add')
 	}	
 })
 </script>
@@ -69,7 +68,7 @@ $.ajax({
                     <c:if test='${logoName != null}'>
 	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
 		           			<a href='../admin/main'>
-	                    		<img id='logo'/>
+	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
 	                    	</a>
                     	</div>
 					</c:if>
@@ -103,10 +102,10 @@ $.ajax({
     </div>
     <div class='row'>
     	<div class='form-control d-flex justify-content-end align-items-center border border-0 px-0'>
-         <button id='faqAddBtn' type='button' class='btn btn-darkBlue'>
+         <a id='faqAddBtn' type='button' class='btn btn-darkBlue' href='add'>
              <i class='bi bi-plus-circle'></i>
              <span>등록</span>
-         </button>
+         </a>
          </div>
      </div>
 </div>

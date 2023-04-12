@@ -9,7 +9,7 @@ if(userId != null) {
 %>    
 function listAlarm(){
 	$.ajax({
-		url: 'alarm/get',
+		url: '../alarm/get',
 		dataType: 'json',
 		success: alarms => {
 			if(alarms.length){
@@ -54,7 +54,7 @@ function listAlarm(){
 }
 
 $.ajax({
-	url: 'alarm/get',
+	url: '../alarm/get',
 	dataType: 'json',
 	success: alarms => {
 		if(alarms.length){

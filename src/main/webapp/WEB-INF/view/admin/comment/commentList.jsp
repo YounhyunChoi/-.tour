@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8'%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta charset='utf-8'>
@@ -11,33 +12,33 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script>
-	function commentList() {
-		$('#comments').empty()
-		
-		$.ajax({
-			url: 'adminList',
-			success: commentList => {
-				if(commentList.length) {
-					comments = []
-					commentList.forEacg(comment => {
-						comments.ufshift(
-								`<tr>
-			                    <td>\${comment.comtNum}</td>
-			                    <td>\${comment.comtContent}</td>
-			                    <td>\${comment.userId}</td>
-			                    <td>\${comment.comtDate}</td>
-			                    <td>
-			                        <a href='../comment/02.html' class='btn btn-darkBlue'>보기</a>
-			                    </td>
-			                </tr>`)
-					})
-					
-					$('#comments').append(comments.join(''))
-				} else $('#comments').append(
-						`<tr><td colspan='5' class='text-center'>댓글이 없습니다.</td></tr>`)
+$(() => {
+	$.ajax({
+		url: 'get',
+		success: commentList => {
+			if(commentList.length) {
+				comments = []
+				$.each(commentList, (i, comment) => {
+					comments.unshift(
+							`<tr>
+		                    <td>\${comment.comtNum}</td>
+		                    <td>\${comment.comtContent}</td>
+		                    <td>\${comment.userId}</td>
+		                    <td>\${comment.comtDate}</td>
+		                    <td>
+		                        <a href='../comment/02.html' class='btn btn-darkBlue'>보기</a>
+		                    </td>
+		                </tr>`)
+				})
+				
+				$('#comments').append(comments.join(''))
+			} else {
+				$('#comments').append(`<tr><td colspan='5' class='text-center'>댓글이 없습니다.</td></tr>`)
 			}
-		})
-	}
+					
+		}
+	})
+})
 </script>
 <title></title>
 <style>

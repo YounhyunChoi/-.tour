@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -23,6 +24,38 @@ function addWish() {
 }
 
 $(() => {
+	//여행코스 이미지
+	$.ajax({
+		url: 'getTourImages',
+		method: 'get',
+		data: {
+			tourNum: ${param.tourNum}
+		},
+		dataType: 'json',
+		success: tourImages => {
+			const tourArr = []
+			
+			if(!tourImages.length) {
+  				$('#tourImg').hide()
+  			} else {
+				$.each(tourImages, (i, tourImage) => {
+					if(i == 0) {
+						tourArr.push(
+							`<div class='carousel-item active'">
+		                        <img src='<c:url value="/attach/` + tourImage + `"/>' style="max-width:100%; height:100%;"/>
+		                    </div>`)
+					} else {
+						tourArr.push(
+							`<div class='carousel-item'">
+		                        <img src='<c:url value="/attach/` + tourImage + `"/>' style="max-width:100%; height:100%;"/>
+		                    </div>`)
+					}
+				})
+				$('#tourImgIn').append(tourArr.join(''))
+  			}
+		}
+	})
+	
 	//여행코스 조회
 	$.ajax({
 		url: 'get',
@@ -79,7 +112,6 @@ $(() => {
 		document.execCommand("copy")
 		document.body.removeChild(textarea)
 	
-		
 		showOkModal('링크가 복사되었습니다. 친구에게 공유해보세요.')
 	})
 
@@ -144,7 +176,9 @@ $(() => {
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill' id='navBackBtn' onclick="location.href='../tour'"></i></div>
+    <div class='float-start mt-3 ms-2'>
+    	<i class='bi bi-caret-left-fill' id='navBackBtn'></i>
+    </div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b id='tourTitle'></b></h2>
     </div>
@@ -154,8 +188,9 @@ $(() => {
         <div class='col'>
             <div class='row py-5 mt-4' id='tourImg'>
                 <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
-                    <div class='carousel-inner'>
-                        <div class='carousel-item active'>
+                    <div class='carousel-inner' id='tourImgIn'>
+                    	<!-- 여행코스 이미지 -->
+                        <!-- <div class='carousel-item active'>
                             <div class='items py-5'>여행코스이미지</div>
                         </div>
                         <div class='carousel-item'>
@@ -163,7 +198,7 @@ $(() => {
                         </div>
                         <div class='carousel-item'>
                             <div class='items py-5'>여행코스이미지</div>
-                        </div>
+                        </div> -->
                     </div>
                     <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
                         <i class="bi bi-chevron-left tourCarouselBtn"></i>

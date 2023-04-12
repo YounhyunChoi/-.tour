@@ -61,8 +61,10 @@ $(() => {
 	
 	//여행코스 등록
 	$('#tourAddBtn').click(() => {
-		if($('#tourImage').val() && $('#tourName').val() && $('#tourContent').val() &&
-						$('#tourSDate').val() && $('#tourEDate').val() && $('#tourPrice').val()) {
+		if($('#tourImage').val() && $('#tourName').val() && $('#tourName').val().length >= 10 &&
+						$('#tourSDate').val() && $('#tourEDate').val() &&
+						$('#tourSDate').val().replaceAll('-', '') < $('#tourEDate').val().replaceAll('-', '') &&
+						$('#tourPrice').val()) {
 			$.ajax({
 				url: 'add',
 				method: 'post',
@@ -83,11 +85,13 @@ $(() => {
 	    				method: 'post',
 	    				contentType: false,
 	    				processData: false,
-	    				data: formData
+	    				data: formData,
+	    				success: () => {
+	                        $(location).attr('href', 'adminList')
+	                    }
 	    			})
 	    		}
 			})
-	    	$('#tourAddBtn').attr('href', 'adminList')
 		} else {
 			if(!($('#tourName').val().length >= 10)) {
 				showOkModal('ERROR] 제목이 10글자 미만입니다.')
@@ -148,7 +152,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../tour/adminList'>상품목록</a> > <a href='../tour/adminAddView'>상품추가</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../tour/adminList'>상품목록</a> > <a href='../tour/add'>상품추가</a>
                 </h6>
             </div>
         </div>

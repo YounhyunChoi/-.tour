@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -11,7 +12,56 @@
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
 <script>
+function showTourImage() {
+	$.ajax({
+		url: 'getTourImages',
+		method: 'get',
+		data: {
+			tourNum: ${tourNum}
+		},
+		dataType: 'json',
+		success: tourImages => {
+			const tourImageArr = []
+			
+			if(tourImages.length) {
+				$.each(tourImages, (i, tourImageName) => {
+					if(i == 0) {
+						tourImageArr.push(
+								`<div class='carousel-item active'>
+			                        <img src='<c:url value="/attach/` + tourImageName + `"/>'style="max-width:100%; height:100%;"/>
+			                    </div>`)
+					} else {
+						tourImageArr.push(
+								`<div class='carousel-item'>
+			                        <img src='<c:url value="/attach/` + tourImageName + `"/>'style="max-width:100%; height:100%;"/>
+			                    </div>`)
+					}
+				})
+			}
+			$('#tourImages').empty()
+			$('#tourImages').append(tourImageArr.join(''))
+		}
+	})
+}
+
 $(() => {
+	//여행코스 이미지 불러오기
+	showTourImage()
+	
+	//여행코스 이미지 업로드 시 실행
+	$('#tourImage').change(() => {
+		let formData = new FormData($('#tourImageUp')[0])
+
+		$.ajax({
+			url: 'addTourImages',
+			method: 'post',
+			contentType: false,
+			processData: false,
+			data: formData,
+			success: showTourImage
+		})
+	})
+	
 	//여행코스 값을 폼에 불러오기
 	$.ajax({
 		url: 'get',
@@ -114,7 +164,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../main.html'>메인</a> > <a href='./01.html'>상품목록</a> > <a href='./03.html'>상품수정</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../tour/adminList'>상품목록</a> > <a href=`document.location.href;`>상품수정</a>
                 </h6>
             </div>
         </div>
@@ -126,12 +176,8 @@ $(() => {
             <div class='col-6'>
                 <div class='row py-5 mt-4' id='tourImg'>
                     <div class='carousel slide py-5' id='tourCarousel' data-ride='carousel'>
-                        <div class='carousel-inner'>
-                            <div class='carousel-item active'>
-                                <div class='items'>
-                                	<img src='<c:url value="#"/>'/>
-                                </div>
-                            </div>
+                        <div class='carousel-inner' id='tourImages'>
+                            <!-- 여행코스 이미지 -->
                         </div>
                         <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
                             <i class='bi bi-chevron-left tourCarouselBtn'></i>

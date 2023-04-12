@@ -31,7 +31,7 @@ $(() => {
 
 				$.each(tours, (i, tour) => {
 					$(`#tourItem\${tour.tourNum}`).click(() => {
-						location.href = `fixTour?tourNum=\${tour.tourNum}`
+						location.href = `fix?tourNum=\${tour.tourNum}`
 					})
 				})
 			} else {
@@ -62,7 +62,7 @@ $(() => {
 
 						$.each(tours, (i, tour) => {
 							$(`#tourItem\${tour.tourNum}`).click(() => {
-								location.href = `fixTour?tourNum=\${tour.tourNum}`
+								location.href = `fix?tourNum=\${tour.tourNum}`
 							})
 						})
 					} else {
@@ -127,7 +127,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../tour/adminList'>상품목록</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../tour/adminList'>상품목록</a>
                 </h6>
             </div>
         </div>

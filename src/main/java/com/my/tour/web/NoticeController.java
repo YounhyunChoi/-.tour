@@ -85,7 +85,8 @@ public class NoticeController {
    }
 
 	@GetMapping("fixNotice")
-	public ModelAndView fixNotice(ModelAndView mv, int noticeNum) {
+	@AdminAccess
+	public ModelAndView fixNotice(ModelAndView mv, HttpSession session, int noticeNum) {
 		mv.setViewName("admin/notice/fixNotice");
 		mv.addObject("noticeNum",noticeNum);
 		return mv;
@@ -94,6 +95,7 @@ public class NoticeController {
 	@PutMapping("fixNotice")
 	public void fixNotice(@RequestBody Notice notice) {
 		noticeService.fixNotice(notice);
+		System.out.println(notice);
 	}
 	
 	@DeleteMapping("delNotice")
@@ -103,6 +105,7 @@ public class NoticeController {
 	
 	//images
 	@GetMapping("getNoticeImage")
+	@AdminAccess
 	public List<String> getNoticeImages(int noticeNum){
 		List<String> noticeImageName = new ArrayList<String>();
 		if(noticeService.getNoticeImages(noticeNum).size() != 0) {

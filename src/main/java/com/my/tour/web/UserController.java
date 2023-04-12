@@ -43,13 +43,6 @@ public class UserController {
 		return mv;
 	}
 	
-	@GetMapping("adminNav")
-	public ModelAndView adminNavigation(ModelAndView mv) {
-		mv.setViewName("admin/navigation/navigation");
-		
-		return mv;
-	}
-	
 	@GetMapping("modal")
 	public ModelAndView modal(ModelAndView mv) {
 		mv.setViewName("navigation/modal");
@@ -213,7 +206,6 @@ public class UserController {
 	}
 	
 	@GetMapping("afterDelUser")
-	@LoginAccess
 	public ModelAndView afterDelUser(ModelAndView mv, HttpSession session) {
 		mv.setViewName("user/afterDelUser");
 		
@@ -228,9 +220,16 @@ public class UserController {
 		return mv;
 	}
 	
+	@GetMapping("adminNav")
+	public ModelAndView adminNavigation(ModelAndView mv) {
+		mv.setViewName("admin/navigation/navigation");
+		
+		return mv;
+	}
+	
 	@GetMapping("adminMain")
 	@AdminAccess
-	public ModelAndView main(ModelAndView mv, HttpSession session) {
+	public ModelAndView adminMain(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/main");
 		
 		return mv;

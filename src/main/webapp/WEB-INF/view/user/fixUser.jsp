@@ -84,7 +84,7 @@ $(() => {
     				mktgAgreement: mktg
     			})
     		})
-    		showOkModal('회원이 수정되었습니다.', 'afterFixUser')
+    		$('#fixUserBtn').attr('href', 'afterFixUser')
    		} else {
        		showOkModal('누락된 필수 입력사항이 있거나 휴대폰 인증이 완료되지 않았습니다.')
        	}
@@ -99,7 +99,7 @@ $(() => {
     			method: 'delete'
     		})
     		
-    		showOkModal('회원이 삭제되었습니다.', 'afterDelUser')
+    	$('#okBtn').attr('href', 'afterDelUser')
     	})
     })
 })
@@ -188,10 +188,10 @@ $(() => {
          <div class='row mt-4 d-felx flex-column'>
             <div class='col text-center'><a>*은 필수입력 사항입니다.</a></div>
             <div class='col mt-4 gap-2 d-flex justify-content-center'>
-               <button type='button' id='fixUserBtn' 
+               <a type='button' id='fixUserBtn' 
                class='userBtn btn btn-darkBlue border-0 rounded text-center text-white'>
                	확인
-               </button>
+               </a>
                <button type='button' id='delUserBtn' 
                class='userBtn btn btn-lightRed border-0 rounded text-center text-white'>
                	회원탈퇴

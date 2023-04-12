@@ -23,9 +23,9 @@ $('#faqAddBtn').click(() => {
 	    		data: {
 	    			faqQuestion: $('#questionInput').val(),
 	    			faqAnswer: $('#answerInput').val()
-	    		}
+	    		},
+	    		success: $('#faqAddBtn').attr('href', 'adminFaqList')
 	    	})
-	    	showOkModal('FAQ가 등록되었습니다.','adminFaqList')
 	    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
 	    	showOkModal('제목과 내용을 입력해주세요.')
 	    } else if(!$('#answerInput').val()){
@@ -54,14 +54,14 @@ $('#faqAddBtn').click(() => {
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
                     <c:if test='${logoName != null}'>
 	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
-		           			<a href='../admin/main'>
-	                    		<img id='logo'/>
+		           			<a href='../user/adminMain'>
+	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
 	                    	</a>
                     	</div>
 					</c:if>
 					<c:if test='${logoName == null}'>
 						<div class='float-start m-4 ms-4'>
-							<a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
 								로고이미지
 							</a>
 						</div>
@@ -75,7 +75,7 @@ $('#faqAddBtn').click(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../faq/adminFaqList'>FAQ</a> > <a href='../faq/add'>FAQ추가</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../faq/adminFaqList'>FAQ</a> > <a href='../faq/add'>FAQ추가</a>
                 </h6>
             </div>
         </div>
@@ -105,10 +105,10 @@ $('#faqAddBtn').click(() => {
                 </div>
             </div>
             <div class='d-flex justify-content-end'>
-                <button type='button' id='faqAddBtn' class='btn btn-darkBlue'>
+                <a type='button' id='faqAddBtn' class='btn btn-darkBlue'>
                     <i class='bi bi-plus-circle'></i>
                     &nbsp;등록
-                </button>
+                </a>
             </div>
         </form>
    </div>

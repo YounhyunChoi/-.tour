@@ -9,13 +9,13 @@ import com.my.tour.domain.UserDto;
 
 public interface UserService {
 	List<UserDto> getUserDto(String userId);
-	List<Admin> getAdmin(String adminId);
 	List<UserDto> getUserOrAdmin(String userId);
 	int addUser(User user);
 	List<User> getUsers();
 	List<User> getUser(String userId); 
 	int fixUser(User user);
 	int deleteUser(String userId);
+	List<Admin> getAdmin(String adminId);
 	List<Logo> getLogos();
 	int addLogo(String logoName);
 }

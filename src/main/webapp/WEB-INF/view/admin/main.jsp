@@ -53,6 +53,34 @@ $(() => {
 			success: showLogo
 		})
 	})
+	
+	$.ajax({
+		url: '../notice/get',
+		method: 'get',
+		dataType: 'json',
+		success: notices => {
+			let html = ''
+			if(notices.length) {
+				$.each(notices, (i, notice) => {
+					if(i < 3) {
+						html += `
+							<li value='\${notice.noticeNum}'>
+	                            <a href='../notice/fixNotice?noticeNum=\${notice.noticeNum}'>
+	                            	\${notice.noticeTitle}
+	                            </a>
+	                            <p></p>
+	                            <p>작성일 \${notice.noticeDate}</p>
+	                            <hr>
+	                        </li>`
+					}
+				})
+			} else {
+				html += `<li>공지사항이 없습니다.</li>`
+			}
+			
+			$('#noticeList').append(html)
+		}
+	})
 })
 </script>
 <title>admin main</title>
@@ -167,7 +195,7 @@ $(() => {
             <div class='row'>
                 <div class='col'>
                     <div class='border border-dark p-5 mt-3 text-center'>
-                        <img />
+                        <img style='max-width: 100%; max-height: 100%;'/>
                     </div>
                 </div>
             </div>
@@ -181,49 +209,14 @@ $(() => {
             <div class='row pt-5'>
                 <div class='col noticeList'>
                     <div class='border border-dark rounded-3 pt-3 adminBody'>
-                        <ol reversed><h5 class='pb-2'><b>공지사항</b></h5>
-                            <li>
-                                <a href='../admin/notice/03.html'>[공지] 설 연휴 일정 변경 안내</a>
-                                <p></p>
-                                <p>작성일 2023-01-16</p>
-                                <hr>
-                            </li>
-                            <li>
-                                <a href='#'>[공지] 시스템 점검 안내</a>
-                                <p></p>
-                                <p>작성일 2022-12-10</p>
-                                <hr>
-                            </li>
-                            <li>
-                                <a href='#'>[공지] 코로나19관련 여행 안내</a>
-                                <p></p>
-                                <p>작성일 2022-05-05</p>
-                                <hr>
-                            </li>
+                        <ol id='noticeList'><h5 class='pb-2'><b>공지사항</b></h5>
                         </ol>
                     </div>
                 </div>
                 <div class='col noticeList'>
                     <div class='border border-dark rounded-3 pt-3 adminBody'>
-                        <ol reversed><h5 class='pb-2'><b>이벤트</b></h5>
-                            <li>
-                                <a href='../admin/event/03.html'>[EVENT] 설 특가 이벤트</a>
-                                <p></p>
-                                <p>작성일 2023-01-16</p>
-                                <hr>
-                            </li>
-                            <li>
-                                <a href='#'>[EVENT] 크리스마스 특가 이벤트</a>
-                                <p></p>
-                                <p>작성일 2022-12-10</p>
-                                <hr>
-                            </li>
-                            <li>
-                                <a href='#'>[EVENT] 가정의날 특가 이벤트</a>
-                                <p></p>
-                                <p>작성일 2022-05-05</p>
-                                <hr>
-                            </li>
+                        <ol id='eventList'><h5 class='pb-2'><b>이벤트</b></h5>
+                        	<li>이벤트가 없습니다.</li>
                         </ol>
                     </div>
                 </div>

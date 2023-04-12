@@ -39,11 +39,11 @@ $.ajax({
 		} else{
 			$('#faqContainer').html(`
         			<div class='row d-block my-5'>
-                    <div class='col text-center pt-4'>
-                        <h3 class='my-3'>
-                            FAQ가 없습니다.
-                        </h3>
-                    </div>
+                    	<div class='col text-center pt-4'>
+                        	<h3 class='my-3'>
+                            	FAQ가 없습니다.
+                        	</h3>
+                    	</div>
               		</div>`)
 		}
 	}	
@@ -67,14 +67,14 @@ $.ajax({
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
                     <c:if test='${logoName != null}'>
 	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
-		           			<a href='../admin/main'>
+		           			<a href='../user/adminMain'>
 	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
 	                    	</a>
                     	</div>
 					</c:if>
 					<c:if test='${logoName == null}'>
 						<div class='float-start m-4 ms-4'>
-							<a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
 								로고이미지
 							</a>
 						</div>
@@ -88,7 +88,7 @@ $.ajax({
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../faq/adminFaqList'>FAQ</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../faq/adminFaqList'>FAQ</a>
                 </h6>
             </div>
         </div>

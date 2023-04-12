@@ -15,7 +15,6 @@
 <script>
 
 function showNoticeImage() {
-	console.log("작동중")
 	$.ajax({
 		url: 'getNoticeImage',
 		method: 'get',
@@ -26,8 +25,6 @@ function showNoticeImage() {
 		success: noticeImages => {
 			const noticeImageArr = []
 			if(noticeImages.length != 1){
-				$('.bi').show()
-				
 				$.each(noticeImages, (i, noticeImage) => {
 					if(i == 1) {
 						noticeImageArr.push(
@@ -66,7 +63,7 @@ $(() => {
 			data: formData,
 			success: isGood => {
 				if(isGood) showNoticeImage()
-				else showOkModal('이미지는 4장까지 등록 할 수 있습니다.')
+				else showOkmodal('이미지는 최대 4장까지 등록 가능합니다.')
 			}
 		})
 	})
@@ -92,8 +89,7 @@ $(() => {
 	    			})
 	    		}
 	    	})
-	    	showOkModal('공지사항이 등록되었습니다.','adminList')
-	    	
+	    	$('#noticeRegistrationBtn').attr('href', 'adminList')
 	    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
 	})
 })
@@ -118,14 +114,14 @@ $(() => {
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
                     <c:if test='${logoName != null}'>
 	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
-		           			<a href='../admin/main'>
-	                    		<img id='logo'/>
+		           			<a href='../user/adminMain'>
+	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
 	                    	</a>
                     	</div>
 					</c:if>
 					<c:if test='${logoName == null}'>
 						<div class='float-start m-4 ms-4'>
-							<a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
 								로고이미지
 							</a>
 						</div>
@@ -139,7 +135,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList'>공지사항</a>  > <a href='../notice/adminAddView'>공지추가</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../notice/adminList'>공지사항</a>  > <a href='../notice/adminAddView'>공지추가</a>
                 </h6>
             </div>
         </div>
@@ -190,10 +186,10 @@ $(() => {
             </div>
         </div>
         <div class='d-flex justify-content-end'>
-            <button type='button' class='btn btn-darkBlue'id='noticeRegistrationBtn'>
+            <a type='button' class='btn btn-darkBlue'id='noticeRegistrationBtn'>
                 <i class='bi bi-plus-circle'></i>
                 &nbsp;등록
-            </button>
+            </a>
         </div>
    </div>
 </div>

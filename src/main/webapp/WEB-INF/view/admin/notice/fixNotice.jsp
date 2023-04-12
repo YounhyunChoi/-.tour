@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -22,9 +23,7 @@ function showNoticeImage() {
 		dataType: 'json',
 		success: noticeImages => {
 			const noticeImageArr = []
-			if(noticeImages.length > 4) {
-				showOkModal('이미지는 4장까지 업로드 할 수 있습니다.')
-			} else if(noticeImages.length != 1){
+			if(noticeImages.length != 1){
 				$('.bi').show()
 				
 				$.each(noticeImages, (i, noticeImage) => {
@@ -40,7 +39,7 @@ function showNoticeImage() {
 			                    </div>`)
 					}
 				})
-			} else {
+			} else {	
 				$('.bi').hide()
 			
 				noticeImageArr.push(
@@ -54,40 +53,68 @@ function showNoticeImage() {
 	})
 }
 
-$.ajax({
-	url: 'getNotice',
-	data: {
-		noticeNum: ${param.noticeNum}
-	},
-	dataType: 'json',
-	success: notices => {
-		let notice = notices.at(0)
-		$('#noticeTitle').val(`\${notice.noticeTitle}`)
-		$('#noticeContent').val(`\${notice.noticeContent}`)
-		
-	}
-})
 $(() => {
+	$.ajax({
+		url: 'getNotice',
+		data: {
+			noticeNum: ${param.noticeNum}
+		},
+		dataType: 'json',
+		success: notices => {
+			let notice = notices.at(0)
+			$('#noticeTitle').val(`\${notice.noticeTitle}`)
+			$('#noticeContent').val(`\${notice.noticeContent}`)
+			
+		}
+	})
+	
 	showNoticeImage()
+	
+		$('#noticeImageUp').find('input').change(() => {
+		let formData = new FormData($('#noticeImageUp')[0])	
+		$.ajax({
+			url: 'addNoticeImages',
+			method: 'post',
+			contentType: false,
+			processData: false,
+			data: formData,
+			success: isGood => {
+				if(isGood) showNoticeImage()
+				else showOkModal('이미지는 4장까지 등록 할 수 있습니다.')
+			}
+		})
+	})
 	
 	$('#fixNoticeBtn').click(() => {
 		let regexr = /[가-힣a-zA-Z0-9\s]{5}/
-		if(regexr.test($('#noticeTitle').val()) && $('#notcieContent').val()) {
+		if(regexr.test($('#noticeTitle').val()) && $('#noticeContent').val()) {
 			$.ajax({
 				url: 'fixNotice',
 				method: 'put',
-				data: {
-					noticeNum: `%{param.noticeNum}`,
+				contentType: 'application/json',
+				data: JSON.stringify({
+					noticeNum: ${noticeNum},
 					noticeTitle: $('#noticeTitle').val(),
-					noticeContent: $('#noticeContent').val()
-					
-				}
-
+					noticeContent: $('#noticeContent').val()	
+				})
 			})
 			showOkModal('공지사항이 수정되었습니다.', 'adminList')
 			
-		} else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
+		} else {
+			showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
+		}
 
+	})
+	//notice삭제
+	$('#delNoticeBtn').click(() => {
+		$.ajax({
+			url: 'delNotice',
+			method: 'delete',
+			data: {
+				noticeNum: `${param.noticeNum}`
+			}
+		})
+		showOkModal('공지사항을 삭제하시겠습니까?', 'adminList')
 	})
 })
 </script>

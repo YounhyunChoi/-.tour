@@ -6,5 +6,6 @@ import lombok.Data;
 public class Alarm {
 	private int alarmNum;
 	private String alarmContent;
+	private String whetherToCheck;
 	private String userId;
 }

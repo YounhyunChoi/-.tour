@@ -7,62 +7,20 @@
 <%
 if(userId != null) {
 %>    
-function listAlarm(){
-	$.ajax({
-		url: 'alarm/get',
-		dataType: 'json',
-		success: alarms => {
-			if(alarms.length){
-			const alarmArr = []
-			$.each(alarms, (i, alarm) => {
-				alarmArr.push(
-				`
-				<li class='border-bottom'>
-	              	<div class='row'>
-	                 		<div class='col-10'>
-	                    		<a class='dropdown-item alarm-item' href='#'>
-	                       		\${alarm.alarmContent}
-	                    		</a>
-	                 		</div>
-	                  	<div class='col-2 ps-0 pt-1'>
-	                     	<a alarmNum=\${alarm.alarmNum} type='button' class='alarmDelBtn btn-close'></a>
-	                  	</div>
-	              	</div>
-	           	</li>
-				`
-				)
-			})
-			$('#alarmContainer').append(alarmArr.join(''))
-			}else{
-				$('#alarmContainer').html(
-					`
-					<li class='border-bottom'>
-					         	<div class='row'>
-					    		<div class='col-10'>
-					       		<a class='dropdown-item alarm-item' href='#'>
-					       		알람이없습니다.
-					       		</a>
-					    		</div>
-					 	</div>
-					</li>
-					`
-				)
-			}
-		}
-	})
-	return alarms
-}
-
 $.ajax({
-	url: 'alarm/get',
+	url: '../alarm/get',
 	dataType: 'json',
 	success: alarms => {
 		if(alarms.length){
+		let test
 		const alarmArr = []
 		$.each(alarms, (i, alarm) => {
+			if(alarm.whetherToCheck == 'N'){
+				$('#alarmBedge').removeClass('invisible')
+			}
 			alarmArr.push(
 			`
-			<li class='border-bottom'>
+			<li class='alarmLi border-bottom'>
               	<div class='row'>
                  		<div class='col-10'>
                     		<a class='dropdown-item alarm-item' href='#'>
@@ -78,23 +36,47 @@ $.ajax({
 		})
 		$('#alarmContainer').append(alarmArr.join(''))
 		
-		$('#alarmBtn').click(() => {
-			$.each(alarms, (i, alarm) => {
-				
+		$('#alarmBtn').click(() => {		
+			$.ajax({
+				url: 'alarm/fix',
+				method: 'put',
+				data: {
+					whetherToCheck: 'Y'
+				},
+				success: () => {
+						$('#alarmBedge').addClass('invisible')
+				}
 			})
-		})
-		
-		$('.alarmDelBtn').each(function() {
-		 $(this).click(() => {
-			 $.ajax({
-					url: 'alarm/del',
-					method: 'delete',
-					data: {
-						alarmNum: $(this).attr('alarmNum')
-					},
-					success: listAlarm
+			$('.alarmDelBtn').each(function() {
+				 $(this).click(() => {
+					 $.ajax({
+							url: 'alarm/del',
+							method: 'delete',
+							data: {
+								alarmNum: $(this).attr('alarmNum')
+							},
+							success: () => {
+								$(this).closest('li').remove()
+								if($('.alarmLi').length == 0){
+									$('#alarmContainer').html(
+											`
+											<li class='border-bottom'>
+											         	<div class='row'>
+											    		<div class='col-10'>
+											       		<a class='dropdown-item alarm-item' href='#'>
+											       		알람이없습니다.
+											       		</a>
+											    		</div>
+											 	</div>
+											</li>
+											`
+										)
+								}
+							}
+						})
+				 })
 				})
-		 })
+			
 		})
 		}else{
 			$('#alarmContainer').html(
@@ -116,7 +98,7 @@ $.ajax({
 <%
 }
 %>    
-</script>	
+</script>
 <div class='container' id='header'>
     <div class='row' id='navbarHeader'>
         <nav class='navbar fixed-top' id='navbarHeader'>
@@ -142,8 +124,10 @@ $.ajax({
 	                  	<a id='alarmBtn' class='btn' type='button' 
 	                  	data-bs-toggle='dropdown' data-bs-auto-close="false" aria-expanded='false'>
 	                     	<i class='icon bi bi-bell-fill justify-content-end'></i>
+	                     	<span id='alarmBedge' class="position-absolute top-0 start-90 translate-middle rounded-circle bg-danger p-1 invisible"></span>
 	                  	</a>
-	                  	<ul id='alarmContainer' class='dropdown-menu dropdown-menu-end alarm overflow-y-auto'>
+	                  	<ul id='alarmContainer' class='dropdown-menu dropdown-menu-end alarm' 
+	                  	style="overflow-y: clip;">
 	                     	
 	                  	</ul>
 	               	</span>

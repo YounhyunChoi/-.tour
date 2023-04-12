@@ -31,8 +31,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public void addNoticeTemp(String adminId, int noticeSize) {
-		noticeDao.insertNoticeTemp(adminId, noticeSize);
+	public void addNoticeTemp(int noticeTempNum, String adminId) {
+		noticeDao.insertNoticeTemp(noticeTempNum, adminId);
 	}
 	
 	@Override

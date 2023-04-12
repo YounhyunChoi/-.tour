@@ -9,7 +9,7 @@ public interface NoticeService {
 	List<Notice> getNotices();
 	List<Notice> getAllNotices();
 	List<Notice> getNotice(int noticeNum);
-	void addNoticeTemp(String adminId, int noticeSize);
+	void addNoticeTemp(int noticeTempNum, String adminId);
 	void addNotice(String noticeTitle, String noticeContent, String adminId);
 	void fixNotice(Notice notice);
 	void delNotice(int noticeNum);

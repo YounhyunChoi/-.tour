@@ -13,8 +13,8 @@ public class TourImageDaoImpl implements TourImageDao {
 	@Autowired private TourImageMap tourImageMap;
 	
 	@Override
-	public List<TourImage> selectTourImages() {
-		return tourImageMap.selectTourImages();
+	public List<TourImage> selectTourImages(int tourNum) {
+		return tourImageMap.selectTourImages(tourNum);
 	}
 
 	@Override
@@ -22,4 +22,8 @@ public class TourImageDaoImpl implements TourImageDao {
 		return tourImageMap.insertTourImage(tourImageName, tourNum);
 	}
 
+	@Override
+	public int deleteTourImage(int tourNum) {
+		return tourImageMap.deleteTourImage(tourNum);
+	}
 }

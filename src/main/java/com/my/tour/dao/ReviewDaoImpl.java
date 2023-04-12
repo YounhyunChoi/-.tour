@@ -24,12 +24,12 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	
 	@Override
-	public int insertReview(String reviewTitle, String reviewContent, int score) {
+	public int insertReview(String reviewTitle, String reviewContent, double score) {
 		return reviewMap.insertReview(reviewTitle, reviewContent, score);
 	}
 	
 	@Override
-	public int updateReview(String reviewTitle, String reviewContent, int score) {
+	public int updateReview(String reviewTitle, String reviewContent, double score) {
 		return reviewMap.updateReview(reviewTitle, reviewContent, score);
 	}
 	

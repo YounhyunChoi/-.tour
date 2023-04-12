@@ -34,6 +34,8 @@ $(() => {
 						location.href = `fixTour?tourNum=\${tour.tourNum}`
 					})
 				})
+			} else {
+				$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
 			}
 		}
 	})
@@ -74,7 +76,7 @@ $(() => {
 	
 	//여행상품 등록으로 이동
 	$('#tourAddBtn').click(() => {
-		location.href = '../tour/addTour'
+		location.href = '../tour/add'
 	})
 })
 </script>

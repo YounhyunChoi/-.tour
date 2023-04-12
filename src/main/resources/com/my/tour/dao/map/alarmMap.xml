@@ -3,15 +3,22 @@
 	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='com.my.tour.dao.map.AlarmMap'>
 	<select id='selectAlarms' resultType='alarm'>
-		select alarm_num, alarm_content, user_id
+		select alarm_num, alarm_content, whether_to_check, user_id
 		from alarms
 		where user_id = #{userId}
 	</select>
 	
 	<insert id='insertAlarm'>
-		insert into alarms( alarm_num, alarm_content, user_id)
-		values (alarm_num_seq.nextval, #{alarmContent}, #{userId})
+		insert into alarms( alarm_num, alarm_content, whether_to_check, user_id)
+		values (alarm_num_seq.nextval, #{alarmContent}, 'N', #{userId})
 	</insert>
+	
+	<update id='updateAlarm'>
+		update alarms
+		set whether_to_check = #{whetherToCheck}
+		where user_id = #{userId}
+	</update>
+	
 	<delete id='deleteAlarm'>
 		delete alarms
 		where alarm_num = #{alarmNum}

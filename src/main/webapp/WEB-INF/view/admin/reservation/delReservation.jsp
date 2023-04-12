@@ -88,7 +88,6 @@ $.ajax({
 										},
 										success: () => {
 											changeAttr($(this), '취소됨', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
-											//알람추가하자
 										}
 									})
 								})

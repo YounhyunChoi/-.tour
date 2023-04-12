@@ -28,8 +28,8 @@ public class NoticeDaoImpl implements NoticeDao {
 	}
 	
 	@Override
-	public int insertNoticeTemp(String adminId, int noticeSize) {
-		return noticeMap.insertNoticeTemp(adminId, noticeSize);
+	public int insertNoticeTemp(int noticeTempNum, String adminId) {
+		return noticeMap.insertNoticeTemp(noticeTempNum, adminId);
 	}
 	
 	@Override

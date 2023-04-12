@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -21,38 +22,33 @@ function showTourImage() {
 		dataType: 'json',
 		success: tourImages => {
 			const tourImageArr = []
-			if(!tourImages.length){
-				$('#tourImg').hide()
-			} else if(tourImages.length != 1){
-				$.each(tourImages, (i, tourImage) => {
-					if(i == 1) {
+			
+			if(tourImages.length) {
+				$.each(tourImages, (i, tourImageName) => {
+					if(i == 0) {
 						tourImageArr.push(
 								`<div class='carousel-item active'>
-			                        <img src='<c:url value="/attach/` + tourImage + `"/>'style="max-width:100%; height:100%;"/>
+			                        <img src='<c:url value="/attach/` + tourImageName + `"/>'style="max-width:100%; height:100%;"/>
 			                    </div>`)
 					} else {
 						tourImageArr.push(
 								`<div class='carousel-item'>
-			                        <img src='<c:url value="/attach/` + tourImage + `"/>'style="max-width:100%; height:100%;"/>
+			                        <img src='<c:url value="/attach/` + tourImageName + `"/>'style="max-width:100%; height:100%;"/>
 			                    </div>`)
 					}
 				})
-			} else {
-				$('.bi').hide()
-			
-				tourImageArr.push(
-						`<div class='carousel-item active'>
-	                        <img src='<c:url value="/attach/` + tourImages[0] + `"/>'style="max-width:100%; height:100%;"/>
-	                    </div>`)
 			}
+			$('#tourImages').empty()
 			$('#tourImages').append(tourImageArr.join(''))
 		}
 	})
 }
 
 $(() => {
-	$('#tourImageUp').find('input').change(() => {
-		let formData = new FormData($('#tourImageUp')[0])	
+	//이미지 업로드 시 실행
+	$('#tourImage').change(() => {
+		let formData = new FormData($('#tourImageUp')[0])
+
 		$.ajax({
 			url: 'addTourImages',
 			method: 'post',
@@ -63,38 +59,44 @@ $(() => {
 		})
 	})
 	
+	//여행코스 등록
 	$('#tourAddBtn').click(() => {
-		if($('#tourName').val() && $('#tourContent').val() &&
-				$('#tourSDate').val() && $('#tourEDate').val() && $('#tourPrice').val()) {
-			showConfirmModal('여행코스를 등록하시겠습니까?', '여행코스가 등록되었습니다.', '../tour/adminList')
-			
-			$('#okBtn').click(() => {
-				$.ajax({
-					url: '../tour/adminAdd',
-					method: 'post',
-					contentType: 'application/json',
-					data: JSON.stringify({
-						tourName: $('#tourName').val(),
-						tourContent: $('#tourContent').val(),
-						tourSDate: $('#tourSDate').val(),
-						tourEDate: $('#tourEDate').val(),
-						tourPrice: $('#tourPrice').val(),
-						termNum: 1
-					}),
-					success: () => {
-		    			let formData = new FormData($('#tourImageUp')[0])	
-		    			$.ajax({
-		    				url: 'addTourImages',
-		    				method: 'post',
-		    				contentType: false,
-		    				processData: false,
-		    				data: formData
-		    			})
-		    		}
-				})
+		if($('#tourImage').val() && $('#tourName').val() && $('#tourContent').val() &&
+						$('#tourSDate').val() && $('#tourEDate').val() && $('#tourPrice').val()) {
+			$.ajax({
+				url: 'add',
+				method: 'post',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					tourName: $('#tourName').val(),
+					tourContent: $('#tourContent').val(),
+					tourSDate: $('#tourSDate').val(),
+					tourEDate: $('#tourEDate').val(),
+					tourPrice: $('#tourPrice').val(),
+					termNum: 1
+				}),
+				success: () => {
+	    			let formData = new FormData($('#tourImageUp')[0])
+	    			
+	    			$.ajax({
+	    				url: 'addTourImages',
+	    				method: 'post',
+	    				contentType: false,
+	    				processData: false,
+	    				data: formData
+	    			})
+	    		}
 			})
+	    	$('#tourAddBtn').attr('href', 'adminList')
 		} else {
-			showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
+			if(!($('#tourName').val().length >= 10)) {
+				showOkModal('ERROR] 제목이 10글자 미만입니다.')
+			} else if(($('#tourSDate').val().replaceAll('-', '') >= $('#tourEDate').val().replaceAll('-', ''))
+					&& $('#tourSDate').val()) {
+				showOkModal('ERROR] 여행코스시작일은 여행코스종료일보다 크거나 같을 수 없습니다.')
+			} else {
+				showOkModal('ERROR] 누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
+			}
 		}
 	})
 })
@@ -123,7 +125,20 @@ $(() => {
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
+                    <c:if test='${logoName != null}'>
+	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
+		           			<a href='../admin/main'>
+	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+	                    	</a>
+                    	</div>
+					</c:if>
+					<c:if test='${logoName == null}'>
+						<div class='float-start m-4 ms-4'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>
+								로고이미지
+							</a>
+						</div>
+					</c:if>
                     <h1 class='text-center pt-3 text-white'><b>상품추가</b></h1>
                 </div>
             </div>
@@ -163,7 +178,7 @@ $(() => {
         <div class='row'>
             <div class='col'>
             	<form id='tourImageUp'>
-					<input type='file' name='tourImage' accept='image/*' multiple/>
+					<input type='file' id='tourImage' name='tourImage' accept='image/*' multiple/>
 				</form>
             </div>
         </div>
@@ -173,7 +188,7 @@ $(() => {
                     제목
                 </div>
                 <div class='col-8'>
-                    <input type='text' class='form-control' id='tourName'/>
+                    <input type='text' class='form-control' id='tourName' minlength='10'/>
                 </div>
             </div>
             <div class='row mt-2 align-items-center'>
@@ -206,9 +221,9 @@ $(() => {
             </div>
             <div class='row justify-content-end me-5 mt-2'>
                 <div class='col-2 align-self-center'>
-                    <button id='tourAddBtn' type='button' class='btn btn-darkBlue' data-bs-toggle='modal' data-bs-target='#modal'>
+                    <a id='tourAddBtn' type='button' class='btn btn-darkBlue'>
                         <span class='bi bi-plus-circle text-nowrap'>&nbsp;등록</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </form>

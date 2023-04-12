@@ -9,7 +9,7 @@ public class Review {
 	private int reviewNum;
 	private String reviewTitle;
 	private String reviewContent;
-	private Double score;
+	private double score;
 	private LocalDate reviewDate;
 	private String userId;
 	private int tourNum;

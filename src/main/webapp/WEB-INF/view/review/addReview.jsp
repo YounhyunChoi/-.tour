@@ -13,29 +13,57 @@
 <script src='../res/modal.js'></script>
 <title>addReview</title>
 <script>
-    $(() => {
-        $('#reviewAddBtn').click(() => {
-            showConfirmModal('후기를 등록하시겠습니까?')
-            
-            $('#okBtn').click(() => {
-            	if($('#reviewTitle').val() && $('#reviewContent').val() && $('#reviewimageNum').val() && $('#score').val()) {
-            		let review = {
-            				reviewTitle: $('#reviewTitle').val(),
-            				reviewContent: $('#reviewContent').val(),
-            				reviewimageNum: $('#reviewimageNum').val(),
-            				score: $('score').val()
-            		}
-            		
-            		$.ajax({
-            			url: 'add',
-            			method: 'post',
-            			data: review,
-            			success: listReviews
-            		})
-            	}
-            })
-        })
+$(() => {
+	selectScore()
+	
+    $('#reviewAddBtn').click(() => {  
+    	let regexr = /[a-zA-Z가-힣0-9]{5}/
+    	
+       	if(regexr.test($('#reviewTitle').val()) && $('#reviewContent').val()) {
+       		$.ajax({
+       			url: 'add',
+       			method: 'post',
+       			data: {
+       	   				reviewTitle: $('#reviewTitle').val(),
+       	   				reviewContent: $('#reviewContent').val(),
+       	   				score: $('#rangeScore').val(),
+       	   				tourNum: ${tourNum}
+       	       	},
+       			success: () => {
+       				let formData = new FormData($('#reviewImageUp')[0])
+       				$.ajax({
+       					url: 'addReviewImages',
+       					method: 'post',
+       					contentType: false,
+       					processData: false,
+       					data: formData
+       				})
+       			}
+       		})
+       		$('#reviewAddBtn').attr('href', 'my')
+       	} else {
+       		showOkModal('제목이 5자리 미만이거나 특수문자가 포함되어 있습니다.')
+       	}
     })
+    
+    $('#rangeScore').change(selectScore)
+})
+
+function selectScore() {
+	let html = ''
+    	
+   	for(let i = 0; i < 5; i++) {
+		if($('#rangeScore').val() - i >= 1) {
+			html += `<i class='bi bi-star-fill'></i>`
+		} else if($('#rangeScore').val() - i == 0.5) {
+			html += `<i class='bi bi-star-half'></i>`
+		} else {
+			html += `<i class='bi bi-star'></i>`
+		}
+	}
+   	
+   	$('#starScore').html(html)
+}
 </script>
 <style>
     .contentBtn {
@@ -45,12 +73,15 @@
     
     #starScore {
     	position: absolute;
-    	right: 0;
+    	right: 25px;
+    	width: 131.5px;
     }
     
     #rangeScore {
     	position: absolute;
-    	right: 0;
+    	right: 14.2px;
+    	width: 152.8px;
+    	opacity: 0;
     }
 </style>
 </head>
@@ -79,32 +110,31 @@
     <div class='row mb-2'>
         <div class='col-2'></div>
         <div class='col-4 text-start'>
-            <input type='file' id='inputImg' class='d-none'>
-            <button type='button'
-                class='reviewimageNum contentBtn border-0 btn-lightGray rounded text-white'>
-                <label for='inputImg'>사진추가</label>
-            </button>
+        	<form id='reviewImageUp'>
+	        	<input type='file' id='inputImg' class='d-none'>
+	            <button type='button'
+	                class='reviewimageNum contentBtn border-0 btn-lightGray rounded text-white'>
+	                <label for='inputImg'>사진추가</label>
+	            </button>
+        	</form>
+            
         </div>
-        <div class='col-6 text-end'>
-            <div class='d-flex align-itmes-center fs-4'>
-            	평점&nbsp
-           		<span id='starScore'>
-           			<i class='bi bi-star'></i>
-           			<i class='bi bi-star'></i>
-           			<i class='bi bi-star'></i>
-           			<i class='bi bi-star'></i>
-           			<i class='bi bi-star'></i>
-           		</span>
-           		<input type='range' value='0' step='1' min='0' max='10' id='rangeScore'/>
-            </div>
+        <div class='col-2 d-flex justify-content-end p-0 fs-4'
+        	style='padding-top: 0.19rem! important;'>
+           	평점
+        </div>
+        <div class='col d-flex align-items-center fs-4'>
+       		<span id='starScore' class='d-flex justify-content-between'>
+       		</span>
+       		<input type='range' value='0.5' step='0.5' min='0.5' max='5' id='rangeScore'/>
         </div>
     </div>
     <div class='row'>
         <div class='col text-end'>
-            <button type='button' id='reviewAddBtn' 
+            <a type='button' id='reviewAddBtn' 
                 class='contentBtn border border-0 rounded  btn-darkBlue text-white'>
                 등록
-            </button>
+            </a>
         </div>
     </div>
 </div>

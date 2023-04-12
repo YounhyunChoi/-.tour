@@ -14,7 +14,7 @@
 		order by comt_date
 	</select>
 	<insert id='insertComment'>
-		insert into comments
+		insert into comments(comt_num, comt_content, comt_date, review_num, user_id)
 		values(comt_num_seq.nextval, #{comtContent}, to_date(sysdate, 'YYYY-MM-DD'), #{reviewNum}, #{userId})
 	</insert>
 	

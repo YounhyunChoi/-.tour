@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.my.tour.dao.AdminDao;
+import com.my.tour.dao.LogoDao;
 import com.my.tour.dao.UserDao;
 import com.my.tour.domain.Admin;
+import com.my.tour.domain.Logo;
 import com.my.tour.domain.User;
 import com.my.tour.domain.UserDto;
 
@@ -15,6 +17,7 @@ import com.my.tour.domain.UserDto;
 public class UserServiceImpl implements UserService {
 	@Autowired private UserDao userDao;
 	@Autowired private AdminDao adminDao;
+	@Autowired LogoDao logoDao;
 	
 	@Override
 	public List<UserDto> getUserDto(String userId) {
@@ -61,5 +64,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int deleteUser(String userId) {
 		return userDao.deleteUser(userId);
+	}
+	
+	@Override
+	public List<Admin> getAdmin(String adminId) {
+		return adminDao.selectAdmin(adminId);
+	}
+
+	@Override
+	public List<Logo> getLogos() {
+		return logoDao.selectLogos();
+	}
+
+	@Override
+	public int addLogo(String logoName) {
+		return logoDao.insertLogo(logoName);
 	}
 }

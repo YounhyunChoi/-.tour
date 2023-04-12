@@ -12,21 +12,84 @@
 <script src='../../res/modal.js'></script>
 <title>ADMIN.NOTICE.03 공지 수정</title>
 <script>
-$(() => {
+function showNoticeImage() {
 	$.ajax({
-		url: 'getNotice',
+		url: 'getNoticeImage',
+		method: 'get',
 		data: {
-			noticeNum: ${param.noticeNum}
+			noticeNum: ${noticeNum}
 		},
 		dataType: 'json',
-		success: notices => {
-			const noticeArr = []
-			let notice = notices.at(0)
+		success: noticeImages => {
+			const noticeImageArr = []
+			if(noticeImages.length > 4) {
+				showOkModal('이미지는 4장까지 업로드 할 수 있습니다.')
+			} else if(noticeImages.length != 1){
+				$('.bi').show()
+				
+				$.each(noticeImages, (i, noticeImage) => {
+					if(i == 1) {
+						noticeImageArr.push(
+								`<div class='carousel-item active'>
+			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'style="max-width:100%; height:100%;"/>
+			                    </div>`)
+					} else {
+						noticeImageArr.push(
+								`<div class='carousel-item'>
+			                        <img src='<c:url value="/attach/` + noticeImage + `"/>'style="max-width:100%; height:100%;"/>
+			                    </div>`)
+					}
+				})
+			} else {
+				$('.bi').hide()
 			
+				noticeImageArr.push(
+						`<div class='carousel-item active'>
+	                        <img src='<c:url value="/attach/` + noticeImages[0] + `"/>'style="max-width:100%; height:100%;"/>
+	                    </div>`)
+			}
+			$('#noticeImages').empty()
+			$('#noticeImages').append(noticeImageArr.join(''))
 		}
 	})
-})
+}
 
+$.ajax({
+	url: 'getNotice',
+	data: {
+		noticeNum: ${param.noticeNum}
+	},
+	dataType: 'json',
+	success: notices => {
+		let notice = notices.at(0)
+		$('#noticeTitle').val(`\${notice.noticeTitle}`)
+		$('#noticeContent').val(`\${notice.noticeContent}`)
+		
+	}
+})
+$(() => {
+	showNoticeImage()
+	
+	$('#fixNoticeBtn').click(() => {
+		let regexr = /[가-힣a-zA-Z0-9\s]{5}/
+		if(regexr.test($('#noticeTitle').val()) && $('#notcieContent').val()) {
+			$.ajax({
+				url: 'fixNotice',
+				method: 'put',
+				data: {
+					noticeNum: `%{param.noticeNum}`,
+					noticeTitle: $('#noticeTitle').val(),
+					noticeContent: $('#noticeContent').val()
+					
+				}
+
+			})
+			showOkModal('공지사항이 수정되었습니다.', 'adminList')
+			
+		} else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
+
+	})
+})
 </script>
 <style>
     #noticeImg {
@@ -56,7 +119,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList''>공지사항</a>  > <a href='../notice/adminFixView'>공지수정</a>
+                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList'>공지사항</a>  > <a href='../notice/adminFixView'>공지수정</a>
                 </h6>
             </div>
         </div>
@@ -70,7 +133,7 @@ $(() => {
                    <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
                </label>
                <div class='col shadow-sm'>
-                   <input type='text' class='form-control' id='noticeTitle' maxlength='30' value='${notice.noticeTitle}'/>
+                   <input type='text' class='form-control' id='noticeTitle' maxlength='30'/>
                </div>
            </div>
        </div>
@@ -102,7 +165,7 @@ $(() => {
                    <h5 class='align-items-center text-nowrap pt-1'>내용</h5>
                </label>
                <div class='col'>
-                   <textarea class='form-control shadow-sm' rows='10' id='noticeContent' maxlength='300'>${notice.notcieContent}</textarea>
+                   <textarea class='form-control shadow-sm' rows='10' id='noticeContent' maxlength='300'></textarea>
                </div>
            </div>
        </div>

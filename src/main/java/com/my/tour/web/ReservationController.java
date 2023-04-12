@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.my.tour.AdminAccess;
-import com.my.tour.GetAccess;
 import com.my.tour.domain.Reservation;
 import com.my.tour.domain.Tour;
 import com.my.tour.service.AlarmService;

@@ -1,9 +1,12 @@
 package com.my.tour.web;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +16,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.my.tour.GetAccess;
-import com.my.tour.LoginAccess;
-import com.my.tour.UserAccess;
+import com.my.tour.domain.Logo;
+import com.my.tour.domain.LogoDto;
 import com.my.tour.domain.User;
 import com.my.tour.domain.UserDto;
 import com.my.tour.service.UserService;
@@ -31,10 +34,18 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("user")
 public class UserController {
 	@Autowired private UserService userService;
+	@Value("${attachPath}") private String attachPath;
 	
 	@GetMapping("nav")
 	public ModelAndView navigation(ModelAndView mv) {
 		mv.setViewName("navigation/navigation");
+		
+		return mv;
+	}
+	
+	@GetMapping("adminNav")
+	public ModelAndView adminNavigation(ModelAndView mv) {
+		mv.setViewName("admin/navigation/navigation");
 		
 		return mv;
 	}
@@ -94,7 +105,7 @@ public class UserController {
 			
 			mv.setViewName(url);
 		} else {
-			mv.setViewName("redirect:/admin/main");
+			mv.setViewName("redirect:/user/adminMain");
 		}
 		
 		return mv;
@@ -215,5 +226,34 @@ public class UserController {
 		mv.setViewName("user/myPage");
 		
 		return mv;
+	}
+	
+	@GetMapping("adminMain")
+	@AdminAccess
+	public ModelAndView main(ModelAndView mv, HttpSession session) {
+		mv.setViewName("admin/main");
+		
+		return mv;
+	}
+	
+	@GetMapping("getLogos")
+	public List<Logo> getLogos() {
+		return userService.getLogos();
+	}
+	
+	@PostMapping("addLogo")
+	public void addLogo(LogoDto logoDto) {
+		String filename = "logo" + logoDto.getLogoImage().getOriginalFilename();
+		if(!filename.equals("logo")) {
+			saveFile(attachPath + "/" + filename, logoDto.getLogoImage());
+			
+			userService.addLogo(filename);
+		}
+	}
+	
+	private void saveFile(String filename, MultipartFile file) {
+		try {
+			file.transferTo(new File(filename));
+		} catch(IOException e) {}
 	}
 }

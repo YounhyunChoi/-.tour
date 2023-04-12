@@ -15,6 +15,7 @@
 <script>
 
 function showNoticeImage() {
+	console.log("작동중")
 	$.ajax({
 		url: 'getNoticeImage',
 		method: 'get',
@@ -25,6 +26,8 @@ function showNoticeImage() {
 		success: noticeImages => {
 			const noticeImageArr = []
 			if(noticeImages.length != 1){
+				$('.bi').show()
+				
 				$.each(noticeImages, (i, noticeImage) => {
 					if(i == 1) {
 						noticeImageArr.push(
@@ -61,12 +64,15 @@ $(() => {
 			contentType: false,
 			processData: false,
 			data: formData,
-			success: showNoticeImage
+			success: isGood => {
+				if(isGood) showNoticeImage()
+				else showOkModal('이미지는 4장까지 등록 할 수 있습니다.')
+			}
 		})
 	})
 	
 	$('#noticeRegistrationBtn').click(() => {
-		let regexr = /[가-힣a-zA-Z0-9]{5}/
+		let regexr = /[가-힣a-zA-Z0-9\s]{5}/
 	    if(regexr.test($('#noticeTitle').val()) && $('#noticeContent').val()){
    			$.ajax({
 	    		url: 'addNotice',

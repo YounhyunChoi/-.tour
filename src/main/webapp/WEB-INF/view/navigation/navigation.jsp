@@ -29,7 +29,8 @@ function listAlarm(){
 	                  	</div>
 	              	</div>
 	           	</li>
-				`)
+				`
+				)
 			})
 			$('#alarmContainer').append(alarmArr.join(''))
 			}else{
@@ -49,6 +50,7 @@ function listAlarm(){
 			}
 		}
 	})
+	return alarms
 }
 
 $.ajax({
@@ -75,6 +77,12 @@ $.ajax({
 			`)
 		})
 		$('#alarmContainer').append(alarmArr.join(''))
+		
+		$('#alarmBtn').click(() => {
+			$.each(alarms, (i, alarm) => {
+				
+			})
+		})
 		
 		$('.alarmDelBtn').each(function() {
 		 $(this).click(() => {

@@ -45,11 +45,16 @@ $(() => {
 	//여행상품 리스트
 	tourList()
 	
-	//검색
+	//검색 개발중
 	$('#searchBtn').click(() => {
-		$('#tourContent').empty()
+		if(!$('#tourContent').children().val()) {
+			$('#tourContent').empty()
+			$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
+		}
 		
 		if($('#tourSearch').val()) {
+			$('#tourContent').empty()
+			
 			$.ajax({
 				url: 'getList',
 				success: tours => {
@@ -70,17 +75,17 @@ $(() => {
 								})
 							})
 						}
-						
 						$('#tourContent').append(tourSearchArr.join(''))
+						
+						/* if(!$('#tourContent').children().val()) {
+							$('#tourContent').empty()
+							$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
+						} */
 					})
 				}
 			})
 		} else {
-			$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
-		}
-		
-		if(!$('#tourContent').children().val()) {
-			$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
+			tourList()
 		}
 	})
 	

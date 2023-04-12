@@ -11,7 +11,17 @@
 	
 	<select id='selectReviewImage' resultType='reviewImage'>
 		select reviewimage_id, reviewimage_name
-		from reviewImages
+		from review_images
 		where review_num = #{reviewNum} and reviewimage_id = 1
 	</select>
+	
+	<insert id='insertReviewImage'>
+		insert review_images
+		values (reviewimage_num_seq.nextval, #{reviewImageName}, #{reviewNum})
+	</insert>
+	
+	<delete id='deleteReviewImage'>
+		delete review_images
+		where review_num = #{reviewNum}
+	</delete>
 </mapper>

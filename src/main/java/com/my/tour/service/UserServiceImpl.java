@@ -17,7 +17,7 @@ import com.my.tour.domain.UserDto;
 public class UserServiceImpl implements UserService {
 	@Autowired private UserDao userDao;
 	@Autowired private AdminDao adminDao;
-	@Autowired LogoDao logoDao;
+	@Autowired private LogoDao logoDao;
 	
 	@Override
 	public List<UserDto> getUserDto(String userId) {

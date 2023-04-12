@@ -5,7 +5,7 @@
             <div class='pb-4' id='modalMsg'></div>
             <div id='modalBtn'>
                 <button type='button' class='btn btn-lightGray' data-bs-dismiss='modal'>아니오</button>
-                <button type='button' class='btn btn-darkBlue' id='okBtn'>예</button>
+                <a type='button' class='btn btn-darkBlue' id='okBtn'>예</a>
             </div>
             <div id='modalOk'>
                 <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>

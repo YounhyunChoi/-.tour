@@ -24,7 +24,7 @@ public class CommentController {
 	@Autowired private CommentService commentService;
 	
 	@GetMapping("add")
-	public ModelAndView addComment(ModelAndView mv) {
+	public ModelAndView addComment(ModelAndView mv, int reviewNum) {
 		mv.setViewName("comment/addComment");
 		return mv;
 	}
@@ -35,6 +35,7 @@ public class CommentController {
 	}
 	
 	@GetMapping("get")
+	@GetAccess
 	public List<Comment> getComments() {
 		return commentService.getComments();
 	}
@@ -63,14 +64,10 @@ public class CommentController {
 		return mv;
 	}
 	
-	@GetMapping("admindel")
+	@GetMapping("adminDel")
+	@AdminAccess
 	public ModelAndView delComment(ModelAndView mv) {
 		mv.setViewName("admin/comment/delComment");
 		return mv;
-	}
-	
-	@DeleteMapping("admindel")
-	public int admindelComent(@PathVariable int comtNum) {
-		return commentService.delComment(comtNum);
 	}
 }

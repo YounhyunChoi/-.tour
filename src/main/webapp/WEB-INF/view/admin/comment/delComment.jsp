@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8'%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta charset='utf-8'>
@@ -15,15 +16,15 @@
 <script>
     $(() => {
         $('#delete').click(() => {
-        	showConfirmModal('댓글을 삭제하시겠습니까?', '댓글이 삭제되었습니다.', '../comment/01.html')
-        	$('#okBtn').click(() => {
-        		$.ajax({
-        			url: 'del',
-        			method: 'delete'
-        		})
-        	})
+       		$.ajax({
+       			url: 'del',
+       			method: 'delete',
+       			data: {
+       				comtNum: `${param.comtNum}`
+       			}
+       		})
+       		showOkModal('댓글을 삭제하시겠습니까?', 'adminList')
         })
-        
     })
 </script>
 <style>
@@ -91,8 +92,7 @@
                 <h6 class='pt-4'>작성일 2023-03-09</h6>
             </div>
             <div class='col-1 d-flex justify-content-end'>
-                <a class='icon btn bi bi-x' data-bs-toggle='modal' 
-                id='delete' data-bs-target='#modal'></a>
+                <a class='icon btn bi bi-x' id='delete'></a>
             </div>
         </div>
     </div>  

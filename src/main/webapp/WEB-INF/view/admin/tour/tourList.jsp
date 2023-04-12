@@ -31,7 +31,7 @@ $(() => {
 
 				$.each(tours, (i, tour) => {
 					$(`#tourItem\${tour.tourNum}`).click(() => {
-						location.href = `fixTour?tourNum=\${tour.tourNum}`
+						location.href = `fix?tourNum=\${tour.tourNum}`
 					})
 				})
 			} else {
@@ -45,11 +45,12 @@ $(() => {
 		$.ajax({
 			url: 'getList',
 			success: tours => {
-				$.each(tours, (i, tour) => {
-					if($('#tourSearch').val().includes(tour.tourName)) {
+				let tourArr = tours.filter(tour => (tour.tourName).includes($('#tourSearch').val()))
+
+				if(tourArr.length) {
+					$.each(tourArr, (i, tour) => {
 						$('#tourContent').empty()
 						const tourSearchArr = []
-						let tourSearchText = ""
 						
 						tourSearchArr.push(
 							`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
@@ -57,19 +58,18 @@ $(() => {
 				                <div class='text-truncate'>\${tour.tourName}</div>
 				            </div>`
 						)
-						tourSearchArr.unshift(tourSearchText)
 						$('#tourContent').append(tourSearchArr.join(''))
-
+						
 						$.each(tours, (i, tour) => {
 							$(`#tourItem\${tour.tourNum}`).click(() => {
-								location.href = `fixTour?tourNum=\${tour.tourNum}`
+								location.href = `fix?tourNum=\${tour.tourNum}`
 							})
 						})
-					} else {
-						$('#tourContent').empty()
-						$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
-					}
-				})
+					})
+				} else {
+					$('#tourContent').empty()
+					$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
+				}
 			}
 		})
 	})
@@ -127,7 +127,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../tour/adminList'>상품목록</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../tour/adminList'>상품목록</a>
                 </h6>
             </div>
         </div>

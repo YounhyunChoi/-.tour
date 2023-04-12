@@ -11,7 +11,7 @@
 	
 	<insert id='insertReservation'>
 		insert into reservations
-		values (resv_num_seq.nextval, #{chargePrice}, #{resvDate}, #{whetherToCancel}, #{userId}, #{tourNum})
+		values (resv_num_seq.nextval, #{chargePrice}, sysdate, 'N', #{userId}, #{tourNum})
 	</insert>
 	
 	<update id='updateReservation'>

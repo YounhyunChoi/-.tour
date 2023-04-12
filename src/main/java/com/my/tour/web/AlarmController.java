@@ -20,6 +20,7 @@ public class AlarmController {
 	@Autowired private AlarmService alarmService;
 	
 	@GetMapping("get")
+	@GetAccess
 	public List<Alarm> getAlarms(HttpSession session){
 		return alarmService.getAlarms((String)session.getAttribute("userId"));
 	}

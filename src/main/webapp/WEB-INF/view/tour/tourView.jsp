@@ -49,7 +49,7 @@ $(() => {
 						success: reservations => {
 							let msg
 							$.each(reservations, (i, reservation) => {
-								if(${param.tourNum} == reservation.tourNum){
+								if(${param.tourNum} == reservation.tourNum && reservation.whetherToCancel == 'N'){
 									msg = '이미 예약한 코스입니다.'
 								}						
 							})

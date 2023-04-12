@@ -83,7 +83,7 @@ $.ajax({
 										data: {
 											resvNum: $(this).attr('id'),
 											whetherToCancel: 'Y',
-											tourName: tourName,
+											tourName: $(this).parent().prev().prev().text() + '이취소되었습니다.',
 											userId: `${param.userId}`
 										},
 										success: () => {

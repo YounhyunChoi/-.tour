@@ -21,4 +21,14 @@ public class ReviewImageDaoImpl implements ReviewImageDao {
 	public List<ReviewImage> selectReviewImage(int reviewNum) {
 		return reviewImageMap.selectReviewImages(reviewNum);
 	}
+
+	@Override
+	public int insertReviewImage(String reviewImageName, int reviewNum) {
+		return reviewImageMap.insertReviewImage(reviewImageName, reviewNum);
+	}
+
+	@Override
+	public int deleteReviewImage(int reviewNum) {
+		return reviewImageMap.deleteReviewImage(reviewNum);
+	}
 }

@@ -68,9 +68,11 @@ public class NoticeController {
 	public ModelAndView addNotice(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/notice/addNotice");
 		
-		if(noticeService.getAllNotices().size() == 0 ||
-			!noticeService.getAllNotices().get(0).getNoticeTitle().equals("temp")) {
-			noticeService.addNoticeTemp((String) session.getAttribute("userId"), noticeService.getAllNotices().size());
+		if(noticeService.getAllNotices().size() == 0) {
+			noticeService.addNoticeTemp(1, (String) session.getAttribute("userId"));
+		} else if (!noticeService.getAllNotices().get(0).getNoticeTitle().equals("temp")){
+			noticeService.addNoticeTemp(noticeService.getNotices().get(0).getNoticeNum() + 1,
+										(String) session.getAttribute("userId"));
 		}
 		
 		mv.addObject("noticeNum", noticeService.getAllNotices().get(0).getNoticeNum());
@@ -118,25 +120,25 @@ public class NoticeController {
 	}
 	
 	@PostMapping("addNoticeImages")
-	   public boolean addNoticeImages(@RequestParam("noticeImage") List<MultipartFile> noticeImage) {
-	      if(noticeImage.size() > 4) {
-	         return false;
-	      } else {
-	         int noticeNum = noticeService.getAllNotices().get(0).getNoticeNum();
-	         String filename = "";
-	         
-	         noticeService.delNoticeImage(noticeNum);
-	         
-	         for(MultipartFile multipartfile: noticeImage) {
-	            filename = "notice" + multipartfile.getOriginalFilename();
-	            if(!filename.equals("notice")) {
-	               saveFile(attachPath + "/" + filename, multipartfile);
-	               noticeService.addNoticeImage(filename, noticeNum);
-	            }
-	         }
-	         return true;
-	      }
-	   }
+	public boolean addNoticeImages(@RequestParam("noticeImage") List<MultipartFile> noticeImage) {
+		if(noticeImage.size() > 4) {
+			return false;
+		} else {
+			int noticeNum = noticeService.getAllNotices().get(0).getNoticeNum();
+			String filename = "";
+         
+			noticeService.delNoticeImage(noticeNum);
+         
+			for(MultipartFile multipartfile: noticeImage) {
+				filename = "notice" + multipartfile.getOriginalFilename();
+				if(!filename.equals("notice")) {
+					saveFile(attachPath + "/" + filename, multipartfile);
+					noticeService.addNoticeImage(filename, noticeNum);
+				}
+			}
+         return true;
+      }
+   }
 
    private void saveFile(String filename, MultipartFile file) {
       try {

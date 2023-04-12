@@ -27,7 +27,7 @@ $(() => {
        	   				reviewTitle: $('#reviewTitle').val(),
        	   				reviewContent: $('#reviewContent').val(),
        	   				score: $('#rangeScore').val(),
-       	   				tourNum: ${tourNum}
+       	   				tourNum: ${param.tourNum}
        	       	},
        			success: () => {
        				let formData = new FormData($('#reviewImageUp')[0])
@@ -98,7 +98,7 @@ function selectScore() {
     <div class='row mb-3 d-flex justify-content-between'>
         <div class='col-2 text-end text-nowrap'><b class='fs-4'>제목</b></div>
         <div class='col-10'>
-            <input type='text' maxlength='30' class='form-control shadow-sm reviewTitle'>
+            <input id='reviewTitle' type='text' maxlength='30' class='form-control shadow-sm'>
         </div>
     </div>
     <div class='row mb-3 d-flex justify-content-between'>
@@ -110,14 +110,13 @@ function selectScore() {
     <div class='row mb-2'>
         <div class='col-2'></div>
         <div class='col-4 text-start'>
-        	<form id='reviewImageUp'>
+        	<form id='reviewImageUp' class='mb-0'>
 	        	<input type='file' id='inputImg' class='d-none'>
 	            <button type='button'
 	                class='reviewimageNum contentBtn border-0 btn-lightGray rounded text-white'>
 	                <label for='inputImg'>사진추가</label>
 	            </button>
         	</form>
-            
         </div>
         <div class='col-2 d-flex justify-content-end p-0 fs-4'
         	style='padding-top: 0.19rem! important;'>
@@ -132,7 +131,7 @@ function selectScore() {
     <div class='row'>
         <div class='col text-end'>
             <a type='button' id='reviewAddBtn' 
-                class='contentBtn border border-0 rounded  btn-darkBlue text-white'>
+                class='contentBtn border border-0 rounded btn btn-darkBlue text-white'>
                 등록
             </a>
         </div>

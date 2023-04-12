@@ -11,10 +11,12 @@ import com.my.tour.domain.Tour;
 public interface ReviewService {
 	List<Review> getReviews();
 	List<ReviewDto> getMyReviews(String userId);
+	List<ReviewDto> getMyReview(String userId, int tourNum);
 	List<ReviewImage> getReviewImage(int reviewNum);
 	List<Reservation> getReservations(String userId);
 	List<Tour> getTour(int tourNum);
-	int addReview(String reviewTitle, String reviewContent, double score);
+	int addReview(String reviewTitle, String reviewContent, double score,
+				String userId, int tourNum);
 	int addReviewImage(String reviewImageName, int reviewNum);
 	int delReviewImage(int reviewNum);
 	int fixReview(String reviewTitle, String reviewContent, double score);

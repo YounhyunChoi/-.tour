@@ -10,18 +10,27 @@
 	</select>
 	
 	<select id='selectMyReviews' resultType='reviewDto'>
-		select review_num, tour_name, review_title, score, review_date, user_id
+		select review_num, tour_name, review_title, score, review_date, user_id, tour_num
 		from reviews join tours
 		using (tour_num)
 		where user_id = #{userId}
 		order by review_num desc
 	</select>
 	
+	<select id='selectMyReview' resultType='reviewDto'>
+		select review_num, tour_name, review_title, score, review_date, user_id, tour_num
+		from reviews join tours
+		using (tour_num)
+		where user_id = #{userId}
+			and tour_num = #{tourNum}
+		order by review_num desc
+	</select>
+	
 	<insert id='insertReview'>
-		insert into reviews(review_num, review_title, score, 
-		         review_date, review_content, reviewimage_id, user_id, tour_num)
-		values(review_num_seq.nextval, #{review_title}, #{score},
-				to_date(sysdate, 'YYYY-MM-DD'), #{review_content}, #{reviewimage_id}, #{user_id}, #{tour_num})
+		insert into reviews(review_num, review_title, review_content, score, 
+		         review_date, user_id, tour_num)
+		values(review_num_seq.nextval, #{reviewTitle}, #{reviewContent}, #{score},
+				to_char(sysdate, 'YYYY-MM-DD'), #{userId}, #{tourNum})
 	</insert>	
 	
 	<update id='updateReview'>

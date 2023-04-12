@@ -83,11 +83,13 @@ $(() => {
 	    				method: 'post',
 	    				contentType: false,
 	    				processData: false,
-	    				data: formData
+	    				data: formData,
+	    				success: () => {
+	    					$(location).attr('href', 'adminList')
+	    				}
 	    			})
 	    		}
 			})
-	    	$('#tourAddBtn').attr('href', 'adminList')
 		} else {
 			if(!($('#tourName').val().length >= 10)) {
 				showOkModal('ERROR] 제목이 10글자 미만입니다.')

@@ -22,10 +22,16 @@ public class ReviewDaoImpl implements ReviewDao {
 	public List<ReviewDto> selectMyReviews(String userId) {
 		return reviewMap.selectMyReviews(userId);
 	}
+
+	@Override
+	public List<ReviewDto> selectMyReview(String userId, int tourNum) {
+		return reviewMap.selectMyReview(userId, tourNum);
+	}
 	
 	@Override
-	public int insertReview(String reviewTitle, String reviewContent, double score) {
-		return reviewMap.insertReview(reviewTitle, reviewContent, score);
+	public int insertReview(String reviewTitle, String reviewContent, double score,
+							String userId, int tourNum) {
+		return reviewMap.insertReview(reviewTitle, reviewContent, score, userId, tourNum);
 	}
 	
 	@Override

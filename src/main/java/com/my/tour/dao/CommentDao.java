@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.my.tour.domain.Comment;
 
-import jakarta.servlet.http.HttpSession;
-
 public interface CommentDao {
 	List<Comment> selectComments();
 	int insertComment(String comtContent, String userId, int reviewNum);

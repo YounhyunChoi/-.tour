@@ -141,6 +141,7 @@ public class TourController {
 			return false;
 		} else {
 			for(MultipartFile multipartfile: tourImage) {
+				System.out.println(multipartfile);
 				filename = "tour" + multipartfile.getOriginalFilename();
 				if(!filename.equals("tour")) {
 					saveFile(attachPath + "/" + filename, multipartfile);

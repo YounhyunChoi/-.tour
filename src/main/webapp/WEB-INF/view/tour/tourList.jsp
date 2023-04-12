@@ -78,7 +78,7 @@ $(() => {
 </div>
 <div class='container'>
 	<div class='row mb-4' id='tourContainer'>
-	
+		<!-- 여행상품 리스트 -->
 	</div>
 </div>
 <footer>

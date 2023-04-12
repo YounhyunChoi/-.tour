@@ -11,8 +11,8 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script>
-$(() => {
-	//여행상품 리스트
+//여행상품 리스트
+function tourList() {
 	$.ajax({
 		url: 'getList',
 		success: tours => {
@@ -39,39 +39,49 @@ $(() => {
 			}
 		}
 	})
+}
+
+$(() => {
+	//여행상품 리스트
+	tourList()
 	
 	//검색
 	$('#searchBtn').click(() => {
-		$.ajax({
-			url: 'getList',
-			success: tours => {
-				let tourArr = tours.filter(tour => (tour.tourName).includes($('#tourSearch').val()))
-
-				if(tourArr.length) {
-					$.each(tourArr, (i, tour) => {
-						$('#tourContent').empty()
+		$('#tourContent').empty()
+		
+		if($('#tourSearch').val()) {
+			$.ajax({
+				url: 'getList',
+				success: tours => {
+					$.each(tours, (i, tour) => {
 						const tourSearchArr = []
 						
-						tourSearchArr.push(
-							`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-								<img src='<c:url value="/attach/` + tour.tourImageName + `"/>'style="max-width:100%; height:100%;"/>
-				                <div class='text-truncate'>\${tour.tourName}</div>
-				            </div>`
-						)
-						$('#tourContent').append(tourSearchArr.join(''))
-						
-						$.each(tours, (i, tour) => {
-							$(`#tourItem\${tour.tourNum}`).click(() => {
-								location.href = `fix?tourNum=\${tour.tourNum}`
+						if((tour.tourName).includes($('#tourSearch').val())) {
+							tourSearchArr.push(
+								`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
+									<img src='<c:url value="/attach/` + tour.tourImageName + `"/>'style="max-width:100%; height:100%;"/>
+					                <div class='text-truncate'>\${tour.tourName}</div>
+					            </div>`
+							)
+							
+							$.each(tours, (i, tour) => {
+								$(`#tourItem\${tour.tourNum}`).click(() => {
+									location.href = `fix?tourNum=\${tour.tourNum}`
+								})
 							})
-						})
+						}
+						
+						$('#tourContent').append(tourSearchArr.join(''))
 					})
-				} else {
-					$('#tourContent').empty()
-					$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
 				}
-			}
-		})
+			})
+		} else {
+			$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
+		}
+		
+		if(!$('#tourContent').children().val()) {
+			$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
+		}
 	})
 	
 	//여행상품 등록으로 이동

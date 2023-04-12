@@ -82,10 +82,13 @@ $.ajax({
 										method: 'put',
 										data: {
 											resvNum: $(this).attr('id'),
-											whetherToCancel: 'Y'
+											whetherToCancel: 'Y',
+											tourName: tourName,
+											userId: `${param.userId}`
 										},
 										success: () => {
 											changeAttr($(this), '취소됨', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
+											//알람추가하자
 										}
 									})
 								})

@@ -1,5 +1,6 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
-<html id='twbsPagination'>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'/>
@@ -9,60 +10,71 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
-<script src='../../res/twbsPagination.js'></script>
 <script>
 $(() => {
+	//여행상품 리스트
 	$.ajax({
-		url: 'get',
+		url: 'getList',
 		success: tours => {
-			//검색
-			/* --- */
+			const tourArr = []
 			
-			//페이지네이션
-			//하나의 페이지에 보여줄 상품 수
-			let pageSize = 6;
-			//상품의 총 개수
-			let totalCount = tours.length;
-			//전체 페이지 수
-			let totalPages = Math.ceil(totalCount / pageSize);
-				$('#indexNum').twbsPagination({
-					totalPages: totalPages,
-					first: '<span aria-hidden="true">&laquo;</span>',
-					prev: '<span aria-hidden="true">&lsaquo;</span>',
-					next: '<span aria-hidden="true">&rsaquo;</span>',
-			        last: '<span aria-hidden="true">&raquo;</span>',
-					onPageClick: function (e, page) {
-						$('#tourContent').empty()
-						const tourArr = []
-						let tourText = ""
-						
-						if(totalCount) {
-							$.each(tours, (i, tour) => {
-								if(Math.floor(i / pageSize) == page - 1) {
-									tourText += 
-										`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-							                <div class='py-5 border border-3 text-nowrap'>여행코스이미지</div>
-							                <div class='text-truncate'>\${tour.tourName}</div>
-							            </div>`
-								}
-							})
-						}
-						
-						tourArr.unshift(tourText)
-						$('#tourContent').append(tourArr.join(''))
-						
-						$.each(tours, (i, tour) => {
-							$(`#tourItem\${tour.tourNum}`).click(() => {
-								location.href = `adminFixDelView?tourNum=\${tour.tourNum}`
-							})
-						})
-					}
+			if(tours.length) {
+				$.each(tours, (i, tour) => {
+					tourArr.push(
+						`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
+							<img src='<c:url value="/attach/` + tour.tourImageName + `"/>'style="max-width:100%; height:100%;"/>
+			                <div class='text-truncate'>\${tour.tourName}</div>
+			            </div>`
+					)
 				})
+				$('#tourContent').append(tourArr.join(''))
+
+				$.each(tours, (i, tour) => {
+					$(`#tourItem\${tour.tourNum}`).click(() => {
+						location.href = `fixTour?tourNum=\${tour.tourNum}`
+					})
+				})
+			}
 		}
 	})
 	
+	//검색
+	$('#searchBtn').click(() => {
+		$.ajax({
+			url: 'getList',
+			success: tours => {
+				$.each(tours, (i, tour) => {
+					if($('#tourSearch').val().includes(tour.tourName)) {
+						$('#tourContent').empty()
+						const tourSearchArr = []
+						let tourSearchText = ""
+						
+						tourSearchArr.push(
+							`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
+								<img src='<c:url value="/attach/` + tour.tourImageName + `"/>'style="max-width:100%; height:100%;"/>
+				                <div class='text-truncate'>\${tour.tourName}</div>
+				            </div>`
+						)
+						tourSearchArr.unshift(tourSearchText)
+						$('#tourContent').append(tourSearchArr.join(''))
+
+						$.each(tours, (i, tour) => {
+							$(`#tourItem\${tour.tourNum}`).click(() => {
+								location.href = `fixTour?tourNum=\${tour.tourNum}`
+							})
+						})
+					} else {
+						$('#tourContent').empty()
+						$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
+					}
+				})
+			}
+		})
+	})
+	
+	//여행상품 등록으로 이동
 	$('#tourAddBtn').click(() => {
-		location.href = '../tour/adminAddView'
+		location.href = '../tour/addTour'
 	})
 })
 </script>
@@ -90,7 +102,20 @@ $(() => {
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
+                    <c:if test='${logoName != null}'>
+	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
+		           			<a href='../admin/main'>
+	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+	                    	</a>
+                    	</div>
+					</c:if>
+					<c:if test='${logoName == null}'>
+						<div class='float-start m-4 ms-4'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>
+								로고이미지
+							</a>
+						</div>
+					</c:if>
                     <h1 class='text-center pt-3 text-white'><b>상품목록</b></h1>
                 </div>
             </div>

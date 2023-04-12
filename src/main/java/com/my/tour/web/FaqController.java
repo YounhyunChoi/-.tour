@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.my.tour.domain.Faq;
 import com.my.tour.service.FaqService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -23,7 +24,7 @@ public class FaqController {
 	
 	@GetMapping("get")
 	@GetAccess
-	public List<Faq> getFaqs() {
+	public List<Faq> getFaqs(HttpServletRequest request) {
 		return faqService.getFaqs();
 	}
 	@GetMapping

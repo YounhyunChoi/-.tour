@@ -15,8 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.my.tour.domain.Reservation;
 import com.my.tour.domain.Tour;
+import com.my.tour.service.AlarmService;
 import com.my.tour.service.ReservationService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -24,29 +26,36 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("reservation")
 public class ReservationController {
 	@Autowired private ReservationService reservationService;
+	@Autowired private AlarmService alarmService;
 	
 	@GetMapping("get")
 	public List<Reservation> getReservations(HttpSession session) {
 		return reservationService.getReservations((String)session.getAttribute("userId"));
 	}
 	
+	
+	@GetMapping("tours")
+	@GetAccess
+	public List<Tour> getTours(HttpServletRequest request){
+		return reservationService.getTours();
+	}
+	
 	@GetMapping("adminGet")
+	@AdminAccess
 	public List<Reservation> getReservations(String userId) {
 		return reservationService.getReservations(userId);
 	}
 	
-	@GetMapping("tours")
-	public List<Tour> getTours(){
-		return reservationService.getTours();
-	}
 	
 	@GetMapping("list")
+	@AdminAccess
 	public ModelAndView reservationList(ModelAndView mv) {
 		mv.setViewName("reservation/reservationList");
 		return mv;
 	}
 	
 	@GetMapping("add")
+	@AdminAccess
 	public ModelAndView addReservation(ModelAndView mv, int tourNum) {
 		Tour tour = reservationService.getTour(tourNum).get(0);
 		mv.setViewName("reservation/addReservation");
@@ -63,7 +72,8 @@ public class ReservationController {
 	}
 	
 	@PutMapping("fix")
-	public 	void fixReservation(int resvNum, String whetherToCancel) {
+	public 	void fixReservation(int resvNum, String whetherToCancel, String tourName, String userId) {
+		alarmService.addAlarm(tourName, userId);
 		reservationService.fixReservation(resvNum, whetherToCancel);
 	}
 	
@@ -74,7 +84,7 @@ public class ReservationController {
 	}
 	
 	@DeleteMapping("del")
-	public void delReservation(int resvNum, String userId) {
+	public void delReservation(int resvNum, String userId, HttpSession session) {
 		reservationService.delReservation(resvNum, userId);
-	}
+	}	
 }

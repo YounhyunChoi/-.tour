@@ -23,6 +23,11 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 	
 	@Override
+	public void fixAlarm(String userId, String whetherToCheck) {
+		alarmDao.updateAlarm(userId, whetherToCheck);
+	}
+	
+	@Override
 	public void delAlarm(int alarmNum) {
 		alarmDao.deleteAlarm(alarmNum);
 	}

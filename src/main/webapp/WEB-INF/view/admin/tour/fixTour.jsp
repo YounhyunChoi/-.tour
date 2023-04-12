@@ -48,20 +48,6 @@ $(() => {
 	//여행코스 이미지 불러오기
 	showTourImage()
 	
-	//여행코스 이미지 업로드 시 실행
-	$('#tourImage').change(() => {
-		let formData = new FormData($('#tourImageUp')[0])
-
-		$.ajax({
-			url: 'addTourImages',
-			method: 'post',
-			contentType: false,
-			processData: false,
-			data: formData,
-			success: showTourImage
-		})
-	})
-	
 	//여행코스 값을 폼에 불러오기
 	$.ajax({
 		url: 'get',
@@ -78,33 +64,55 @@ $(() => {
 		}
 	})
 	
+	//여행코스 이미지 수정시 실행
+	$('#tourImage').change(() => {
+		let formData = new FormData($('#tourImageUp')[0])
+
+		$.ajax({
+			url: 'addTourImages',
+			method: 'post',
+			contentType: false,
+			processData: false,
+			data: formData,
+			success: showTourImage
+		})
+	})
+	
 	//여행코스 수정
 	$('#tourFixBtn').click(() => {
-		if($('#tourName').val() && $('#tourSDate').val() &&
-				$('#tourEDate').val() && $('#tourPrice').val() && $('#tourContent').val()) {
-			showConfirmModal('여행코스를 수정하시겠습니까?', '여행코스가 수정되었습니다.', '../tour/adminList')
+		if($('#tourImage').val() && $('#tourName').val() && $('#tourName').val().length >= 10 &&
+				$('#tourSDate').val() && $('#tourEDate').val() &&
+				$('#tourSDate').val().replaceAll('-', '') < $('#tourEDate').val().replaceAll('-', '') &&
+				$('#tourPrice').val()) {
+			let tour = {
+				tourNum: ${param.tourNum},
+				tourName: $('#tourName').val(),
+				tourContent: $('#tourContent').val(),
+				tourSDate: $('#tourSDate').val(),
+				tourEDate: $('#tourEDate').val(),
+				tourPrice: $('#tourPrice').val(),
+				adminId: `${adminId}`,
+				termNum: 1
+			}
 			
-			$('#okBtn').click(() => {
-				let tour = {
-					tourNum: ${param.tourNum},
-					tourName: $('#tourName').val(),
-					tourContent: $('#tourContent').val(),
-					tourSDate: $('#tourSDate').val(),
-					tourEDate: $('#tourEDate').val(),
-					tourPrice: $('#tourPrice').val(),
-					adminId: `${adminId}`,
-					termNum: 1
-				}
-				
-				$.ajax({
-					url: '../tour/fixTour',
-					method: 'put',
-					contentType: 'application/json',
-					data: JSON.stringify(tour)
-				})
+			$.ajax({
+				url: '../tour/fix',
+				method: 'put',
+				contentType: 'application/json',
+				data: JSON.stringify(tour),
+				success: () =>  {
+					$(location).attr('href', 'adminList')
+                }
 			})
 		} else {
-			showOkModal('필수 입력사항을 채워주세요.')
+			if(!($('#tourName').val().length >= 10)) {
+				showOkModal('ERROR] 제목이 10글자 미만입니다.')
+			} else if(($('#tourSDate').val().replaceAll('-', '') >= $('#tourEDate').val().replaceAll('-', ''))
+					&& $('#tourSDate').val()) {
+				showOkModal('ERROR] 여행코스시작일은 여행코스종료일보다 크거나 같을 수 없습니다.')
+			} else {
+				showOkModal('ERROR] 누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
+			}
 		}
 	})
 	
@@ -194,7 +202,7 @@ $(() => {
         <div class='row'>
             <div class='col'>
             	<form id='tourImageUp'>
-					<input type='file' name='tourImage' id='tourImage' accept='image/*' multiple/>
+					<input type='file' id='tourImage' name='tourImage' accept='image/*' multiple/>
 				</form>
             </div>
         </div>

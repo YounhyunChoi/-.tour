@@ -11,6 +11,7 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../res/style.css' rel='stylesheet' />
 <script src='../res/navigation.js'></script>
+<script src='../res/modal.js'></script>
 <script>
 	$(() => {		
 		$.ajax({
@@ -94,6 +95,9 @@
 				}
 				
 				$('#myReview').append(html)
+				if('${param.tourNumError}') {
+					showOkModal('작성하려는 리뷰의 여행코스가 예약 내역에 없거나, 여행코스 종료일이 지나지 않았습니다. 다시 확인해주세요.')
+				}
 			}
 		})
 	})

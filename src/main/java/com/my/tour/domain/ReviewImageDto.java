@@ -5,6 +5,6 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Data;
 
 @Data
-public class NoticeImageDto {
-	private MultipartFile noticeImage;
+public class ReviewImageDto {
+	private MultipartFile reviewImage;
 }

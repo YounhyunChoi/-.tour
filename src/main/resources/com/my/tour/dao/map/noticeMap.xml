@@ -23,12 +23,7 @@
 	
 	<insert id='insertNoticeTemp'>
 		insert into notices
-		<if test='noticeSize != 0'>
-			values (notice_num_seq.currval + 1, 'temp', 'temp', to_date(sysdate, 'YYYY-MM-DD'), #{adminId})
-		</if>
-		<if test='noticeSize == 0'>
-			values (1, 'temp', 'temp', to_date(sysdate, 'YYYY-MM-DD'), #{adminId})
-		</if>
+		values (#{noticeTempNum}, 'temp', 'temp', to_date(sysdate, 'YYYY-MM-DD'), #{adminId})
 	</insert>
 	
 	<insert id='insertNotice'>

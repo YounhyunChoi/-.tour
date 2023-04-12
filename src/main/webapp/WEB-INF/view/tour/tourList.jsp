@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -12,38 +13,30 @@
 <script>
 $(() => {
 	$.ajax({
-		url: 'tour/get',
+		url: 'tour/getList',
 		success: tours => {
 			const tourArr = []
+			let tourText = ""
 			
 			if(tours.length) {
 				$.each(tours, (i, tour) => {
-					if((i + 1) % 2 == 1) {
-						tourArr.push(
-							`<div class='row'>
-				                <div class='col p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-				                    <div class='border border-3 text-nowrap tourImg'>여행코스이미지</div>
-				                    <div class='text-truncate'>\${tour.tourName}</div>
-				                </div>`
-			            )
-					} else {
-						tourArr.push(
-							`<div class='col p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-			                    <div class='border border-3 text-nowrap tourImg'>여행코스이미지</div>
-			                    <div class='text-truncate'>\${tour.tourName}</div>
-			                </div>
-			            </div>`)
-					}
+					tourArr.push(
+		                `<div class='col-5 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
+		                    <div class='border border-3'>
+		                    	<img src='<c:url value="/attach/` + tour.tourImageName + `"/>' style="max-width:100%; height:100%;"/>
+							</div>
+		                    <div class='text-truncate'>\${tour.tourName}</div>
+		                </div>`
+					)
 				})
-				
 				$('#tourContainer').append(tourArr.join(''))
-				
-				$.each(tours, (i, tour) => {
-					$(`#tourItem\${tour.tourNum}`).click(() => {
-						location.href = `tour/view?tourNum=\${tour.tourNum}`
-					})
-				})
 			}
+			
+			$.each(tours, (i, tour) => {
+				$(`#tourItem\${tour.tourNum}`).click(() => {
+					location.href = `tour/view?tourNum=\${tour.tourNum}`
+				})
+			})
 		}
 	})
 })
@@ -74,17 +67,17 @@ $(() => {
 <header>
 </header>
 <div class='navigation fixed-top'>
-   <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill' onclick="location.href='../main.html'"></i></div>
-   <div class='menuName'>
-      <h2 class='text-center pt-3'><b>코스목록</b></h2>
-   </div>
+	<div class='float-start mt-3 ms-2'>
+		<i class='bi bi-caret-left-fill'></i>
+	</div>
+	<div class='menuName'>
+		<h2 class='text-center pt-3'><b>코스목록</b></h2>
+	</div>
 </div>
 <div class='container'>
-    <div class='row mb-4'>
-        <div id='tourContainer' class='col'>
-            
-        </div>
-    </div>
+	<div class='row mb-4' id='tourContainer'>
+	
+	</div>
 </div>
 <footer>
 </footer>

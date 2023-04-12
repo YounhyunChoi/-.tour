@@ -1,0 +1,81 @@
+<%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<html>
+<head>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'/>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css'/>
+<link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css' rel='stylesheet'/>
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<link href='../res/style.css' rel='stylesheet'/>
+<script>
+    $(() => {
+        sessionStorage.setItem("userId", "java01")
+    })
+</script>
+<script src='../res/navigation.js'></script>
+<title>NOTICE.02 공지 조회</title>
+<style>
+   #noticeImg {
+        border: .1rem solid lightgray;
+        margin: 1rem;
+        text-align: center;
+    }
+
+    .tourCarouselBtn {
+        color: black;
+    }
+</style>
+</head>
+<body>
+<header>
+</header>
+<div class='navigation fixed-top'>
+   <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill ' onclick="location.href='./01.html'"></i></div>
+   <div class='menuName'>
+      <h2 class='text-center pt-3'><b>공지상세</b></h2>
+   </div>
+</div>
+<div class='container'>
+    <div class='row mt-5'>
+        <h3 class='noticeName'><span><b>3.</b></span> <b>[공지] 설 연휴 일정 변경 안내</b></h3>
+        <span class='col noticeContent'>
+            <p>작성일 2023-01-16</p>
+        </span>
+        <hr>
+        <div class='row mb-2'>
+            <div class='col'>
+                <div class='row py-5 me-0' id='noticeImg'>
+                    <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
+                        <div class='carousel-inner noticeImg'>
+                            <div class='carousel-item active'>
+                                <div class='items py-5 fs-4'>공지사항이미지</div>
+                            </div>
+                            <div class='carousel-item'>
+                                <div class='items py-5 fs-4'>공지사항이미지</div>
+                            </div>
+                            <div class='carousel-item'>
+                                <div class='items py-5 fs-4'>공지사항이미지</div>
+                            </div>
+                        </div>
+                        <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+                            <i class="bi bi-chevron-left tourCarouselBtn"></i>
+                            <div class="visually-hidden">Previous</div>
+                        </a>
+                        <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
+                            <i class="bi bi-chevron-right tourCarouselBtn"></i>
+                            <div class="visually-hidden">Next</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span>설 연휴에 따른 여행 일정 변경 안내드립니다. 
+            우리 고유 명절인 설을 맞이하면 신청한 택배가 배송지연될 수 있음을 안내드립니다...
+        </span>
+    </div>
+</div>
+<footer>
+</footer>
+</body>
+</html>

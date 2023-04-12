@@ -7,7 +7,6 @@
 <%
 if(userId != null) {
 %>    
-<<<<<<< HEAD
 function listAlarm(){
 	$.ajax({
 		url: '../alarm/get',
@@ -53,9 +52,6 @@ function listAlarm(){
 	})
 	return alarms
 }
-
-=======
->>>>>>> branch 'master' of https://github.com/YounhyunChoi/-.tour.git
 $.ajax({
 	url: '../alarm/get',
 	dataType: 'json',

@@ -13,7 +13,7 @@
 <script>
 $(() => {
 	$.ajax({
-		url: 'tour/getList',
+		url: 'tour/get',
 		success: tours => {
 			const tourArr = []
 			let tourText = ""

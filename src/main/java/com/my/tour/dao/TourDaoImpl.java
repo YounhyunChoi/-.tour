@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.my.tour.dao.map.TourMap;
 import com.my.tour.domain.Tour;
+import com.my.tour.domain.TourDto;
 
 @Repository("TourDao")
 public class TourDaoImpl implements TourDao {
@@ -19,23 +20,38 @@ public class TourDaoImpl implements TourDao {
 	}
 	
 	@Override
+	public List<Tour> selectAllTours() {
+		return tourMap.selectAllTours();
+	}
+	
+	@Override
 	public List<Tour> selectTour(int tourNum) {
 		return tourMap.selectTour(tourNum);
 	}
+	
+	@Override
+	public List<TourDto> selectTourList() {
+		return tourMap.selectTourList();
+	}
+	
+	@Override
+	public int insertTourTemp(int tourTempNum, String adminId) {
+		return tourMap.insertTourTemp(tourTempNum, adminId);
+	}
 
 	@Override
-	public void insertTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate,
+	public int insertTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate,
 			int tourPrice, String adminId, int termNum) {
-		tourMap.insertTour(tourName, tourContent, tourSDate, tourEDate, tourPrice, adminId, termNum);
+		return tourMap.insertTour(tourName, tourContent, tourSDate, tourEDate, tourPrice, adminId, termNum);
 	}
 
 	@Override
-	public void updateTour(Tour tour) {
-		tourMap.updateTour(tour);
+	public int updateTour(Tour tour) {
+		return tourMap.updateTour(tour);
 	}
 
 	@Override
-	public void deleteTour(int tourNum) {
-		tourMap.deleteTour(tourNum);
+	public int deleteTour(int tourNum) {
+		return tourMap.deleteTour(tourNum);
 	}
 }

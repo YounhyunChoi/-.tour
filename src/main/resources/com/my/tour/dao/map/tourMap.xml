@@ -5,6 +5,14 @@
 	<select id='selectTours' resultType='tour'>
 		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id, term_num
 		from tours
+		where tour_name not in 'temp'
+		order by tour_num desc
+	</select>
+	
+	<select id='selectAllTours' resultType='tour'>
+		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id, term_num
+		from tours
+		order by tour_num desc
 	</select>
 	
 	<select id='selectTour' resultType='tour'>
@@ -12,6 +20,18 @@
 		from tours
 		where tour_num = #{tourNum}
 	</select>
+	
+	<select id='selectTourList' resultType='tourDto'>
+		select tour_num, tour_name
+		from tours
+		where tour_name not in 'temp'
+		order by tour_num desc
+	</select>
+		
+	<insert id='insertTourTemp'>
+		insert into tours
+		values(#{tourTempNum}, 'temp', 'temp', to_date(sysdate, 'YYYY-MM-DD'), to_date(sysdate, 'YYYY-MM-DD'), 0, #{adminId}, 1)
+	</insert>
 	
 	<insert id='insertTour'>
 		insert into tours(tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id, term_num)

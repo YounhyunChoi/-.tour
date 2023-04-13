@@ -55,7 +55,6 @@ public class ReservationController {
 		Tour tour = reservationService.getTour(tourNum).get(0);
 		mv.setViewName("reservation/addReservation");
 		mv.addObject("tour", tour);
-		mv.addObject("term", reservationService.getTerm(tour.getTermNum()));
 		return mv;
 	}
 	

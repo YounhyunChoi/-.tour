@@ -93,7 +93,7 @@ public class TourController {
 	public void addTour(@RequestBody Tour tour, HttpSession session) {
 		tourService.delTour(tourService.getAllTours().get(0).getTourNum());
 		tourService.addTour(tour.getTourName(), tour.getTourContent(), 
-				tour.getTourSDate(), tour.getTourEDate(), tour.getTourPrice(),
+				tour.getTourSDate(), tour.getTourEDate(), tour.getTourPrice(), tour.getDiscountPrice(),
 				(String)session.getAttribute("userId"), tour.getTermNum());
 	}
 	
@@ -101,7 +101,6 @@ public class TourController {
 	@AdminAccess
 	public ModelAndView fixTour(ModelAndView mv, HttpSession session, int tourNum) {
 		mv.setViewName("admin/tour/fixTour");
-		mv.addObject("adminId", session.getAttribute("userId"));
 		mv.addObject("tourNum", tourNum);
 		return mv;
 	}

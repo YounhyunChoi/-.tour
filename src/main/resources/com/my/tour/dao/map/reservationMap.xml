@@ -9,17 +9,18 @@
 		order by resv_num desc
 	</select>
 	
-	<select id='selectResvAndTour' resultType='reservationDto'>
+	<select id='selectResvsWithTour' resultType='reservationDto'>
 		select r.resv_num, r.charge_price, r.resv_date, r.whether_to_cancel, r.resv_edate, r.user_id, r.tour_num, t.tour_name,
 			t.tour_sdate, t.tour_edate, t.tour_price
 		from tour.reservations r
 			left outer join tour.tours t
-			on r.tour_num = t.tour_num;
+			on r.tour_num = t.tour_num
+			order by resv_num desc
 	</select>
 	
 	<insert id='insertReservation'>
 		insert into reservations
-		values (resv_num_seq.nextval, #{chargePrice}, sysdate, 'N', #{resv_EDate}, #{userId}, #{tourNum})
+		values (resv_num_seq.nextval, #{chargePrice}, sysdate, 'N', #{resvEDate}, #{userId}, #{tourNum})
 	</insert>
 	
 	<update id='updateReservation'>

@@ -41,7 +41,7 @@ $.ajax({
 		
 		if(reservationDtos.length){
 			$.each(reservationDtos, (i, reservationDto) => {
-				resvArr.push(
+				resvDtoArr.push(
 				`
 				 <tr>
                     <td>\${reservationDto.resvNum}</td>
@@ -56,8 +56,12 @@ $.ajax({
 				`
 				)	
 			})
-			$('tbody').append(resvArr.join(''))
-
+			$('tbody').append(resvDtoArr.join(''))
+			
+			$('.chargePrice').each(function(){
+				addComma($(this), $(this).text())
+			})
+			
 			$('.cancelBtn').each(function(){
 				if($(this).attr('whethertocancel') == 'Y'){
 					changeAttr($(this), '취소됨', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
@@ -74,7 +78,7 @@ $.ajax({
 								method: 'put',
 								data: {
 									resvNum: $(this).attr('id'),
-									tourName: $(this).parent().prev().prev().text() + '이취소되었습니다.',
+									tourName: '"'+$(this).parent().prev().prev().text() + '"' + '이취소되었습니다.',
 									userId: `${param.userId}`
 								},
 								success: () => {

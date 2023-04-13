@@ -29,39 +29,39 @@ $.ajax({
 		if(reservationDtos.length) {
 			const resvDtoArr = []
 				$.each(reservationDtos, (i, reservationDto) => {	
-							reservationArr.push(
-							`
-								<div class='row mt-4 d-flex flex-column shadow-sm border border-1'>
-							        <div class='col p-2 border-bottom'>
-							            <div class='row align-items-center'>	
-							                <div class='col-8 fs-6 tourDate'>여행기간:\${reservationDto.tourSDate} ~ \${reservationDto.tourEDate}</div>
-							                <div class='col-4 text-end'>
-							                    <button type='button' id=tourViewBtn\${reservationDto.tourNum} class='border-0 bg-white'>
-							                        <span class='fs-5'>상세보기</span>
-							                        <i class='bi bi-chevron-right viewDetailBtn'></i>
-							                    </button>
-							                </div>
-							            </div>
-							        </div>
-							        <div class='col my-3'>
-							            <div class='row'>
-							                <div class='col-4'>
-							                    <div class='d-flex flex-column align-items-center'>
-							                        <p class='mb-1 resvNum'>\${reservationDto.resvNum}</p>
-							                        <div class='d-flex image'>
-							                            <span>여행코스이미지</span>
-							                        </div>
-							                    </div>
-							                </div>
-							                <div class='col-5 fs-5'><b>\${reservationDto.tourName}</b></div>
-							                <div id='resvBtnContainer\${reservation.tourNum}' class='col-3 d-flex align-self-end justify-content-center'
-							                	 whetherToCancel=\${reservationDto.whetherToCancel}>									                   
-							                </div>
-							            </div>
-							        </div>
-							    </div>
-							`
-							)					
+					resvDtoArr.push(
+					`
+					<div class='row mt-4 d-flex flex-column shadow-sm border border-1'>
+				        <div class='col p-2 border-bottom'>
+				            <div class='row align-items-center'>	
+				                <div class='col-8 fs-6 tourDate'>여행기간:\${reservationDto.tourSDate} ~ \${reservationDto.tourEDate}</div>
+				                <div class='col-4 text-end'>
+				                    <button type='button' id=tourViewBtn\${reservationDto.tourNum} class='border-0 bg-white'>
+				                        <span class='fs-5'>상세보기</span>
+				                        <i class='bi bi-chevron-right viewDetailBtn'></i>
+				                    </button>
+				                </div>
+				            </div>
+				        </div>
+				        <div class='col my-3'>
+				            <div class='row'>
+				                <div class='col-4'>
+				                    <div class='d-flex flex-column align-items-center'>
+				                        <p class='mb-1 resvNum'>\${reservationDto.resvNum}</p>
+				                        <div class='d-flex image'>
+				                            <span>여행코스이미지</span>
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class='col-5 fs-5'><b>\${reservationDto.tourName}</b></div>
+				                <div id='resvBtnContainer\${reservationDto.tourNum}' class='col-3 d-flex align-self-end justify-content-center'
+				                	 whetherToCancel=\${reservationDto.whetherToCancel}>									                   
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+					`
+					)					
 				})
 				$('#reservationContainer').append(resvDtoArr.join(''))
 				for(let i =0; i < $('.resvNum').length; i++){

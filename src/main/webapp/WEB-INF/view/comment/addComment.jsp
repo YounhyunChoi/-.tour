@@ -22,11 +22,9 @@
         			data: {
         				comtContent: $('#comtContent').val(),
         				reviewNum: ${param.reviewNum}
-        			},
-        			success: () => {
-        				$('#addComment').attr('href', '../review/get')
         			}
         		})
+        		$('#addComment').attr('href', '../review/get')
     		} else {
     			showOkModal('댓글을 입력해주세요.')
     		}

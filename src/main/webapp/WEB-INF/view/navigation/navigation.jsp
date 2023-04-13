@@ -52,7 +52,6 @@ function listAlarm(){
 	})
 	return alarms
 }
-
 $.ajax({
 	url: '../alarm/get',
 	dataType: 'json',

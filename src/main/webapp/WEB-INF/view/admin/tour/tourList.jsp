@@ -11,8 +11,10 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script>
-$(() => {
-	//여행상품 리스트
+//여행상품 리스트
+function tourList() {
+	$('#tourContent').empty()
+	
 	$.ajax({
 		url: 'getList',
 		success: tours => {
@@ -39,39 +41,46 @@ $(() => {
 			}
 		}
 	})
+}
+
+$(() => {
+	//여행상품 리스트
+	tourList()
 	
 	//검색
 	$('#searchBtn').click(() => {
-		$.ajax({
-			url: 'getList',
-			success: tours => {
-				$.each(tours, (i, tour) => {
-					if($('#tourSearch').val().includes(tour.tourName)) {
+		if($('#tourSearch').val()) {
+			$.ajax({
+				url: 'getList',
+				success: tours => {
+					if(tours.length) {
 						$('#tourContent').empty()
-						const tourSearchArr = []
-						let tourSearchText = ""
 						
-						tourSearchArr.push(
-							`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-								<img src='<c:url value="/attach/` + tour.tourImageName + `"/>'style="max-width:100%; height:100%;"/>
-				                <div class='text-truncate'>\${tour.tourName}</div>
-				            </div>`
-						)
-						tourSearchArr.unshift(tourSearchText)
-						$('#tourContent').append(tourSearchArr.join(''))
-
+						$.each(tours, (i, tour) => {
+							const tourSearchArr = []
+							
+							if((tour.tourName).includes($('#tourSearch').val())) {
+								tourSearchArr.push(
+									`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
+										<img src='<c:url value="/attach/` + tour.tourImageName + `"/>'style="max-width:100%; height:100%;"/>
+						                <div class='text-truncate'>\${tour.tourName}</div>
+						            </div>`
+								)
+							}
+							$('#tourContent').append(tourSearchArr.join(''))
+						})
+						
 						$.each(tours, (i, tour) => {
 							$(`#tourItem\${tour.tourNum}`).click(() => {
 								location.href = `fix?tourNum=\${tour.tourNum}`
 							})
 						})
-					} else {
-						$('#tourContent').empty()
-						$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
 					}
-				})
-			}
-		})
+				}
+			})
+		} else {
+			tourList()
+		}
 	})
 	
 	//여행상품 등록으로 이동
@@ -138,6 +147,8 @@ $(() => {
         <form class='mb-4'>
             <div class='row'>
                 <div class='col-10 pe-0 pt-2'>
+                	<!-- text창에서 enter입력시 submit 방지 -->
+					<input type="text" style="display:none;">
                     <input type='text' class='form-control' id='tourSearch'/>
                 </div>
                 <div class='col-2 p-0'>

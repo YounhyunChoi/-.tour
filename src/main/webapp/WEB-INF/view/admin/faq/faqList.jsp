@@ -10,7 +10,6 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
-<title></title>
 <script>
 $.ajax({
 	url: 'get',
@@ -49,6 +48,7 @@ $.ajax({
 	}	
 })
 </script>
+<title>FAQ</title>
 <style>
     .form-control {
         height: 5.2rem;
@@ -84,7 +84,7 @@ $.ajax({
             </div>
         </div>
     </div>
-   <div class='row'>
+    <div class='row'>
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>

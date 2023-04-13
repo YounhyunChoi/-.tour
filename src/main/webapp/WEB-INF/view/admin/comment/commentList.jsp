@@ -39,10 +39,6 @@ $(() => {
 					
 		}
 	})
-	
-	$.ajax({
-		
-	})
 })
 </script>
 <title></title>

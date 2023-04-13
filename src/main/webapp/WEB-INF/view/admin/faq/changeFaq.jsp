@@ -36,7 +36,7 @@ $('#faqFixBtn').click(() => {
 	    			newFaqAnswer: $('#answerInput').val()
 	    		}
 	    	})
-	    	showOkModal('FAQ가 수정되었습니다.','adminFaqList')
+	    	showOkModal('FAQ가 수정되었습니다.','adminList')
 	    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
 	    	showOkModal('제목과 내용을 입력해주세요.')
 	    } else if(!$('#answerInput').val()){
@@ -47,7 +47,7 @@ $('#faqFixBtn').click(() => {
 })
 	
 $('#faqDelBtn').click(() => {
-      showConfirmModal('FAQ를 삭제하시겠습니까?', 'FAQ가 삭제되었습니다.', 'adminFaqList')
+      showConfirmModal('FAQ를 삭제하시겠습니까?', 'FAQ가 삭제되었습니다.', 'adminList')
       $('#okBtn').click(() => {
       	$.ajax({
       		url: 'del',
@@ -89,7 +89,7 @@ $('#faqDelBtn').click(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../faq/adminFaqList'>FAQ</a> > <a href=''>FAQ수정</a>
+                    <a href='../admin/main'>메인</a> > <a href='../faq/adminList'>FAQ</a> > <a href=''>FAQ수정</a>
                 </h6>
             </div>
         </div>

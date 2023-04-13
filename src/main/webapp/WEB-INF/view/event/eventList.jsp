@@ -9,7 +9,6 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
-<title>EVENT.01 이벤트 목록</title>
 <script>
 $(() => {
 	$.ajax({
@@ -35,6 +34,7 @@ $(() => {
 	})
 })
 </script>
+<title>이벤트목록</title>
 <style>
    .noticeName{
         color: black;

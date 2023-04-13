@@ -13,8 +13,8 @@
                     <li><a class='nav-link' href='../notice/adminList'>공지사항</a></li>
                     <li><a class='nav-link' href='../event/adminList'>이벤트</a></li>
                     <li class='mt-4 text-decoration-underline'>고객센터</li>
-                    <li><a class='nav-link' href='../faq/adminFaqList'>FAQ</a></li>
-                    <li><a class='nav-link' href='../report/01.html'>신고목록</a></li>
+                    <li><a class='nav-link' href='../faq/adminList'>FAQ</a></li>
+                    <li><a class='nav-link' href='../report/adminList'>신고목록</a></li>
                 </ul>
             </div>
         </nav>

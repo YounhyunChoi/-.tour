@@ -184,88 +184,90 @@ $(() => {
 </header>
 <div class='row' id='mainBody'>
     <div class='col'>
-        <div class='row'>
-            <div class='col-6'>
-                <div class='row py-5 mt-4' id='tourImg'>
-                    <div class='carousel slide py-5' id='tourCarousel' data-ride='carousel'>
-                        <div class='carousel-inner' id='tourImages'>
-                            <!-- 여행코스 이미지 -->
-                        </div>
-                        <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
-                            <i class='bi bi-chevron-left tourCarouselBtn'></i>
-                            <div class='visually-hidden'>Previous</div>
-                        </a>
-                        <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
-                            <i class='bi bi-chevron-right tourCarouselBtn'></i>
-                            <div class='visually-hidden'>Next</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class='row'>
+        <div class='row ms-4'>
             <div class='col'>
-            	<form id='tourImageUp'>
-					<input type='file' id='tourImage' name='tourImage' accept='image/*' multiple/>
-				</form>
+            <div class='row py-5 me-0' id='tourImg'>
+                  <div class='carousel slide py-5' id='tourCarousel' data-ride='carousel'>
+                      <div class='carousel-inner' id='tourImages'>
+                          <!-- 여행코스 이미지 -->
+                      </div>
+                      <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+                          <i class='bi bi-chevron-left tourCarouselBtn'></i>
+                          <div class='visually-hidden'>Previous</div>
+                      </a>
+                      <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
+                          <i class='bi bi-chevron-right tourCarouselBtn'></i>
+                          <div class='visually-hidden'>Next</div>
+                      </a>
+                  </div>
+              </div>
+           </div>
+          <form id='tourImageUp'>
+            <input class='ms-3' type='file' id='tourImage' name='tourImage' accept='image/*' multiple/>
+         </form>
+        </div>
+         <div class='row'>
+           <div class='col pt-2 d-flex gap-3 mb-4'>
+                <label for='tourName'>
+                    <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
+                </label>
+                <div class='col shadow-sm'>
+                    <input type='text' class='form-control' id='tourName' minlength='10'/>
+                </div>
             </div>
         </div>
-        <form>
-            <div class='row mt-2 align-items-center'>
-                <div class='col-2 text-end text-nowrap fs-5'>
-                    제목
-                </div>
-                <div class='col-8'>
-                    <input type='text' class='form-control' id='tourName'/>
-                </div>
+         <div class='row'>
+            <div class='col pt-2 d-flex gap-3 mb-4'>
+                <label for='tourSDate'>
+                    <h5 class='align-items-center text-nowrap pt-1'>기간</h5>
+                </label>
+                <div class='col shadow-sm'>
+                   <input type='date' class='form-control' id='tourSDate'/>
+               </div>
+                  ~
+                  <div class='col shadow-sm'>
+                   <input type='date' class='form-control' id='tourEDate'/>
+               </div>
             </div>
-            <div class='row mt-2 align-items-center'>
-                <div class='col-2 text-end text-nowrap fs-5'>
-                    기간
-                </div>
-                <div class='col-4'>
-                    <input type='date' class='form-control' id='tourSDate'/>
-                </div>
-                	~
-                <div class='col-4'>
-                    <input type='date' class='form-control' id='tourEDate'/>
-                </div>
+        </div>
+        <div class='row'>
+            <div class='col pt-2 d-flex gap-3 mb-4'>
+                <label for='tourPrice'>
+                  <h5 class='align-items-center text-nowrap pt-1'>가격</h5>
+               </label>
+               <div class='col'>
+                   <input type='text' class='form-control' id='tourPrice'/>
+               </div>
             </div>
-            <div class='row mt-2 align-items-center'>
-                <div class='col-2 text-end text-nowrap fs-5'>
-                    가격
-                </div>
-                <div class='col-8'>
-                	<input type='text' class='form-control' id='tourPrice'/>
-                </div>
+        </div>
+        <div class='row'>
+            <div class='col pt-2 d-flex gap-3 mb-4'>
+                <label for='discountPrice'>
+                  <h5 class='align-items-center text-nowrap pt-1'>할인금액</h5>
+               </label>
+               <div class='col'>
+                   <input type='text' class='form-control' id='discountPrice'/>
+               </div>
             </div>
-            <div class='row mt-2 align-items-center'>
-                <div class='col-2 text-end text-nowrap fs-5'>
-                    할인금액
-                </div>
-                <div class='col-8'>
-                    <input type='text' class='form-control' id='discountPrice'/>
-                </div>
+        </div>
+        <div class='row'>
+            <div class='col pt-2 d-flex gap-3 mb-4'>
+               <label for='tourContent'>
+                  <h5 class='align-items-center text-nowrap pt-1'>내용</h5>
+               </label>
+              <div class='col'>
+                   <textarea class='form-control' rows='10' id='tourContent'></textarea>
+               </div>
             </div>
-            <div class='row mt-2'>
-                <div class='col-2 text-end text-nowrap fs-5'>
-                    내용
-                </div>
-                <div class='col-8'>
-                    <textarea class='form-control' rows='10' id='tourContent'></textarea>
-                </div>
-            </div>
-            <div class='row justify-content-end me-5 mt-2'>
-                <div class='col-4 d-flex flex-nowrap align-self-center'>
-                    <a id='tourFixBtn' type='button' class='btn btn-olive'>
-                        <span class='bi bi-check-circle text-nowrap'>&nbsp;수정</span>
-                    </a>
-                    <a id='tourDelBtn' type='button' class='btn btn-lightRed ms-2'>
-                        <span class='bi bi-x-circle text-nowrap'>&nbsp;삭제</span>
-                    </a>
-                </div>
-            </div>
-        </form>
+        </div>
+        <div class='d-flex gap-2 justify-content-end mb-3'>
+            <a id='tourFixBtn' type='button' class='btn btn-olive'>
+                <i class='bi bi-check-circle text-nowrap'></i>&nbsp;수정
+            </a>
+            <a id='tourDelBtn' type='button' class='btn btn-lightRed ms-2'>
+                <i class='bi bi-x-circle text-nowrap'></i>&nbsp;삭제
+            </a>
+        </div>
     </div>
 </div>
 <footer>

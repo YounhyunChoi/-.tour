@@ -12,7 +12,7 @@ public interface TourDao {
 	List<Tour> selectTour(int tourNum);
 	List<TourDto> selectTourList();
 	int insertTourTemp(int tourTempNum, String adminId);
-	int insertTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate, int tourPrice, String adminId, int termNum);
+	int insertTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate, int tourPrice,int discountPrice, String adminId, int termNum);
 	int updateTour(Tour tour);
 	int deleteTour(int tourNum);
 }

@@ -75,6 +75,7 @@ $(() => {
 					tourSDate: $('#tourSDate').val(),
 					tourEDate: $('#tourEDate').val(),
 					tourPrice: $('#tourPrice').val(),
+					discountPrice: 0,
 					termNum: 1
 				}),
 				success: () => {
@@ -180,10 +181,16 @@ $(() => {
             </div>
         </div>
         <div class='row'>
-            <div class='col'>
+            <div class='col-3'>
             	<form id='tourImageUp'>
 					<input type='file' id='tourImage' name='tourImage' accept='image/*' multiple/>
 				</form>
+            </div>
+            <div class='col-3 align-items-center'>
+				<select>
+					<option>약관1</option>
+					<option>약관2</option>
+				</select>
             </div>
         </div>
 		<form>

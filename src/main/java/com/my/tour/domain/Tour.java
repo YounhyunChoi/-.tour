@@ -12,6 +12,7 @@ public class Tour {
 	private LocalDate tourSDate;
 	private LocalDate tourEDate;
 	private int tourPrice;
+	private int discountPrice;
 	private String adminId;
 	private int termNum;
 }

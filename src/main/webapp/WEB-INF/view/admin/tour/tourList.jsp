@@ -13,6 +13,8 @@
 <script>
 //여행상품 리스트
 function tourList() {
+	$('#tourContent').empty()
+	
 	$.ajax({
 		url: 'getList',
 		success: tours => {
@@ -48,11 +50,6 @@ $(() => {
 	//검색
 	$('#searchBtn').click(() => {
 		if($('#tourSearch').val()) {
-			if(!$('#tourContent').children().val()) {
-				$('#tourContent').empty()
-				$('#tourContent').append(`<div class='text-center fs-3'>여행상품이 없습니다.</div>`)
-			}
-			
 			$.ajax({
 				url: 'getList',
 				success: tours => {

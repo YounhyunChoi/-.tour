@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.my.tour.domain.Reservation;
 import com.my.tour.domain.ReservationDto;
+import com.my.tour.domain.Review;
 import com.my.tour.domain.Tour;
 
 public interface ReservationService {
@@ -14,4 +15,5 @@ public interface ReservationService {
 	void fixReservation(int resvNum);
 	void delReservation(int resvNum, String userId);
 	List<Tour> getTour(int tourNum);
+	List<Review> getReview(int resvNum);
 }

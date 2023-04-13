@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.tour.domain.ReservationDto;
+import com.my.tour.domain.Review;
 import com.my.tour.domain.Tour;
 import com.my.tour.service.AlarmService;
 import com.my.tour.service.ReservationService;
@@ -35,6 +36,12 @@ public class ReservationController {
 		return reservationService.getResvsWithTour((String)session.getAttribute("userId"));
 	}
 		
+	@GetMapping("reviewGet")
+	@GetAccess
+	public List<Review> getReview(int resvNum) {
+		return reservationService.getReview(resvNum);
+	}
+	
 	@GetMapping("adminGet")
 	@GetAccess
 	public List<ReservationDto> getReservations(HttpServletRequest request, String userId) {

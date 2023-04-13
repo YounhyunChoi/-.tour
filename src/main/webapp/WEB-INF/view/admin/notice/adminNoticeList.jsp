@@ -10,15 +10,14 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
-<title>ADMIN.NOTICE.01 공지 목록</title>
 <script>
-$(() => {	
+$(() => {
 	$('#fixNoticeBtn').click(() => {
 		if($('#noticeNum:checked').val()){
 			$('#fixNoticeBtn').attr('href', '../notice/fix?noticeNum=' + $('#noticeNum:checked').val())
-		}		
+		}
 	})
-	
+
 	$.ajax({
 		url: 'get',
 		dataType: 'json',

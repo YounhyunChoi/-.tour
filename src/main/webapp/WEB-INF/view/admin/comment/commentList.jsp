@@ -41,7 +41,7 @@ $(() => {
 	})
 })
 </script>
-<title></title>
+<title>댓글</title>
 <style>
     th,td {
         text-align: center;

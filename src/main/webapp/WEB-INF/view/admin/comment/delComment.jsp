@@ -12,7 +12,6 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
-<title></title>
 <script>
     $(() => {
     	let commentArr = []
@@ -101,6 +100,7 @@
         })
     })
 </script>
+<title>댓글조회</title>
 <style>	
     
 </style>

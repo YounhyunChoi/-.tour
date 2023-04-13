@@ -63,30 +63,32 @@ public class NoticeController {
       return mv;
    }
 
-	@GetMapping("addNotice")
+	@GetMapping("add")
 	@AdminAccess
 	public ModelAndView addNotice(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/notice/addNotice");
 		
-		if(noticeService.getAllNotices().size() == 0) {
-			noticeService.addNoticeTemp(1, (String) session.getAttribute("userId"));
-		} else if (!noticeService.getAllNotices().get(0).getNoticeTitle().equals("temp")){
-			noticeService.addNoticeTemp(noticeService.getNotices().get(0).getNoticeNum() + 1,
-										(String) session.getAttribute("userId"));
+		if(session.getAttribute("userId") != null) {
+			if(noticeService.getAllNotices().size() == 0) {
+				noticeService.addNoticeTemp(1, (String) session.getAttribute("userId"));
+			} else if (!noticeService.getAllNotices().get(0).getNoticeTitle().equals("temp")){
+				noticeService.addNoticeTemp(noticeService.getNotices().get(0).getNoticeNum() + 1,
+											(String) session.getAttribute("userId"));
+			}
+			
+			mv.addObject("noticeNum", noticeService.getAllNotices().get(0).getNoticeNum());
 		}
-		
-		mv.addObject("noticeNum", noticeService.getAllNotices().get(0).getNoticeNum());
 		
 		return mv;
 	}
 
-   @PostMapping("addNotice")
+   @PostMapping("add")
    public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
       noticeService.delNotice(noticeService.getAllNotices().get(0).getNoticeNum());
       noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));   
    }
 
-	@GetMapping("fixNotice")
+	@GetMapping("fix")
 	@AdminAccess
 	public ModelAndView fixNotice(ModelAndView mv, HttpSession session, int noticeNum) {
 		mv.setViewName("admin/notice/fixNotice");
@@ -94,13 +96,12 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@PutMapping("fixNotice")
+	@PutMapping("fix")
 	public void fixNotice(@RequestBody Notice notice) {
 		noticeService.fixNotice(notice);
-		System.out.println(notice);
 	}
 	
-	@DeleteMapping("delNotice")
+	@DeleteMapping("del")
 	public void delNotice(int noticeNum) {
 		noticeService.delNotice(noticeNum);
 	}
@@ -129,10 +130,10 @@ public class NoticeController {
          
 			noticeService.delNoticeImage(noticeNum);
          
-			for(MultipartFile multipartfile: noticeImage) {
-				filename = "notice" + multipartfile.getOriginalFilename();
+			for(MultipartFile multipartFile: noticeImage) {
+				filename = "notice" + multipartFile.getOriginalFilename();
 				if(!filename.equals("notice")) {
-					saveFile(attachPath + "/" + filename, multipartfile);
+					saveFile(attachPath + "/" + filename, multipartFile);
 					noticeService.addNoticeImage(filename, noticeNum);
 				}
 			}

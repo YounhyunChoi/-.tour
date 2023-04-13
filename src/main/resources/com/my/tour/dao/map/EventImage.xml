@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC './/mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.tour.dao.map.EventImageMap'>
+	<select id='selectEventImages' resultType='eventImage'>
+		select *
+		from event_images
+		where event_num = #{eventNum}
+		order by eventImage_num
+	</select>
+	
+	<insert id='insertEventImage'>
+		insert into event_images
+		values (eventimage_num_seq.nextval, #{eventImageName}, #{eventNum})
+	</insert>
+	
+	<delete id='deleteEventImage'>
+		delete event_images
+		where event_num = #{eventNum}
+	</delete>
+</mapper>

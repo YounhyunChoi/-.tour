@@ -238,7 +238,7 @@ $.ajax({
                 <li class='nav-item'>
                     <ul>
                         <li>
-                            <a class='nav-link' aria-current='page' href='#'>이벤트</a>
+                            <a class='nav-link' aria-current='page' href='/event'>이벤트</a>
                         </li>
                     </ul>
                 </li>

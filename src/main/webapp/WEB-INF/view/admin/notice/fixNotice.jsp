@@ -204,7 +204,7 @@ $(() => {
                </div>
            </div>
        </div>
-       <div class='d-flex gap-2 justify-content-end'>
+       <div class='d-flex gap-2 justify-content-end mb-3'>
            <a type='button' class='btn btn-olive'id='fixNoticeBtn'>
                <i class='bi bi-check-circle'></i>
                &nbsp;수정

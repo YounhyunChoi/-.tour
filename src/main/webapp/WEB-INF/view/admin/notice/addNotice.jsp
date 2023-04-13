@@ -186,7 +186,7 @@ $(() => {
                 </div>
             </div>
         </div>
-        <div class='d-flex justify-content-end'>
+        <div class='d-flex justify-content-end mb-3'>
             <a type='button' class='btn btn-darkBlue'id='addNoticeBtn'>
                 <i class='bi bi-plus-circle'></i>
                 &nbsp;등록

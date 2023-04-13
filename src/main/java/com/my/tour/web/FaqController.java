@@ -33,7 +33,7 @@ public class FaqController {
 		return mv;
 	}
 	
-	@GetMapping("adminFaqList")
+	@GetMapping("adminList")
 	@AdminAccess
 	public ModelAndView adminFaqMain(ModelAndView mv, HttpSession session) {
 		mv.setViewName("admin/faq/faqList");

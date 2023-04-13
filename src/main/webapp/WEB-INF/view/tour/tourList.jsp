@@ -21,12 +21,12 @@ $(() => {
 			if(tours.length) {
 				$.each(tours, (i, tour) => {
 					tourArr.push(
-		                `<div class='col-5 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-		                    <div class='border border-3'>
-		                    	<img src='<c:url value="/attach/` + tour.tourImageName + `"/>' style="max-width:90%; height:90%;"/>
+						`<div class='col-5 p-1 d-flex-column tourText pb-4' id='tourItem\${tour.tourNum}'>
+							<div class='mt-2'>
+								<img class='rounded-1 shadow-sm' src='<c:url value="/attach/` + tour.tourImageName + `"/>' style="max-width:90%; height:90%;"/>
 							</div>
-		                    <div class='text-truncate'>\${tour.tourName}</div>
-		                </div>`
+							<div class='text-truncate align-middle pt-2'>\${tour.tourName}</div>
+						</div>`
 					)
 				})
 				$('#tourContainer').append(tourArr.join(''))
@@ -43,17 +43,18 @@ $(() => {
 	})
 })
 </script>
-<title>TOUR.01 여행코스 목록</title>
+<title>여행코스 목록</title>
 <style>
     [id*='tourItem'] {
-        border: .1rem solid;
+        border: .1rem solid lightgray;
+        border-radius: .2rem;
         margin: 1rem;
-        height: 14rem;
-        box-shadow: .1rem .1rem .1rem .1rem lightgray;
+        height: 13rem;
+        box-shadow: .1rem .1rem .1rem 0 lightgray;
     }
 
     .tourImg {
-        height: 12rem;
+        height: 13rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -70,7 +71,7 @@ $(() => {
 </header>
 <div class='navigation fixed-top'>
 	<div class='float-start mt-3 ms-2'>
-		<i class='bi bi-caret-left-fill'></i>
+		<i class='bi bi-chevron-left'></i>
 	</div>
 	<div class='menuName'>
 		<h2 class='text-center pt-3'><b>코스목록</b></h2>

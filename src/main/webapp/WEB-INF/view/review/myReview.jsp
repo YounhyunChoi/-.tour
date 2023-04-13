@@ -44,11 +44,14 @@
 					                    	</a>
 					                	</div>
 					            	</div>
-					            	<div class='row mt-2'>
-					                	<div class='col-3 me-4'>
-					                    	<div class='reviewImage'><img src='<c:url value="/attach/\${myReview.reviewImageName}"/>'/></div>
-					                	</div>
-					                	<div class='col ms-2 fs-5 text-left'>
+					            	<div class='row mt-2'>`
+					    if('${myReview.reviewImageName}') {
+						    html += 	`<div class='col-3 me-4'>
+			                    			<div class='reviewImage'><img src='<c:url value="/attach/\${myReview.reviewImageName}"/>'/></div>
+				                		</div>`
+					    }
+					                	
+					    html +=			`<div class='col ms-2 fs-5 text-left'>
 					                    	<p class='mb-0'>제목 \${myReview.reviewTitle}</p>
 					                    	<p class='mb-0 d-flex align-items-center'>평점&nbsp`
 
@@ -95,8 +98,8 @@
 				}
 				
 				$('#myReview').append(html)
-				if('${param.tourNumError}') {
-					showOkModal('작성하려는 리뷰의 여행코스가 예약 내역에 없거나, 여행코스 종료일이 지나지 않았습니다. 다시 확인해주세요.')
+				if('${param.reviewErrMsg}') {
+					showOkModal('${param.reviewErrMsg}')
 				}
 			}
 		})
@@ -116,7 +119,7 @@
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill'></i></div>
+    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left'></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>내가 쓴 후기</b></h2>
     </div>

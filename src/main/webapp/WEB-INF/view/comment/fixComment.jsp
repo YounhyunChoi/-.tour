@@ -13,18 +13,18 @@
 <script src='../res/modal.js'></script>
 <script>
     $(() => {
-        $('#deleteComment').click(() => {
-        	showConfirmModal('댓글을 삭제하겠습니까?')
-        	
-        	$('#okBtn').click(() => )
-        	$.ajax({
-        		url: 'del',
-        		method: 'delete',
-        		data:{
-        			comtNum: `${param.comtNum}`
-        		}
-        	})
-        	showOkModal('댓글을 삭제하시겠습니까?', '../review/get')
+    	$('#deleteComment').click(() => {
+       		showConfirmModal('댓글을 삭제하시겠습니까?')
+       		
+       		$('#okBtn').click(() => {
+           		$.ajax({
+           			url: 'del/' + ${param.comtNum},
+           			method: 'delete',
+           			success: () => {
+           				$(location).attr('href', '../review/get')
+           			}
+           		})
+       		})
         })
     	
         $('#editComment').click(() => {
@@ -34,10 +34,10 @@
         			method: 'put',
         			data: {
         				comtContent: $('#comtContent').val(),
-        				comtNum: $('#comtNum').val()
+        				comtNum: ${param.comtNum}
         			}
         		})
-        		showOkModal('댓글이 수정되었습니다.', '../review/get')
+        		$('#editComment').attr('href', '../review/get')
         	} else {
     			showOkModal('댓글을 입력해주세요.')
     		}
@@ -46,14 +46,14 @@
 </script>
 <title>댓글수정</title>
 <style>
-   
+
 </style>
 </head>
 <body>
 <header>
 </header>
 <div class='navigation fixed-top'>
-   <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill'></i></div>
+   <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left'></i></div>
    <div class='menuName'>
       <h2 class='text-center pt-3'><b>댓글수정</b></h2>
    </div>
@@ -68,7 +68,7 @@
             <span class='mt-2 gap-2 d-flex justify-content-end'>
                 <a class='btn btn-lightRed' id='deleteComment'>댓글삭제</a>
                 <a class='btn btn-olive' id='editComment'>댓글수정</a>
-            </span>       
+            </span>
         </div>
     </div>
 </div>

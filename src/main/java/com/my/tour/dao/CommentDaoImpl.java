@@ -9,8 +9,6 @@ import com.my.tour.dao.map.CommentMap;
 import com.my.tour.domain.Comment;
 import com.my.tour.domain.CommentDto;
 
-import jakarta.servlet.http.HttpSession;
-
 @Repository
 public class CommentDaoImpl implements CommentDao{
 	@Autowired private CommentMap commentMap;

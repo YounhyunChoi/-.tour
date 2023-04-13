@@ -12,9 +12,9 @@
 <script src='res/navigation.js'></script>
 <script>
 $(() => {
-        $('header').html($('header').html().replaceAll('../', ''))
-        $('footer').html($('footer').html().replaceAll('../', ''))
-    })
+	$('header').html($('header').html().replaceAll('../', ''))
+	$('footer').html($('footer').html().replaceAll('../', ''))
+})
 </script>
   <title>main</title>
 <style>

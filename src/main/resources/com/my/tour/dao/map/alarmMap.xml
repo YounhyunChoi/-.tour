@@ -9,7 +9,7 @@
 	</select>
 	
 	<insert id='insertAlarm'>
-		insert into alarms( alarm_num, alarm_content, whether_to_check, user_id)
+		insert into alarms(alarm_num, alarm_content, whether_to_check, user_id)
 		values (alarm_num_seq.nextval, #{alarmContent}, 'N', #{userId})
 	</insert>
 	

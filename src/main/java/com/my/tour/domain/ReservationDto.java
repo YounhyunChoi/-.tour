@@ -17,4 +17,5 @@ public class ReservationDto {
 	private LocalDate tourSDate;
 	private LocalDate tourEDate;
 	private int tourPrice;
+	private String tourImageName;
 }

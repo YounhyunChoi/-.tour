@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -20,7 +21,7 @@ function wishList() {
 				let wishText = ""
 				
 				$.ajax({
-					url: 'tour/get',
+					url: 'tour/getList',
 					success: tours => {
 						$.each(wishes, (i, wish) => {
 							wishText =
@@ -29,47 +30,52 @@ function wishList() {
 							            <div class='row d-flex justify-content-between'>
 							                <div class='col-4 fs-4 text-center'>찜번호 \${wish.wishNum}</div>
 							                <div class='col-4 text-end'>
-							                    <button type='button' class='border-0 bg-white' onclick="location.href='./tour/view/\${wish.tourNum}'">
+							                    <button type='button' class='border-0 bg-white'>
 							                        <span class='fs-5'>상세보기</span>
 							                        <i class='bi bi-chevron-right viewDetailBtn'></i>
 							                    </button>
 							                </div>
 							            </div>
-							        </div>
-							        <div class='col my-3'>
-							            <div class='row'>
-							                <div class='col-4'>
-							                    <div class='d-flex flex-column align-items-center'>
-							                        <div class='d-flex image'>
-							                            <span>여행코스이미지</span>
-							                        </div>
-							                    </div>
-											</div>`;
+							        </div>`;
 
 							if(tours.length) {
 								$.each(tours, (i, tour) => {
 									if(wish.tourNum == tour.tourNum) {
 										wishText += 
-											`<div class='col-5 fs-5'>
-							                    <div class='text-left' name='checkDouble'>
-							                        \${tour.tourName}
-							                    </div>
-							                </div>
-											<div class='col-3 d-flex justify-content-center align-self-end'>
-							                    <button type='button' id='\${wish.wishNum}' name='wishDelBtn' value='\${wish.wishNum}'
-							                    class='border border-0 rounded text-white btn btn-lightRed'>삭제</button>
-							                </div>
-							            </div>
-							        </div>
-								</div>`;
+											`<div class='col my-3'>
+												<div class='row'>
+													<div class='col-4'>
+														<div class='d-flex flex-column align-items-center'>
+															<div class='d-flex image'>
+																<img src='<c:url value="/attach/` + tour.tourImageName + `"/>' style="max-width:100%; height:100%;"/>
+															</div>
+														</div>
+													</div>
+													<div class='col-5 fs-5'>
+									                    <div class='text-left'>
+									                        \${tour.tourName}
+									                    </div>
+									                </div>
+													<div class='col-3 d-flex justify-content-center align-self-end'>
+									                    <button type='button' id='\${wish.wishNum}' name='wishDelBtn' value='\${wish.wishNum}'
+									                    class='border border-0 rounded text-white btn btn-lightRed'>삭제</button>
+									                </div>
+									            </div>
+									        </div>
+										</div>`;
 								
 										wishArr.unshift(wishText)
 									}
 								})
 							}
 						})
-
 						$('#wishContent').append(wishArr.join(''))
+						
+						$.each(tours, (i, tour) => {
+							$(`#tourItem\${tour.wishNum}`).click(() => {
+								location.href = `tour/view?tourNum=\${tour.tourNum}`
+							})
+						})
 					}
 				})
 				
@@ -143,7 +149,7 @@ $(wishList)
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill' onclick="location.href='../user/mypage.html'"></i></div>
+    <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left' onclick="location.href='../user/mypage.html'"></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>찜내역</b></h2>
     </div>

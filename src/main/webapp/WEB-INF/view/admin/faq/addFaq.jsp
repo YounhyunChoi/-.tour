@@ -11,7 +11,6 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
-<title></title>
 <script>
 $(() => {
 $('#faqAddBtn').click(() => {
@@ -24,7 +23,7 @@ $('#faqAddBtn').click(() => {
 	    			faqQuestion: $('#questionInput').val(),
 	    			faqAnswer: $('#answerInput').val()
 	    		},
-	    		success: $('#faqAddBtn').attr('href', 'adminFaqList')
+	    		success: $('#faqAddBtn').attr('href', 'adminList')
 	    	})
 	    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
 	    	showOkModal('제목과 내용을 입력해주세요.')
@@ -36,6 +35,7 @@ $('#faqAddBtn').click(() => {
 })
 })
 </script>
+<title>FAQ추가</title>
 <style>
     #contentBox{
         height: 20rem;
@@ -71,11 +71,11 @@ $('#faqAddBtn').click(() => {
             </div>
         </div>
     </div>
-   <div class='row'>
+    <div class='row'>
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../user/adminMain'>메인</a> > <a href='../faq/adminFaqList'>FAQ</a> > <a href='../faq/add'>FAQ추가</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../faq/adminList'>FAQ</a> > <a href='../faq/add'>FAQ추가</a>
                 </h6>
             </div>
         </div>

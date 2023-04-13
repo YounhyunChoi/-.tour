@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=UTF-8'  pageEncoding='UTF-8'%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta charset='utf-8'>
@@ -17,9 +18,10 @@ $.ajax({
 	dataType: 'json',
 	success: reservationDtos => {
 		let presentDate = new Date()
+
 		if(reservationDtos.length) {
 			const resvDtoArr = []
-				$.each(reservationDtos, (i, reservationDto) => {	
+				$.each(reservationDtos, (i, reservationDto) => {
 					resvDtoArr.push(
 					`
 					<div class='row mt-4 d-flex flex-column shadow-sm border border-1'>
@@ -38,9 +40,9 @@ $.ajax({
 				            <div class='row'>
 				                <div class='col-4'>
 				                    <div class='d-flex flex-column align-items-center'>
-				                        <p class='mb-1 resvNum'>\${reservationDto.resvNum}</p>
+				                        <span class='d-flex'>예약번호<p class='mb-1 resvNum'>\${reservationDto.resvNum}</p></span>
 				                        <div class='d-flex image'>
-				                            <span>여행코스이미지</span>
+				                        <img src='<c:url value="/attach/` + reservationDto.tourImageName + `"/>' style="max-width:90%; height:90%;"/>
 				                        </div>
 				                    </div>
 				                </div>
@@ -71,11 +73,25 @@ $.ajax({
 								`<button type='button' id='reviewAddBtn\${reservationDto.tourNum}'
 		                        class='border border-0 rounded text-white reviewAddBtn'>후기등록</button>`
 		                        )
-							}	
-					$(`#reviewAddBtn\${reservationDto.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${reservationDto.tourNum}`})
+							}
+					$.ajax({
+						url: 'reviewGet',
+						dataType: 'json',
+						data:{
+							resvNum: reservationDto.resvNum
+						},
+						success: reviews => {
+							if(reviews.length){
+								$(`#resvBtnContainer\${reservationDto.tourNum}`).empty()
+								$(`#resvBtnContainer\${reservationDto.tourNum}`).html(
+									`<span class='text-center'>후기작성완료</span>
+			                        ` )
+							}
+						}
+					})	
+					$(`#reviewAddBtn\${reservationDto.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${reservationDto.tourNum}&resvNum=\${reservationDto.resvNum}`})
 					$(`#tourViewBtn\${reservationDto.tourNum}`).click(() => {location.href=`../tour/view?tourNum=\${reservationDto.tourNum}`})
-				}) 
-		
+				})			
 		}else {
 			$('#reservationContainer').html(`
         			<div class='row d-block my-5'>
@@ -123,7 +139,7 @@ $.ajax({
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill' onclick="location.href='../user/mypage.html'"></i></div>
+    <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left' onclick="location.href='../user/mypage.html'"></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>예약내역</b></h2>
     </div>

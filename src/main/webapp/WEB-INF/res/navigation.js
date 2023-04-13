@@ -10,7 +10,7 @@ $(() => {
        	}
     })
     
-    $('.bi.bi-caret-left-fill').click(() => {
+    $('.bi.bi-chevron-left').click(() => {
 		history.go(-1)
 	})
 })

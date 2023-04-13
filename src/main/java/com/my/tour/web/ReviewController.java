@@ -34,7 +34,7 @@ public class ReviewController {
 	@GetMapping("my")
 	@LoginAccess
 	public ModelAndView my(ModelAndView mv, HttpSession session, 
-							@Nullable boolean tourNumError) {
+							@Nullable String reviewErrMsg) {
 		mv.setViewName("review/myReview");
 		
 		return mv;
@@ -64,27 +64,33 @@ public class ReviewController {
 				break;
 			}
 		}
+		
 		if(mv.getViewName() == null) {
 			mv.setViewName("redirect:/review/my");
-			mv.addObject("tourNumError", true);
+			mv.addObject("reviewErrMsg", "작성하려는 리뷰의 여행코스가 예약 내역에 없거나, 여행코스 종료일이 지나지 않았습니다. 다시 확인해주세요.");
+		} else if(reviewService.getMyReview((String) session.getAttribute("userId"), tourNum).size() != 0) {
+			mv.setViewName("redirect:/review/my");
+			mv.addObject("reviewErrMsg", "이미 작성된 여행코스 리뷰입니다.");
 		}
 		
 		return mv;
 	}
 	
 	@PostMapping("add")
-	public void addReview(String reviewTitle, String reviewContent, double score) {
-		reviewService.addReview(reviewTitle, reviewContent, score);
+	public void addReview(String reviewTitle, String reviewContent, double score,
+						HttpSession session, int tourNum) {
+		reviewService.addReview(reviewTitle, reviewContent, score,
+				(String) session.getAttribute("userId"), tourNum);
 	}
 	
-	@PostMapping("addNoticeImages")
-	public void addNoticeImages(@RequestParam("noticeImage") List<MultipartFile> noticeImage, HttpSession session) {	
+	@PostMapping("addReviewImages")
+	public void addReviewImages(@RequestParam("reviewImage") List<MultipartFile> reviewImage, HttpSession session) {	
 		int reviewNum = reviewService.getMyReviews((String) session.getAttribute("userId")).get(0).getReviewNum();
 		String filename = "";
 	 
 		reviewService.delReviewImage(reviewNum);
 	 
-		for(MultipartFile multipartfile: noticeImage) {
+		for(MultipartFile multipartfile: reviewImage) {
 			filename = "review" + multipartfile.getOriginalFilename();
 			if(!filename.equals("review")) {
 				saveFile(attachPath + "/" + filename, multipartfile);

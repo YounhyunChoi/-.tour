@@ -10,7 +10,6 @@
 <link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
 <script src='../res/modal.js?ver=2'></script>
-<title></title>
 <script>
 let addComma = function(component, value){
 	component.text(Number(value).toLocaleString('en').split(".")[0])
@@ -43,14 +42,16 @@ $(() => {
 	})
 })
 </script>
+<title>예약 추가</title>
 <style>
+
 </style>
 </head>
 <body>
 <header></header>
 <div class='navigation fixed-top'>
 	<div class='float-start mt-2 ms-2'>
-		<i class='bi bi-caret-left-fill'></i>
+		<i class='bi bi-chevron-left'></i>
 	</div>	
 	<div class='menuName'>
 		<h2 class='text-center pt-3'>

@@ -12,7 +12,6 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
-<title></title>
 <script>
     $(() => {
     	let commentArr = []
@@ -101,6 +100,7 @@
         })
     })
 </script>
+<title>댓글조회</title>
 <style>	
     
 </style>
@@ -134,7 +134,7 @@
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../main.html'>메인</a> > <a href='./01.html'>댓글</a> > <a href='./02.html'>댓글조회</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../comment/adminList'>댓글</a> > <a href=''>댓글조회</a>
                 </h6>
             </div>
         </div>

@@ -73,18 +73,18 @@ $(() => {
 					tourArr.push(
 							`<div class='ms-3'>
 								<div class='d-block'>
-									<span>\${tour.tourName}</span>
+									<span><h5><b>\${tour.tourName}</h5></b></span>
 								</div>
 								<div class='d-block'>
-									기간
+									기간:
 									<span>\${tour.tourSDate} ~ \${tour.tourEDate}</span>
 								</div>
 								<div class='d-block'>
-									가격
+									가격:
 									<span id='tourPrice'>\${tour.tourPrice - tour.discountPrice}</span>
 								</div>
 								<div class='d-block'>
-									내용
+									내용:
 									<span>\${tour.tourContent}</span>
 								</div>
 							</div>`)
@@ -196,7 +196,7 @@ $(() => {
 </header>
 <div class='navigation fixed-top'>
     <div class='float-start mt-3 ms-2'>
-    	<i class='bi bi-caret-left-fill' id='navBackBtn'></i>
+    	<i class='bi bi-chevron-left' id='navBackBtn'></i>
     </div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b id='tourTitle'></b></h2>
@@ -205,7 +205,7 @@ $(() => {
 <div class='container'>
     <div class='row'>
         <div class='col'>
-            <div class='row py-5 mt-4' id='tourImg'>
+            <div class='row py-4 mt-4' id='tourImg'>
                 <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
                     <div class='carousel-inner' id='tourImgIn'>
                     	<!-- 여행코스 이미지 -->

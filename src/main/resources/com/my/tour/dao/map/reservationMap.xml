@@ -11,10 +11,12 @@
 	
 	<select id='selectResvsWithTour' resultType='reservationDto'>
 		select r.resv_num, r.charge_price, r.resv_date, r.whether_to_cancel, r.resv_edate, r.user_id, r.tour_num, t.tour_name,
-			t.tour_sdate, t.tour_edate, t.tour_price
+			t.tour_sdate, t.tour_edate, t.tour_price, ti.tourimage_name
 		from tour.reservations r
 			left outer join tour.tours t
 			on r.tour_num = t.tour_num
+			left outer join tour.tour_images ti
+			on t.tour_num = ti.tour_num
 			order by resv_num desc
 	</select>
 	

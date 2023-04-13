@@ -13,4 +13,5 @@ public class Review {
 	private LocalDate reviewDate;
 	private String userId;
 	private int tourNum;
+	private int resvNum;
 }

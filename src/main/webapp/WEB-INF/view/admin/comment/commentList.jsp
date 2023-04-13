@@ -82,7 +82,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='#'>메인</a> > <a href='./01.html'>댓글</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../comment/adminList'>댓글</a>
                 </h6>
             </div>
         </div>

@@ -12,6 +12,10 @@
 <script src='../res/navigation.js'></script>
 <script src='../res/modal.js'></script>
 <script>
+let addComma = function(component, value){
+	component.text(Number(value).toLocaleString('en').split(".")[0])
+}
+
 function addWish() {
 	$.ajax({
 		url: '../wish/add',
@@ -61,23 +65,34 @@ $(() => {
 		url: 'get',
 		success: tours => {
 			const tourArr = []
-			let tourEDate
 			$.each(tours, (i, tour) => {
 				if(tour.tourNum == ${param.tourNum}) {
-					tourEDate = tour.tourEDate
 					$('#tourTitle').append(`\${tour.tourName}`)
 					
 					tourArr.push(
 							`<div class='ms-3'>
-								\${tour.tourName}<br>
-								기간 \${tour.tourSDate} ~ \${tour.tourEDate}<br>
-								가격 \${tour.tourPrice}<br>
-								내용 \${tour.tourContent}<br>
+								<div class='d-block'>
+									<span>\${tour.tourName}</span>
+								</div>
+								<div class='d-block'>
+									기간
+									<span>\${tour.tourSDate} ~ \${tour.tourEDate}</span>
+								</div>
+								<div class='d-block'>
+									가격
+									<span id='tourPrice'>\${tour.tourPrice - tour.discountPrice}</span>
+								</div>
+								<div class='d-block'>
+									내용
+									<span>\${tour.tourContent}</span>
+								</div>
 							</div>`)
 					$('#tourContent').append(tourArr.join(''))
 				}
-				
 			})
+			
+			addComma($('#tourPrice'), $('#tourPrice').text())
+			
 			$('#reservationBtn').click(e => {	
 				if(`${userId}`){
 					$.ajax({
@@ -85,7 +100,7 @@ $(() => {
 						success: reservations => {
 							let msg
 							$.each(reservations, (i, reservation) => {
-								if(${param.tourNum} == reservation.tourNum && reservation.whetherToCancel == 'N' && tourEDate == reservation.resvEDate){
+								if(${param.tourNum} == reservation.tourNum && reservation.whetherToCancel == 'N' &&  tour.tourEDate == reservation.resvEDate){
 									msg = '이미 예약한 코스입니다.'
 								}						
 							})

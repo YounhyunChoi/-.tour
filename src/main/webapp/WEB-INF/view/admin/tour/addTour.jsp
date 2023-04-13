@@ -75,7 +75,7 @@ $(() => {
 					tourSDate: $('#tourSDate').val(),
 					tourEDate: $('#tourEDate').val(),
 					tourPrice: $('#tourPrice').val(),
-					termNum: 1
+					discountPrice: 0
 				}),
 				success: () => {
 	    			let formData = new FormData($('#tourImageUp')[0])
@@ -180,7 +180,7 @@ $(() => {
             </div>
         </div>
         <div class='row'>
-            <div class='col'>
+            <div class='col-3'>
             	<form id='tourImageUp'>
 					<input type='file' id='tourImage' name='tourImage' accept='image/*' multiple/>
 				</form>

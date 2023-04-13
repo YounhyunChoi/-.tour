@@ -3,20 +3,29 @@
 	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='com.my.tour.dao.map.ReservationMap'>
 	<select id='selectReservations' resultType='reservation'>
-		select resv_num, charge_price, resv_Date, whether_to_cancel, user_id, tour_num
+		select resv_num, charge_price, resv_Date, whether_to_cancel, resv_EDate, user_id, tour_num
 		from reservations
 		where user_id = #{userId}
 		order by resv_num desc
 	</select>
 	
+	<select id='selectResvsWithTour' resultType='reservationDto'>
+		select r.resv_num, r.charge_price, r.resv_date, r.whether_to_cancel, r.resv_edate, r.user_id, r.tour_num, t.tour_name,
+			t.tour_sdate, t.tour_edate, t.tour_price
+		from tour.reservations r
+			left outer join tour.tours t
+			on r.tour_num = t.tour_num
+			order by resv_num desc
+	</select>
+	
 	<insert id='insertReservation'>
 		insert into reservations
-		values (resv_num_seq.nextval, #{chargePrice}, sysdate, 'N', #{userId}, #{tourNum})
+		values (resv_num_seq.nextval, #{chargePrice}, sysdate, 'N', #{resvEDate}, #{userId}, #{tourNum})
 	</insert>
 	
 	<update id='updateReservation'>
 		update reservations
-		set whether_to_cancel = #{whetherToCancel}
+		set whether_to_cancel = 'Y'
 		where resv_num = #{resvNum}
 	</update>
 </mapper>

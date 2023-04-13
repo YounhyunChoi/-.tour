@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.my.tour.domain.Alarm;
 import com.my.tour.service.AlarmService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -21,13 +22,13 @@ public class AlarmController {
 	
 	@GetMapping("get")
 	@GetAccess
-	public List<Alarm> getAlarms(HttpSession session){
+	public List<Alarm> getAlarms(HttpServletRequest request, HttpSession session){
 		return alarmService.getAlarms((String)session.getAttribute("userId"));
 	}
 	
 	@PutMapping("fix")
-	public void fixAlarm(HttpSession session, String whetherToCheck) {
-		alarmService.fixAlarm((String)session.getAttribute("userId"), whetherToCheck);
+	public void fixAlarm(HttpSession session) {
+		alarmService.fixAlarm((String)session.getAttribute("userId"));
 	}
 	
 	@DeleteMapping("del")

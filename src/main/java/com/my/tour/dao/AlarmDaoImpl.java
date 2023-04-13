@@ -23,8 +23,8 @@ public class AlarmDaoImpl implements AlarmDao{
 	}
 	
 	@Override
-	public void updateAlarm(String userId, String whetherToCheck) {
-		alarmMap.updateAlarm(userId, whetherToCheck);
+	public void updateAlarm(String userId) {
+		alarmMap.updateAlarm(userId);
 	}
 	@Override
 	public void deleteAlarm(int alarmNum) {

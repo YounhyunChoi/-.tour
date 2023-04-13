@@ -58,6 +58,7 @@ $(() => {
 					$('#tourSDate').val(`\${tour.tourSDate}`)
 					$('#tourEDate').val(`\${tour.tourEDate}`)
 					$('#tourPrice').val(`\${tour.tourPrice}`)
+					$('#discountPrice').val(`\${tour.discountPrice}`)
 					$('#tourContent').val(`\${tour.tourContent}`)
 				}
 			})
@@ -80,10 +81,10 @@ $(() => {
 	
 	//여행코스 수정
 	$('#tourFixBtn').click(() => {
-		if($('#tourImage').val() && $('#tourName').val() && $('#tourName').val().length >= 10 &&
+		if($('#tourName').val() && $('#tourName').val().length >= 10 &&
 				$('#tourSDate').val() && $('#tourEDate').val() &&
 				$('#tourSDate').val().replaceAll('-', '') < $('#tourEDate').val().replaceAll('-', '') &&
-				$('#tourPrice').val()) {
+				$('#tourPrice').val() >= $('#discountPrice').val() && $('#discountPrice').val() >= 0) {
 			let tour = {
 				tourNum: ${param.tourNum},
 				tourName: $('#tourName').val(),
@@ -91,8 +92,7 @@ $(() => {
 				tourSDate: $('#tourSDate').val(),
 				tourEDate: $('#tourEDate').val(),
 				tourPrice: $('#tourPrice').val(),
-				adminId: `${adminId}`,
-				termNum: 1
+				discountPrice: $('#discountPrice').val()
 			}
 			
 			$.ajax({
@@ -110,6 +110,10 @@ $(() => {
 			} else if(($('#tourSDate').val().replaceAll('-', '') >= $('#tourEDate').val().replaceAll('-', ''))
 					&& $('#tourSDate').val()) {
 				showOkModal('ERROR] 여행코스시작일은 여행코스종료일보다 크거나 같을 수 없습니다.')
+			} else if($('#tourPrice').val() < $('#discountPrice').val()) {
+				showOkModal('ERROR] 할인가격은 여행코스가격보다 클 수 없습니다.')
+			} else if($('#discountPrice').val() < 0) {
+				showOkModal('ERROR] 할인가격이 음수입니다.')
 			} else {
 				showOkModal('ERROR] 누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
 			}
@@ -232,7 +236,15 @@ $(() => {
                     가격
                 </div>
                 <div class='col-8'>
-                    <input type='text' class='form-control' id='tourPrice'/>
+                	<input type='text' class='form-control' id='tourPrice'/>
+                </div>
+            </div>
+            <div class='row mt-2 align-items-center'>
+                <div class='col-1 text-end text-nowrap fs-5'>
+                    할인금액
+                </div>
+                <div class='col-8'>
+                    <input type='text' class='form-control' id='discountPrice'/>
                 </div>
             </div>
             <div class='row mt-2'>
@@ -245,12 +257,12 @@ $(() => {
             </div>
             <div class='row justify-content-end me-5 mt-2'>
                 <div class='col-4 d-flex flex-nowrap align-self-center'>
-                    <button id='tourFixBtn' type='button' class='btn btn-olive' data-bs-toggle='modal' data-bs-target='#modal'>
+                    <a id='tourFixBtn' type='button' class='btn btn-olive'>
                         <span class='bi bi-check-circle text-nowrap'>&nbsp;수정</span>
-                    </button>
-                    <button id='tourDelBtn' type='button' class='btn btn-lightRed ms-2' data-bs-toggle='modal' data-bs-target='#modal'>
+                    </a>
+                    <a id='tourDelBtn' type='button' class='btn btn-lightRed ms-2'>
                         <span class='bi bi-x-circle text-nowrap'>&nbsp;삭제</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </form>

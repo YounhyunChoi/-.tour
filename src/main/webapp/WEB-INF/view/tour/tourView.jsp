@@ -82,7 +82,7 @@ $(() => {
 						success: reservations => {
 							let msg
 							$.each(reservations, (i, reservation) => {
-								if(${param.tourNum} == reservation.tourNum && reservation.whetherToCancel == 'N'){
+								if(${param.tourNum} == reservation.tourNum && reservation.whetherToCancel == 'N' &&  tour.tourEDate == reservation.resvEDate){
 									msg = '이미 예약한 코스입니다.'
 								}						
 							})

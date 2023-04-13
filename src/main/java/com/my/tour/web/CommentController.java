@@ -25,6 +25,7 @@ public class CommentController {
 	@Autowired private CommentService commentService;
 	
 	@GetMapping("add")
+	@LoginAccess
 	public ModelAndView addComment(ModelAndView mv, int reviewNum) {
 		mv.setViewName("comment/addComment");
 		return mv;
@@ -41,7 +42,8 @@ public class CommentController {
 	}
 	
 	@GetMapping("fix")
-	public ModelAndView fixComment(ModelAndView mv) {
+	@LoginAccess
+	public ModelAndView fixComment(ModelAndView mv, HttpSession session, int comtNum) {
 		mv.setViewName("comment/fixComment");
 		return mv;
 	}

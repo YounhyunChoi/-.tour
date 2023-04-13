@@ -13,18 +13,18 @@
 <script src='../res/modal.js'></script>
 <script>
     $(() => {
-        $('#deleteComment').click(() => {
-        	showConfirmModal('댓글을 삭제하겠습니까?')
-        	
-        	$('#okBtn').click(() => )
-        	$.ajax({
-        		url: 'del',
-        		method: 'delete',
-        		data:{
-        			comtNum: `${param.comtNum}`
-        		}
-        	})
-        	showOkModal('댓글을 삭제하시겠습니까?', '../review/get')
+    	$('#deleteComment').click(() => {
+       		showConfirmModal('댓글을 삭제하시겠습니까?')
+       		
+       		$('#okBtn').click(() => {
+           		$.ajax({
+           			url: 'del/' + ${param.comtNum},
+           			method: 'delete',
+           			success: () => {
+           				$(location).attr('href', '../review/get')
+           			}
+           		})
+       		})
         })
     	
         $('#editComment').click(() => {
@@ -34,10 +34,10 @@
         			method: 'put',
         			data: {
         				comtContent: $('#comtContent').val(),
-        				comtNum: $('#comtNum').val()
+        				comtNum: ${param.comtNum}
         			}
         		})
-        		showOkModal('댓글이 수정되었습니다.', '../review/get')
+        		$('#editComment').attr('href', '../review/get')
         	} else {
     			showOkModal('댓글을 입력해주세요.')
     		}

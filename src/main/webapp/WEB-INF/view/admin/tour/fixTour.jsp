@@ -84,7 +84,7 @@ $(() => {
 		if($('#tourName').val() && $('#tourName').val().length >= 10 &&
 				$('#tourSDate').val() && $('#tourEDate').val() &&
 				$('#tourSDate').val().replaceAll('-', '') < $('#tourEDate').val().replaceAll('-', '') &&
-				$('#tourPrice').val() >= $('#discountPrice').val() && $('#discountPrice').val() >= 0) {
+				parseInt($('#tourPrice').val()) >= parseInt($('#discountPrice').val()) && $('#discountPrice').val() >= 0) {
 			let tour = {
 				tourNum: ${param.tourNum},
 				tourName: $('#tourName').val(),
@@ -110,8 +110,8 @@ $(() => {
 			} else if(($('#tourSDate').val().replaceAll('-', '') >= $('#tourEDate').val().replaceAll('-', ''))
 					&& $('#tourSDate').val()) {
 				showOkModal('ERROR] 여행코스시작일은 여행코스종료일보다 크거나 같을 수 없습니다.')
-			} else if($('#tourPrice').val() < $('#discountPrice').val()) {
-				showOkModal('ERROR] 할인가격은 여행코스가격보다 클 수 없습니다.')
+			} else if(parseInt($('#tourPrice').val()) < parseInt($('#discountPrice').val())) {
+				showOkModal('ERROR] 할인금액은 여행코스가격보다 클 수 없습니다.')
 			} else if($('#discountPrice').val() < 0) {
 				showOkModal('ERROR] 할인가격이 음수입니다.')
 			} else {

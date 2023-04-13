@@ -88,7 +88,7 @@ $.ajax({
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../user/adminMain'>메인</a> > <a href='../faq/adminFaqList'>FAQ</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../faq/adminList'>FAQ</a>
                 </h6>
             </div>
         </div>

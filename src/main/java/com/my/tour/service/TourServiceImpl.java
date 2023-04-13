@@ -44,8 +44,8 @@ public class TourServiceImpl implements TourService {
 	
 	@Override
 	public void addTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate,
-			int tourPrice, int discountPrice, String adminId, int termNum) {
-		tourDao.insertTour(tourName, tourContent, tourSDate, tourEDate, tourPrice, discountPrice, adminId, termNum);
+			int tourPrice, int discountPrice, String adminId) {
+		tourDao.insertTour(tourName, tourContent, tourSDate, tourEDate, tourPrice, discountPrice, adminId);
 	}
 
 	@Override

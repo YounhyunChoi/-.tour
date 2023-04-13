@@ -131,14 +131,14 @@ public class TourController {
 	
 	@PostMapping("addTourImages")
 	public boolean addTourImages(@RequestParam("tourImage") List<MultipartFile> tourImage) {
-		int tourNum = tourService.getAllTours().get(0).getTourNum();
-		String filename = "";
-		
-		tourService.delTourImage(tourNum);
-		
 		if(tourImage.size() > 4) {
 			return false;
 		} else {
+			int tourNum = tourService.getAllTours().get(0).getTourNum();
+			String filename = "";
+			
+			tourService.delTourImage(tourNum);
+			
 			for(MultipartFile multipartfile: tourImage) {
 				filename = "tour" + multipartfile.getOriginalFilename();
 				if(!filename.equals("tour")) {

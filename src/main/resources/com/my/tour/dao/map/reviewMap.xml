@@ -7,7 +7,7 @@
 				user_id, tour_num
 		from reviews
 		<where>
-			review_exporsure = 'Y'
+			review_exposure = 'Y'
 			<if test='resvNum != null'>
 				and resv_num = #{resvNum}
 			</if>

@@ -73,7 +73,7 @@ $.ajax({
 		                        class='border border-0 rounded text-white reviewAddBtn'>후기등록</button>`
 		                        )
 							}	
-					$(`#reviewAddBtn\${reservationDto.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${reservationDto.tourNum}`})
+					$(`#reviewAddBtn\${reservationDto.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${reservationDto.tourNum}&resvNum=\${reservationDto.resvNum}`})
 					$(`#tourViewBtn\${reservationDto.tourNum}`).click(() => {location.href=`../tour/view?tourNum=\${reservationDto.tourNum}`})
 				}) 
 		

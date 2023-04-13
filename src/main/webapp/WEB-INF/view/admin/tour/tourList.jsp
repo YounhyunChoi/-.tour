@@ -66,14 +66,14 @@ $(() => {
 						                <div class='text-truncate'>\${tour.tourName}</div>
 						            </div>`
 								)
-								
-								$.each(tours, (i, tour) => {
-									$(`#tourItem\${tour.tourNum}`).click(() => {
-										location.href = `fix?tourNum=\${tour.tourNum}`
-									})
-								})
 							}
 							$('#tourContent').append(tourSearchArr.join(''))
+						})
+						
+						$.each(tours, (i, tour) => {
+							$(`#tourItem\${tour.tourNum}`).click(() => {
+								location.href = `fix?tourNum=\${tour.tourNum}`
+							})
 						})
 					}
 				}

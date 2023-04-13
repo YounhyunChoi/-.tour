@@ -12,13 +12,6 @@
 <script src='../../res/modal.js'></script>
 <title></title>
 <script>
-let changeToDate = function(date){
-	date = date.replaceAll('-', '')
-	let year = date.slice(0,4)
-	let month = date.slice(5,6) - 1
-	let day = date.slice(7,8)
-	return new Date(year, month, day)
-}
 let changeAttr = function(component, text, removeClass, addClass, attrName, attrValue){
 	component.text(text)
 	component.removeClass(removeClass)	
@@ -61,11 +54,10 @@ $.ajax({
 			$('.chargePrice').each(function(){
 				addComma($(this), $(this).text())
 			})
-			
 			$('.cancelBtn').each(function(){
 				if($(this).attr('whethertocancel') == 'Y'){
 					changeAttr($(this), '취소됨', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
-				}else if(presentDate.getTime() > changeToDate($(this).attr('edate')).getTime()){
+				}else if(presentDate.getTime() > new Date($(this).attr('edate')).getTime()){
 					changeAttr($(this), '취소불가', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
 				}else if($(this).attr('whethertocancel') == 'N'){
 					$(this).text('취소')
@@ -78,7 +70,7 @@ $.ajax({
 								method: 'put',
 								data: {
 									resvNum: $(this).attr('id'),
-									tourName: '"'+$(this).parent().prev().prev().text() + '"' + '이취소되었습니다.',
+									tourName: '"'+$(this).parent().prev().prev().text() + '"' + '이 취소되었습니다.',
 									userId: `${param.userId}`
 								},
 								success: () => {

@@ -23,7 +23,7 @@ $(() => {
 					tourArr.push(
 		                `<div class='col-5 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
 		                    <div class='border border-3'>
-		                    	<img src='<c:url value="/attach/` + tour.tourImageName + `"/>' style="max-width:100%; height:100%;"/>
+		                    	<img src='<c:url value="/attach/` + tour.tourImageName + `"/>' style="max-width:90%; height:90%;"/>
 							</div>
 		                    <div class='text-truncate'>\${tour.tourName}</div>
 		                </div>`
@@ -70,7 +70,7 @@ $(() => {
 </header>
 <div class='navigation fixed-top'>
 	<div class='float-start mt-3 ms-2'>
-		<i class='bi bi-caret-left-fill'></i>
+		<i class='bi bi-chevron-left'></i>
 	</div>
 	<div class='menuName'>
 		<h2 class='text-center pt-3'><b>코스목록</b></h2>

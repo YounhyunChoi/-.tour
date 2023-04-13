@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.my.tour.dao.map.CommentMap;
 import com.my.tour.domain.Comment;
+import com.my.tour.domain.CommentDto;
 
 @Repository
 public class CommentDaoImpl implements CommentDao{
@@ -15,6 +16,16 @@ public class CommentDaoImpl implements CommentDao{
 	@Override
 	public List<Comment> selectComments() {
 		return commentMap.selectComments();
+	}
+	
+	@Override
+	public List<Comment> selectComment(int reviewNum){
+		return commentMap.selectComment(reviewNum);
+	}
+
+	@Override
+	public List<CommentDto> selectCommentDto(int comtNum) {
+		return commentMap.selectCommentDto(comtNum);
 	}
 	
 	@Override

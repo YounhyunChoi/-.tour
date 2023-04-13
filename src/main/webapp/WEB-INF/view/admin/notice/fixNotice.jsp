@@ -89,17 +89,18 @@ $(() => {
 		let regexr = /[가-힣a-zA-Z0-9\s]{5}/
 		if(regexr.test($('#noticeTitle').val()) && $('#noticeContent').val()) {
 			$.ajax({
-				url: 'fixNotice',
+				url: 'fix',
 				method: 'put',
 				contentType: 'application/json',
 				data: JSON.stringify({
 					noticeNum: ${noticeNum},
 					noticeTitle: $('#noticeTitle').val(),
 					noticeContent: $('#noticeContent').val()	
-				})
+				}),
+				success: () => {
+					$(location).attr('href', 'adminList')
+				}
 			})
-			showOkModal('공지사항이 수정되었습니다.', 'adminList')
-			
 		} else {
 			showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
 		}
@@ -107,14 +108,21 @@ $(() => {
 	})
 	//notice삭제
 	$('#delNoticeBtn').click(() => {
-		$.ajax({
-			url: 'delNotice',
-			method: 'delete',
-			data: {
-				noticeNum: `${param.noticeNum}`
-			}
+		showConfirmModal('공지사항을 삭제하시겠습니까?')
+		
+		$('#okBtn').click(() => {
+			$.ajax({
+				url: 'del',
+				method: 'delete',
+				data: {
+					noticeNum: `${param.noticeNum}`
+				},
+				success: () => {
+					$(location).attr('href', 'adminList')
+				}
+			})
 		})
-		showOkModal('공지사항을 삭제하시겠습니까?', 'adminList')
+		
 	})
 })
 </script>
@@ -125,7 +133,7 @@ $(() => {
         text-align: center;
     }
 
-    .tourCarouselBtn {
+    .noticeCarouselBtn {
         color: black;
     }
 </style>
@@ -146,7 +154,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList'>공지사항</a>  > <a href='../notice/adminFixView'>공지수정</a>
+                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList'>공지사항</a>  > <a href='../notice/fix?noticeNum=' + $('#noticeNum:checked').val()'>공지수정</a>
                 </h6>
             </div>
         </div>
@@ -197,14 +205,14 @@ $(() => {
            </div>
        </div>
        <div class='d-flex gap-2 justify-content-end'>
-           <button type='button' class='btn btn-olive'id='fixNoticeBtn'>
+           <a type='button' class='btn btn-olive'id='fixNoticeBtn'>
                <i class='bi bi-check-circle'></i>
                &nbsp;수정
-           </button>
-           <button type='button' class='btn btn-lightRed'id='delNoticeBtn'>
+           </a>
+           <a type='button' class='btn btn-lightRed'id='delNoticeBtn'>
                <i class='bi bi-x-circle'></i>
                &nbsp;삭제
-           </button>
+           </a>
        </div>
    </div>
 </div>

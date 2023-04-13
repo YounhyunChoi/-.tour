@@ -13,7 +13,7 @@ public interface TourService {
 	List<Tour> getTour(int tourNum);
 	List<TourDto> getTourList();
 	void addTourTemp(int tourTempNum, String adminId);
-	void addTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate, int tourPrice, String adminId, int termNum);
+	void addTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate, int tourPrice, int discountPrice, String adminId);
 	void fixTour(Tour tour);
 	void delTour(int tourNum);
 	List<TourImage> getTourImages(int tourNum);

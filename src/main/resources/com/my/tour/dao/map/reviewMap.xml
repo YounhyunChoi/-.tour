@@ -10,6 +10,14 @@
 		order by review_num desc
 	</select>
 	
+	<select id='selectReview' resultType='review'>
+		select review_num, review_title, review_content, score, review_date,
+				user_id, tour_num
+		from reviews
+		where review_num = #{reviewNum}
+		order by review_num desc
+	</select>
+	
 	<select id='selectMyReviews' resultType='reviewDto'>
 		select review_num, tour_name, review_title, score, review_date, user_id, tour_num
 		from reviews join tours

@@ -12,7 +12,7 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script>
-$(() => {
+$(() => {	
 	$.ajax({
 		url: 'get',
 		success: commentList => {
@@ -26,17 +26,22 @@ $(() => {
 		                    <td>\${comment.userId}</td>
 		                    <td>\${comment.comtDate}</td>
 		                    <td>
-		                        <a href='../comment/02.html' class='btn btn-darkBlue'>보기</a>
+		                        <a href='adminDel?comtNum=\${comment.comtNum}' class='btn btn-darkBlue' id='viewComtBtn' value='\${comment.comtNum}'>보기</a>
 		                    </td>
 		                </tr>`)
 				})
 				
 				$('#comments').append(comments.join(''))
+				
 			} else {
 				$('#comments').append(`<tr><td colspan='5' class='text-center'>댓글이 없습니다.</td></tr>`)
 			}
 					
 		}
+	})
+	
+	$.ajax({
+		
 	})
 })
 </script>
@@ -58,7 +63,20 @@ $(() => {
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
+                    <c:if test='${logoName != null}'>
+	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
+		           			<a href='../user/adminMain'>
+	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+	                    	</a>
+                    	</div>
+					</c:if>
+					<c:if test='${logoName == null}'>
+						<div class='float-start m-4 ms-4'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
+								로고이미지
+							</a>
+						</div>
+					</c:if>
                     <h1 class='text-center pt-3 text-white'><b>댓글</b></h1>
                 </div>
             </div>

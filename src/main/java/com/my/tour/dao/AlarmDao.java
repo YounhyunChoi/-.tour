@@ -7,6 +7,6 @@ import com.my.tour.domain.Alarm;
 public interface AlarmDao {
 	List<Alarm> selectAlarms(String userId);
 	void insertAlarm(String alarmContent, String userId);
-	void updateAlarm(String userId, String whetherToCheck);
+	void updateAlarm(String userId);
 	void deleteAlarm(int alarmNum);
 }

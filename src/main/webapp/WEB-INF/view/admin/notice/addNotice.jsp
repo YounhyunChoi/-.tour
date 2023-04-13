@@ -13,7 +13,6 @@
 <script src='../../res/modal.js'></script>
 <title>ADMIN.NOTICE.02 공지 추가</title>
 <script>
-
 function showNoticeImage() {
 	$.ajax({
 		url: 'getNoticeImage',
@@ -63,16 +62,16 @@ $(() => {
 			data: formData,
 			success: isGood => {
 				if(isGood) showNoticeImage()
-				else showOkmodal('이미지는 최대 4장까지 등록 가능합니다.')
+				else showOkModal('이미지는 최대 4장까지 등록 가능합니다.')
 			}
 		})
 	})
 	
-	$('#noticeRegistrationBtn').click(() => {
+	$('#addNoticeBtn').click(() => {
 		let regexr = /[가-힣a-zA-Z0-9\s]{5}/
 	    if(regexr.test($('#noticeTitle').val()) && $('#noticeContent').val()){
    			$.ajax({
-	    		url: 'addNotice',
+	    		url: 'add',
 	    		method:'post',
 	    		data: {
 	    			noticeTitle: $('#noticeTitle').val(),
@@ -85,11 +84,13 @@ $(() => {
 	    				method: 'post',
 	    				contentType: false,
 	    				processData: false,
-	    				data: formData
+	    				data: formData,
+	    				success: () => {
+	    					$(location).attr('href', 'adminList')
+	    				}
 	    			})
 	    		}
 	    	})
-	    	$('#noticeRegistrationBtn').attr('href', 'adminList')
 	    } else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')
 	})
 })
@@ -186,7 +187,7 @@ $(() => {
             </div>
         </div>
         <div class='d-flex justify-content-end'>
-            <a type='button' class='btn btn-darkBlue'id='noticeRegistrationBtn'>
+            <a type='button' class='btn btn-darkBlue'id='addNoticeBtn'>
                 <i class='bi bi-plus-circle'></i>
                 &nbsp;등록
             </a>

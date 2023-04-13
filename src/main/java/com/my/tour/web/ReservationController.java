@@ -2,6 +2,7 @@ package com.my.tour.web;
 
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.my.tour.domain.Reservation;
+import com.my.tour.domain.ReservationDto;
 import com.my.tour.domain.Tour;
 import com.my.tour.service.AlarmService;
 import com.my.tour.service.ReservationService;
@@ -27,24 +28,17 @@ import jakarta.servlet.http.HttpSession;
 public class ReservationController {
 	@Autowired private ReservationService reservationService;
 	@Autowired private AlarmService alarmService;
-	
+
 	@GetMapping("get")
 	@GetAccess
-	public List<Reservation> getReservations(HttpSession session) {
-		return reservationService.getReservations((String)session.getAttribute("userId"));
+	public List<ReservationDto> getResvsWithTour(HttpServletRequest request, HttpSession session) {
+		return reservationService.getResvsWithTour((String)session.getAttribute("userId"));
 	}
-	
-	
-	@GetMapping("tours")
-	@GetAccess
-	public List<Tour> getTours(HttpServletRequest request){
-		return reservationService.getTours();
-	}
-	
+		
 	@GetMapping("adminGet")
-	@AdminAccess
-	public List<Reservation> getReservations(String userId) {
-		return reservationService.getReservations(userId);
+	@GetAccess
+	public List<ReservationDto> getReservations(HttpServletRequest request, String userId) {
+		return reservationService.getResvsWithTour(userId);
 	}
 	
 	
@@ -56,24 +50,23 @@ public class ReservationController {
 	}
 	
 	@GetMapping("add")
-	@AdminAccess
-	public ModelAndView addReservation(ModelAndView mv, int tourNum) {
+	@LoginAccess
+	public ModelAndView addReservation(ModelAndView mv,  HttpSession session, int tourNum) {
 		Tour tour = reservationService.getTour(tourNum).get(0);
 		mv.setViewName("reservation/addReservation");
 		mv.addObject("tour", tour);
-		mv.addObject("term", reservationService.getTerm(tour.getTermNum()));
 		return mv;
 	}
 	
 	@PostMapping("add")
-	public void addReservation(int chargePrice, HttpSession session, int tourNum) {
-		reservationService.addReservation(chargePrice, (String)session.getAttribute("userId"), tourNum);
+	public void addReservation(int chargePrice, HttpSession session, int tourNum, LocalDate resvEDate) {
+		reservationService.addReservation(chargePrice, (String)session.getAttribute("userId"), tourNum, resvEDate);
 	}
 	
 	@PutMapping("fix")
-	public 	void fixReservation(int resvNum, String whetherToCancel, String tourName, String userId) {
+	public void fixReservation(int resvNum, String tourName, String userId) {
 		alarmService.addAlarm(tourName, userId);
-		reservationService.fixReservation(resvNum, whetherToCancel);
+		reservationService.fixReservation(resvNum);
 	}
 	
 	@GetMapping("del")

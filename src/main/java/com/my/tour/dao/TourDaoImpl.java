@@ -41,8 +41,8 @@ public class TourDaoImpl implements TourDao {
 
 	@Override
 	public int insertTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate,
-			int tourPrice, String adminId, int termNum) {
-		return tourMap.insertTour(tourName, tourContent, tourSDate, tourEDate, tourPrice, adminId, termNum);
+			int tourPrice, int discountPrice, String adminId) {
+		return tourMap.insertTour(tourName, tourContent, tourSDate, tourEDate, tourPrice, discountPrice, adminId);
 	}
 
 	@Override

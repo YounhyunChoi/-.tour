@@ -15,7 +15,7 @@
 	
 	<update id='updateAlarm'>
 		update alarms
-		set whether_to_check = #{whetherToCheck}
+		set whether_to_check = 'Y'
 		where user_id = #{userId}
 	</update>
 	

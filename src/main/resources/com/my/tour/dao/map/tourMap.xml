@@ -3,20 +3,20 @@
 	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='com.my.tour.dao.map.TourMap'>
 	<select id='selectTours' resultType='tour'>
-		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id, term_num
+		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, discount_price, admin_id
 		from tours
 		where tour_name not in 'temp'
 		order by tour_num desc
 	</select>
 	
 	<select id='selectAllTours' resultType='tour'>
-		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id, term_num
+		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price
 		from tours
 		order by tour_num desc
 	</select>
 	
 	<select id='selectTour' resultType='tour'>
-		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id, term_num
+		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id
 		from tours
 		where tour_num = #{tourNum}
 	</select>
@@ -30,18 +30,18 @@
 		
 	<insert id='insertTourTemp'>
 		insert into tours
-		values(#{tourTempNum}, 'temp', 'temp', to_date(sysdate, 'YYYY-MM-DD'), to_date(sysdate, 'YYYY-MM-DD'), 0, #{adminId}, 1)
+		values(#{tourTempNum}, 'temp', 'temp', to_date(sysdate, 'YYYY-MM-DD'), to_date(sysdate, 'YYYY-MM-DD'), 0, 0, #{adminId})
 	</insert>
 	
 	<insert id='insertTour'>
-		insert into tours(tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id, term_num)
-		values(tour_num_seq.nextval, #{tourName}, #{tourContent}, #{tourSDate}, #{tourEDate}, #{tourPrice}, #{adminId}, #{termNum})
+		insert into tours(tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, discount_price, admin_id)
+		values(tour_num_seq.nextval, #{tourName}, #{tourContent}, #{tourSDate}, #{tourEDate}, #{tourPrice}, #{discountPrice}, #{adminId})
 	</insert>
 		
 	<update id='updateTour'>
 		update tours
 		set tour_name = #{tourName}, tour_content = #{tourContent}, tour_sdate = #{tourSDate}, tour_edate = #{tourEDate},
-			tour_price = #{tourPrice}, admin_id = #{adminId}, term_num = #{termNum}
+			tour_price = #{tourPrice}, discount_price = #{discountPrice}
 		where tour_num = #{tourNum}
 	</update>
 	

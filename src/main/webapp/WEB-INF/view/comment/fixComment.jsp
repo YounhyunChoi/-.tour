@@ -14,6 +14,9 @@
 <script>
     $(() => {
         $('#deleteComment').click(() => {
+        	showConfirmModal('댓글을 삭제하겠습니까?')
+        	
+        	$('#okBtn').click(() => )
         	$.ajax({
         		url: 'del',
         		method: 'delete',
@@ -30,7 +33,8 @@
         			url: 'fix',
         			method: 'put',
         			data: {
-        				comtContent: $('#comtContent').val()
+        				comtContent: $('#comtContent').val(),
+        				comtNum: $('#comtNum').val()
         			}
         		})
         		showOkModal('댓글이 수정되었습니다.', '../review/get')
@@ -49,7 +53,7 @@
 <header>
 </header>
 <div class='navigation fixed-top'>
-   <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill'></i></div>
+   <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left'></i></div>
    <div class='menuName'>
       <h2 class='text-center pt-3'><b>댓글수정</b></h2>
    </div>

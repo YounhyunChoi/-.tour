@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC './/mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.tour.dao.map.EventMap'>
+	<select id='selectEvents' resultType='event'>
+		select event_num, event_title, event_content, event_date
+		from events
+		where event_title not in 'temp'
+		order by event_num desc
+	</select>
+	
+	<select id='selectAllEvents' resultType='event'>
+		select event_num, event_title, event_content, event_date
+		from events
+		order by event_num desc
+	</select>
+	
+	<select id='selectEvent' resultType='event'>
+		select event_num, event_title, event_content, event_date
+		from events
+		where event_num = #{eventNum}
+	</select>
+	
+	<insert id='insertEventTemp'>
+		insert into events
+		values (#{eventTempNum}, 'temp', 'temp', to_char(sysdate,'YYYY-MM-DD'), #{adminId})
+	</insert>
+	
+	<insert id='insertEvent'>
+		insert into events
+		values (event_num_seq.nextval, #{eventTitle}, #{eventContent}, to_char(sysdate, 'YYYY-MM-DD'), #{adminId})
+	</insert>
+	
+	<update id='updateEvent'>
+		update events
+		set event_title = #{eventTitle}, event_content = #{eventContent}
+		where event_num = #{eventNum}
+	</update>
+	
+	<delete id='deleteEvent'>
+		delete events
+		where event_num = #{eventNum}
+	</delete>
+</mapper>

@@ -26,7 +26,7 @@ $(() => {
 			        	<sapn id='noticeNum'><b>\${notice.noticeNum}.</b></span>
 			        	<b>\${notice.noticeTitle}</b>
 			        </h3>
-			        <span class='col noticeContent'>
+			        <span class='col noticeDate'>
 			            <p>작성일 \${notice.noticeDate}</p>
 			        </span>
 			        <hr>
@@ -50,12 +50,12 @@ $(() => {
 						$.each(noticeImages, (i, noticeImage) => {
 							if(i == 1) {
 								noticeArr.push(
-										`<div class='carousel-item active'">
+										`<div class='carousel-item active'>
 					                        <img src='<c:url value="/attach/` + noticeImage + `"/>' style="max-width:100%; height:100%;"/>
 					                    </div>`)
 							} else {
 								noticeArr.push(
-										`<div class='carousel-item'">
+										`<div class='carousel-item'>
 					                        <img src='<c:url value="/attach/` + noticeImage + `"/>' style="max-width:100%; height:100%;"/>
 					                    </div>`)
 							}
@@ -103,7 +103,7 @@ $(() => {
 <header>
 </header>
 <div class='navigation fixed-top'>
-   <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill'></i></div>
+   <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left'></i></div>
    <div class='menuName'>
       <h2 class='text-center pt-3'><b>공지상세</b></h2>
    </div>

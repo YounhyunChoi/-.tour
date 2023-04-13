@@ -10,9 +10,10 @@ import com.my.tour.domain.Tour;
 
 public interface ReviewService {
 	List<Review> getReviews();
+	List<Review> getReview(int reviewNum);
 	List<ReviewDto> getMyReviews(String userId);
 	List<ReviewDto> getMyReview(String userId, int tourNum);
-	List<ReviewImage> getReviewImage(int reviewNum);
+	List<ReviewImage> getReviewImages(int reviewNum);
 	List<Reservation> getReservations(String userId);
 	List<Tour> getTour(int tourNum);
 	int addReview(String reviewTitle, String reviewContent, double score,

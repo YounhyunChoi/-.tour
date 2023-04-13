@@ -22,25 +22,29 @@ $(() => {
 		idCheck = false
 	})
 	
-	$('#duplicateCheck').click(() => {
-		regexr = /[a-z0-9]{5}/
-    	$.ajax({
-			url: 'getUserDto',
-			data: {
-				userId: $('#userId').val()
-			},
-			dataType: 'json',
-			success: user => {
-				if(user.length) {
-					showOkModal('아이디가 중복되었습니다.')
-					idCheck = false
-				} else {
-					showOkModal('사용가능한 아이디입니다.')
-					idCheck = regexr.test($('#userId').val())
+	if($('#userId').val().length > 4) {
+		$('#duplicateCheck').click(() => {
+			regexr = /[a-z0-9]{5}/
+	    	$.ajax({
+				url: 'getUserDto',
+				data: {
+					userId: $('#userId').val()
+				},
+				dataType: 'json',
+				success: user => {
+					if(user.length) {
+						showOkModal('아이디가 중복되었습니다.')
+						idCheck = false
+					} else {
+						showOkModal('사용가능한 아이디입니다.')
+						idCheck = regexr.test($('#userId').val())
+					}
 				}
-			}
-		})
-    })
+			})
+	    })
+	} else {
+		showOkModal('영문, 숫자로 구성된 5자리 이상의 아이디를 입력하세요.')
+	}
     
     let passwordCheck = false
     
@@ -75,16 +79,20 @@ $(() => {
     	phoneCheck = false
     })
     
-  	$('#sendCheckNumBtn').click(() => {
-  		checkNum = Math.floor(Math.random() * 1000000) + ''
-  		while (checkNum.length != 6) {
-  			checkNum = '0' + checkNum
-  		}
-  		
-    	phoneNum = $('#phoneNum').val()
-  		console.log(checkNum)
-    	showOkModal('인증번호가 발송되었습니다.')
-    })
+    if($('#phoneNum').val().length > 9) {
+    	$('#sendCheckNumBtn').click(() => {
+      		checkNum = Math.floor(Math.random() * 1000000) + ''
+      		while (checkNum.length != 6) {
+      			checkNum = '0' + checkNum
+      		}
+      		
+        	phoneNum = $('#phoneNum').val()
+      		console.log(checkNum)
+        	showOkModal('인증번호가 발송되었습니다.')
+        })
+    } else {
+    	showOkModal('-를 제외한 10~11자리의 휴대폰 번호를 입력하세요')
+    }
     
     $('#phoneCheckBtn').click(() => {
         if($('#phoneCheckNum').val() == checkNum && phoneNum == $('#phoneNum').val()) {
@@ -134,7 +142,7 @@ $(() => {
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill'></i></div>
+    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left'></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>회원가입</b></h2>
     </div>

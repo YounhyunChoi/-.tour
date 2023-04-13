@@ -17,7 +17,7 @@
     }
 
     .myPageIcon {
-        font-size: 50px;
+        font-size: 40px;
     }
 </style>
 </head>
@@ -25,7 +25,7 @@
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill'></i></div>
+    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left'></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>My</b></h2>
     </div>
@@ -43,7 +43,7 @@
                 </a>
             </div>
         </div>
-        <div class='row py-2 px-3 border-bottom border-dark lightBlue'>
+        <div class='row py-3 px-3 border-bottom border-dark lightBlue'>
             <div class='col-2'>
                 <i class='bi bi-calendar-check-fill myPageIcon'></i>
             </div>
@@ -56,7 +56,7 @@
                 </a>
             </div>
         </div>
-        <div class='row py-2 px-3 border-bottom border-dark lightBlue'>
+        <div class='row py-3 px-3 border-bottom border-dark lightBlue'>
             <div class='col-2'>
                 <i class='bi bi-heart myPageIcon'></i>
             </div>
@@ -69,7 +69,7 @@
                 </a>
             </div>
         </div>
-        <div class='row py-2 px-3 lightBlue'>
+        <div class='row py-3 px-3 lightBlue'>
             <div class='col-2'>
                 <i class='bi bi-chat-dots myPageIcon'></i>
             </div>

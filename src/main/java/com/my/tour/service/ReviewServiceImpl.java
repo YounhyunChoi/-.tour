@@ -28,6 +28,11 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
+	public List<Review> getReview(int reviewNum) {
+		return reviewDao.selectReview(reviewNum);
+	}
+
+	@Override
 	public List<ReviewDto> getMyReviews(String userId) {
 		return reviewDao.selectMyReviews(userId);
 	}
@@ -38,7 +43,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
-	public List<ReviewImage> getReviewImage(int reivewNum) {
+	public List<ReviewImage> getReviewImages(int reivewNum) {
 		return reviewImageDao.selectReviewImages(reivewNum);
 	}
 

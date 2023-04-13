@@ -29,14 +29,16 @@ $(() => {
       if ($('#agreeCheckbox').prop('checked')) $('#paymentBtn').removeAttr('disabled')
       else if (!$('#agreeCheckbox').prop('checked')) $('#paymentBtn').attr('disabled', 'disabled')
    })
+  
    $('#paymentBtn').click(() => {
 	   if(`${userId}`){
 	   $.ajax({
 			url: 'add',
 			method: 'post',
 			data: {
-				chargePrice: $('.chargePrice').eq(0).text().replace(',', ''),
-				tourNum: ${tour.tourNum}
+				chargePrice: $('.chargePrice').eq(0).text().replaceAll(',', ''),
+				tourNum: ${tour.tourNum},
+				resvEDate: `${tour.tourEDate}`
 			}
 	   })
       	showOkModal('여행코스가 예약되었습니다.', 'list')
@@ -53,7 +55,7 @@ $(() => {
 <header></header>
 <div class='navigation fixed-top'>
 	<div class='float-start mt-2 ms-2'>
-		<i class='bi bi-caret-left-fill'></i>
+		<i class='bi bi-chevron-left'></i>
 	</div>	
 	<div class='menuName'>
 		<h2 class='text-center pt-3'>
@@ -86,7 +88,7 @@ $(() => {
 			<b>필수안내 약관</b>
 		</div>
 		<div class='col p-2 border border-2 contents shadow-sm'>
-			<span id='termContent'>${term.termContent}</span><br>
+			<span id='termContent'>약관내용</span><br>
 		</div>
 		<div class='col p-2 text-left'>
 			<input type='checkbox' id='agreeCheckbox'

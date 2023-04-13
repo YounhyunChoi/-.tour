@@ -11,6 +11,7 @@ public class Reservation {
 	private int chargePrice;
 	private LocalDate resvDate;
 	private String whetherToCancel;
+	private LocalDate resvEDate;
 	private String userId;
 	private int tourNum;
 }

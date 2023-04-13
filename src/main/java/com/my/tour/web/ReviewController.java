@@ -83,14 +83,14 @@ public class ReviewController {
 				(String) session.getAttribute("userId"), tourNum);
 	}
 	
-	@PostMapping("addNoticeImages")
-	public void addNoticeImages(@RequestParam("noticeImage") List<MultipartFile> noticeImage, HttpSession session) {	
+	@PostMapping("addReviewImages")
+	public void addReviewImages(@RequestParam("reviewImage") List<MultipartFile> reviewImage, HttpSession session) {	
 		int reviewNum = reviewService.getMyReviews((String) session.getAttribute("userId")).get(0).getReviewNum();
 		String filename = "";
 	 
 		reviewService.delReviewImage(reviewNum);
 	 
-		for(MultipartFile multipartfile: noticeImage) {
+		for(MultipartFile multipartfile: reviewImage) {
 			filename = "review" + multipartfile.getOriginalFilename();
 			if(!filename.equals("review")) {
 				saveFile(attachPath + "/" + filename, multipartfile);

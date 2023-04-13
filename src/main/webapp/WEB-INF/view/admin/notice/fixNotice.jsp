@@ -11,7 +11,6 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
-<title>ADMIN.NOTICE.03 공지 수정</title>
 <script>
 function showNoticeImage() {
 	$.ajax({
@@ -126,6 +125,7 @@ $(() => {
 	})
 })
 </script>
+<title>공지수정</title>
 <style>
     #noticeImg {
         border: .1rem solid lightgray;
@@ -154,7 +154,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList'>공지사항</a>  > <a href='../notice/fix?noticeNum=' + $('#noticeNum:checked').val()'>공지수정</a>
+                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList'>공지사항</a> > <a href=''>공지수정</a>
                 </h6>
             </div>
         </div>

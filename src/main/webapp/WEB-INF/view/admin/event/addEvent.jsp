@@ -11,7 +11,6 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
-<title>ADMIN.EVENT.02 이벤트 추가</title>
 <script>
 function showEventImage() {
 	$.ajax({
@@ -95,6 +94,7 @@ $(() => {
 	})
 })
 </script>
+<title>이벤트추가</title>
 <style>
     #eventImg {
         border: .1rem solid lightgray;
@@ -127,7 +127,7 @@ $(() => {
 							</a>
 						</div>
 					</c:if>
-                    <h1 class='text-center pt-3 text-white'><b>이벤트 추가</b></h1>
+                    <h1 class='text-center pt-3 text-white'><b>이벤트추가</b></h1>
              	</div>
              </div>
         </div>

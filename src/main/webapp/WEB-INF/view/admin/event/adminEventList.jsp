@@ -10,7 +10,6 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
-<title>ADMIN.EVENT.01 이벤트 목록</title>
 <script>
 $(() => {
 	$('#fixEventBtn').click(() => {
@@ -47,8 +46,11 @@ $(() => {
 		}
 	})
 })
-
 </script>
+<title>이벤트목록</title>
+<style>
+
+</style>
 </head>
 <body>
 <header>
@@ -70,16 +72,16 @@ $(() => {
 							</a>
 						</div>
 					</c:if>
-                	<h1 class='text-center pt-3 text-white'><b>이벤트</b></h1>
+                	<h1 class='text-center pt-3 text-white'><b>이벤트목록</b></h1>
                 </div>
             </div>
         </div>
     </div>
-   <div class='row'>
+    <div class='row'>
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../user/adminMain'>메인</a> > <a href='../event/adminList'>이벤트</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../event/adminList'>이벤트목록</a>
                 </h6>
             </div>
         </div>

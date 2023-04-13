@@ -16,6 +16,20 @@
 $(() => {
 	selectScore()
 	
+	let resvReview
+	$.ajax({
+		url: 'getReviewByResv',
+		method: 'get',
+		data: {
+			resvNum: ${param.resvNum}
+		},
+		success: review => {
+			if(review.length) {
+				$(location).attr('href', 'my?reviewErrMsg=이미+작성된+여행코스+리뷰입니다.')
+			}
+		}
+	})
+	
     $('#reviewAddBtn').click(() => {  
     	let regexr = /[a-zA-Z가-힣0-9]{5}/
     	
@@ -24,21 +38,27 @@ $(() => {
        			url: 'add',
        			method: 'post',
        			data: {
-       	   				reviewTitle: $('#reviewTitle').val(),
-       	   				reviewContent: $('#reviewContent').val(),
-       	   				score: $('#rangeScore').val(),
-       	   				tourNum: ${param.tourNum}
+   	   				reviewTitle: $('#reviewTitle').val(),
+   	   				reviewContent: $('#reviewContent').val(),
+   	   				score: $('#rangeScore').val(),
+   	   				tourNum: ${param.tourNum},
+   	   				resvNum: ${param.resvNum}
        	       	},
        			success: () => {
        				let formData = new FormData($('#reviewImageUp')[0])
+       				
        				$.ajax({
        					url: 'addReviewImages',
        					method: 'post',
        					contentType: false,
        					processData: false,
        					data: formData,
-       					success: () => {
-       						$(location).attr('href', 'my')	
+       					success: isGood => {
+       						if(isGood) {
+           						$(location).attr('href', 'my')	
+       						} else {
+       							showOkModal('이미지는 최대 4장까지 등록 가능합니다.')
+       						}
        					}
        				})
        			}
@@ -113,12 +133,12 @@ function selectScore() {
         <div class='col-2'></div>
         <div class='col-4 text-start'>
         	<form id='reviewImageUp' class='mb-0'>
-	        	<input type='file' id='inputImg' class='d-none'>
-	            <button type='button'
-	                class='reviewimageNum contentBtn border-0 btn-lightGray rounded text-white'>
-	                <label for='inputImg'>사진추가</label>
-	            </button>
+	        	<input type='file' id='inputImg' name='reviewImage' class='d-none' multiple>
         	</form>
+        	<button type='button'
+	            class='reviewimageNum contentBtn border-0 btn-lightGray rounded text-white'>
+	            <label for='inputImg'>사진추가</label>
+	        </button>
         </div>
         <div class='col-2 d-flex justify-content-end p-0 fs-4'
         	style='padding-top: 0.19rem! important;'>

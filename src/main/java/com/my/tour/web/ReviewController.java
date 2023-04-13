@@ -53,9 +53,14 @@ public class ReviewController {
 		return reviews;
 	}
 	
+	@GetMapping("getReviewByResv")
+	public List<Review> getReviewByResv(int resvNum) {
+		return reviewService.getReviews(resvNum);
+	}
+	
 	@GetMapping("add")
 	@LoginAccess
-	public ModelAndView addReview(ModelAndView mv, HttpSession session, int tourNum) {		
+	public ModelAndView addReview(ModelAndView mv, HttpSession session, int tourNum, int resvNum) {		
 		for(Reservation reservation: 
 			reviewService.getReservations((String) session.getAttribute("userId"))) {
 			if(reservation.getTourNum() == tourNum && 
@@ -78,24 +83,30 @@ public class ReviewController {
 	
 	@PostMapping("add")
 	public void addReview(String reviewTitle, String reviewContent, double score,
-						HttpSession session, int tourNum) {
+						HttpSession session, int tourNum, int resvNum) {
 		reviewService.addReview(reviewTitle, reviewContent, score,
-				(String) session.getAttribute("userId"), tourNum);
+				(String) session.getAttribute("userId"), tourNum, resvNum);
 	}
 	
 	@PostMapping("addReviewImages")
-	public void addReviewImages(@RequestParam("reviewImage") List<MultipartFile> reviewImage, HttpSession session) {	
-		int reviewNum = reviewService.getMyReviews((String) session.getAttribute("userId")).get(0).getReviewNum();
-		String filename = "";
-	 
-		reviewService.delReviewImage(reviewNum);
-	 
-		for(MultipartFile multipartfile: reviewImage) {
-			filename = "review" + multipartfile.getOriginalFilename();
-			if(!filename.equals("review")) {
-				saveFile(attachPath + "/" + filename, multipartfile);
-				reviewService.addReviewImage(filename, reviewNum);
+	public boolean addReviewImages(@RequestParam("reviewImage") List<MultipartFile> reviewImage, HttpSession session) {	
+		if(reviewImage.size() > 4) {
+			return false;
+		} else {
+			int reviewNum = reviewService.getMyReviews((String) session.getAttribute("userId")).get(0).getReviewNum();
+			String filename = "";
+		 
+			reviewService.delReviewImage(reviewNum);
+		 
+			for(MultipartFile multipartfile: reviewImage) {
+				filename = "review" + multipartfile.getOriginalFilename();
+				if(!filename.equals("review")) {
+					saveFile(attachPath + "/" + filename, multipartfile);
+					reviewService.addReviewImage(filename, reviewNum);
+				}
 			}
+			
+			return true;
 		}
 	}
 

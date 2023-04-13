@@ -12,7 +12,7 @@ public interface ReviewDao {
 	List<ReviewDto> selectMyReviews(String userId);
 	List<ReviewDto> selectMyReview(String userId, int tourNum);
 	int insertReview(String reviewTitle, String reviewContent, double score,
-					String userId, int tourNum);
+					String userId, int tourNum, int resvNum);
 	int updateReview(String reviewTitle, String reviewContent, double score);
 	int deleteReview(int reviewNum);
 }

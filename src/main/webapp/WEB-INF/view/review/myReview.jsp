@@ -44,8 +44,9 @@
 					                    	</a>
 					                	</div>
 					            	</div>
-					            	<div class='row mt-2'>`
-					    if('${myReview.reviewImageName}') {
+					            	<div class='row mt-2'>`				    
+					    
+					    if(myReview.reviewImageName) {
 						    html += 	`<div class='col-3 me-4'>
 			                    			<div class='reviewImage'><img src='<c:url value="/attach/\${myReview.reviewImageName}"/>'/></div>
 				                		</div>`

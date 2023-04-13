@@ -10,6 +10,7 @@
 <link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
 <script src='../res/modal.js?ver=2'></script>
+<title>예약 추가</title>
 <script>
 let addComma = function(component, value){
 	component.text(Number(value).toLocaleString('en').split(".")[0])
@@ -42,10 +43,6 @@ $(() => {
 	})
 })
 </script>
-<title>예약 추가</title>
-<style>
-
-</style>
 </head>
 <body>
 <header></header>
@@ -74,9 +71,9 @@ $(() => {
 			<b>금액 및 할인</b>
 		</div>
 		<div class='col p-2 border border-2 contents shadow-sm'>
-			<b>코스 금액</b><span id='tourPrice'>${tour.tourPrice}</span><br>
-			<b>할인 금액</b><span id='salePrice'>${tour.discountPrice}</span>원<br><br>
-			<b>총 결제 금액</b><span class='chargePrice'></span>
+			<b>코스 금액: </b><span id='tourPrice'>${tour.tourPrice}</span><br>
+			<b>할인 금액: </b><span id='salePrice'>${tour.discountPrice}</span>원<br><br>
+			<b>총 결제 금액: </b><span class='chargePrice'></span>
 		</div>
 	</div>
 	<div class='row d-block'>

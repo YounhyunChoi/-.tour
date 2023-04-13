@@ -28,7 +28,12 @@ function wishList() {
 								`<div class='row mt-4 d-flex flex-column shadow-sm border border-1'>
 									<div class='col p-2 border-bottom'>
 							            <div class='row d-flex justify-content-between'>
-							                <div class='col-4 fs-4 text-center'>찜번호 \${wish.wishNum}</div>
+							                <div class='col-4 fs-4 text-center'>
+							                	<span>
+							                		찜번호
+							                		<span class='mb-1 wishNum'>\${wish.wishNum}</span>
+							                	</span>
+							                </div>
 							                <div class='col-4 text-end'>
 							                    <button type='button' class='border-0 bg-white'>
 							                        <span class='fs-5'>상세보기</span>
@@ -70,6 +75,10 @@ function wishList() {
 							}
 						})
 						$('#wishContent').append(wishArr.join(''))
+
+						for(let i = 0; i < $('.wishNum').length; i++){
+							$('.wishNum').eq(i).text($('.wishNum').eq(i).text().padStart(4, '0'))
+						}
 						
 						$.each(tours, (i, tour) => {
 							$(`#tourItem\${tour.wishNum}`).click(() => {

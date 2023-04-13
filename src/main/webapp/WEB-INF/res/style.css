@@ -41,6 +41,10 @@ div.mx-auto {
     font-size: 30px;
 }
 
+.bi-chevron-right {
+    font-size: 30px;
+}
+
 .menuName {
     border-bottom: 0.1rem solid #053847;
     background-color: #dfebf6;

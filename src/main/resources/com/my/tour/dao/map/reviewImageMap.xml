@@ -10,7 +10,7 @@
 	</select>
 	
 	<insert id='insertReviewImage'>
-		insert review_images
+		insert into review_images
 		values (reviewimage_num_seq.nextval, #{reviewImageName}, #{reviewNum})
 	</insert>
 	

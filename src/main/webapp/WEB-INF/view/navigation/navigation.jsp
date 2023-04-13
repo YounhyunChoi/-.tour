@@ -7,57 +7,11 @@
 <%
 if(userId != null) {
 %>    
-function listAlarm(){
-	$.ajax({
-		url: '../alarm/get',
-		dataType: 'json',
-		success: alarms => {
-			if(alarms.length){
-			const alarmArr = []
-			$.each(alarms, (i, alarm) => {
-				alarmArr.push(
-				`
-				<li class='border-bottom'>
-	              	<div class='row'>
-	                 		<div class='col-10'>
-	                    		<a class='dropdown-item alarm-item' href='#'>
-	                       		\${alarm.alarmContent}
-	                    		</a>
-	                 		</div>
-	                  	<div class='col-2 ps-0 pt-1'>
-	                     	<a alarmNum=\${alarm.alarmNum} type='button' class='alarmDelBtn btn-close'></a>
-	                  	</div>
-	              	</div>
-	           	</li>
-				`
-				)
-			})
-			$('#alarmContainer').append(alarmArr.join(''))
-			}else{
-				$('#alarmContainer').html(
-					`
-					<li class='border-bottom'>
-					         	<div class='row'>
-					    		<div class='col-10'>
-					       		<a class='dropdown-item alarm-item' href='#'>
-					       		알람이없습니다.
-					       		</a>
-					    		</div>
-					 	</div>
-					</li>
-					`
-				)
-			}
-		}
-	})
-	return alarms
-}
 $.ajax({
 	url: '../alarm/get',
 	dataType: 'json',
 	success: alarms => {
 		if(alarms.length){
-		let test
 		const alarmArr = []
 		$.each(alarms, (i, alarm) => {
 			if(alarm.whetherToCheck == 'N'){
@@ -121,7 +75,6 @@ $.ajax({
 						})
 				 })
 				})
-			
 		})
 		}else{
 			$('#alarmContainer').html(

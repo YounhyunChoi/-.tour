@@ -212,7 +212,7 @@ $(() => {
         </div>
         <form>
             <div class='row mt-2 align-items-center'>
-                <div class='col-1 text-end text-nowrap fs-5'>
+                <div class='col-2 text-end text-nowrap fs-5'>
                     제목
                 </div>
                 <div class='col-8'>
@@ -220,7 +220,7 @@ $(() => {
                 </div>
             </div>
             <div class='row mt-2 align-items-center'>
-                <div class='col-1 text-end text-nowrap fs-5'>
+                <div class='col-2 text-end text-nowrap fs-5'>
                     기간
                 </div>
                 <div class='col-4'>
@@ -232,7 +232,7 @@ $(() => {
                 </div>
             </div>
             <div class='row mt-2 align-items-center'>
-                <div class='col-1 text-end text-nowrap fs-5'>
+                <div class='col-2 text-end text-nowrap fs-5'>
                     가격
                 </div>
                 <div class='col-8'>
@@ -240,7 +240,7 @@ $(() => {
                 </div>
             </div>
             <div class='row mt-2 align-items-center'>
-                <div class='col-1 text-end text-nowrap fs-5'>
+                <div class='col-2 text-end text-nowrap fs-5'>
                     할인금액
                 </div>
                 <div class='col-8'>
@@ -248,7 +248,7 @@ $(() => {
                 </div>
             </div>
             <div class='row mt-2'>
-                <div class='col-1 text-end text-nowrap fs-5'>
+                <div class='col-2 text-end text-nowrap fs-5'>
                     내용
                 </div>
                 <div class='col-8'>

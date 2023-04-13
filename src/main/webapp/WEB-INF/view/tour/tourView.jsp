@@ -61,8 +61,10 @@ $(() => {
 		url: 'get',
 		success: tours => {
 			const tourArr = []
+			let tourEDate
 			$.each(tours, (i, tour) => {
 				if(tour.tourNum == ${param.tourNum}) {
+					tourEDate = tour.tourEDate
 					$('#tourTitle').append(`\${tour.tourName}`)
 					
 					tourArr.push(
@@ -74,6 +76,7 @@ $(() => {
 							</div>`)
 					$('#tourContent').append(tourArr.join(''))
 				}
+				
 			})
 			$('#reservationBtn').click(e => {	
 				if(`${userId}`){
@@ -82,7 +85,7 @@ $(() => {
 						success: reservations => {
 							let msg
 							$.each(reservations, (i, reservation) => {
-								if(${param.tourNum} == reservation.tourNum && reservation.whetherToCancel == 'N' &&  tour.tourEDate == reservation.resvEDate){
+								if(${param.tourNum} == reservation.tourNum && reservation.whetherToCancel == 'N' && tourEDate == reservation.resvEDate){
 									msg = '이미 예약한 코스입니다.'
 								}						
 							})

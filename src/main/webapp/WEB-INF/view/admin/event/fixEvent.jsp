@@ -11,7 +11,6 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
-<title>ADMIN.NOTICE.03 이벤트 수정</title>
 <script>
 function showEventImage() {
 	$.ajax({
@@ -121,6 +120,7 @@ $(() => {
 	})
 })
 </script>
+<title>이벤트수정</title>
 <style>
     #eventImg {
         border: .1rem solid lightgray;
@@ -139,7 +139,20 @@ $(() => {
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
+                	<c:if test='${logoName != null}'>
+                		<div class='float-start ms-4 mt-1' style='height: 50px;'>
+                			<a href='../user/adminMain'>
+                				<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+                			</a>
+                		</div>
+                	</c:if>
+                	<c:if test='${logoName == null}'>
+						<div class='float-start m-4 ms-4'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
+								로고이미지
+							</a>
+						</div>
+					</c:if>
                     <h1 class='text-center pt-3 text-white'><b>이벤트수정</b></h1>
                 </div>
             </div>
@@ -149,7 +162,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../event/adminList'>이벤트</a>  > <a href='#'>이벤트수정</a>
+                    <a href='../admin/main'>메인</a> > <a href='../event/adminList'>이벤트</a> > <a href=''>이벤트수정</a>
                 </h6>
             </div>
         </div>
@@ -160,7 +173,7 @@ $(() => {
   		<div class='row'>
            <div class='col pt-2 d-flex gap-3 mb-4'>
                <label for='eventTitle'>
-                   <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
+                   <h5 class='align-items-center text-nowrap pt-1'>이벤트수정</h5>
                </label>
                <div class='col shadow-sm'>
                    <input type='text' class='form-control' id='eventTitle' maxlength='30'/>

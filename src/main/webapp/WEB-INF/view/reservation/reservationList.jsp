@@ -1,5 +1,4 @@
 <%@ page language='java' contentType='text/html; charset=UTF-8'  pageEncoding='UTF-8'%>
-
 <html>
 <head>
 <meta charset='utf-8'>
@@ -13,14 +12,6 @@
 <script src='../res/navigation.js'></script>
 <title></title>
 <script>
-let changeToDate = function(date){
-	date = date.replaceAll('-', '')
-	let year = date.slice(0,4)
-	let month = date.slice(5,6) -1
-	let day = date.slice(7,8)
-	return new Date(year, month, day)
-}
-
 $.ajax({
 	url: 'get',
 	dataType: 'json',
@@ -64,22 +55,23 @@ $.ajax({
 					)					
 				})
 				$('#reservationContainer').append(resvDtoArr.join(''))
+				
 				for(let i =0; i < $('.resvNum').length; i++){
 					$('.resvNum').eq(i).text($('.resvNum').eq(i).text().padStart(4, '0'))
 				}
+			
 				$.each(reservationDtos, (i, reservationDto) => {
 					if($(`#resvBtnContainer\${reservationDto.tourNum}`).attr('whetherToCancel') == 'Y'){
 						$(`#resvBtnContainer\${reservationDto.tourNum}`).html(
 							`<span
 	                        class=' text-danger text-center'>취소됨</span>`
 	                        )
-					}else if(presentDate.getTime() > changeToDate(reservationDto.tourEDate).getTime()){						
+					}else if(presentDate.getTime() > new Date(reservationDto.tourEDate).getTime()){						
 						$(`#resvBtnContainer\${reservationDto.tourNum}`).html(
 								`<button type='button' id='reviewAddBtn\${reservationDto.tourNum}'
 		                        class='border border-0 rounded text-white reviewAddBtn'>후기등록</button>`
 		                        )
-							}
-					
+							}	
 					$(`#reviewAddBtn\${reservationDto.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${reservationDto.tourNum}`})
 					$(`#tourViewBtn\${reservationDto.tourNum}`).click(() => {location.href=`../tour/view?tourNum=\${reservationDto.tourNum}`})
 				}) 

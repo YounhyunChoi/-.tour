@@ -55,9 +55,11 @@ $.ajax({
 					)					
 				})
 				$('#reservationContainer').append(resvDtoArr.join(''))
+				
 				for(let i =0; i < $('.resvNum').length; i++){
 					$('.resvNum').eq(i).text($('.resvNum').eq(i).text().padStart(4, '0'))
 				}
+			
 				$.each(reservationDtos, (i, reservationDto) => {
 					if($(`#resvBtnContainer\${reservationDto.tourNum}`).attr('whetherToCancel') == 'Y'){
 						$(`#resvBtnContainer\${reservationDto.tourNum}`).html(
@@ -69,8 +71,7 @@ $.ajax({
 								`<button type='button' id='reviewAddBtn\${reservationDto.tourNum}'
 		                        class='border border-0 rounded text-white reviewAddBtn'>후기등록</button>`
 		                        )
-							}
-					
+							}	
 					$(`#reviewAddBtn\${reservationDto.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${reservationDto.tourNum}`})
 					$(`#tourViewBtn\${reservationDto.tourNum}`).click(() => {location.href=`../tour/view?tourNum=\${reservationDto.tourNum}`})
 				}) 

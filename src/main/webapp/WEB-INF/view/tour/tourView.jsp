@@ -65,10 +65,11 @@ $(() => {
 		url: 'get',
 		success: tours => {
 			const tourArr = []
+			let tourEDate
 			$.each(tours, (i, tour) => {
 				if(tour.tourNum == ${param.tourNum}) {
 					$('#tourTitle').append(`\${tour.tourName}`)
-					
+					tourEDate = tour.tourEDate
 					tourArr.push(
 							`<div class='ms-3'>
 								<div class='d-block'>
@@ -100,9 +101,9 @@ $(() => {
 						success: reservations => {
 							let msg
 							$.each(reservations, (i, reservation) => {
-								if(${param.tourNum} == reservation.tourNum && reservation.whetherToCancel == 'N' &&  tour.tourEDate == reservation.resvEDate){
+								if(${param.tourNum} == reservation.tourNum && reservation.whetherToCancel == 'N' && tourEDate == reservation.resvEDate){
 									msg = '이미 예약한 코스입니다.'
-								}						
+								}			
 							})
 							if(msg) {
 								showOkModal(msg);
@@ -243,7 +244,6 @@ $(() => {
                 <button type='button' id='reservationBtn' class='mt-5 ms-5 w-auto btn btn-darkBlue'>
                     예약하기
                 </button>
-                </form>
             </div>
         </div>
     </div>

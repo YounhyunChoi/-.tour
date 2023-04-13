@@ -83,7 +83,7 @@ $(() => {
 	})
 })
 </script>
-<title>admin main</title>
+<title>관리자메인</title>
 <style>
     @font-face {
         font-family: 'Pretendard-Regular';

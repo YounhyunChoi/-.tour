@@ -144,7 +144,20 @@ $(() => {
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
+                    <c:if test='${logoName != null}'>
+	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
+		           			<a href='../user/adminMain'>
+	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+	                    	</a>
+                    	</div>
+					</c:if>
+					<c:if test='${logoName == null}'>
+						<div class='float-start m-4 ms-4'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
+								로고이미지
+							</a>
+						</div>
+					</c:if>
                     <h1 class='text-center pt-3 text-white'><b>공지수정</b></h1>
                 </div>
             </div>
@@ -154,7 +167,7 @@ $(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../notice/adminList'>공지사항</a> > <a href=''>공지수정</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../notice/adminList'>공지사항</a> > <a href=''>공지수정</a>
                 </h6>
             </div>
         </div>

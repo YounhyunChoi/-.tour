@@ -36,11 +36,13 @@ $(() => {
        					method: 'post',
        					contentType: false,
        					processData: false,
-       					data: formData
+       					data: formData,
+       					success: () => {
+       						$(location).attr('href', 'my')	
+       					}
        				})
        			}
        		})
-       		$('#reviewAddBtn').attr('href', 'my')
        	} else {
        		showOkModal('제목이 5자리 미만이거나 특수문자가 포함되어 있습니다.')
        	}

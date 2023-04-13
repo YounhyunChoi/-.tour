@@ -6,6 +6,7 @@
 		select review_num, review_title, review_content, score, review_date,
 				user_id, tour_num
 		from reviews
+		where review_exporsure = 'Y'
 		order by review_num desc
 	</select>
 	

@@ -16,7 +16,7 @@
 let changeToDate = function(date){
 	date = date.replaceAll('-', '')
 	let year = date.slice(0,4)
-	let month = date.slice(5,6)
+	let month = date.slice(5,6) - 1
 	let day = date.slice(7,8)
 	return new Date(year, month, day)
 }
@@ -77,6 +77,7 @@ $.ajax({
 						$('.resvNum').eq(i).text($('.resvNum').eq(i).text().padStart(4, '0'))
 					}
 					$.each(tours, (i, tour) => {
+						console.log(presentDate.getTime(), changeToDate(tour.tourEDate).getTime())
 						if(presentDate.getTime() > changeToDate(tour.tourEDate).getTime()){						
 							$(`#resvBtnContainer\${tour.tourNum}`).html(
 								`<button type='button' id='reviewAddBtn\${tour.tourNum}'

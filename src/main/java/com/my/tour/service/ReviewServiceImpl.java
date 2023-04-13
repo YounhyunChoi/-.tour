@@ -39,7 +39,7 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	public List<ReviewImage> getReviewImage(int reivewNum) {
-		return reviewImageDao.selectReviewImage(reivewNum);
+		return reviewImageDao.selectReviewImages(reivewNum);
 	}
 
 	@Override

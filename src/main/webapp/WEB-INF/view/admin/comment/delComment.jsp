@@ -15,19 +15,93 @@
 <title></title>
 <script>
     $(() => {
+    	let commentArr = []
+		commentArr.push(`
+				<div class='row '>
+			        <div class='col-3 border border-secondary p-2'>
+			            <a>후기번호 `)   		
+   		for(let i = '${comment.reviewNum}'.length; i < 4; i++)	{
+			commentArr.push(`0`)
+		} 
+		commentArr.push(`${comment.reviewNum}</a>
+			        </div>
+			        <div class='col-9 border border-secondary p-2'>
+			            <a>${comment.tourName}</a>
+			        </div>
+			    </div>
+			    <div class='row'>
+			        <div class='row shadow-sm mx-1 border border-lightGray mt-3'>`)
+		if('${comment.reviewImageName}') {
+			commentArr.push(`
+					 <div class='col-4 p-0 reviewImage m-3 mx-1'>
+						<img src='<c:url value="/attach/${comment.reviewImageName}"/>' style="max-width:100%; height:100%;"/>
+					</div>`)
+		}
+		commentArr.push(`
+		            <div class='col pe-0'>
+		                <div class='row mt-1 text-end'>
+		                    <h6>작성일 ${comment.reviewDate}</h6>
+		                </div>
+		                <div class='row mt-2'>
+		                    <h5>제목 ${comment.reviewTitle}<br>
+		                        평점`)
+		for(let i = 0; i < 5; i++) {
+			if(${comment.score - 1} >= 1) {
+				commentArr.push(`<i class='bi bi-star-fill'></i>`)
+			} else if(${comment.score - 1} == 0.5) {
+				commentArr.push(`<i class='bi bi-star-half'></i>`)
+			} else {
+				commentArr.push(`<i class='bi bi-star'></i>`)
+			}
+		}                        
+		commentArr.push(`<br>
+		                        ${comment.reviewUserId}
+		                    </h5>
+		                </div>
+		            </div>
+		            <h3>${comment.reviewContent}</h3>
+		        </div>
+		    </div>
+		    <div class='row'>
+		        <div class='row shadow-sm mx-1 border border-lightGray mt-3' id='selectComt'>
+		        	<div class='col-3 pt-3'>
+                		<p class='mb-1'> 댓글번호 `)
+   		for(let i = '${comment.comtNum}'.length; i < 4; i++)	{
+			commentArr.push(`0`)
+		} 
+        commentArr.push(`${comment.comtNum}</p>
+               	 		<h4>${comment.comtUserId}</h4>
+            		</div>
+            		<div class='col-4 text-start pt-4'>
+                		<h3>${comment.comtContent}</h3>
+            		</div>
+            		<div class='col-4 text-end align-text-bottom pt-5'>
+                		<h6 class='pt-4'>작성일 ${comment.comtDate}</h6>
+            		</div>
+            		<div class='col-1 d-flex justify-content-end'>
+                		<a class='icon btn bi bi-x' id='delete'></a>
+            		</div>
+		        </div>
+		    </div> `)
+		    
+		$('#mainBody').append(commentArr.join(''))
+    	
         $('#delete').click(() => {
-       		$.ajax({
-       			url: 'del',
-       			method: 'delete',
-       			data: {
-       				comtNum: `${param.comtNum}`
-       			}
+       		showConfirmModal('댓글을 삭제하시겠습니까?')
+       		
+       		$('#okBtn').click(() => {
+           		$.ajax({
+           			url: 'del/' + ${comment.comtNum},
+           			method: 'delete',
+           			success: () => {
+           				$(location).attr('href', 'adminList')
+           			}
+           		})
        		})
-       		showOkModal('댓글을 삭제하시겠습니까?', 'adminList')
         })
     })
 </script>
-<style>
+<style>	
     
 </style>
 </head>
@@ -37,7 +111,20 @@
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'><a  class='border border-dark text-white p-2 mt-1' href='../main.html' id='logo'>로고이미지</a></div>
+                    <c:if test='${logoName != null}'>
+	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
+		           			<a href='../user/adminMain'>
+	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+	                    	</a>
+                    	</div>
+					</c:if>
+					<c:if test='${logoName == null}'>
+						<div class='float-start m-4 ms-4'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
+								로고이미지
+							</a>
+						</div>
+					</c:if>
                     <h1 class='text-center pt-3 text-white'><b>댓글조회</b></h1>
                 </div>
             </div>
@@ -54,63 +141,7 @@
     </div>
 </header>
 <div class='row' id='mainBody'>
-    <div class='row '>
-        <div class='col-3 border border-secondary p-2'>
-            <a>후기번호 0001</a>
-        </div>
-        <div class='col-9 border border-secondary p-2'>
-            <a>서울시티투어 버스</a>
-        </div>
-    </div>
-    <div class='row'>
-        <div class='row shadow-sm mx-1 border border-lightGray mt-3'>
-            <div class='col-4 p-0 reviewImage m-3 mx-1'>후기이미지</div>
-            <div class='col pe-0'>
-                <div class='row mt-1 text-end'>
-                    <h6>작성일 2023-03-15</h6>
-                </div>
-                <div class='row mt-2'>
-                    <h5>제목 코스가 너무 마음에 들어요<br>
-                        평점 ★★★★★<br>
-                        java01
-                    </h5>
-                </div>
-            </div>
-            <h3>장소가 너무 예쁘니까 어느 방향으로 사진을 찍어도 작품처럼 나오네요.</h3>
-        </div>
-    </div>
-    <div class='row'>
-        <div class='row shadow-sm mx-1 border border-lightGray mt-3'>
-            <div class='col-3 pt-3'>
-                <p class='mb-1'>댓글번호 0002</p>
-                <h4>java01</h4>
-            </div>
-            <div class='col-4 text-start pt-4'>
-                <h3>XX야</h3>
-            </div>
-            <div class='col-4 text-end align-text-bottom pt-5'>
-                <h6 class='pt-4'>작성일 2023-03-09</h6>
-            </div>
-            <div class='col-1 d-flex justify-content-end'>
-                <a class='icon btn bi bi-x' id='delete'></a>
-            </div>
-        </div>
-    </div>  
-</div>
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'>
-            </div>
-            <div id='modalBtn'>
-                <button type='button' class='btn btn-lightGray' data-bs-dismiss='modal'>아니오</button>
-                <button type='button' class='btn btn-darkBlue' id='okBtn'>예</button>
-            </div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
-            </div>
-        </div>
-    </div>
+     
 </div>
 <footer>
 </footer>

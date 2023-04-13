@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -9,20 +10,92 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../res/style.css' rel='stylesheet'/>
 <script>
-    $(() => {
-        sessionStorage.setItem("userId", "java01")
-    })
+$(() => {
+	$.ajax({
+		url: 'getEvent',
+		data: {
+			eventNum: ${param.eventNum}
+		},
+		dataType: 'json',
+		success: events => {
+			const eventArr = []
+			let event = events.at(0)
+				eventArr.push(
+					`<h3 class='eventName'>
+			        	<sapn id='eventNum'><b>\${event.eventNum}.</b></span>
+			        	<b>\${event.eventTitle}</b>
+			        </h3>
+			        <span class='col eventDate'>
+			            <p>작성일 \${event.eventDate}</p>
+			        </span>
+			        <hr>
+			        <div class='row mb-2' id='cardImg'>
+	            		<div class='col'>
+	                		<div class='row me-0 py-2' id='eventImg' style='height: 10rem;'>`)
+	        $.ajax({
+	        	url: 'getEventImage',
+	        	data: {
+	        		eventNum: ${param.eventNum}
+	        	},
+	        	dataType: 'json',
+	        	success: eventImages => {
+	        		if(!eventImages.length){
+	        			$(() => {
+	        				$('#eventImg').hide()
+	        			})
+	        		} else if(eventImages.length != 1) {
+	        			eventArr.push(
+	        					`<div class='carousel slide' id='eventCarousel' data-ride='carousel'>
+		                        	<div class='carousel-inner eventImg'>`)
+		                $.each(eventImages, (i, eventImage) => {
+		                	if(i == 1) {
+		                		eventArr.push(
+		                				`<div class='carousel-item active'>
+				                        	<img src='<c:url value="/attach/` + eventImage + `"/>' style="max-width:100%; height:100%;"/>
+				                    	</div>`)
+		                	} else {
+		                		eventArr.push(
+		                				`<div class='carousel-item'>
+				                        	<img src='<c:url value="/attach/` + eventImage + `"/>' style="max-width:100%; height:100%;"/>
+				                    	</div>`)
+		                	}
+		                })
+		                eventArr.push(`</div>
+				                        <a href='#eventCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+				                            <i class="bi bi-chevron-left eventCarouselBtn"></i>
+				                            <div class="visually-hidden">Previous</div>
+				                        </a>
+				                        <a href='#eventCarousel' class='carousel-control-next' data-bs-slide='next'>
+				                            <i class="bi bi-chevron-right eventCarouselBtn"></i>
+				                            <div class="visually-hidden">Next</div>
+				                        </a>
+				                    </div>`)
+	        		} else {
+	        			eventArr.push(`<img src='<c:url value="/attach/` + eventImages[0] + `"/>' style="max-width:100%; height:100%;"/>`)
+	        		}
+	        		eventArr.push(`
+	  							</div>
+				            </div>
+				        </div>
+					    <span>\${event.eventContent}</span>`)
+					$('#eventView').append(eventArr.join(''))
+	        	}
+	        })
+		}
+
+	})
+})
 </script>
 <script src='../res/navigation.js'></script>
-<title>NOTICE.02 공지 조회</title>
+<title>EVENT.02 이벤트 조회</title>
 <style>
-   #noticeImg {
+   #eventImg {
         border: .1rem solid lightgray;
         margin: 1rem;
         text-align: center;
     }
 
-    .tourCarouselBtn {
+    .eventCarouselBtn {
         color: black;
     }
 </style>
@@ -31,48 +104,13 @@
 <header>
 </header>
 <div class='navigation fixed-top'>
-   <div class='float-start mt-2 ms-2'><i class='bi bi-caret-left-fill ' onclick="location.href='./01.html'"></i></div>
+   <div class='float-start mt-3 ms-2'><i class='bi bi-caret-left-fill' ></i></div>
    <div class='menuName'>
-      <h2 class='text-center pt-3'><b>공지상세</b></h2>
+      <h2 class='text-center pt-3'><b>이벤트상세</b></h2>
    </div>
 </div>
 <div class='container'>
-    <div class='row mt-5'>
-        <h3 class='noticeName'><span><b>3.</b></span> <b>[공지] 설 연휴 일정 변경 안내</b></h3>
-        <span class='col noticeContent'>
-            <p>작성일 2023-01-16</p>
-        </span>
-        <hr>
-        <div class='row mb-2'>
-            <div class='col'>
-                <div class='row py-5 me-0' id='noticeImg'>
-                    <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
-                        <div class='carousel-inner noticeImg'>
-                            <div class='carousel-item active'>
-                                <div class='items py-5 fs-4'>공지사항이미지</div>
-                            </div>
-                            <div class='carousel-item'>
-                                <div class='items py-5 fs-4'>공지사항이미지</div>
-                            </div>
-                            <div class='carousel-item'>
-                                <div class='items py-5 fs-4'>공지사항이미지</div>
-                            </div>
-                        </div>
-                        <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
-                            <i class="bi bi-chevron-left tourCarouselBtn"></i>
-                            <div class="visually-hidden">Previous</div>
-                        </a>
-                        <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
-                            <i class="bi bi-chevron-right tourCarouselBtn"></i>
-                            <div class="visually-hidden">Next</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <span>설 연휴에 따른 여행 일정 변경 안내드립니다. 
-            우리 고유 명절인 설을 맞이하면 신청한 택배가 배송지연될 수 있음을 안내드립니다...
-        </span>
+    <div class='row mt-5' id='eventView'>
     </div>
 </div>
 <footer>

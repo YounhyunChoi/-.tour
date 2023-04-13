@@ -8,7 +8,7 @@ public interface EventMap {
 	List<Event> selectEvents();
 	List<Event> selectAllEvents();
 	List<Event> selectEvent(int eventNum);
-	int insertEventTemp(String adminId, int noticeSize);
+	int insertEventTemp(int eventTempNum, String adminId);
 	int insertEvent(String eventTitle, String eventContent, String adminId);
 	int updateEvent(Event event);
 	int deleteEvent(int eventNum);

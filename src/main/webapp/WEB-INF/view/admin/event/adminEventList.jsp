@@ -13,8 +13,41 @@
 <title>ADMIN.EVENT.01 이벤트 목록</title>
 <script>
 $(() => {
+	$('#fixEventBtn').click(() => {
+		if($('#eventNum:checked').val()) {
+			$('#fixEventBtn').attr('href', '../event/fix?eventNum=' + $('#eventNum:checked').val())
+		}		
+	})
 	
+	$.ajax({
+		url: 'get',
+		dataType: 'json',
+		success: events => {
+			if(events.length){
+				const eventArr = []
+				
+				$.each(events, (i, event) => {
+					eventArr.push(
+						`<tr>
+                            <td class='align-middle'>
+                            	<input type='radio' id='eventNum' name='eventHeader' value='\${event.eventNum}'/>
+                            </td>
+                            <td>\${event.eventNum}</td>
+                            <td>\${event.eventTitle}</td>
+                            <td>\${event.eventContent}</td>
+                            <td>\${event.eventDate}</td>
+                        </tr>`)
+				})
+				$('#events').append(eventArr.join(''))
+			} else {
+				$('#pageNav').hide()
+				$('#events').append(
+						'<tr><td colspan=5 class=text-center>등록된 이벤트가 없습니다.</td></tr>')
+			}
+		}
+	})
 })
+
 </script>
 </head>
 <body>
@@ -54,7 +87,7 @@ $(() => {
 </header>
 <div class='row' id='mainBody'>
    <div class='col'>
-        <form class='mb-4'>
+        <div class='mb-4'>
             <div class='row'>
                 <div class='col-6 pt-2'>
                     <input type='text' class='form-control'/>
@@ -64,13 +97,13 @@ $(() => {
                 </div>
                 <div class='col'>
                     <div class='d-flex justify-content-end'>
-                        <a type='button' class='btn btn-darkBlue' href='addEvent'>
+                        <a type='button' class='btn btn-darkBlue' href='add'>
                             <i class='bi bi-plus-circle'></i>&nbsp;새글
                         </a>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
         <div class='row'>
             <div class='col'>
                 <table class='table table-bordered table-sm'>
@@ -81,27 +114,21 @@ $(() => {
                         <th>내용</th>
                         <th>작성일</th>
                     </thead>
-                    <tbody class='text-center'>
-                        <tr>
-                            <td><input type='radio' name='noticeHeader'/></td>
-                            <td>5</td>
-                            <td>새해 특가</td>
-                            <td>새해 특가 내용</td>
-                            <td>2022-12-29</td>
-                        </tr>
+                    <tbody class='text-center' id='events'>
+                        <!-- 이벤트 목록 -->
                     </tbody>
                 </table>
             </div>
             <div class='d-flex justify-content-end'>
-                <a type='button' class='btn btn-olive'>
+                <a type='button' class='btn btn-olive' href='#' id='fixEventBtn'>
                     <i class='bi bi-check-circle'></i>
                     &nbsp;수정
                 </a>
             </div>
-            <nav aria-label='Page navigation example'>
+            <nav aria-label='Page navigation example' id='pageNav'>
                 <ul class='pagination d-flex justify-content-center  mt-5' id='indexNum'>
                     <li class='page-item'>
-                        <a class='page-link' href='#' aria-label='Previous'>
+                        <a class='page-link' aria-label='Previous'>
                             <span aria-hidden='true'>&laquo;</span>
                         </a>
                     </li>
@@ -111,10 +138,6 @@ $(() => {
                         </a>
                     </li>
                     <li class='page-item'><a class='page-link' href='#'>1</a></li>
-                    <li class='page-item'><a class='page-link' href='#'>2</a></li>
-                    <li class='page-item'><a class='page-link' href='#'>3</a></li>
-                    <li class='page-item'><a class='page-link' href='#'>4</a></li>
-                    <li class='page-item'><a class='page-link' href='#'>5</a></li>
                     <li class='page-item'>
                         <a class='page-link' href='#' aria-label='Next'>
                             <span aria-hidden='true'>&rsaquo;</span>

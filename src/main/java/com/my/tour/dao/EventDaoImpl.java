@@ -28,8 +28,8 @@ public class EventDaoImpl implements EventDao {
 	}
 	
 	@Override
-	public int insertEventTemp(String adminId, int eventNum) {
-		return eventMap.insertEventTemp(adminId, eventNum);
+	public int insertEventTemp(int eventTempNum, String adminId) {
+		return eventMap.insertEventTemp(eventTempNum, adminId);
 	}
 	
 	@Override

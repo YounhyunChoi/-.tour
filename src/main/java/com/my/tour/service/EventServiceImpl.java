@@ -31,8 +31,8 @@ public class EventServiceImpl implements EventService {
 	}
 	
 	@Override
-	public void addEventTemp(String adminId, int eventNum) {
-		eventDao.insertEventTemp(adminId, eventNum);
+	public void addEventTemp(int eventTempNum, String adminId) {
+		eventDao.insertEventTemp(eventTempNum, adminId);
 	}
 	
 	@Override
@@ -56,8 +56,8 @@ public class EventServiceImpl implements EventService {
 	}
 	
 	@Override
-	public void addEventImage(String adminId, int eventNum) {
-		eventImageDao.insertEventImage(adminId, eventNum);
+	public void addEventImage(String eventImageName, int eventNum) {
+		eventImageDao.insertEventImage(eventImageName, eventNum);
 	}
 	
 	@Override

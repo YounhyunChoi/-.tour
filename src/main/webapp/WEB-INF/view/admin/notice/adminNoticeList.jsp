@@ -15,7 +15,7 @@
 $(() => {	
 	$('#fixNoticeBtn').click(() => {
 		if($('#noticeNum:checked').val()){
-			$('#fixNoticeBtn').attr('href', '../notice/fixNotice?noticeNum=' + $('#noticeNum:checked').val())
+			$('#fixNoticeBtn').attr('href', '../notice/fix?noticeNum=' + $('#noticeNum:checked').val())
 		}		
 	})
 	
@@ -41,8 +41,12 @@ $(() => {
                        )
 				})
 				$('#notices').append(noticeArr.join(''))
-			} else $('#notices').append(
+			} else {
+				$('#pageNav').hide()
+				$('#notices').append(
 					'<tr><td colspan=5 class=text-center>등록된 공지사항이 없습니다.</td></tr>')
+			}
+					
 		}
 	})
 })
@@ -85,7 +89,7 @@ $(() => {
 </header>
 <div class='row' id='mainBody'>
    <div class='col'>
-        <form class='mb-4'>
+        <div class='mb-4'>
             <div class='row'>
                 <div class='col-6 pt-2'>
                     <input type='text' class='form-control'/>
@@ -95,13 +99,13 @@ $(() => {
                 </div>
                 <div class='col'>
                     <div class='d-flex justify-content-end'>
-                        <a type='button' class='btn btn-darkBlue' id='addNoticeBtn' href='addNotice'>
+                        <a type='button' class='btn btn-darkBlue' id='addNoticeBtn' href='add'>
                             <i class='bi bi-plus-circle'></i>&nbsp;새글
                         </a>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
         <div class='row'>
             <div class='col'>
                 <table class='table table-bordered table-sm'>
@@ -123,7 +127,7 @@ $(() => {
                     &nbsp;수정
                 </a>
             </div>
-            <nav aria-label='Page navigation example'>
+            <nav aria-label='Page navigation example' id='pageNav'>
                 <ul class='pagination d-flex justify-content-center  mt-5' id='indexNum'>
                     <li class='page-item'>
                         <a class='page-link' href='#' aria-label='Previous'>

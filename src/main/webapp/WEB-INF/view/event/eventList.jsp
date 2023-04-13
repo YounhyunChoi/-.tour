@@ -18,9 +18,10 @@ $(() => {
 		success: events => {
 			if(events.length){
 				const eventArr = []
+				
 				$.each(events, (i, event) => {
 					eventArr.push(
-						`<a href='#' class='noticeName'><h4><b>\${event.eventNum}. \${event.eventTitle}</b></h4></a>
+						`<a href='event/view?eventNum=\${event.eventNum}' class='noticeName'><h4><b>\${event.eventNum}. \${event.eventTitle}</b></h4></a>
     					<span class='col noticeContent'>
 					        <p><h5>\${event.eventContent}</h5></p><br>
 					        <p>작성일 \${event.eventDate}</p>

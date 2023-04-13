@@ -64,8 +64,8 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	public int addReview(String reviewTitle, String reviewContent, double score,
-						String userId, int tourNum) {
-		return reviewDao.insertReview(reviewTitle, reviewContent, score, userId, tourNum);
+						String userId, int tourNum, int resvNum) {
+		return reviewDao.insertReview(reviewTitle, reviewContent, score, userId, tourNum, resvNum);
 	}
 
 	@Override

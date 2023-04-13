@@ -10,15 +10,14 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
-<title>ADMIN.NOTICE.01 공지 목록</title>
 <script>
-$(() => {	
+$(() => {
 	$('#fixNoticeBtn').click(() => {
 		if($('#noticeNum:checked').val()){
 			$('#fixNoticeBtn').attr('href', '../notice/fix?noticeNum=' + $('#noticeNum:checked').val())
-		}		
+		}
 	})
-	
+
 	$.ajax({
 		url: 'get',
 		dataType: 'json',
@@ -51,6 +50,10 @@ $(() => {
 	})
 })
 </script>
+<title>공지사항</title>
+<style>
+
+</style>
 </head>
 <body>
 <header>
@@ -77,7 +80,7 @@ $(() => {
             </div>
         </div>
     </div>
-   <div class='row'>
+    <div class='row'>
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>

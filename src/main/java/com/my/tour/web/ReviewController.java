@@ -83,9 +83,9 @@ public class ReviewController {
 	
 	@PostMapping("add")
 	public void addReview(String reviewTitle, String reviewContent, double score,
-						HttpSession session, int tourNum) {
+						HttpSession session, int tourNum, int resvNum) {
 		reviewService.addReview(reviewTitle, reviewContent, score,
-				(String) session.getAttribute("userId"), tourNum);
+				(String) session.getAttribute("userId"), tourNum, resvNum);
 	}
 	
 	@PostMapping("addReviewImages")

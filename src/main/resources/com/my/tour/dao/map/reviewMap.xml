@@ -42,9 +42,9 @@
 	
 	<insert id='insertReview'>
 		insert into reviews(review_num, review_title, review_content, score, 
-		         review_date, user_id, tour_num)
+		         review_date, user_id, tour_num, resv_num)
 		values(review_num_seq.nextval, #{reviewTitle}, #{reviewContent}, #{score},
-				to_char(sysdate, 'YYYY-MM-DD'), #{userId}, #{tourNum})
+				to_char(sysdate, 'YYYY-MM-DD'), #{userId}, #{tourNum}, #{resvNum})
 	</insert>	
 	
 	<update id='updateReview'>

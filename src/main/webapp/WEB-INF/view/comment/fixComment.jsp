@@ -46,7 +46,7 @@
 </script>
 <title>댓글수정</title>
 <style>
-   
+
 </style>
 </head>
 <body>
@@ -68,7 +68,7 @@
             <span class='mt-2 gap-2 d-flex justify-content-end'>
                 <a class='btn btn-lightRed' id='deleteComment'>댓글삭제</a>
                 <a class='btn btn-olive' id='editComment'>댓글수정</a>
-            </span>       
+            </span>
         </div>
     </div>
 </div>

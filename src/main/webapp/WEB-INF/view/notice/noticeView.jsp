@@ -86,7 +86,7 @@ $(() => {
 })
 
 </script>
-<title>NOTICE.02 공지 조회</title>
+<title>공지 조회</title>
 <style>
    #noticeImg {
         border: .1rem solid lightgray;

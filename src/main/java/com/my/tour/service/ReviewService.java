@@ -18,7 +18,7 @@ public interface ReviewService {
 	List<Reservation> getReservations(String userId);
 	List<Tour> getTour(int tourNum);
 	int addReview(String reviewTitle, String reviewContent, double score,
-				String userId, int tourNum);
+				String userId, int tourNum, int resvNum);
 	int addReviewImage(String reviewImageName, int reviewNum);
 	int delReviewImage(int reviewNum);
 	int fixReview(String reviewTitle, String reviewContent, double score);

@@ -44,9 +44,7 @@
 					                    	</a>
 					                	</div>
 					            	</div>
-					            	<div class='row mt-2'>`
-					            	console.log('\${myReview.reviewImageName}')
-					    
+					            	<div class='row mt-2'>`				    
 					    
 					    if(myReview.reviewImageName) {
 						    html += 	`<div class='col-3 me-4'>

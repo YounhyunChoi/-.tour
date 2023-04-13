@@ -38,10 +38,11 @@ $(() => {
        			url: 'add',
        			method: 'post',
        			data: {
-       	   				reviewTitle: $('#reviewTitle').val(),
-       	   				reviewContent: $('#reviewContent').val(),
-       	   				score: $('#rangeScore').val(),
-       	   				tourNum: ${param.tourNum}
+   	   				reviewTitle: $('#reviewTitle').val(),
+   	   				reviewContent: $('#reviewContent').val(),
+   	   				score: $('#rangeScore').val(),
+   	   				tourNum: ${param.tourNum},
+   	   				resvNum: ${param.resvNum}
        	       	},
        			success: () => {
        				let formData = new FormData($('#reviewImageUp')[0])

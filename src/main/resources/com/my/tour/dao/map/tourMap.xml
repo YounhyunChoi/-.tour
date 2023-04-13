@@ -3,7 +3,7 @@
 	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='com.my.tour.dao.map.TourMap'>
 	<select id='selectTours' resultType='tour'>
-		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, discount_price, admin_id
+		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, discount_price
 		from tours
 		where tour_name not in 'temp'
 		order by tour_num desc
@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id='selectTour' resultType='tour'>
-		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, admin_id
+		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price
 		from tours
 		where tour_num = #{tourNum}
 	</select>

@@ -158,7 +158,7 @@ $(() => {
             </div>
         </div>
     </div>
-   <div class='row'>
+    <div class='row'>
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>

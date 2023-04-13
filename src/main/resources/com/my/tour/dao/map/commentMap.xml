@@ -5,17 +5,29 @@
 	<select id='selectComments' resultType='comment'>
 		select user_id, comt_num, comt_content, comt_date
 		from comments
-		order by comt_date
+		order by comt_num asc
 	</select> 
+	
 	<select id='selectComment' resultType='comment'>
 		select user_id, comt_num, comt_content, comt_date
 		from comments
-		where review_num = #{review_num}
-		order by comt_date
+		where review_num = #{reveiwNum}
+		order by comt_num asc
 	</select>
+	
+	<select id='selectCommentDto' resultType='commentDto'>
+		select c.comt_num as comt_num, c.review_num as review_num, t.tour_name as tour_name,
+			r.review_title as review_title,	r.score as score, r.user_id as review_user_id, 
+			r.review_content as review_content,	r.review_date as review_date, c.user_id as comt_user_id, c.comt_content as comt_content,
+			c.comt_date as comt_date
+		from comments c left outer join reviews r on c.review_num = r.review_num 
+		left outer join tours t on r.tour_num = t.tour_num
+		where comt_num = #{comtNum}
+	</select>
+	
 	<insert id='insertComment'>
 		insert into comments(comt_num, comt_content, comt_date, review_num, user_id)
-		values(comt_num_seq.nextval, #{comtContent}, to_date(sysdate, 'YYYY-MM-DD'), #{reviewNum}, #{userId})
+		values(comt_num_seq.nextval, #{comtContent}, to_char(sysdate, 'YYYY-MM-DD'), #{reviewNum}, #{userId})
 	</insert>
 	
 	<update id='updateComment'>

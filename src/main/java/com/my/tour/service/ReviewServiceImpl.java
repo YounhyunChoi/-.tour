@@ -28,13 +28,18 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
+	public List<Review> getReview(int reviewNum) {
+		return reviewDao.selectReview(reviewNum);
+	}
+
+	@Override
 	public List<ReviewDto> getMyReviews(String userId) {
 		return reviewDao.selectMyReviews(userId);
 	}
 	
 	@Override
-	public List<ReviewImage> getReviewImage(int reivewNum) {
-		return reviewImageDao.selectReviewImage(reivewNum);
+	public List<ReviewImage> getReviewImages(int reivewNum) {
+		return reviewImageDao.selectReviewImages(reivewNum);
 	}
 
 	@Override

@@ -11,7 +11,6 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
-<title></title>
 <script>
 $(() => {
 $('#faqAddBtn').click(() => {
@@ -36,6 +35,7 @@ $('#faqAddBtn').click(() => {
 })
 })
 </script>
+<title>FAQ추가</title>
 <style>
     #contentBox{
         height: 20rem;
@@ -71,7 +71,7 @@ $('#faqAddBtn').click(() => {
             </div>
         </div>
     </div>
-   <div class='row'>
+    <div class='row'>
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>

@@ -10,7 +10,6 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
-<title></title>
 <script>
 $.ajax({
 	url: 'get',
@@ -61,6 +60,7 @@ $('#faqDelBtn').click(() => {
    })
 })
 </script>
+<title>FAQ수정</title>
 <style>
     #contentBox{
         height: 20rem;
@@ -85,7 +85,7 @@ $('#faqDelBtn').click(() => {
             </div>
         </div>
     </div>
-   <div class='row'>
+    <div class='row'>
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
@@ -119,33 +119,17 @@ $('#faqDelBtn').click(() => {
                 </div>
             </div>
             <div class='d-flex gap-2 justify-content-end'>
-                <button type='button' class='btn btn-olive'
-                data-bs-toggle='modal' data-bs-target='#modal' id='faqFixBtn'>
+                <a type='button' class='btn btn-olive' id='faqFixBtn'>
                     <i class='bi bi-check-circle'></i>
                     &nbsp;수정
-                </button>
-                <button type='button' class='btn btn-lightRed'
-                data-bs-toggle='modal' data-bs-target='#modal' id='faqDelBtn'>
+                </a>
+                <a type='button' class='btn btn-lightRed' id='faqDelBtn'>
                     <i class='bi bi-x-circle'></i>
                     &nbsp;삭제
-                </button>
+                </a>
             </div>
         </form>
    </div>
-</div>
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'></div>
-            <div id='modalBtn'>
-                <button type='button' class='btn btn-lightGray' data-bs-dismiss='modal'>아니오</button>
-                <button type='button' class='btn btn-darkBlue' id='okBtn'>예</button>
-            </div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
-            </div>
-        </div>
-    </div>
 </div>
 <footer>
 </footer>

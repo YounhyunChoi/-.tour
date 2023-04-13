@@ -14,5 +14,4 @@ public class Tour {
 	private int tourPrice;
 	private int discountPrice;
 	private String adminId;
-	private int termNum;
 }

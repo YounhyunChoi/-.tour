@@ -94,7 +94,7 @@ public class TourController {
 		tourService.delTour(tourService.getAllTours().get(0).getTourNum());
 		tourService.addTour(tour.getTourName(), tour.getTourContent(), 
 				tour.getTourSDate(), tour.getTourEDate(), tour.getTourPrice(), tour.getDiscountPrice(),
-				(String)session.getAttribute("userId"), tour.getTermNum());
+				(String)session.getAttribute("userId"));
 	}
 	
 	@GetMapping("fix")

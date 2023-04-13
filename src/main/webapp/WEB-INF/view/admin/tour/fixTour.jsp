@@ -92,8 +92,7 @@ $(() => {
 				tourSDate: $('#tourSDate').val(),
 				tourEDate: $('#tourEDate').val(),
 				tourPrice: $('#tourPrice').val(),
-				discountPrice: $('#discountPrice').val(),
-				termNum: 1
+				discountPrice: $('#discountPrice').val()
 			}
 			
 			$.ajax({

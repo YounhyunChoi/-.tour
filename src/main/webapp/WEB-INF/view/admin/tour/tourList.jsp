@@ -25,7 +25,7 @@ function tourList() {
 					tourArr.push(
 						`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
 							<img src='<c:url value="/attach/` + tour.tourImageName + `"/>'style="max-width:100%; height:100%;"/>
-			                <div class='text-truncate'>\${tour.tourName}</div>
+			                <div>\${tour.tourName}</div>
 			            </div>`
 					)
 				})

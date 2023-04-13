@@ -30,6 +30,8 @@ $(() => {
 					)
 				})
 				$('#tourContainer').append(tourArr.join(''))
+			} else {
+				$('#tourContainer').append(`<div class='pt-3 text-center fs-3'>여행상품이 없습니다.</div>`)
 			}
 			
 			$.each(tours, (i, tour) => {
@@ -76,7 +78,7 @@ $(() => {
 </div>
 <div class='container'>
 	<div class='row mb-4' id='tourContainer'>
-	
+		<!-- 여행상품 리스트 -->
 	</div>
 </div>
 <footer>

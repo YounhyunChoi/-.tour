@@ -1,6 +1,7 @@
 package com.my.tour.dao;
 
 
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.my.tour.dao.map.ReservationMap;
 import com.my.tour.domain.Reservation;
+import com.my.tour.domain.ReservationDto;
 
 @Repository
 public class ReservationDaoImpl implements ReservationDao{
@@ -20,13 +22,18 @@ public class ReservationDaoImpl implements ReservationDao{
 	}
 	
 	@Override
-	public void insertReservation(int chargePrice, LocalDate resvDate, String whetherToCancel, String userId, int tourNum) {
-		 reservationMap.insertReservation(chargePrice, resvDate, whetherToCancel, userId, tourNum);
+	public List<ReservationDto> selectResvsWithTour(String userId){
+		return reservationMap.selectResvsWithTour(userId);
 	}
 	
 	@Override
-	public void updateReservation(int resvNum, String whetherToCancel) {
-		reservationMap.updateReservation(resvNum, whetherToCancel);
+	public void insertReservation(int chargePrice,String userId, int tourNum, LocalDate resvEDate) {
+		 reservationMap.insertReservation(chargePrice, userId, tourNum, resvEDate);
+	}
+	
+	@Override
+	public void updateReservation(int resvNum) {
+		reservationMap.updateReservation(resvNum);
 	}
 	
 	@Override

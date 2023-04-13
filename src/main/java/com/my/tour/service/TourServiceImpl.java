@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.my.tour.dao.TourDao;
 import com.my.tour.dao.TourImageDao;
 import com.my.tour.domain.Tour;
+import com.my.tour.domain.TourDto;
 import com.my.tour.domain.TourImage;
 
 @Service("TourService")
@@ -22,14 +23,29 @@ public class TourServiceImpl implements TourService {
 	}
 	
 	@Override
+	public List<Tour> getAllTours() {
+		return tourDao.selectAllTours();
+	}
+	
+	@Override
 	public List<Tour> getTour(int tourNum) {
 		return tourDao.selectTour(tourNum);
 	}
+	
+	@Override
+	public List<TourDto> getTourList() {
+		return tourDao.selectTourList();
+	}
 
 	@Override
+	public void addTourTemp(int tourTempNum, String adminId) {
+		tourDao.insertTourTemp(tourTempNum, adminId);
+	}
+	
+	@Override
 	public void addTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate,
-			int tourPrice, String adminId, int termNum) {
-		tourDao.insertTour(tourName, tourContent, tourSDate, tourEDate, tourPrice, adminId, termNum);
+			int tourPrice, int discountPrice, String adminId) {
+		tourDao.insertTour(tourName, tourContent, tourSDate, tourEDate, tourPrice, discountPrice, adminId);
 	}
 
 	@Override
@@ -43,12 +59,17 @@ public class TourServiceImpl implements TourService {
 	}
 
 	@Override
-	public List<TourImage> getTourImages() {
-		return tourImageDao.selectTourImages();
+	public List<TourImage> getTourImages(int tourNum) {
+		return tourImageDao.selectTourImages(tourNum);
 	}
 
 	@Override
 	public int addTourImage(String tourImageName, int tourNum) {
 		return tourImageDao.insertTourImage(tourImageName, tourNum);
+	}
+
+	@Override
+	public int delTourImage(int tourNum) {
+		return tourImageDao.deleteTourImage(tourNum);
 	}
 }

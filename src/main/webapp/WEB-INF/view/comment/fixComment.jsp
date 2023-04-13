@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8'%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <head>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -13,13 +14,17 @@
 <script>
     $(() => {
         $('#deleteComment').click(() => {
-	        showConfirmModal('댓글을 삭제하시겠습니까?', '댓글이 삭제되었습니다.', '../review/get')
-	        $('#okBtn').click(() => {
-	        	$.ajax({
-	        		url: 'del',
-	        		method: 'delete'
-	        	})
-	        })
+        	showConfirmModal('댓글을 삭제하겠습니까?')
+        	
+        	$('#okBtn').click(() => )
+        	$.ajax({
+        		url: 'del',
+        		method: 'delete',
+        		data:{
+        			comtNum: `${param.comtNum}`
+        		}
+        	})
+        	showOkModal('댓글을 삭제하시겠습니까?', '../review/get')
         })
     	
         $('#editComment').click(() => {
@@ -28,10 +33,14 @@
         			url: 'fix',
         			method: 'put',
         			data: {
-        				comtContent: $('#comtContent').val()
+        				comtContent: $('#comtContent').val(),
+        				comtNum: $('#comtNum').val()
         			}
         		})
-        	}
+        		showOkModal('댓글이 수정되었습니다.', '../review/get')
+        	} else {
+    			showOkModal('댓글을 입력해주세요.')
+    		}
 	    })
     })
 </script>
@@ -55,7 +64,7 @@
         <div class='p-2 border border-secondary shadow-sm rounded-3' id='one'>
             <h3>java01</h3>
             <hr>
-            <textarea class='form-control' id='comtContent'></textarea>
+            <textarea class='form-control' id='comtContent' maxlength='100'></textarea>
             <span class='mt-2 gap-2 d-flex justify-content-end'>
                 <a class='btn btn-lightRed' id='deleteComment'>댓글삭제</a>
                 <a class='btn btn-olive' id='editComment'>댓글수정</a>

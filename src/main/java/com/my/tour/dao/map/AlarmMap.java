@@ -7,5 +7,6 @@ import com.my.tour.domain.Alarm;
 public interface AlarmMap {
 	List<Alarm> selectAlarms(String userId);
 	int insertAlarm(String alarmContent, String userId);
+	int updateAlarm(String userId);
 	int deleteAlarm(int alarmNum);
 }

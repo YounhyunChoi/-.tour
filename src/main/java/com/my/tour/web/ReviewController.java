@@ -44,9 +44,9 @@ public class ReviewController {
 	public List<ReviewDto> getMyReviews(HttpSession session) {
 		List<ReviewDto> reviews = reviewService.getMyReviews((String) session.getAttribute("userId"));
 		for(ReviewDto review : reviews) {
-			if(reviewService.getReviewImage(review.getReviewNum()).size() != 0) {
+			if(reviewService.getReviewImages(review.getReviewNum()).size() != 0) {
 				review.setReviewImageName(
-						reviewService.getReviewImage(review.getReviewNum()).get(0).getReviewImageName());
+						reviewService.getReviewImages(review.getReviewNum()).get(0).getReviewImageName());
 			}
 		}
 		

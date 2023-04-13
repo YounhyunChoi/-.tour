@@ -16,7 +16,7 @@
 let changeToDate = function(date){
 	date = date.replaceAll('-', '')
 	let year = date.slice(0,4)
-	let month = date.slice(5,6)
+	let month = date.slice(5,6) -1
 	let day = date.slice(7,8)
 	return new Date(year, month, day)
 }
@@ -24,70 +24,66 @@ let changeToDate = function(date){
 $.ajax({
 	url: 'get',
 	dataType: 'json',
-	success: reservations => {
+	success: reservationDtos => {
 		let presentDate = new Date()
-		let tourEDate
-		
-		if(reservations.length) {
-			const reservationArr = []
-			$.ajax({
-				url: '../reservation/tours',
-				dataType: 'json',
-				success: tours => {	
-					$.each(reservations, (i, reservation) => {
-						$.each(tours, (i, tour) => {	
-							if(reservation.tourNum == tour.tourNum){
-								reservationArr.push(
-								`
-									<div class='row mt-4 d-flex flex-column shadow-sm border border-1'>
-								        <div class='col p-2 border-bottom'>
-								            <div class='row align-items-center'>	
-								                <div class='col-8 fs-6 tourDate'>여행기간:\${tour.tourSDate} ~ \${tour.tourEDate}</div>
-								                <div class='col-4 text-end'>
-								                    <button type='button' id=tourViewBtn\${tour.tourNum} class='border-0 bg-white'>
-								                        <span class='fs-5'>상세보기</span>
-								                        <i class='bi bi-chevron-right viewDetailBtn'></i>
-								                    </button>
-								                </div>
-								            </div>
-								        </div>
-								        <div class='col my-3'>
-								            <div class='row'>
-								                <div class='col-4'>
-								                    <div class='d-flex flex-column align-items-center'>
-								                        <p class='mb-1 resvNum'>\${reservation.resvNum}</p>
-								                        <div class='d-flex image'>
-								                            <span>여행코스이미지</span>
-								                        </div>
-								                    </div>
-								                </div>
-								                <div class='col-5 fs-5'><b>\${tour.tourName}</b></div>
-								                <div id='resvBtnContainer\${reservation.tourNum}' class='col-3 d-flex align-self-end'>									                   
-								                </div>
-								            </div>
-								        </div>
-								    </div>
-								`
-								)
-							}
-						})
-					})
-					$('#reservationContainer').append(reservationArr.join(''))
-					for(let i =0; i < $('.resvNum').length; i++){
-						$('.resvNum').eq(i).text($('.resvNum').eq(i).text().padStart(4, '0'))
-					}
-					$.each(tours, (i, tour) => {
-						if(presentDate.getTime() > changeToDate(tour.tourEDate).getTime()){						
-							$(`#resvBtnContainer\${tour.tourNum}`).html(
-								`<button type='button' id='reviewAddBtn\${tour.tourNum}'
+		if(reservationDtos.length) {
+			const resvDtoArr = []
+				$.each(reservationDtos, (i, reservationDto) => {	
+					resvDtoArr.push(
+					`
+					<div class='row mt-4 d-flex flex-column shadow-sm border border-1'>
+				        <div class='col p-2 border-bottom'>
+				            <div class='row align-items-center'>	
+				                <div class='col-8 fs-6 tourDate'>여행기간:\${reservationDto.tourSDate} ~ \${reservationDto.tourEDate}</div>
+				                <div class='col-4 text-end'>
+				                    <button type='button' id=tourViewBtn\${reservationDto.tourNum} class='border-0 bg-white'>
+				                        <span class='fs-5'>상세보기</span>
+				                        <i class='bi bi-chevron-right viewDetailBtn'></i>
+				                    </button>
+				                </div>
+				            </div>
+				        </div>
+				        <div class='col my-3'>
+				            <div class='row'>
+				                <div class='col-4'>
+				                    <div class='d-flex flex-column align-items-center'>
+				                        <p class='mb-1 resvNum'>\${reservationDto.resvNum}</p>
+				                        <div class='d-flex image'>
+				                            <span>여행코스이미지</span>
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class='col-5 fs-5'><b>\${reservationDto.tourName}</b></div>
+				                <div id='resvBtnContainer\${reservationDto.tourNum}' class='col-3 d-flex align-self-end justify-content-center'
+				                	 whetherToCancel=\${reservationDto.whetherToCancel}>									                   
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+					`
+					)					
+				})
+				$('#reservationContainer').append(resvDtoArr.join(''))
+				for(let i =0; i < $('.resvNum').length; i++){
+					$('.resvNum').eq(i).text($('.resvNum').eq(i).text().padStart(4, '0'))
+				}
+				$.each(reservationDtos, (i, reservationDto) => {
+					if($(`#resvBtnContainer\${reservationDto.tourNum}`).attr('whetherToCancel') == 'Y'){
+						$(`#resvBtnContainer\${reservationDto.tourNum}`).html(
+							`<span
+	                        class=' text-danger text-center'>취소됨</span>`
+	                        )
+					}else if(presentDate.getTime() > changeToDate(reservationDto.tourEDate).getTime()){						
+						$(`#resvBtnContainer\${reservationDto.tourNum}`).html(
+								`<button type='button' id='reviewAddBtn\${reservationDto.tourNum}'
 		                        class='border border-0 rounded text-white reviewAddBtn'>후기등록</button>`
 		                        )
 							}
-						$(`#reviewAddBtn\${tour.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${tour.tourNum}`})
-						$(`#tourViewBtn\${tour.tourNum}`).click(() => {location.href=`../tour/view?tourNum=\${tour.tourNum}`})
-					}) 
-				}	
-			})
+					
+					$(`#reviewAddBtn\${reservationDto.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${reservationDto.tourNum}`})
+					$(`#tourViewBtn\${reservationDto.tourNum}`).click(() => {location.href=`../tour/view?tourNum=\${reservationDto.tourNum}`})
+				}) 
+		
 		}else {
 			$('#reservationContainer').html(`
         			<div class='row d-block my-5'>

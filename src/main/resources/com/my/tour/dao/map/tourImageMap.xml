@@ -5,11 +5,17 @@
 	<select id='selectTourImages' resultType='tourImage'>
 		select *
 		from tour_images
+		where tour_num = #{tourNum}
 		order by tourimage_num
 	</select>
 	
 	<insert id='insertTourImage'>
 		insert into tour_images
-		values(tourimages_num_seq.nextval, #{tourImageName}, #{tourNum})
+		values(tourimage_num_seq.nextval, #{tourImageName}, #{tourNum})
 	</insert>
+	
+	<delete id='deleteTourImage'>
+		delete tour_images
+		where tour_num = #{tourNum}
+	</delete>
 </mapper>

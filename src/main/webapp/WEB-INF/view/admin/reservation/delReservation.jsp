@@ -15,7 +15,7 @@
 let changeToDate = function(date){
 	date = date.replaceAll('-', '')
 	let year = date.slice(0,4)
-	let month = date.slice(5,6)
+	let month = date.slice(5,6) - 1
 	let day = date.slice(7,8)
 	return new Date(year, month, day)
 }
@@ -25,82 +25,71 @@ let changeAttr = function(component, text, removeClass, addClass, attrName, attr
 	component.addClass(addClass)
 	component.attr(attrName, attrValue)
 }
+
+let addComma = function(component, value){
+	component.text(Number(value).toLocaleString('en').split(".")[0])
+}
 $.ajax({
-	url: 'tours',
+	url: 'adminGet',
 	dataType: 'json',
-	success: tours => {
-		$.ajax({
-			url: 'adminGet',
-			dataType: 'json',
-			data: {
-				userId: `${param.userId}`
-			},
-			success: reservations => {
-				const resvArr = []
-				let tourName
-				let tourEDate
-				let presentDate = new Date()
-				
-				if(reservations.length){
-					$.each(reservations, (i, reservation) => {
-						$.each(tours, (i, tour) => {
-							if(`\${tour.tourNum}` == `\${reservation.tourNum}`){
-								tourName = `\${tour.tourName}`
-								tourEDate = `\${tour.tourEDate}`
-							}
-						})
-						resvArr.push(
-						`
-						 <tr>
-		                    <td>\${reservation.resvNum}</td>
-		                    <td>\${reservation.resvDate}</td>
-		                    <td>` + tourName + `</td>
-		                    <td>\${reservation.chargePrice}</td>
-		                    <td>
-		                        <button type='button' id= \${reservation.resvNum} class='btn cancelBtn btn-lightRed' edate=` + tourEDate + `
-		                       	whetherToCancel=\${reservation.whetherToCancel}></button>
-		                    </td>
-		                </tr>
-						`
-						)	
-					})
-					$('tbody').append(resvArr.join(''))	
-					
-					$('.cancelBtn').each(function(){
-						if($(this).attr('whethertocancel') == 'Y'){
-							changeAttr($(this), '취소됨', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
-						}else if(presentDate.getTime() > changeToDate($(this).attr('edate')).getTime()){
-							changeAttr($(this), '취소불가', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
-						}else if($(this).attr('whethertocancel') == 'N'){
-							$(this).text('취소')
-							$(this).addClass('btn-lightRed')
-							$(this).click(() => {
-								showConfirmModal('예약 취소 하시겠습니까?', '예약이 취소되었습니다.')
-								$('#okBtn').click(() => {
-									$.ajax({
-										url:'fix',
-										method: 'put',
-										data: {
-											resvNum: $(this).attr('id'),
-											whetherToCancel: 'Y',
-											tourName: $(this).parent().prev().prev().text() + '이취소되었습니다.',
-											userId: `${param.userId}`
-										},
-										success: () => {
-											changeAttr($(this), '취소됨', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
-										}
-									})
-								})
+	data: {
+		userId: `${param.userId}`
+	},
+	success: reservationDtos => {
+		const resvDtoArr = []
+		let presentDate = new Date()
+		
+		if(reservationDtos.length){
+			$.each(reservationDtos, (i, reservationDto) => {
+				resvArr.push(
+				`
+				 <tr>
+                    <td>\${reservationDto.resvNum}</td>
+                    <td>\${reservationDto.resvDate}</td>
+                    <td>\${reservationDto.tourName}</td>
+                    <td class='chargePrice'>\${reservationDto.chargePrice}</td>
+                    <td>
+                        <button type='button' id= \${reservationDto.resvNum} class='btn cancelBtn btn-lightRed' edate=\${reservationDto.tourEDate}
+                       	whetherToCancel=\${reservationDto.whetherToCancel}></button>
+                    </td>
+                </tr>
+				`
+				)	
+			})
+			$('tbody').append(resvArr.join(''))
+
+			$('.cancelBtn').each(function(){
+				if($(this).attr('whethertocancel') == 'Y'){
+					changeAttr($(this), '취소됨', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
+				}else if(presentDate.getTime() > changeToDate($(this).attr('edate')).getTime()){
+					changeAttr($(this), '취소불가', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
+				}else if($(this).attr('whethertocancel') == 'N'){
+					$(this).text('취소')
+					$(this).addClass('btn-lightRed')
+					$(this).click(() => {
+						showConfirmModal('예약 취소 하시겠습니까?', '예약이 취소되었습니다.')
+						$('#okBtn').click(() => {
+							$.ajax({
+								url:'fix',
+								method: 'put',
+								data: {
+									resvNum: $(this).attr('id'),
+									tourName: $(this).parent().prev().prev().text() + '이취소되었습니다.',
+									userId: `${param.userId}`
+								},
+								success: () => {
+									changeAttr($(this), '취소됨', 'btn-lightRed', 'btn-lightGray','disabled', 'disabled')
+								}
 							})
-						}
+						})
 					})
-				}else{
-					$('tbody').html("<td class='fs-1' colspan='5'>예약내역이 없습니다.</td>")
 				}
-			}
-			
-		})
+			})
+		}else{
+			$('tbody').html("<td class='fs-1' colspan='5'>예약내역이 없습니다.</td>")
+		}
 	}
+	
 })
 </script>
 <style>

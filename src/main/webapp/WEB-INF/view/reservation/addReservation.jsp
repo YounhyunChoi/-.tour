@@ -36,7 +36,8 @@ $(() => {
 			method: 'post',
 			data: {
 				chargePrice: $('.chargePrice').eq(0).text().replace(',', ''),
-				tourNum: ${tour.tourNum}
+				tourNum: ${tour.tourNum},
+				resvEDate: ${tour.tourEDate}
 			}
 	   })
       	showOkModal('여행코스가 예약되었습니다.', 'list')

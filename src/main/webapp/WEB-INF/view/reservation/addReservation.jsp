@@ -2,17 +2,12 @@
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link
-	href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css'
-	rel='stylesheet' />
-<link rel='stylesheet'
-	href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css' />
-<link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css'
-	rel='stylesheet' />
-<script
-	src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
+<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'/>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css'/>
+<link href='https://getbootstrap.com/docs/5.3/assets/css/docs.css' rel='stylesheet'/>
+<script	src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
-<link href='../res/style.css' rel='stylesheet' />
+<link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
 <script src='../res/modal.js?ver=2'></script>
 <title></title>
@@ -79,7 +74,7 @@ $(() => {
 		</div>
 		<div class='col p-2 border border-2 contents shadow-sm'>
 			<b>코스 금액</b><span id='tourPrice'>${tour.tourPrice}</span><br>
-			<b>할인 금액</b><span id='salePrice'>1</span>원<br><br>
+			<b>할인 금액</b><span id='salePrice'>${tour.discountPrice}</span>원<br><br>
 			<b>총 결제 금액</b><span class='chargePrice'></span>
 		</div>
 	</div>

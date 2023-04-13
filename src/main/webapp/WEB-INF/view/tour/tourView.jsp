@@ -209,15 +209,6 @@ $(() => {
                 <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
                     <div class='carousel-inner' id='tourImgIn'>
                     	<!-- 여행코스 이미지 -->
-                        <!-- <div class='carousel-item active'>
-                            <div class='items py-5'>여행코스이미지</div>
-                        </div>
-                        <div class='carousel-item'>
-                            <div class='items py-5'>여행코스이미지</div>
-                        </div>
-                        <div class='carousel-item'>
-                            <div class='items py-5'>여행코스이미지</div>
-                        </div> -->
                     </div>
                     <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
                         <i class="bi bi-chevron-left tourCarouselBtn"></i>

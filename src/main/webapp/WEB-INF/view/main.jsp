@@ -16,7 +16,7 @@ $(() => {
 	$('footer').html($('footer').html().replaceAll('../', ''))
 })
 </script>
-  <title>main</title>
+<title>메인</title>
 <style>
     #mainBody { 
     padding-top: 60px;
@@ -25,18 +25,22 @@ $(() => {
     #noticeBar{
         color:white
     }
+    
     #navBackBtn {
         cursor: pointer;
     }
+    
     #tourImg, #eventImg {
         border: .1rem solid;
         margin: 1rem;
         box-shadow: .1rem .1rem .1rem .1rem lightgray;
         text-align: center;
     }
+    
     #tourImg{
         padding: 10rem 0 10rem 0;
     }
+    
     .tourCarouselBtn {
         color: black;
     }
@@ -46,7 +50,7 @@ $(() => {
 <header></header>
 <div class='row m-0 bg-danger'>
     <div class='col pt-1'>
-        <p><a href='./notice/02.jsp' id='noticeBar'><h4 class='text-center'>공지사항</h4></a></p>
+        <p><a href='../notice' id='noticeBar'><h4 class='text-center'>공지사항</h4></a></p>
     </div>
 </div>
 <div class='row m-0'>

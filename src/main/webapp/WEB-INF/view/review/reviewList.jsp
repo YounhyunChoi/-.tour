@@ -10,6 +10,15 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
+<script>
+$(() => {
+	let reviews = ''
+	
+	$.ajax
+	
+	$('#container')
+})
+</script>
 <title></title>
 <style>
     .page-link {
@@ -77,122 +86,6 @@
             </div>
         </div>
     </div>
-    <div class='row mx-2 mt-3 shadow-sm border'>
-        <div class='col'>
-            <div class='row align-items-center border-bottom'>
-                <div class='col-4 fs-6'>후기번호 0003</div>
-                <div class='col-5 px-0'>서울시티투어 버스</div>
-                <div class='col-3 text-nowrap text-end'>
-                    <button type='button' class='border-0 bg-white' onclick="location.href='04.html'">
-                        <span class='fs-5'>상세보기</span>
-                        <i class='bi bi-chevron-right viewDetailBtn'></i>
-                    </button>
-                </div>
-            </div>
-            <div class='row mt-2'>
-                <div class='col-3 me-4'>
-                    <div class='reviewImage'>후기이미지</div>
-                </div>
-                <div class='col ms-2 fs-5 text-left'>
-                    제목 아쉬웠어요<br>
-                    평점 ★★★☆☆
-                    <br>java04
-                </div>
-            </div>
-            <div class='row'>
-                <p class='text-end'>
-                    작성일 2023-03-15
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class='row mx-2 mt-3 shadow-sm border'>
-        <div class='col'>
-            <div class='row align-items-center border-bottom'>
-                <div class='col-4 fs-6'>후기번호 0002</div>
-                <div class='col-5 px-0'>서울시티투어 버스</div>
-                <div class='col-3 text-nowrap text-end'>
-                    <button type='button' class='border-0 bg-white' onclick="location.href='04.html'">
-                        <span class='fs-5'>상세보기</span>
-                        <i class='bi bi-chevron-right viewDetailBtn'></i>
-                    </button>
-                </div>
-            </div>
-            <div class='row mt-2'>
-                <div class='col-3 me-4'>
-                    <div class='reviewImage'>후기이미지</div>
-                </div>
-                <div class='col ms-2 fs-5 text-left'>
-                    제목 이쁘다<br>
-                    평점 ★★★★★
-                    <br>java02
-                </div>
-            </div>
-            <div class='row'>
-                <p class='text-end'>
-                    작성일 2023-03-15
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class='row mx-2 mt-3 shadow-sm border'>
-        <div class='col'>
-            <div class='row align-items-center border-bottom'>
-                <div class='col-4 fs-6'>후기번호 0001</div>
-                <div class='col-5 px-0'>도심 속 역사와 예술 이야기</div>
-                <div class='col-3 text-nowrap text-end'>
-                    <button type='button' class='border-0 bg-white' onclick="location.href='04.html'">
-                        <span class='fs-5'>상세보기</span>
-                        <i class='bi bi-chevron-right viewDetailBtn'></i>
-                    </button>
-                </div>
-            </div>
-            <div class='row mt-2'>
-                <div class='col-3 me-4'>
-                    <div class='reviewImage'>후기이미지</div>
-                </div>
-                <div class='col ms-2 fs-5 text-left'>
-                    제목 안녕하세요<br>
-                    평점 ★★★★★
-                    <br>java03
-                </div>
-            </div>
-            <div class='row'>
-                <p class='text-end'>
-                    작성일 2023-03-15
-                </p>
-            </div>
-        </div>
-    </div>
-    <nav aria-label='Page navigation example'>
-        <ul class='pagination d-flex justify-content-center mt-4' id='indexNum'>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Previous'>
-                    <span aria-hidden='true'>&laquo;</span>
-                </a>
-            </li>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Previous'>
-                    <span aria-hidden='true'>&lsaquo;</span>
-                </a>
-            </li>
-            <li class='page-item'><a class='page-link' href='#'>1</a></li>
-            <li class='page-item'><a class='page-link' href='#'>2</a></li>
-            <li class='page-item'><a class='page-link' href='#'>3</a></li>
-            <li class='page-item'><a class='page-link' href='#'>4</a></li>
-            <li class='page-item'><a class='page-link' href='#'>5</a></li>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Next'>
-                    <span aria-hidden='true'>&rsaquo;</span>
-                </a>
-            </li>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Next'>
-                    <span aria-hidden='true'>&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>
 <footer>
 </footer>

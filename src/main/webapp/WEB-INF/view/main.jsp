@@ -90,7 +90,7 @@ $(() => {
     }
     
     #tourImg, #eventImg {
-        border: .1rem solid;
+        border: .1rem solid lightgray;
         margin: 1rem;
         box-shadow: .1rem .1rem .1rem .1rem lightgray;
         text-align: center;
@@ -114,15 +114,15 @@ $(() => {
 </div>
 <div class='row m-0'>
     <div class='col'>
-        <div class='row py-5 mt-4' id='eventImg'>
-        	<div class='py-5 fs-4'>이벤트이미지</div>
+        <div class='row py-1 mt-4' id='eventImg'>
+        	<div class='py-1 fs-4'>이벤트이미지</div>
         </div>
     </div>
 </div>
 <div class='row m-0'>
     <div class='col'>
         <div class='row mt-4' id='tourImg'>
-        	<div class='py-5 fs-4'>여행코스이미지</div>
+        	<div class='py-1 fs-4'>여행코스이미지</div>
         </div>
     </div>
 </div>

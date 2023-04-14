@@ -12,15 +12,15 @@ import com.my.tour.domain.ReviewDto;
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
 	@Autowired private ReviewMap reviewMap;
-	
-	@Override
-	public List<Review> selectReviews() {
-		return reviewMap.selectReviews();
-	}
 
 	@Override
 	public List<Review> selectReviews(int resvNum) {
 		return reviewMap.selectReviews(resvNum);
+	}
+	
+	@Override
+	public List<ReviewDto> selectReviewDtos() {
+		return reviewMap.selectReviewDtos();
 	}
 	
 	@Override

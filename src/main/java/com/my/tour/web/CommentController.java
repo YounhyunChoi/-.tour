@@ -44,7 +44,8 @@ public class CommentController {
 	
 	@GetMapping("fix")
 	@LoginAccess
-	public ModelAndView fixComment(ModelAndView mv, HttpSession session, int comtNum) {
+	public ModelAndView fixComment(ModelAndView mv, HttpSession session, int comtNum, int reviewNum) {
+		mv.addObject("userId", session.getAttribute("userId"));
 		mv.setViewName("comment/fixComment");
 		return mv;
 	}

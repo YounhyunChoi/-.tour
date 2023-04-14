@@ -182,8 +182,8 @@ $.ajax({
                     여행
                     <ul>
                         <li>
-                            <a class='nav-link' aria-current='page' href='/tour'>코스보기</a>
-                            <a class='nav-link' aria-current='page' href='#'>후기</a>
+                            <a class='nav-link' aria-current='page' href='../tour'>코스보기</a>
+                            <a class='nav-link' aria-current='page' href='../review/list'>후기</a>
                         </li>
                     </ul>
                 </li>
@@ -191,7 +191,7 @@ $.ajax({
                 <li class='nav-item'>
                     <ul>
                         <li>
-                            <a class='nav-link' aria-current='page' href='/event'>이벤트</a>
+                            <a class='nav-link' aria-current='page' href='../event'>이벤트</a>
                         </li>
                     </ul>
                 </li>
@@ -199,7 +199,7 @@ $.ajax({
                 <li class='nav-item'>
                     <ul>
                         <li>
-                            <a class='nav-link' aria-current='page' href='/notice'>공지사항</a>
+                            <a class='nav-link' aria-current='page' href='../notice'>공지사항</a>
                         </li>
                     </ul>
                 </li>
@@ -209,7 +209,7 @@ $.ajax({
                     <ul>
                         <li>
                             <a class='nav-link' aria-current='page' href='#'>1대1문의</a>
-                            <a class='nav-link' aria-current='page' href='/faq'>FAQ</a>
+                            <a class='nav-link' aria-current='page' href='../faq'>FAQ</a>
                         </li>
                     </ul>
                 </li>

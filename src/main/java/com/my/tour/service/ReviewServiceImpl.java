@@ -26,13 +26,13 @@ public class ReviewServiceImpl implements ReviewService {
 	@Autowired private CommentDao commentDao;
 	
 	@Override
-	public List<Review> getReviews() {
-		return reviewDao.selectReviews();
+	public List<Review> getReviews(int resvNum) {
+		return reviewDao.selectReviews(resvNum);
 	}
 	
 	@Override
-	public List<Review> getReviews(int resvNum) {
-		return reviewDao.selectReviews(resvNum);
+	public List<ReviewDto> getReviewDtos() {
+		return reviewDao.selectReviewDtos();
 	}
 
 	@Override

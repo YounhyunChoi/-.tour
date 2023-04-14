@@ -23,7 +23,9 @@ function showTourImage() {
 		success: tourImages => {
 			const tourImageArr = []
 			
-			if(tourImages.length) {
+			if(tourImages.length != 1) {
+				$('.tourCarouselBtn').show()
+				
 				$.each(tourImages, (i, tourImageName) => {
 					if(i == 0) {
 						tourImageArr.push(
@@ -37,6 +39,13 @@ function showTourImage() {
 			                    </div>`)
 					}
 				})
+			} else {
+				$('.tourCarouselBtn').hide()
+				
+				tourImageArr.push(
+					`<div class='carousel-item active'>
+                        <img src='<c:url value="/attach/` + tourImages[0] + `"/>'style="max-width:100%; height:100%;"/>
+                    </div>`)
 			}
 			$('#tourImages').empty()
 			$('#tourImages').append(tourImageArr.join(''))
@@ -155,14 +164,14 @@ $(() => {
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
                     <c:if test='${logoName != null}'>
 	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
-		           			<a href='../admin/main'>
+		           			<a href='../user/adminMain'>
 	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
 	                    	</a>
                     	</div>
 					</c:if>
 					<c:if test='${logoName == null}'>
 						<div class='float-start m-4 ms-4'>
-							<a  class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
 								로고이미지
 							</a>
 						</div>

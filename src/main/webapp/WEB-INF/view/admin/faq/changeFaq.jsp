@@ -79,7 +79,7 @@ $('#faqDelBtn').click(() => {
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
                     <div class='float-start m-4 ms-4'>
-                        <a class='border border-dark text-white p-2 mt-1' href='../admin/main' id='logo'>로고이미지</a>
+                        <a class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>로고이미지</a>
                     </div>
                     <h1 class='text-center pt-3 text-white'><b>FAQ수정</b></h1>
                 </div>
@@ -90,7 +90,7 @@ $('#faqDelBtn').click(() => {
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
                 <h6 class='text-white p-2'>
-                    <a href='../admin/main'>메인</a> > <a href='../faq/adminList'>FAQ</a> > <a href=''>FAQ수정</a>
+                    <a href='../user/adminMain'>메인</a> > <a href='../faq/adminList'>FAQ</a> > <a href=''>FAQ수정</a>
                 </h6>
             </div>
         </div>

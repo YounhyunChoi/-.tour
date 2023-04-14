@@ -40,8 +40,8 @@ $(() => {
 			const tourArr = []
 			
 			if(!tourImages.length) {
-  				$('#tourImg').hide()
-  			} else {
+  				$('.tourCarouselBtn').hide()
+  			} else if(tourImages.length != 1) {
 				$.each(tourImages, (i, tourImage) => {
 					if(i == 0) {
 						tourArr.push(
@@ -55,8 +55,12 @@ $(() => {
 		                    </div>`)
 					}
 				})
-				$('#tourImgIn').append(tourArr.join(''))
+  			} else {
+  				$('.tourCarouselBtn').hide()
+  				
+  				tourArr.push(`<img src='<c:url value="/attach/` + tourImages[0] + `"/>' style="max-width:100%; height:100%;"/>`)
   			}
+			$('#tourImgIn').append(tourArr.join(''))
 		}
 	})
 	

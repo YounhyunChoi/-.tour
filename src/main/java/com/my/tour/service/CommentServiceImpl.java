@@ -10,7 +10,7 @@ import com.my.tour.dao.ReviewDao;
 import com.my.tour.dao.ReviewImageDao;
 import com.my.tour.domain.Comment;
 import com.my.tour.domain.CommentDto;
-import com.my.tour.domain.Review;
+import com.my.tour.domain.ReviewDto;
 import com.my.tour.domain.ReviewImage;
 
 @Service
@@ -20,13 +20,8 @@ public class CommentServiceImpl implements CommentService{
 	@Autowired private ReviewImageDao reviewImageDao;
 	
 	@Override
-	public List<Comment> getComments() {
-		return commentDao.selectComments();
-	}
-	
-	@Override
-	public List<Comment> getComment(int reviewNum) {
-		return commentDao.selectComment(reviewNum);
+	public List<Comment> getComments(int reviewNum) {
+		return commentDao.selectComments(reviewNum);
 	}
 
 	@Override
@@ -35,7 +30,7 @@ public class CommentServiceImpl implements CommentService{
 	}
 	
 	@Override
-	public List<Review> getReview(int reviewNum) {
+	public List<ReviewDto> getReview(int reviewNum) {
 		return reviewDao.selectReview(reviewNum);
 	}
 

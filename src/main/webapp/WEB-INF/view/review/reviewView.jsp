@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8'%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta charset='utf-8'>
@@ -12,18 +13,14 @@
 <script src='../res/navigation.js'></script>
 <script src='../res/modal.js'></script>
 <script>
-    function listReviews() {
-    	$('#reviews').empty()
-    	
-    	$.ajax({
-    		url: 'get',
-    		success: reviewList => {
-    			if(reviewList.length) {
-    				
-    			}
-    		}
-    	})
-    }
+$(() => {
+	let reviewNum = ''
+	for(let i = '${review.reviewNum}'.length; i < 4; i++) {
+		reviewNum += '0'
+	}
+	
+	$('#reviewNum').text('후기번호 ' + reviewNum + ${review.reviewNum})
+})
 </script>
 <title></title>
 <style>
@@ -33,22 +30,54 @@
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left'></i></div>
+    <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>후기 조회</b></h2>
     </div>
 </div>
-<div class='container' id='reviews'>
+<div class='container'>
+    <div class='row mx-2 mt-5 shadow-sm border'>
+        <div class='col'>
+            <div class='row align-items-center border-bottom'>
+                <div class='col-4 fs-6' id='reviewNum'>
+				</div>
+                <div class='col fs-4'>${review.reviewTitle}</div>
+            </div>
+            <div class='row mt-2'>
+            	<c:if test='${reviewImageName != null}'>
+            		<div class='col-4'>
+	                    <div class='reviewImage'>
+	                    	<img src='<c:url value="/attach/${reviewImageName}"/>'/>
+	                    </div>
+	                </div>
+            	</c:if>
+                
+                <div class='col ms-2 fs-5 text-left'>
+                    제목 행복한여행<br>
+                    평점 ★★★★★<br>
+                    java01
+                </div>
+            </div>
+            <div class='row'>
+                <p class='text-end'>
+                    작성일 2023-03-15
+                </p>
+            </div>
+            <div class='row fs-5 px-3 pb-2'>
+                가족들이랑 함께 다녀왔는데 직원들도 친절하고 식사도 맛있어서 좋았어요.
+            </div>
+        </div>
+    </div>
 </div>
 <div class='container mt-4'>
     <div class='row justify-content-end'>
         <div class='col-3'>
-            <a href='../comment/add' type='button' class='btn btn-darkBlue form-control'>
+            <a href='../comment/01.html' type='button' class='btn btn-darkBlue form-control'>
                 <span>댓글쓰기</span>
             </a>
         </div>
         <div class='col-3'>
-            <a href='../review/fix' type='button' class='btn btn-olive form-control'>
+            <a href='../review/06.html' type='button' class='btn btn-olive form-control'>
                 <span>수정하기</span>
             </a>
         </div>
@@ -87,6 +116,20 @@
         <div class='col'>
             <div class='fs-6 text-end'>
                 작성일 2023-03-18
+            </div>
+        </div>
+    </div>
+</div>
+<div class='modal modal-center fade' id='modal'>
+    <div class='modal-dialog modal-smallsize'>
+        <div class='modal-content'>
+            <div class='pb-4' id='modalMsg'></div>
+            <div id='modalBtn'>
+                <button type='button' class='btn btn-lightGray' data-bs-dismiss='modal'>아니오</button>
+                <button type='button' class='btn btn-darkBlue' id='okBtn'>예</button>
+            </div>
+            <div id='modalOk'>
+                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
             </div>
         </div>
     </div>

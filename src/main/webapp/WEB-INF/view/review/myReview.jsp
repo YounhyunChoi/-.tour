@@ -38,7 +38,7 @@
 					    html +=            `\${myReview.reviewNum}</div>
 					                	<div class='col'>\${myReview.tourName}</div>
 					                	<div class='col-4 text-end'>
-					                    	<a type='button' class='border-0 bg-white' href='reviewView?reviewNum=\${myReview.reviewNum}'>
+					                    	<a type='button' class='border-0 bg-white' href='view?reviewNum=\${myReview.reviewNum}'>
 					                        <span class='fs-5'>상세보기</span>
 					                        <i class='bi bi-chevron-right viewDetailBtn'></i>
 					                    	</a>
@@ -120,7 +120,7 @@
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left'></i></div>
+    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>내가 쓴 후기</b></h2>
     </div>

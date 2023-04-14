@@ -5,14 +5,8 @@
 	<select id='selectComments' resultType='comment'>
 		select user_id, comt_num, comt_content, comt_date
 		from comments
-		order by comt_num asc
-	</select> 
-	
-	<select id='selectComment' resultType='comment'>
-		select user_id, comt_num, comt_content, comt_date
-		from comments
 		where review_num = #{reveiwNum}
-		order by comt_num asc
+		order by comt_num desc
 	</select>
 	
 	<select id='selectCommentDto' resultType='commentDto'>

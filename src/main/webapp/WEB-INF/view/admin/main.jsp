@@ -103,8 +103,7 @@ $(() => {
 				})
 			} else {
 				html += `<li>이벤트가 없습니다.</li>`
-			}
-			
+			}	
 			$('#eventList').append(html)
 		}
 	})

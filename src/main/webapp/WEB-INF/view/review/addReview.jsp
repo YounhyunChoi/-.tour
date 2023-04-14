@@ -73,7 +73,7 @@ function selectScore() {
 			html += `<i class='bi bi-star'></i>`
 		}
 	}
-   	
+   
    	$('#starScore').html(html)
 }
 </script>

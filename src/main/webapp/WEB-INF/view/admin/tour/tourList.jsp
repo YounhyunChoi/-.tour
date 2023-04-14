@@ -47,7 +47,6 @@ function tourList() {
 $(() => {
 	//여행상품 리스트
 	tourList()
-	
 	//검색
 	$('#searchBtn').click(() => {
 		if($('#tourSearch').val()) {
@@ -82,8 +81,7 @@ $(() => {
 		} else {
 			tourList()
 		}
-	})
-	
+	})	
 	//여행상품 등록으로 이동
 	$('#tourAddBtn').click(() => {
 		location.href = '../tour/add'
@@ -119,38 +117,38 @@ $(() => {
 </head>
 <body>
 <header>
-    <div class='container-fluid'>
-        <div class='row'>
-            <div class='col'>
-                <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <c:if test='${logoName != null}'>
-	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
-		           			<a href='../user/adminMain'>
-	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
-	                    	</a>
-                    	</div>
-					</c:if>
-					<c:if test='${logoName == null}'>
-						<div class='float-start m-4 ms-4'>
-							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
-								로고이미지
-							</a>
-						</div>
-					</c:if>
-                    <h1 class='text-center pt-3 text-white'><b>상품목록</b></h1>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class='container-fluid'>
     <div class='row'>
         <div class='col'>
-            <div class='navigation fixed-top pt-2' id='subHeader'>
-                <h6 class='text-white p-2'>
-                    <a href='../user/adminMain'>메인</a> > <a href='../tour/adminList'>상품목록</a>
-                </h6>
+            <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
+                <c:if test='${logoName != null}'>
+	                <div class='float-start ms-4 mt-1' style='height: 50px;'>
+	         			<a href='../user/adminMain'>
+	                 		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+	                 	</a>
+                	</div>
+				</c:if>
+				<c:if test='${logoName == null}'>
+					<div class='float-start m-4 ms-4'>
+						<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
+							로고이미지
+						</a>
+					</div>
+				</c:if>
+                <h1 class='text-center pt-3 text-white'><b>상품목록</b></h1>
             </div>
         </div>
     </div>
+</div>
+<div class='row'>
+    <div class='col'>
+        <div class='navigation fixed-top pt-2' id='subHeader'>
+            <h6 class='text-white p-2'>
+                <a href='../user/adminMain'>메인</a> > <a href='../tour/adminList'>상품목록</a>
+            </h6>
+        </div>
+    </div>
+</div>
 </header>
 <div class='row' id='mainBody'>
     <div class='col'>

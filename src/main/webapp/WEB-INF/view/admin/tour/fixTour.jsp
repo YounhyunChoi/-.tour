@@ -72,8 +72,7 @@ $(() => {
 				}
 			})
 		}
-	})
-	
+	})	
 	//여행코스 이미지 수정시 실행
 	$('#tourImage').change(() => {
 		let formData = new FormData($('#tourImageUp')[0])
@@ -86,8 +85,7 @@ $(() => {
 			data: formData,
 			success: showTourImage
 		})
-	})
-	
+	})	
 	//여행코스 수정
 	$('#tourFixBtn').click(() => {
 		if($('#tourName').val() && $('#tourName').val().length >= 10 &&
@@ -128,7 +126,6 @@ $(() => {
 			}
 		}
 	})
-	
 	//여행코스 삭제
 	$('#tourDelBtn').click(() => {
 		showConfirmModal('여행코스를 삭제하시겠습니까?', '../tour/adminList')
@@ -158,38 +155,38 @@ $(() => {
 </head>
 <body>
 <header>
-    <div class='container-fluid'>
-        <div class='row'>
-            <div class='col'>
-                <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <c:if test='${logoName != null}'>
-	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
-		           			<a href='../user/adminMain'>
-	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
-	                    	</a>
-                    	</div>
-					</c:if>
-					<c:if test='${logoName == null}'>
-						<div class='float-start m-4 ms-4'>
-							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
-								로고이미지
-							</a>
-						</div>
-					</c:if>
-                    <h1 class='text-center pt-3 text-white'><b>상품수정</b></h1>
-                </div>
-            </div>
-        </div>
-    </div>
-   <div class='row'>
+<div class='container-fluid'>
+    <div class='row'>
         <div class='col'>
-            <div class='navigation fixed-top pt-2' id='subHeader'>
-                <h6 class='text-white p-2'>
-                    <a href='../user/adminMain'>메인</a> > <a href='../tour/adminList'>상품목록</a> > <a href=''>상품수정</a>
-                </h6>
-            </div>
-        </div>
-    </div>
+            <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
+                <c:if test='${logoName != null}'>
+	                 <div class='float-start ms-4 mt-1' style='height: 50px;'>
+	         			<a href='../user/adminMain'>
+	                 		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+	                 	</a>
+                	</div>
+				</c:if>
+				<c:if test='${logoName == null}'>
+					<div class='float-start m-4 ms-4'>
+						<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
+							로고이미지
+						</a>
+					</div>
+				</c:if>
+                 <h1 class='text-center pt-3 text-white'><b>상품수정</b></h1>
+             </div>
+         </div>
+     </div>
+ </div>
+<div class='row'>
+     <div class='col'>
+         <div class='navigation fixed-top pt-2' id='subHeader'>
+             <h6 class='text-white p-2'>
+                 <a href='../user/adminMain'>메인</a> > <a href='../tour/adminList'>상품목록</a> > <a href=''>상품수정</a>
+             </h6>
+         </div>
+     </div>
+</div>
 </header>
 <div class='row' id='mainBody'>
     <div class='col'>
@@ -279,7 +276,6 @@ $(() => {
         </div>
     </div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

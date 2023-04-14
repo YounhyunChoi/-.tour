@@ -7,57 +7,56 @@
 <%
 if(userId != null) {
 %>    
-$.ajax({
-	url: '../alarm/get',
-	dataType: 'json',
-	success: alarms => {
-		if(alarms.length){
-		const alarmArr = []
-		$.each(alarms, (i, alarm) => {
-			if(alarm.whetherToCheck == 'N'){
-				$('#alarmBedge').removeClass('invisible')
-			}
-			alarmArr.push(
-			`
-			<li class='alarmLi border-bottom'>
-              	<div class='row'>
-                 		<div class='col-10'>
-                    		<a class='dropdown-item alarm-item' href='#'>
-                       		\${alarm.alarmContent}
-                    		</a>
-                 		</div>
-                  	<div class='col-2 ps-0 pt-1'>
-                     	<a alarmNum=\${alarm.alarmNum} type='button' class='alarmDelBtn btn-close'></a>
-                  	</div>
-              	</div>
-           	</li>
-			`)
-		})
-		$('#alarmContainer').append(alarmArr.join(''))
-		
-		$('#alarmBtn').click(() => {		
-			$.ajax({
-				url: 'alarm/fix',
-				method: 'put',
-				data: {
-					whetherToCheck: 'Y'
-				},
-				success: () => {
-						$('#alarmBedge').addClass('invisible')
-				}
-			})
-			$('.alarmDelBtn').each(function() {
-				 $(this).click(() => {
-					 $.ajax({
-							url: 'alarm/del',
-							method: 'delete',
-							data: {
-								alarmNum: $(this).attr('alarmNum')
-							},
-							success: () => {
-								$(this).closest('li').remove()
-								if($('.alarmLi').length == 0){
-									$('#alarmContainer').html(
+	$.ajax({
+		url: '../alarm/get',
+		dataType: 'json',
+		success: alarms => {
+			if(alarms.length) {
+				const alarmArr = []
+				$.each(alarms, (i, alarm) => {
+					if(alarm.whetherToCheck == 'N') {
+						$('#alarmBedge').removeClass('invisible')
+					}
+					alarmArr.push(
+						`<li class='alarmLi border-bottom'>
+							<div class='row'>
+								<div class='col-10'>
+									<a class='dropdown-item alarm-item' href='#'>
+			                       		\${alarm.alarmContent}
+			                    		</a>
+			                 		</div>
+								<div class='col-2 ps-0 pt-1'>
+									<a alarmNum=\${alarm.alarmNum} type='button' class='alarmDelBtn btn-close'></a>
+								</div>
+							</div>
+						</li>`
+					)
+				})
+				$('#alarmContainer').append(alarmArr.join(''))
+				
+				$('#alarmBtn').click(() => {		
+					$.ajax({
+						url: 'alarm/fix',
+						method: 'put',
+						data: {
+							whetherToCheck: 'Y'
+						},
+						success: () => {
+								$('#alarmBedge').addClass('invisible')
+						}
+					})
+					$('.alarmDelBtn').each(function() {
+						 $(this).click(() => {
+							 $.ajax({
+								url: 'alarm/del',
+								method: 'delete',
+								data: {
+									alarmNum: $(this).attr('alarmNum')
+								},
+								success: () => {
+									$(this).closest('li').remove()
+									if($('.alarmLi').length == 0) {
+										$('#alarmContainer').html(
 											`
 											<li class='border-bottom'>
 											         	<div class='row'>
@@ -70,29 +69,29 @@ $.ajax({
 											</li>
 											`
 										)
+									}
 								}
-							}
+							})
 						})
-				 })
+					})
 				})
-		})
-		}else{
-			$('#alarmContainer').html(
-				`
-				<li class='border-bottom'>
-				         	<div class='row'>
+			} else {
+				$('#alarmContainer').html(
+					`
+					<li class='border-bottom'>
+			         	<div class='row'>
 				    		<div class='col-10'>
-				       		<a class='dropdown-item alarm-item' href='#'>
-				       		알람이없습니다.
-				       		</a>
+					       		<a class='dropdown-item alarm-item' href='#'>
+					       			알람이없습니다.
+					       		</a>
 				    		</div>
-				 	</div>
-				</li>
-				`
-			)
+					 	</div>
+					</li>
+					`
+				)
+			}
 		}
-	}
-})
+	})
 <%
 }
 %>    
@@ -124,10 +123,7 @@ $.ajax({
 	                     	<i class='icon bi bi-bell-fill justify-content-end'></i>
 	                     	<span id='alarmBedge' class="position-absolute top-0 start-90 translate-middle rounded-circle bg-danger p-1 invisible"></span>
 	                  	</a>
-	                  	<ul id='alarmContainer' class='dropdown-menu dropdown-menu-end alarm' 
-	                  	style="overflow-y: clip;">
-	                     	
-	                  	</ul>
+	                  	<ul id='alarmContainer' class='dropdown-menu dropdown-menu-end alarm' style="overflow-y: clip;"></ul>
 	               	</span>
 <%
 				}
@@ -242,7 +238,7 @@ $.ajax({
                 </a>
             </div>
             <div class='pe-2'>
-                <a href='../user/myPage'  class='btn w-auto' type='button'>
+                <a href='../user/myPage' class='btn w-auto' type='button'>
                     <i class='icon bi-person-fill fa-3x'></i>
                 </a>
             </div>

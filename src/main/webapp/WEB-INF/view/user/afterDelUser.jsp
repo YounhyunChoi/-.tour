@@ -15,17 +15,17 @@
 <body>
 <header></header>
 <div class='container'>
-<div class='row text-center'>
-    <h1 class='mt-5'><b>회원 탈퇴 완료</b></h1>
-    <hr class="border border-dark border-1 opacity-50">
-    <div class='mt-3 mb-3'>
-        <a>회원 탈퇴 되었습니다.</a>
-    </div>
-    <p>그동안 이용해 주셔서 감사합니다.</p>
-    <span class='mt-3'>
-        <a href='/' class='btn btn-darkBlue'>메인화면 바로가기</a>
-    </span>
-</div>
+	<div class='row text-center'>
+	    <h1 class='mt-5'><b>회원 탈퇴 완료</b></h1>
+	    <hr class="border border-dark border-1 opacity-50">
+	    <div class='mt-3 mb-3'>
+	        <a>회원 탈퇴 되었습니다.</a>
+	    </div>
+	    <p>그동안 이용해 주셔서 감사합니다.</p>
+	    <span class='mt-3'>
+	        <a href='/' class='btn btn-darkBlue'>메인화면 바로가기</a>
+	    </span>
+	</div>
 </div>
 <footer></footer>
 </body>

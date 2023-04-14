@@ -44,8 +44,7 @@ $(() => {
 <style></style>
 </head>
 <body>
-<header>
-</header>
+<header></header>
 <div class='navigation fixed-top'>
    <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
    <div class='menuName'>

@@ -1,8 +1,8 @@
 $(() => {
 	$.ajax({
-       	url: '../user/adminNav',
-       	success: function(result) {
+		url: '../user/adminNav',
+		success: function(result) {
     		$('.container-fluid').append(result)
-       }
-    })
+		}
+	})
 })

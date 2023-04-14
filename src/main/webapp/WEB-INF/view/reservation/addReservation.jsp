@@ -27,16 +27,18 @@ $(() => {
   
    $('#paymentBtn').click(() => {
 	   if(`${userId}`){
-	   $.ajax({
-			url: 'add',
-			method: 'post',
-			data: {
-				chargePrice: $('.chargePrice').eq(0).text().replaceAll(',', ''),
-				tourNum: ${tour.tourNum},
-				resvEDate: `${tour.tourEDate}`
-			}
-	   })
-      	showOkModal('여행코스가 예약되었습니다.', 'list')
+		   showConfirmModal('결제하시겠습니까?', '여행코스가 예약되었습니다.', 'list')
+		   $('#okBtn').click(() => {			   
+			   $.ajax({
+					url: 'add',
+					method: 'post',
+					data: {
+						chargePrice: $('.chargePrice').eq(0).text().replaceAll(',', ''),
+						tourNum: ${tour.tourNum},
+						resvEDate: `${tour.tourEDate}`
+					}
+			   })
+		   })
    	   } else {
 	   	showOkModal('로그인페이지로 이동합니다.', '../user/login')
    	}
@@ -92,8 +94,7 @@ $(() => {
 	</div>
 	<div class='row'>
 		<div class='col mt-5 d-flex justify-content-center'>
-			<button id='paymentBtn' type='button' data-bs-toggle="modal"
-				data-bs-target="#modal"
+			<button id='paymentBtn' type='button'
 				class='px-5 py-2 border-0 rounded btn-lightRed text-center text-white '>
 				<span class='chargePrice'></span>원결제하기
 			</button>

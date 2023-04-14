@@ -101,8 +101,7 @@ $(() => {
 </style>
 </head>
 <body>
-<header>
-</header>
+<header></header>
 <div class='navigation fixed-top'>
    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn' ></i></div>
    <div class='menuName'>
@@ -113,7 +112,6 @@ $(() => {
     <div class='row mt-5' id='eventView'>
     </div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

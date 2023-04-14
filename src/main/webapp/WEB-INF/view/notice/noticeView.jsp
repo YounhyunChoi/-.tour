@@ -84,7 +84,6 @@ $(() => {
 		}
 	})
 })
-
 </script>
 <title>공지 조회</title>
 <style>
@@ -99,8 +98,7 @@ $(() => {
     }
 </style>
 </head>
-<body>
-<header>
+<body><header>
 </header>
 <div class='navigation fixed-top'>
    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
@@ -112,7 +110,6 @@ $(() => {
     <div class='row mt-5' id='noticeView'>
     </div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

@@ -130,8 +130,6 @@ function wishList() {
 		}
 	})
 }
-
-
 $(wishList)
 </script>
 <style>
@@ -155,20 +153,15 @@ $(wishList)
     }
 </style>
 </head>
-<header>
-</header>
+<header></header>
 <div class='navigation fixed-top'>
     <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn' onclick="location.href='../user/mypage.html'"></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>찜내역</b></h2>
     </div>
 </div>
-
 <div class='container px-4' id='wishContent'>
-    
 </div>
-
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

@@ -55,7 +55,6 @@ $(() => {
 </script>
 <title>공지사항</title>
 <style>
-
 </style>
 </head>
 <body>
@@ -136,7 +135,6 @@ $(() => {
         </div>
    </div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

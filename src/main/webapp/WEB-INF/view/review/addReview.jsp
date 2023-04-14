@@ -54,11 +54,7 @@ $(() => {
        					processData: false,
        					data: formData,
        					success: isGood => {
-       						if(isGood) {
-           						$(location).attr('href', 'my')	
-       						} else {
-       							showOkModal('이미지는 최대 4장까지 등록 가능합니다.')
-       						}
+           					$(location).attr('href', 'my')	
        					}
        				})
        			}
@@ -111,7 +107,7 @@ function selectScore() {
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left'></i></div>
+    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>후기쓰기</b></h2>
     </div>
@@ -133,7 +129,7 @@ function selectScore() {
         <div class='col-2'></div>
         <div class='col-4 text-start'>
         	<form id='reviewImageUp' class='mb-0'>
-	        	<input type='file' id='inputImg' name='reviewImage' class='d-none' multiple>
+	        	<input type='file' id='inputImg' name='reviewImage' class='d-none'>
         	</form>
         	<button type='button'
 	            class='reviewimageNum contentBtn border-0 btn-lightGray rounded text-white'>

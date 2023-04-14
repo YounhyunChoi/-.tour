@@ -10,7 +10,7 @@ $(() => {
        	}
     })
     
-    $('.bi.bi-chevron-left').click(() => {
+    $('#historyBtn').click(() => {
 		history.go(-1)
 	})
 })

@@ -7,9 +7,9 @@ import com.my.tour.domain.UserDto;
 
 public interface UserDao {
 	List<UserDto> selectUserDto(String userId);
-	int insertUser(User user);
+	void insertUser(User user);
 	List<User> selectUsers();
 	List<User> selectUser(String userId);
-	int updateUser(User user);
-	int deleteUser(String userId);
+	void updateUser(User user);
+	void deleteUser(String userId);
 }

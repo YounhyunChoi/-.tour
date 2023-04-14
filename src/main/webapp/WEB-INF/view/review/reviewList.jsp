@@ -10,6 +10,87 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
+<script>
+$(() => {
+	$.ajax({
+		url: 'get',
+		dataType: 'json',
+		success: reviews => {
+			let reviewhtml = ''
+			if(reviews.length) {
+				$.each(reviews, (i, review) => {
+					reviewhtml += `<div class='row mx-2 mt-3 shadow-sm border'>
+								<div class='col'>
+					            	<div class='row align-items-center border-bottom'>
+				                		<div class='col-4 fs-6'>후기번호 `
+				                	
+				   	for(i = (review.reviewNum + '').length; i < 4; i++) {
+				   		reviewhtml += `0`
+				   	}
+				                	
+				   	reviewhtml +=            `\${review.reviewNum}</div>
+				                	<div class='col'>\${review.tourName}</div>
+				                	<div class='col-4 text-end'>
+				                    	<a type='button' class='border-0 bg-white' href='view?reviewNum=\${review.reviewNum}'>
+				                        <span class='fs-5'>상세보기</span>
+				                        <i class='bi bi-chevron-right viewDetailBtn'></i>
+				                    	</a>
+				                	</div>
+				            	</div>
+				            	<div class='row mt-2'>`				    
+				    
+				    if(review.reviewImageName) {
+				    	reviewhtml += 	`<div class='col-3 me-4'>
+		                    			<div class='reviewImage'><img src='<c:url value="/attach/\${review.reviewImageName}"/>'/></div>
+			                		</div>`
+				    }
+				                	
+			        reviewhtml +=		`<div class='col ms-2 fs-5 text-left'>
+				                    	<p class='mb-0'>제목 \${review.reviewTitle}</p>
+				                    	<p class='mb-0 d-flex align-items-center'>평점&nbsp`
+	
+					for(let i = 0; i < 5; i++) {
+						if(review.score - i >= 1) {
+							reviewhtml += `<i class='bi bi-star-fill'></i>`
+						} else if(review.score - i == 0.5) {
+							reviewhtml += `<i class='bi bi-star-half'></i>`
+						} else {
+							reviewhtml += `<i class='bi bi-star'></i>`
+						}
+					}
+				    	
+					reviewhtml +=`			</p>
+				    					<p class='mb-0'>\${review.userId}</p>
+				                	</div>
+				            	</div>
+				            	<div class='row'>
+				                	<p class='text-end'>
+				                    	작성일 \${review.reviewDate}
+				                	</p>
+				            	</div>
+				       	 	</div>
+				    	</div>`
+				})
+			} else {
+				reviewhtml += `<div class='col text-center'>
+	                <i class='bi bi-chat-dots'></i>
+	                <h3 class='my-3'>
+	                    작성된 후기가 없습니다.
+	                </h3>
+	            </div>
+	            <div class='col text-center mt-5'>
+		           <a type='button' href='/'
+		               class='px-5 py-2 border-0 rounded btn-darkBlue text-center text-white'>
+		               메인 페이지로 가기
+		           </a>
+		       </div>`
+			}
+			console.log(reviewhtml)
+			$('.container').append(reviewhtml)
+		}
+	})
+})
+</script>
 <title></title>
 <style>
     .page-link {
@@ -21,7 +102,7 @@
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left'></i></div>
+    <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>후기 목록</b></h2>
     </div>
@@ -48,152 +129,6 @@
             </div>
         </div>
     </form> 
-    <div class='row mx-2 mt-3 shadow-sm border'>
-        <div class='col'>
-            <div class='row align-items-center border-bottom'>
-                <div class='col-4 fs-6'>후기번호 0004</div>
-                <div class='col-5 px-0'>서울시티투어 버스</div>
-                <div class='col-3 text-nowrap text-end'>
-                    <button type='button' class='border-0 bg-white' onclick="location.href='05.html'">
-                        <span class='fs-5'>상세보기</span>
-                        <i class='bi bi-chevron-right viewDetailBtn'></i>
-                    </button>
-                </div>
-            </div>
-            <div class='row mt-2'>
-                <div class='col-3 me-4'>
-                    <div class='reviewImage'>후기이미지</div>
-                </div>
-                <div class='col ms-2 fs-5 text-left'>
-                    제목 행복한여행<br>
-                    평점 ★★★★★
-                    <br>java01
-                </div>
-            </div>
-            <div class='row'>
-                <p class='text-end'>
-                    작성일 2023-03-15
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class='row mx-2 mt-3 shadow-sm border'>
-        <div class='col'>
-            <div class='row align-items-center border-bottom'>
-                <div class='col-4 fs-6'>후기번호 0003</div>
-                <div class='col-5 px-0'>서울시티투어 버스</div>
-                <div class='col-3 text-nowrap text-end'>
-                    <button type='button' class='border-0 bg-white' onclick="location.href='04.html'">
-                        <span class='fs-5'>상세보기</span>
-                        <i class='bi bi-chevron-right viewDetailBtn'></i>
-                    </button>
-                </div>
-            </div>
-            <div class='row mt-2'>
-                <div class='col-3 me-4'>
-                    <div class='reviewImage'>후기이미지</div>
-                </div>
-                <div class='col ms-2 fs-5 text-left'>
-                    제목 아쉬웠어요<br>
-                    평점 ★★★☆☆
-                    <br>java04
-                </div>
-            </div>
-            <div class='row'>
-                <p class='text-end'>
-                    작성일 2023-03-15
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class='row mx-2 mt-3 shadow-sm border'>
-        <div class='col'>
-            <div class='row align-items-center border-bottom'>
-                <div class='col-4 fs-6'>후기번호 0002</div>
-                <div class='col-5 px-0'>서울시티투어 버스</div>
-                <div class='col-3 text-nowrap text-end'>
-                    <button type='button' class='border-0 bg-white' onclick="location.href='04.html'">
-                        <span class='fs-5'>상세보기</span>
-                        <i class='bi bi-chevron-right viewDetailBtn'></i>
-                    </button>
-                </div>
-            </div>
-            <div class='row mt-2'>
-                <div class='col-3 me-4'>
-                    <div class='reviewImage'>후기이미지</div>
-                </div>
-                <div class='col ms-2 fs-5 text-left'>
-                    제목 이쁘다<br>
-                    평점 ★★★★★
-                    <br>java02
-                </div>
-            </div>
-            <div class='row'>
-                <p class='text-end'>
-                    작성일 2023-03-15
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class='row mx-2 mt-3 shadow-sm border'>
-        <div class='col'>
-            <div class='row align-items-center border-bottom'>
-                <div class='col-4 fs-6'>후기번호 0001</div>
-                <div class='col-5 px-0'>도심 속 역사와 예술 이야기</div>
-                <div class='col-3 text-nowrap text-end'>
-                    <button type='button' class='border-0 bg-white' onclick="location.href='04.html'">
-                        <span class='fs-5'>상세보기</span>
-                        <i class='bi bi-chevron-right viewDetailBtn'></i>
-                    </button>
-                </div>
-            </div>
-            <div class='row mt-2'>
-                <div class='col-3 me-4'>
-                    <div class='reviewImage'>후기이미지</div>
-                </div>
-                <div class='col ms-2 fs-5 text-left'>
-                    제목 안녕하세요<br>
-                    평점 ★★★★★
-                    <br>java03
-                </div>
-            </div>
-            <div class='row'>
-                <p class='text-end'>
-                    작성일 2023-03-15
-                </p>
-            </div>
-        </div>
-    </div>
-    <nav aria-label='Page navigation example'>
-        <ul class='pagination d-flex justify-content-center mt-4' id='indexNum'>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Previous'>
-                    <span aria-hidden='true'>&laquo;</span>
-                </a>
-            </li>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Previous'>
-                    <span aria-hidden='true'>&lsaquo;</span>
-                </a>
-            </li>
-            <li class='page-item'><a class='page-link' href='#'>1</a></li>
-            <li class='page-item'><a class='page-link' href='#'>2</a></li>
-            <li class='page-item'><a class='page-link' href='#'>3</a></li>
-            <li class='page-item'><a class='page-link' href='#'>4</a></li>
-            <li class='page-item'><a class='page-link' href='#'>5</a></li>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Next'>
-                    <span aria-hidden='true'>&rsaquo;</span>
-                </a>
-            </li>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Next'>
-                    <span aria-hidden='true'>&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
 </div>
 <footer>
 </footer>

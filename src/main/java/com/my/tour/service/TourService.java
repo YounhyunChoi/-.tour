@@ -18,5 +18,5 @@ public interface TourService {
 	void delTour(int tourNum);
 	List<TourImage> getTourImages(int tourNum);
 	int addTourImage(String tourImageName, int tourNum);
-	int delTourImage(int tourNum);
+	void delTourImage(int tourNum);
 }

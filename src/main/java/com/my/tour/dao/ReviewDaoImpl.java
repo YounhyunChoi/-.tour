@@ -12,15 +12,15 @@ import com.my.tour.domain.ReviewDto;
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
 	@Autowired private ReviewMap reviewMap;
-	
-	@Override
-	public List<Review> selectReviews() {
-		return reviewMap.selectReviews();
-	}
 
 	@Override
 	public List<Review> selectReviews(int resvNum) {
 		return reviewMap.selectReviews(resvNum);
+	}
+	
+	@Override
+	public List<ReviewDto> selectReviewDtos() {
+		return reviewMap.selectReviewDtos();
 	}
 	
 	@Override
@@ -39,18 +39,18 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	
 	@Override
-	public int insertReview(String reviewTitle, String reviewContent, double score,
+	public void insertReview(String reviewTitle, String reviewContent, double score,
 							String userId, int tourNum, int resvNum) {
-		return reviewMap.insertReview(reviewTitle, reviewContent, score, userId, tourNum, resvNum);
+		reviewMap.insertReview(reviewTitle, reviewContent, score, userId, tourNum, resvNum);
 	}
 	
 	@Override
-	public int updateReview(String reviewTitle, String reviewContent, double score) {
-		return reviewMap.updateReview(reviewTitle, reviewContent, score);
+	public void updateReview(Review reivew) {
+		reviewMap.updateReview(reivew);
 	}
 	
 	@Override
-	public int deleteReview(int reviewNum) {
-		return reviewMap.deleteReview(reviewNum);
+	public void deleteReview(int reviewNum) {
+		reviewMap.deleteReview(reviewNum);
 	}
 }

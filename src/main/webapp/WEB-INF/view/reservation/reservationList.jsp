@@ -28,7 +28,7 @@ $.ajax({
 				            <div class='row align-items-center'>	
 				                <div class='col-8 fs-6 tourDate'>여행기간: \${reservationDto.tourSDate} ~ \${reservationDto.tourEDate}</div>
 				                <div class='col-4 text-end'>
-				                    <button type='button' id=tourViewBtn\${reservationDto.tourNum} class='border-0 bg-white'>
+				                    <button type='button' id=tourViewBtn\${reservationDto.resvNum} class='border-0 bg-white'>
 				                        <span class='fs-5'>상세보기</span>
 				                        <i class='bi bi-chevron-right viewDetailBtn'></i>
 				                    </button>
@@ -46,7 +46,7 @@ $.ajax({
 				                    </div>
 				                </div>
 				                <div class='col-5 fs-5'><b>\${reservationDto.tourName}</b></div>
-				                <div id='resvBtnContainer\${reservationDto.tourNum}' class='col-3 d-flex align-self-end justify-content-center'
+				                <div id='resvBtnContainer\${reservationDto.resvNum}' class='col-3 d-flex align-self-end justify-content-center'
 				                	 whetherToCancel=\${reservationDto.whetherToCancel}>									                   
 				                </div>
 				            </div>
@@ -62,14 +62,14 @@ $.ajax({
 				}
 			
 				$.each(reservationDtos, (i, reservationDto) => {
-					if($(`#resvBtnContainer\${reservationDto.tourNum}`).attr('whetherToCancel') == 'Y'){
-						$(`#resvBtnContainer\${reservationDto.tourNum}`).html(
+					if($(`#resvBtnContainer\${reservationDto.resvNum}`).attr('whetherToCancel') == 'Y'){
+						$(`#resvBtnContainer\${reservationDto.resvNum}`).html(
 							`<span
 	                        class=' text-danger text-center'>취소됨</span>`
 	                        )
 					}else if(presentDate.getTime() > new Date(reservationDto.tourEDate).getTime()){						
-						$(`#resvBtnContainer\${reservationDto.tourNum}`).html(
-								`<button type='button' id='reviewAddBtn\${reservationDto.tourNum}'
+						$(`#resvBtnContainer\${reservationDto.resvNum}`).html(
+								`<button type='button' id='reviewAddBtn\${reservationDto.resvNum}'
 		                        class='border border-0 rounded text-white reviewAddBtn'>후기등록</button>`
 		                        )
 							}
@@ -81,15 +81,16 @@ $.ajax({
 						},
 						success: reviews => {
 							if(reviews.length){
-								$(`#resvBtnContainer\${reservationDto.tourNum}`).empty()
-								$(`#resvBtnContainer\${reservationDto.tourNum}`).html(
-									`<span class='text-center'>후기작성완료</span>
-			                        ` )
+								$(`#resvBtnContainer\${reservationDto.resvNum}`).empty()
+								$(`#resvBtnContainer\${reservationDto.resvNum}`).html(
+									`<span class='text-center'>후기작성완료</span>`)
 							}
 						}
 					})	
-					$(`#reviewAddBtn\${reservationDto.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${reservationDto.tourNum}&resvNum=\${reservationDto.resvNum}`})
-					$(`#tourViewBtn\${reservationDto.tourNum}`).click(() => {location.href=`../tour/view?tourNum=\${reservationDto.tourNum}`})
+					$(`#reviewAddBtn\${reservationDto.resvNum}`).click(() => {
+						location.href=`../review/add?tourNum=\${reservationDto.tourNum}&resvNum=\${reservationDto.resvNum}`})
+					$(`#tourViewBtn\${reservationDto.resvNum}`).click(() => {
+						location.href=`../tour/view?tourNum=\${reservationDto.tourNum}`})
 				})			
 		}else {
 			$('#reservationContainer').html(`
@@ -138,7 +139,7 @@ $.ajax({
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' onclick="location.href='../user/mypage.html'"></i></div>
+    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn' onclick="location.href='../user/mypage.html'"></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>예약내역</b></h2>
     </div>

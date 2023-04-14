@@ -81,6 +81,34 @@ $(() => {
 			$('#noticeList').append(html)
 		}
 	})
+	
+	$.ajax({
+		url: '../event/get',
+		method: 'get',
+		dataType: 'json',
+		success: events => {
+			let html = ''
+			if(events.length) {
+				$.each(events, (i, event) => {
+					if(i < 3) {
+						html += `
+							<li value='\${event.eventNum}'>
+	                            <a href='../event/fixEvent?eventNum=\${event.eventNum}'>
+	                            	\${event.eventTitle}
+	                            </a>
+	                            <p></p>
+	                            <p>작성일 \${event.eventDate}</p>
+	                            <hr>
+	                        </li>`
+					}
+				})
+			} else {
+				html += `<li>이벤트가 없습니다.</li>`
+			}
+			
+			$('#eventList').append(html)
+		}
+	})
 })
 </script>
 <title>관리자메인</title>
@@ -216,7 +244,6 @@ $(() => {
                 <div class='col noticeList'>
                     <div class='border border-dark rounded-3 pt-3 adminBody'>
                         <ol id='eventList'><h5 class='pb-2'><b>이벤트</b></h5>
-                        	<li>이벤트가 없습니다.</li>
                         </ol>
                     </div>
                 </div>

@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta charset='utf-8'>
@@ -14,6 +15,69 @@
 $(() => {
 	$('header').html($('header').html().replaceAll('../', ''))
 	$('footer').html($('footer').html().replaceAll('../', ''))
+	
+	$.ajax({
+		url: 'notice/get',
+		dataType: 'json',
+		success: notices => {
+			if(notices.length) {
+				$('#noticeBar').html('<h4 class="mt-3">' + notices.at(0).noticeTitle + '</h4>')
+				$('#noticeBar').attr('href', 'notice/view?noticeNum=' + notices.at(0).noticeNum)
+			} else {
+				$('#noticeBar').html('<h4 class="text-center">공지사항</h4>')
+			}
+			
+		}
+	})
+	
+	$.ajax({
+		url: 'event/get',
+		dataType: 'json',
+		success: events => {
+			if(events.length) {
+				$.ajax({
+					url: 'event/getEventImage',
+					data: {
+						eventNum: events.at(0).eventNum
+					},
+					dataType: 'json',
+					success: eventImage => {
+						$('#eventImg div').html(`<img src='<c:url value="/attach/\${eventImage.at(0)}"/>'/>`)
+						$('#eventImg').click(() => {
+							$(location).attr('href', 'event/view?eventNum=' + events.at(0).eventNum)
+						})
+					}
+				})
+			} else {
+				$('#eventImg div').html('이벤트이미지')
+			}
+			
+		}
+	})
+	
+	$.ajax({
+		url: 'tour/get',
+		dataType: 'json',
+		success: tours => {
+			if(tours.length) {
+				$.ajax({
+					url: 'tour/getTourImages',
+					data: {
+						tourNum: tours.at(0).tourNum
+					},
+					dataType: 'json',
+					success: tourImage => {
+						$('#tourImg div').html(`<img src='<c:url value="/attach/\${tourImage.at(0)}"/>'/>`)
+						$('#tourImg').click(() => {
+							$(location).attr('href', 'tour/view?tourNum=' + tours.at(0).tourNum)
+						})
+					}
+				})
+			} else {
+				$('#tourImg div').html('여행코스이미지')
+			}
+		}
+	})
 })
 </script>
 <title>메인</title>
@@ -50,60 +114,20 @@ $(() => {
 <header></header>
 <div class='row m-0 bg-danger'>
     <div class='col pt-1'>
-        <p><a href='../notice' id='noticeBar'><h4 class='text-center'>공지사항</h4></a></p>
+        <p><a id='noticeBar' class='text-center'></a></p>
     </div>
 </div>
 <div class='row m-0'>
     <div class='col'>
         <div class='row py-5 mt-4' id='eventImg'>
-            <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
-                <div class='carousel-inner'>
-                    <div class='carousel-item active'>
-                    	<div class='items py-5 fs-4'>이벤트이미지</div>
-                    </div>
-                    <div class='carousel-item'>
-                        <div class='items py-5 fs-4'>이벤트이미지</div>
-                    </div>
-                    <div class='carousel-item'>
-                        <div class='items py-5 fs-4'>이벤트이미지</div>
-                    </div>
-                </div>
-                <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
-                    <i class="bi bi-chevron-left tourCarouselBtn"></i>
-                    <div class="visually-hidden">Previous</div>
-                </a>
-                <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
-                    <i class="bi bi-chevron-right tourCarouselBtn"></i>
-                    <div class="visually-hidden">Next</div>
-                </a>
-            </div>
+        	<div class='py-5 fs-4'>이벤트이미지</div>
         </div>
     </div>
 </div>
 <div class='row m-0'>
     <div class='col'>
         <div class='row mt-4' id='tourImg'>
-            <div class='carousel slide' id='tourCarousel2' data-ride='carousel'>
-                <div class='carousel-inner'>
-                    <div class='carousel-item active'>
-                        <div class='items py-5 fs-4'>여행코스이미지</div>
-                    </div>
-                    <div class='carousel-item'>
-                        <div class='items py-5 fs-4' >여행코스이미지</div>
-                    </div>
-                    <div class='carousel-item'>
-                        <div class='items py-5 fs-4'>여행코스이미지</div>
-                    </div>
-                </div>
-                <a href='#tourCarousel2' class='carousel-control-prev' data-bs-slide='prev'>
-                    <i class="bi bi-chevron-left tourCarouselBtn"></i>
-                    <div class="visually-hidden">Previous</div>
-                </a>
-                <a href='#tourCarousel2' class='carousel-control-next' data-bs-slide='next'>
-                    <i class="bi bi-chevron-right tourCarouselBtn"></i>
-                    <div class="visually-hidden">Next</div>
-                </a>
-            </div>
+        	<div class='py-5 fs-4'>여행코스이미지</div>
         </div>
     </div>
 </div>

@@ -39,18 +39,18 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	
 	@Override
-	public int insertReview(String reviewTitle, String reviewContent, double score,
+	public void insertReview(String reviewTitle, String reviewContent, double score,
 							String userId, int tourNum, int resvNum) {
-		return reviewMap.insertReview(reviewTitle, reviewContent, score, userId, tourNum, resvNum);
+		reviewMap.insertReview(reviewTitle, reviewContent, score, userId, tourNum, resvNum);
 	}
 	
 	@Override
-	public int updateReview(String reviewTitle, String reviewContent, double score) {
-		return reviewMap.updateReview(reviewTitle, reviewContent, score);
+	public void updateReview(String reviewTitle, String reviewContent, double score) {
+		reviewMap.updateReview(reviewTitle, reviewContent, score);
 	}
 	
 	@Override
-	public int deleteReview(int reviewNum) {
-		return reviewMap.deleteReview(reviewNum);
+	public void deleteReview(int reviewNum) {
+		reviewMap.deleteReview(reviewNum);
 	}
 }

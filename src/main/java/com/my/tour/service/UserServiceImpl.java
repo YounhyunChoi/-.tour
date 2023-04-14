@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public int addUser(User user) {
-		return userDao.insertUser(user);
+	public void addUser(User user) {
+		userDao.insertUser(user);
 	}
 
 	@Override
@@ -57,13 +57,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int fixUser(User user) {
-		return userDao.updateUser(user);
+	public void fixUser(User user) {
+		userDao.updateUser(user);
 	}
 
 	@Override
-	public int deleteUser(String userId) {
-		return userDao.deleteUser(userId);
+	public void deleteUser(String userId) {
+		userDao.deleteUser(userId);
 	}
 	
 	@Override
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int addLogo(String logoName) {
-		return logoDao.insertLogo(logoName);
+	public void addLogo(String logoName) {
+		logoDao.insertLogo(logoName);
 	}
 }

@@ -11,8 +11,8 @@ public interface TourDao {
 	List<Tour> selectAllTours();
 	List<Tour> selectTour(int tourNum);
 	List<TourDto> selectTourList();
-	int insertTourTemp(int tourTempNum, String adminId);
-	int insertTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate, int tourPrice,int discountPrice, String adminId);
-	int updateTour(Tour tour);
-	int deleteTour(int tourNum);
+	void insertTourTemp(int tourTempNum, String adminId);
+	void insertTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate, int tourPrice,int discountPrice, String adminId);
+	void updateTour(Tour tour);
+	void deleteTour(int tourNum);
 }

@@ -134,12 +134,12 @@ public class ReviewController {
 	}
 	
 	@PutMapping("fix")
-	public int fixReview(String reviewTitle, String reviewContent, int score) {
-		return reviewService.fixReview(reviewTitle, reviewContent, score);
+	public void fixReview(String reviewTitle, String reviewContent, int score) {
+		reviewService.fixReview(reviewTitle, reviewContent, score);
 	}
 	
 	@DeleteMapping("del")
-	public int delReview(int reviewNum) {
-		return reviewService.delReview(reviewNum);
+	public void delReview(int reviewNum) {
+		reviewService.delReview(reviewNum);
 	}
 }

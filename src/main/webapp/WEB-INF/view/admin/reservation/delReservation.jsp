@@ -11,6 +11,7 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script src='../../res/modal.js'></script>
+<title>예약조회</title>
 <script>
 let changeAttr = function(component, text, removeClass, addClass, attrName, attrValue){
 	component.text(text)
@@ -88,7 +89,6 @@ $.ajax({
 	
 })
 </script>
-<title>예약조회</title>
 <style>
 .btn-lightGray {
 	color: #fff !important;

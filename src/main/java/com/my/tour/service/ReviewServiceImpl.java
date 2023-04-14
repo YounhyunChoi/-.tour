@@ -63,28 +63,28 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
-	public int addReview(String reviewTitle, String reviewContent, double score,
+	public void addReview(String reviewTitle, String reviewContent, double score,
 						String userId, int tourNum, int resvNum) {
-		return reviewDao.insertReview(reviewTitle, reviewContent, score, userId, tourNum, resvNum);
+		reviewDao.insertReview(reviewTitle, reviewContent, score, userId, tourNum, resvNum);
 	}
 
 	@Override
-	public int addReviewImage(String reviewImageName, int reviewNum) {
-		return reviewImageDao.insertReviewImage(reviewImageName, reviewNum);
+	public void addReviewImage(String reviewImageName, int reviewNum) {
+		reviewImageDao.insertReviewImage(reviewImageName, reviewNum);
 	}
 	
 	@Override
-	public int delReviewImage(int reviewNum) {
-		return reviewImageDao.deleteReviewImage(reviewNum);
+	public void delReviewImage(int reviewNum) {
+		reviewImageDao.deleteReviewImage(reviewNum);
 	}
 	
 	@Override
-	public int fixReview(String reviewTitle, String reviewContent, double score) {
-		return reviewDao.updateReview(reviewTitle, reviewContent, score);
+	public void fixReview(String reviewTitle, String reviewContent, double score) {
+		reviewDao.updateReview(reviewTitle, reviewContent, score);
 	}
 	
 	@Override
-	public int delReview(int reviewNum) {
-		return reviewDao.deleteReview(reviewNum);
+	public void delReview(int reviewNum) {
+		reviewDao.deleteReview(reviewNum);
 	}
 }

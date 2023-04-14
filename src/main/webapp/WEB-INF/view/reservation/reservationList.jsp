@@ -83,13 +83,14 @@ $.ajax({
 							if(reviews.length){
 								$(`#resvBtnContainer\${reservationDto.tourNum}`).empty()
 								$(`#resvBtnContainer\${reservationDto.tourNum}`).html(
-									`<span class='text-center'>후기작성완료</span>
-			                        ` )
+									`<span class='text-center'>후기작성완료</span>`)
 							}
 						}
 					})	
-					$(`#reviewAddBtn\${reservationDto.tourNum}`).click(() => {location.href=`../review/add?tourNum=\${reservationDto.tourNum}&resvNum=\${reservationDto.resvNum}`})
-					$(`#tourViewBtn\${reservationDto.tourNum}`).click(() => {location.href=`../tour/view?tourNum=\${reservationDto.tourNum}`})
+					$(`#reviewAddBtn\${reservationDto.tourNum}`).click(() => {
+						location.href=`../review/add?tourNum=\${reservationDto.tourNum}&resvNum=\${reservationDto.resvNum}`})
+					$(`#tourViewBtn\${reservationDto.tourNum}`).click(() => {
+						location.href=`../tour/view?tourNum=\${reservationDto.tourNum}`})
 				})			
 		}else {
 			$('#reservationContainer').html(`

@@ -6,6 +6,6 @@ import com.my.tour.domain.ReviewImage;
 
 public interface ReviewImageDao {
 	List<ReviewImage> selectReviewImages(int reviewNum);
-	int insertReviewImage(String reviewImageName, int reviewNum);
-	int deleteReviewImage(int reviewNum);
+	void insertReviewImage(String reviewImageName, int reviewNum);
+	void deleteReviewImage(int reviewNum);
 }

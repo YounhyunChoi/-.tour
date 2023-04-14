@@ -11,8 +11,8 @@ public interface ReviewDao {
 	List<Review> selectReview(int reviewNum);
 	List<ReviewDto> selectMyReviews(String userId);
 	List<ReviewDto> selectMyReview(String userId, int tourNum);
-	int insertReview(String reviewTitle, String reviewContent, double score,
+	void insertReview(String reviewTitle, String reviewContent, double score,
 					String userId, int tourNum, int resvNum);
-	int updateReview(String reviewTitle, String reviewContent, double score);
-	int deleteReview(int reviewNum);
+	void updateReview(String reviewTitle, String reviewContent, double score);
+	void deleteReview(int reviewNum);
 }

@@ -23,7 +23,7 @@ public class TourImageDaoImpl implements TourImageDao {
 	}
 
 	@Override
-	public int deleteTourImage(int tourNum) {
-		return tourImageMap.deleteTourImage(tourNum);
+	public void deleteTourImage(int tourNum) {
+		tourImageMap.deleteTourImage(tourNum);
 	}
 }

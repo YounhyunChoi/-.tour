@@ -23,6 +23,7 @@ $.ajax({
 		})
 	}	
 })
+
 $(() => {
 $('#faqFixBtn').click(() => {
 		let questionRegExp = /[가-힣ㄱ-ㅎa-zA-Z0-9\s]{5,30}/

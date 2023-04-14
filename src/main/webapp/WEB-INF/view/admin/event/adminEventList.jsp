@@ -47,9 +47,7 @@ $(() => {
 })
 </script>
 <title>이벤트목록</title>
-<style>
-
-</style>
+<style></style>
 </head>
 <body>
 <header>
@@ -129,7 +127,6 @@ $(() => {
         </div>
    </div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

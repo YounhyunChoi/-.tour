@@ -137,7 +137,7 @@ public class NoticeController {
 					noticeService.addNoticeImage(filename, noticeNum);
 				}
 			}
-		return true;
+			return true;
 		}
 	}
 

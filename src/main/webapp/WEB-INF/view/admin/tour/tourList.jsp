@@ -22,9 +22,11 @@ function tourList() {
 			if(tours.length) {
 				$.each(tours, (i, tour) => {
 					tourArr.push(
-						`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-							<img src='<c:url value="/attach/` + tour.tourImageName + `"/>'style="max-width:90%; height:90%;"/>
-			                <div>\${tour.tourName}</div>
+						`<div class='col-3 p-1 d-flex-column tourText pb-4' id='tourItem\${tour.tourNum}'>
+							<div class='mt-2'>
+								<img class='rounded-1 shadow-sm' src='<c:url value="/attach/` + tour.tourImageName + `"/>'style="max-width:90%; height:90%;"/>
+							</div>
+			                <div class='text-truncate align-middle pt-2'>\${tour.tourName}</div>
 			            </div>`
 					)
 				})
@@ -91,9 +93,18 @@ $(() => {
 <title>상품목록</title>
 <style>
     [id*='tourItem'] {
-        border: .1rem solid;
+        border: .1rem solid lightgray;
+        border-radius: .2rem;
         margin: 1rem;
-        box-shadow: .1rem .1rem .1rem .1rem lightgray;
+        height: 14rem;
+        box-shadow: .1rem .1rem .1rem 0 lightgray;
+    }
+
+    .tourImg {
+        height: 13rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .tourText {

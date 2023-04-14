@@ -96,10 +96,6 @@ $(() => {
         text-align: center;
     }
     
-    #tourImg{
-        padding: 10rem 0 10rem 0;
-    }
-    
     .tourCarouselBtn {
         color: black;
     }
@@ -114,14 +110,14 @@ $(() => {
 </div>
 <div class='row m-0'>
     <div class='col'>
-        <div class='row py-1 mt-4' id='eventImg'>
+        <div class='row py-2 mt-4' id='eventImg'>
         	<div class='py-1 fs-4'>이벤트이미지</div>
         </div>
     </div>
 </div>
 <div class='row m-0'>
     <div class='col'>
-        <div class='row mt-4' id='tourImg'>
+        <div class='row mt-4 py-2' id='tourImg'>
         	<div class='py-1 fs-4'>여행코스이미지</div>
         </div>
     </div>

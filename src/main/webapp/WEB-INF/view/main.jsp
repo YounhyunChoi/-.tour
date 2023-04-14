@@ -89,10 +89,6 @@ $(() => {
         color:white
     }
     
-    #navBackBtn {
-        cursor: pointer;
-    }
-    
     #tourImg, #eventImg {
         border: .1rem solid;
         margin: 1rem;

@@ -11,9 +11,9 @@
 		insert into faqs(faq_Question, faq_answer, admin_id)
 		values (#{faqQuestion}, #{faqAnswer}, #{adminId})
 	</insert>
+	
 	<delete id='deleteFaq'>
 		delete faqs
 		where faq_Question = #{paramFaqQuestion}
 	</delete>
-	
 </mapper>

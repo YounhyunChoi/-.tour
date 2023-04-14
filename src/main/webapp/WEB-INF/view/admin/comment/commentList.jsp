@@ -12,7 +12,7 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script>
-$(() => {	
+function commentList() {	
 	$.ajax({
 		url: 'get',
 		success: commentList => {
@@ -37,6 +37,29 @@ $(() => {
 				$('#comments').append(`<tr><td colspan='5' class='text-center'>댓글이 없습니다.</td></tr>`)
 			}
 					
+		}
+	})
+}
+
+$(() => {
+	commentList()
+	
+	$('#searchBtn').click(() => {
+		if($('#comtSearch').val()) {
+			$.ajax({
+				url: 'get',
+				success: comments => {
+					if(comments.length) {
+						$('#mainBody').empty()
+						
+						$.each(comments, (i, comment) => {
+							const comtSearchArr = []
+							
+							if((comment.comt))
+						}) 
+					}
+				}
+			})
 		}
 	})
 })
@@ -98,12 +121,12 @@ $(() => {
             </select>
         </div>
         <div class='col-8 pt-2'>
-            <input type='text' class='form-control'/>
+            <input type='text' class='form-control' id='comtSearch'/>
         </div>
         <div class='col-2'>
             <form>
                 <div>
-                    <a type='button' class='btn w-auto'>
+                    <a type='button' class='btn w-auto' id='searchBtn'>
                         <i class="icon bi bi-search"></i>
                     </a>
                 </div>

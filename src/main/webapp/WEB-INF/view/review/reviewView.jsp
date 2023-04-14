@@ -67,7 +67,8 @@ $(() => {
                                   
                if('${userId}' == comment.userId) {
                   commenthtml += `<ul class='dropdown-menu commentMenu p-0 border-olive'>
-                                 <li><a class='dropdown-item btn border-olive' href="../comment/fix?comtNum=\${comment.comtNum}">수정</a></li>
+                                 <li><a class='dropdown-item btn border-olive' 
+                                 href="../comment/fix?comtNum=\${comment.comtNum}&reviewNum=${review.reviewNum}">수정</a></li>
                               </ul>`
                } else {
                   commenthtml += `<ul class='dropdown-menu commentMenu p-0 border-lightRed'>
@@ -92,7 +93,6 @@ $(() => {
                           </div>
                       </div>
                   </div>`
-				console.log(commenthtml)
                $(commenthtml).insertBefore('footer')
             })
          }

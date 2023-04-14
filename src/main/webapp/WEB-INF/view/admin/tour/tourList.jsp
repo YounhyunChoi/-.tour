@@ -61,7 +61,7 @@ $(() => {
 							if((tour.tourName).includes($('#tourSearch').val())) {
 								tourSearchArr.push(
 									`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
-										<img src='<c:url value="/attach/` + tour.tourImageName + `"/>'style="max-width:100%; height:100%;"/>
+										<img src='<c:url value="/attach/` + tour.tourImageName + `"/>'style="max-width:90%; height:90%;"/>
 						                <div class='text-truncate'>\${tour.tourName}</div>
 						            </div>`
 								)

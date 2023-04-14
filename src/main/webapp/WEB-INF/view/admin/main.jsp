@@ -65,7 +65,7 @@ $(() => {
 					if(i < 3) {
 						html += `
 							<li value='\${notice.noticeNum}'>
-	                            <a href='../notice/fixNotice?noticeNum=\${notice.noticeNum}'>
+	                            <a href='../notice/fix?noticeNum=\${notice.noticeNum}'>
 	                            	\${notice.noticeTitle}
 	                            </a>
 	                            <p></p>

@@ -107,7 +107,7 @@ $(() => {
 	})
 	//notice삭제
 	$('#delNoticeBtn').click(() => {
-		showConfirmModal('공지사항을 삭제하시겠습니까?')
+		showConfirmModal('공지사항을 삭제하시겠습니까?', 'adminList')
 		
 		$('#okBtn').click(() => {
 			$.ajax({
@@ -115,9 +115,6 @@ $(() => {
 				method: 'delete',
 				data: {
 					noticeNum: `${param.noticeNum}`
-				},
-				success: () => {
-					$(location).attr('href', 'adminList')
 				}
 			})
 		})

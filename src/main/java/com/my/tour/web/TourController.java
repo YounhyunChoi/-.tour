@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.my.tour.domain.ReviewDto;
 import com.my.tour.domain.Tour;
 import com.my.tour.domain.TourDto;
 import com.my.tour.domain.TourImage;
@@ -49,6 +50,16 @@ public class TourController {
 		}
 		
 		return tourList;
+	}
+	
+	@GetMapping("getReviews")
+	@GetAccess
+	public List<ReviewDto> getReviews(HttpServletRequest request) {
+		List<ReviewDto> reviewList = tourService.getReviewDto();
+		for(ReviewDto reviewDto: reviewList) {
+			reviewDto.setReviewImageName(tourService.getReviewImages(reviewDto.getReviewNum()).get(0).getReviewImageName());
+		}
+		return reviewList;
 	}
 	
 	@GetMapping

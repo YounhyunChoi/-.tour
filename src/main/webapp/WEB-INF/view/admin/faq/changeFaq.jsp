@@ -36,8 +36,8 @@ $('#faqFixBtn').click(() => {
 	    			newFaqQuestion: $('#questionInput').val(),
 	    			newFaqAnswer: $('#answerInput').val()
 	    		}
-	    	})
-	    	showOkModal('FAQ가 수정되었습니다.','adminList')
+	    	})    
+	    	location.href='adminList'
 	    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
 	    	showOkModal('제목과 내용을 입력해주세요.')
 	    } else if(!$('#answerInput').val()){
@@ -48,7 +48,7 @@ $('#faqFixBtn').click(() => {
 })
 	
 $('#faqDelBtn').click(() => {
-      showConfirmModal('FAQ를 삭제하시겠습니까?', 'FAQ가 삭제되었습니다.', 'adminList')
+		showConfirmModal('FAQ를 삭제하시겠습니까?', 'adminList')
       $('#okBtn').click(() => {
       	$.ajax({
       		url: 'del',

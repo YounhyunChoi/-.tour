@@ -7,14 +7,14 @@ $(() => {
     })
 })
 
-function showConfirmModal(confirmMsg, okMsg, url) {
+function showConfirmModal(confirmMsg,url) {
    	$('#modalMsg').text(confirmMsg)
    	$('#modalBtn').show()
    	$('#modalOk').hide()
-   	$('#okBtn').click(() => showOkModal(okMsg, url))
+   	$('#okBtn').click(() => location.href=url)
    	$('#modal').modal('show')
 }
- 
+
 function showOkModal(okMsg, url) {
    	$('#modalMsg').text(okMsg)
    	$('#modalBtn').hide()

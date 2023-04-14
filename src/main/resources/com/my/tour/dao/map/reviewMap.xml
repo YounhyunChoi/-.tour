@@ -56,7 +56,7 @@
 	
 	<update id='updateReview'>
 		update reviews
-		set review_title = #{reviewTitle}, review_content = #{reviewContent}, score = #{Score}
+		set review_title = #{reviewTitle}, review_content = #{reviewContent}, score = #{score}
 		where review_num = #{reviewNum}
 	</update>	
 	

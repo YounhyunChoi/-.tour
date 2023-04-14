@@ -24,7 +24,7 @@
         				reviewNum: ${param.reviewNum}
         			}
         		})
-        		$('#addComment').attr('href', '../review/get')
+        		$('#addComment').attr('href', '../review/view?reviewNum=${param.reviewNum}')
     		} else {
     			showOkModal('댓글을 입력해주세요.')
     		}
@@ -46,7 +46,7 @@
 <div class='row'>
     <div class='col mt-5'>
         <div class='p-2 border border-secondary shadow-sm rounded-3' id='one'>
-            <h3>java01</h3>
+            <h3>${userId}</h3>
             <hr>
             <textarea class='form-control' id='comtContent' maxlength='100'></textarea>
             <span class='mt-2 d-flex justify-content-end'>

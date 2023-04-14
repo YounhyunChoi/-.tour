@@ -20,6 +20,84 @@ $(() => {
 	}
 	
 	$('#reviewNum').text('후기번호 ' + reviewNum + ${review.reviewNum})
+	
+	let scorehtml = '평점 '
+	
+	for(let i = 0; i < 5; i++) {
+		if(${review.score} - i >= 1) {
+			scorehtml += `<i class='bi bi-star-fill'></i>`
+		} else if(${review.score} - i == 0.5) {
+			scorehtml += `<i class='bi bi-star-half'></i>`
+		} else {
+			scorehtml += `<i class='bi bi-star'></i>`
+		}
+	}
+	
+	$('#score').html(scorehtml)
+	
+	$.ajax({
+      url: 'getComments',
+      method: 'get',
+      data: {
+         reviewNum: ${param.reviewNum}
+      },
+      success: comments => {
+         if(comments.length) {
+            $.each(comments, (i, comment) => {
+               let commenthtml = `
+                  <div class='container px-4 mt-4 shadow-sm'>
+                      <div class='row border-bottom align-items-center border rounded-top'>
+                          <div class='col-3'>
+                              <div class='fs-3'>\${comment.userId}</div>
+                          </div>
+                          <div class='col-4'>
+                              <div class='fs-6'>댓글번호 `
+               for(let i = comment.comtNum; i < 4; i++) {
+                  commenthtml += '0'
+               }               
+               commenthtml +=   `\${comment.comtNum}
+               				</div>
+                          </div>
+                          <div class='col'>
+                              <div class='dropdown float-end'>
+                                  <a class='btn' type='button' 
+                                  data-bs-toggle='dropdown' aria-expanded='false'>
+                                      <i class='bi bi-three-dots-vertical justify-content-end'></i>
+                                  </a>`
+                                  
+               if('${userId}' == comment.userId) {
+                  commenthtml += `<ul class='dropdown-menu commentMenu p-0 border-olive'>
+                                 <li><a class='dropdown-item btn border-olive' href="../comment/fix?comtNum=\${comment.comtNum}">수정</a></li>
+                              </ul>`
+               } else {
+                  commenthtml += `<ul class='dropdown-menu commentMenu p-0 border-lightRed'>
+                                 <li class='border-bottom'><a class='dropdown-item btn'>신고</a></li>
+                              </ul>`
+               }
+                  commenthtml += `</div>
+                          </div>
+                      </div>
+                      <div class='row border-start border-end'>
+                          <div class='col'>
+                              <div class='fs-6'>
+                                  \${comment.comtContent}
+                              </div>
+                          </div>
+                      </div>
+                      <div class='row border-start border-end rounded-bottom'>
+                          <div class='col'>
+                              <div class='fs-6 text-end'>
+                                  \${comment.comtDate}
+                              </div>
+                          </div>
+                      </div>
+                  </div>`
+				console.log(commenthtml)
+               $(commenthtml).insertBefore('footer')
+            })
+         }
+      }
+   })
 })
 </script>
 <title></title>
@@ -41,7 +119,7 @@ $(() => {
             <div class='row align-items-center border-bottom'>
                 <div class='col-4 fs-6' id='reviewNum'>
 				</div>
-                <div class='col fs-4'>${review.reviewTitle}</div>
+                <div class='col fs-4'>${review.tourName}</div>
             </div>
             <div class='row mt-2'>
             	<c:if test='${reviewImageName != null}'>
@@ -51,20 +129,21 @@ $(() => {
 	                    </div>
 	                </div>
             	</c:if>
-                
                 <div class='col ms-2 fs-5 text-left'>
-                    제목 행복한여행<br>
-                    평점 ★★★★★<br>
-                    java01
+                    ${review.reviewTitle}<br>
+                    <p class='mb-0' id='score'>
+                    
+                    </p>
+                    ${review.userId}
                 </div>
             </div>
             <div class='row'>
                 <p class='text-end'>
-                    작성일 2023-03-15
+                    작성일 ${review.reviewDate}
                 </p>
             </div>
             <div class='row fs-5 px-3 pb-2'>
-                가족들이랑 함께 다녀왔는데 직원들도 친절하고 식사도 맛있어서 좋았어요.
+                ${review.reviewContent}
             </div>
         </div>
     </div>
@@ -72,68 +151,25 @@ $(() => {
 <div class='container mt-4'>
     <div class='row justify-content-end'>
         <div class='col-3'>
-            <a href='../comment/01.html' type='button' class='btn btn-darkBlue form-control'>
+            <a href='../comment/add?reviewNum=${param.reviewNum}' type='button' class='btn btn-darkBlue form-control'>
                 <span>댓글쓰기</span>
             </a>
         </div>
         <div class='col-3'>
-            <a href='../review/06.html' type='button' class='btn btn-olive form-control'>
-                <span>수정하기</span>
-            </a>
+	        <c:if test='${review.userId == userId}'>
+	            <a href='fix?reviewNum=${param.reviewNum}' type='button' class='btn btn-olive form-control'>
+	                <span>수정하기</span>
+	            </a>
+	        </c:if>
+	        <c:if test='${review.userId != userId}'>
+	            <a type='button' class='btn btn-lightRed form-control'>
+	                <span>신고하기</span>
+	            </a>
+	        </c:if>
         </div>
     </div>
 </div>
-<div class='container px-4 mt-4 shadow-sm'>
-    <div class='row border-bottom align-items-center border rounded-top'>
-        <div class='col-3'>
-            <div class='fs-3'>java02</div>
-        </div>
-        <div class='col-4'>
-            <div class='fs-6'>댓글번호 0001</div>
-        </div>
-        <div class='col'>
-            <div class='dropdown float-end'>
-                <a class='btn' type='button' 
-                data-bs-toggle='dropdown' aria-expanded='false'>
-                    <i class='bi bi-three-dots-vertical justify-content-end'></i>
-                </a>
-                <ul class='dropdown-menu commentMenu p-0 border-lightRed'>
-                    <li class='border-bottom'><a class='dropdown-item btn' id='reportComment'
-                        data-bs-toggle='modal' data-bs-target='#modal'>신고</a></li>
-                    <li><a class='dropdown-item btn border-olive' href="../comment/02.html">수정</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class='row border-start border-end'>
-        <div class='col'>
-            <div class='fs-6'>
-                너무 부러워요
-            </div>
-        </div>
-    </div>
-    <div class='row border-start border-end rounded-bottom'>
-        <div class='col'>
-            <div class='fs-6 text-end'>
-                작성일 2023-03-18
-            </div>
-        </div>
-    </div>
-</div>
-<div class='modal modal-center fade' id='modal'>
-    <div class='modal-dialog modal-smallsize'>
-        <div class='modal-content'>
-            <div class='pb-4' id='modalMsg'></div>
-            <div id='modalBtn'>
-                <button type='button' class='btn btn-lightGray' data-bs-dismiss='modal'>아니오</button>
-                <button type='button' class='btn btn-darkBlue' id='okBtn'>예</button>
-            </div>
-            <div id='modalOk'>
-                <a type='button' class='btn btn-darkBlue' data-bs-dismiss='modal'>확인</a>
-            </div>
-        </div>
-    </div>
-</div>
+
 <footer>
 </footer>
 </body>

@@ -26,7 +26,8 @@ public class CommentController {
 	
 	@GetMapping("add")
 	@LoginAccess
-	public ModelAndView addComment(ModelAndView mv, int reviewNum) {
+	public ModelAndView addComment(ModelAndView mv, HttpSession session, int reviewNum) {
+		mv.addObject("userId", session.getAttribute("userId"));
 		mv.setViewName("comment/addComment");
 		return mv;
 	}

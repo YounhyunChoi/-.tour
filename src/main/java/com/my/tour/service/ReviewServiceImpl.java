@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.my.tour.dao.CommentDao;
 import com.my.tour.dao.ReservationDao;
 import com.my.tour.dao.ReviewDao;
 import com.my.tour.dao.ReviewImageDao;
 import com.my.tour.dao.TourDao;
+import com.my.tour.domain.Comment;
 import com.my.tour.domain.Reservation;
 import com.my.tour.domain.Review;
 import com.my.tour.domain.ReviewDto;
@@ -21,6 +23,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Autowired private ReviewImageDao reviewImageDao;
 	@Autowired private TourDao tourDao;
 	@Autowired private ReservationDao reservationDao;
+	@Autowired private CommentDao commentDao;
 	
 	@Override
 	public List<Review> getReviews() {
@@ -35,6 +38,11 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<ReviewDto> getReview(int reviewNum) {
 		return reviewDao.selectReview(reviewNum);
+	}
+	
+	@Override
+	public List<Comment> getComments(int reviewNum) {
+		return commentDao.selectComments(reviewNum);
 	}
 
 	@Override
@@ -79,8 +87,8 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
-	public int fixReview(String reviewTitle, String reviewContent, double score) {
-		return reviewDao.updateReview(reviewTitle, reviewContent, score);
+	public int fixReview(Review reivew) {
+		return reviewDao.updateReview(reivew);
 	}
 	
 	@Override

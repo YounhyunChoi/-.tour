@@ -122,7 +122,9 @@ $(() => {
 	
 	//여행코스 삭제
 	$('#tourDelBtn').click(() => {
-		showConfirmModal('여행코스를 삭제하시겠습니까?', '여행코스가 삭제되었습니다.', '../tour/adminList')
+		showOkModal('여행코스를 삭제하시겠습니까?', '../tour/adminList')
+	   	$('#modalOk').hide()
+	   	$('#modalBtn').show()
 		
 		$('#okBtn').click(() => {
 			$.ajax({

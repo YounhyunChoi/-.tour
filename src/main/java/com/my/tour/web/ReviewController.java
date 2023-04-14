@@ -123,8 +123,8 @@ public class ReviewController {
    }
    
    @GetMapping("get")
-   public List<ReviewDto> getReviews() {
-	   return reviewService.getReviews();
+   public List<ReviewDto> getReviewDtos() {
+	   return reviewService.getReviewDtos();
    }
    
    @GetMapping("getReviewDto")

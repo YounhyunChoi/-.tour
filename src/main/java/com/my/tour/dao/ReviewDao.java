@@ -7,7 +7,7 @@ import com.my.tour.domain.ReviewDto;
 
 public interface ReviewDao {
 	List<Review> selectReviews(int resvNum);
-	List<ReviewDto> selectReviews();
+	List<ReviewDto> selectReviewDtos();
 	List<ReviewDto> selectReview(int reviewNum);
 	List<ReviewDto> selectMyReviews(String userId);
 	List<ReviewDto> selectMyReview(String userId, int tourNum);

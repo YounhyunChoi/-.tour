@@ -31,8 +31,8 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
-	public List<ReviewDto> getReviews() {
-		return reviewDao.selectReviews();
+	public List<ReviewDto> getReviewDtos() {
+		return reviewDao.selectReviewDtos();
 	}
 
 	@Override

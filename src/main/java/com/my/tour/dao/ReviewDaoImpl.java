@@ -19,8 +19,8 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	
 	@Override
-	public List<ReviewDto> selectReviews() {
-		return reviewMap.selectReviews();
+	public List<ReviewDto> selectReviewDtos() {
+		return reviewMap.selectReviewDtos();
 	}
 	
 	@Override

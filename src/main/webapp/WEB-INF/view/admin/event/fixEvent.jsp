@@ -170,7 +170,7 @@ $(() => {
   		<div class='row'>
            <div class='col pt-2 d-flex gap-3 mb-4'>
                <label for='eventTitle'>
-                   <h5 class='align-items-center text-nowrap pt-1'>이벤트수정</h5>
+                   <h5 class='align-items-center text-nowrap pt-1'>제목</h5>
                </label>
                <div class='col shadow-sm'>
                    <input type='text' class='form-control' id='eventTitle' maxlength='30'/>

@@ -32,7 +32,7 @@ $(() => {
 			        <hr>
 			        <div class='row mb-2' id='cardImg'>
 		            	<div class='col'>
-		                	<div class='row me-0 py-2' id='noticeImg' style='height: 10rem;'>`)
+		                	<div class='row me-0 py-2' id='noticeImg' style='height: 14rem;'>`)
 		  	$.ajax({
 		  		url: 'getNoticeImage',
 		  		data: {

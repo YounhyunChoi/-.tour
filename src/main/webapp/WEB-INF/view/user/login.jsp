@@ -45,7 +45,7 @@ $(() => {
 <body>
 <header></header>
 <div class='navigation fixed-top'>
-	<div class='float-start ms-2 mt-3'><i class='bi bi-chevron-left'></i></div>
+	<div class='float-start ms-2 mt-3'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
 	<div class='menuName'>
 	    <h2 class='text-center pt-3'><b>로그인</b></h2>
 	</div>

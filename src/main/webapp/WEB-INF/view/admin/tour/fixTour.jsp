@@ -42,7 +42,7 @@ function showTourImage() {
 			} else {
 				$('.tourCarouselBtn').hide()
 				
-				eventImageArr.push(
+				tourImageArr.push(
 					`<div class='carousel-item active'>
                         <img src='<c:url value="/attach/` + tourImages[0] + `"/>'style="max-width:100%; height:100%;"/>
                     </div>`)

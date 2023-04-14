@@ -44,12 +44,15 @@ $(() => {
                 <div class='col fs-4'>${review.reviewTitle}</div>
             </div>
             <div class='row mt-2'>
-            	<c:if test=`${reviewImageName}`>
+            	<c:if test='${reviewImageName != null}'>
+            		<div class='col-4'>
+	                    <div class='reviewImage'>
+	                    	<img src='<c:url value="/attach/${reviewImageName}"/>'/>
+	                    </div>
+	                </div>
             	</c:if>
-                <div class='col-4'>
-                    <div class='reviewImage'>후기이미지</div>
-                </div>
-                <div class='col-6 ms-2 fs-5 text-left'>
+                
+                <div class='col ms-2 fs-5 text-left'>
                     제목 행복한여행<br>
                     평점 ★★★★★<br>
                     java01

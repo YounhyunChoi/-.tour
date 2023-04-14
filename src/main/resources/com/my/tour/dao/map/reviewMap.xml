@@ -21,10 +21,10 @@
 		using (tour_num)
 		<where>
 			<if test='reviewNum != null'>
-				review_num = #{reviewNum}
+				and review_num = #{reviewNum}
 			</if>
 			<if test='tourNum != null'>
-				tour_num = #{tourNum}
+				and tour_num = #{tourNum}
 			</if>
 		</where>
 		order by review_num desc

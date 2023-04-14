@@ -38,7 +38,7 @@
 					    html +=            `\${myReview.reviewNum}</div>
 					                	<div class='col'>\${myReview.tourName}</div>
 					                	<div class='col-4 text-end'>
-					                    	<a type='button' class='border-0 bg-white' href='reviewView?reviewNum=\${myReview.reviewNum}'>
+					                    	<a type='button' class='border-0 bg-white' href='view?reviewNum=\${myReview.reviewNum}'>
 					                        <span class='fs-5'>상세보기</span>
 					                        <i class='bi bi-chevron-right viewDetailBtn'></i>
 					                    	</a>

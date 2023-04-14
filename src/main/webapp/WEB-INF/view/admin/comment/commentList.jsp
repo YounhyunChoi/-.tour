@@ -21,7 +21,7 @@ $.ajax({
 				comments.push(
 						`<tr>
 	                    <td>\${comment.comtNum}</td>
-	                    <td>\${comment.comtContent}</td>
+	                    <td class='text-truncate'>\${comment.comtContent}</td>
 	                    <td>\${comment.userId}</td>
 	                    <td>\${comment.comtDate}</td>
 	                    <td>

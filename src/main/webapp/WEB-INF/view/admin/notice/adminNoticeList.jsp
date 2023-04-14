@@ -11,13 +11,7 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script>
-$(() => {
-	$('#fixNoticeBtn').click(() => {
-		if($('#noticeNum:checked').val()){
-			$('#fixNoticeBtn').attr('href', '../notice/fix?noticeNum=' + $('#noticeNum:checked').val())
-		}
-	})
-
+function listNotice() {
 	$.ajax({
 		url: 'get',
 		dataType: 'json',
@@ -47,6 +41,16 @@ $(() => {
 					
 		}
 	})
+}
+$(() => {
+	$('#fixNoticeBtn').click(() => {
+		if($('#noticeNum:checked').val()){
+			$('#fixNoticeBtn').attr('href', '../notice/fix?noticeNum=' + $('#noticeNum:checked').val())
+		}
+	})
+	
+	listNotice()
+	
 })
 </script>
 <title>공지사항</title>
@@ -93,10 +97,10 @@ $(() => {
         <div class='mb-4'>
             <div class='row'>
                 <div class='col-6 pt-2'>
-                    <input type='text' class='form-control'/>
+                    <input type='text' class='form-control' id='search'/>
                 </div>
                 <div class='col'>
-                    <a href='#' type='button' class='btn'><i class='icon bi bi-search'></i></a>
+                    <a type='button' class='btn'><i class='icon bi bi-search' id='searchBtn'></i></a>
                 </div>
                 <div class='col'>
                     <div class='d-flex justify-content-end'>

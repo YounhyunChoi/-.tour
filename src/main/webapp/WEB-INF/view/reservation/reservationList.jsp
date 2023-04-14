@@ -146,7 +146,6 @@ $.ajax({
 </div>
 <div id='reservationContainer' class='container px-4'>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

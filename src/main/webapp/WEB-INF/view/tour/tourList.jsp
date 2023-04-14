@@ -67,8 +67,7 @@ $(() => {
 </style>
 </head>
 <body>
-<header>
-</header>
+<header></header>
 <div class='navigation fixed-top'>
 	<div class='float-start mt-3 ms-2'>
 		<i class='bi bi-chevron-left' id='historyBtn'></i>
@@ -82,7 +81,6 @@ $(() => {
 		<!-- 여행상품 리스트 -->
 	</div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

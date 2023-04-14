@@ -298,8 +298,7 @@ $(() => {
 </style>
 </head>
 <body>
-<header>
-</header>
+<header></header>
 <div class='navigation fixed-top'>
     <div class='float-start mt-3 ms-2'>
     	<i class='bi bi-chevron-left' id='historyBtn'></i>
@@ -329,8 +328,7 @@ $(() => {
         </div>
     </div>
     <div class='row'>
-        <div class='col-8' id='tourContent'>
-			
+        <div class='col-8' id='tourContent'>		
         </div>
         <div class='col-4'>
             <div class='row'>
@@ -346,10 +344,8 @@ $(() => {
     </div>
     <div id='reviewContainer'>
 	        <!-- 리뷰 리스트 -->
-	    </div>
     </div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

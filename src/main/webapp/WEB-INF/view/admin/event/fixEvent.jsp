@@ -103,7 +103,7 @@ $(() => {
 	})
 	
 	$('#delEventBtn').click(() => {
-		showConfirmModal('이벤트를 삭제하시겠습니까?')
+		showConfirmModal('이벤트를 삭제하시겠습니까?', 'adminList')
 		
 		$('#okBtn').click(() => {
 			$.ajax({
@@ -111,9 +111,6 @@ $(() => {
 				method: 'delete',
 				data: {
 					eventNum: `${param.eventNum}`
-				},
-				success: () => {
-					$(location).attr('href', 'adminList')
 				}
 			})
 		})

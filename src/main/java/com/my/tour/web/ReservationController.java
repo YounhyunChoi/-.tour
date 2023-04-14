@@ -1,7 +1,5 @@
 package com.my.tour.web;
 
-
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -38,7 +36,7 @@ public class ReservationController {
 		
 	@GetMapping("reviewGet")
 	@GetAccess
-	public List<Review> getReview(int resvNum) {
+	public List<Review> getReview(HttpServletRequest request, int resvNum) {
 		return reservationService.getReview(resvNum);
 	}
 	
@@ -58,7 +56,7 @@ public class ReservationController {
 	
 	@GetMapping("add")
 	@LoginAccess
-	public ModelAndView addReservation(ModelAndView mv,  HttpSession session, int tourNum) {
+	public ModelAndView addReservation(ModelAndView mv, HttpSession session, int tourNum) {
 		Tour tour = reservationService.getTour(tourNum).get(0);
 		mv.setViewName("reservation/addReservation");
 		mv.addObject("tour", tour);

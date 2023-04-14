@@ -2,7 +2,6 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
-<meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet' />
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css' />
@@ -11,7 +10,7 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../res/style.css' rel='stylesheet' />
 <script src='../res/navigation.js'></script>
-<title></title>
+<title>예약 목록</title>
 <script>
 $.ajax({
 	url: 'get',
@@ -27,7 +26,7 @@ $.ajax({
 					<div class='row mt-4 d-flex flex-column shadow-sm border border-1'>
 				        <div class='col p-2 border-bottom'>
 				            <div class='row align-items-center'>	
-				                <div class='col-8 fs-6 tourDate'>여행기간:\${reservationDto.tourSDate} ~ \${reservationDto.tourEDate}</div>
+				                <div class='col-8 fs-6 tourDate'>여행기간: \${reservationDto.tourSDate} ~ \${reservationDto.tourEDate}</div>
 				                <div class='col-4 text-end'>
 				                    <button type='button' id=tourViewBtn\${reservationDto.tourNum} class='border-0 bg-white'>
 				                        <span class='fs-5'>상세보기</span>
@@ -139,7 +138,7 @@ $.ajax({
 <header>
 </header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left' onclick="location.href='../user/mypage.html'"></i></div>
+    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' onclick="location.href='../user/mypage.html'"></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>예약내역</b></h2>
     </div>

@@ -39,6 +39,7 @@ public class ReservationServiceImpl implements ReservationService{
 	public void fixReservation(int resvNum) {
 		reservationDao.updateReservation(resvNum);
 	}
+	
 	@Override
 	public void delReservation(int resvNum, String userId) {
 		reservationDao.deleteReservation(resvNum, userId);

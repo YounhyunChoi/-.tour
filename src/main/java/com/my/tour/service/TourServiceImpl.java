@@ -69,7 +69,7 @@ public class TourServiceImpl implements TourService {
 	}
 
 	@Override
-	public int delTourImage(int tourNum) {
-		return tourImageDao.deleteTourImage(tourNum);
+	public void delTourImage(int tourNum) {
+		tourImageDao.deleteTourImage(tourNum);
 	}
 }

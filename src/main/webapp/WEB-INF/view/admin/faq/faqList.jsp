@@ -10,6 +10,7 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
+<title>FAQ목록</title>
 <script>
 $.ajax({
 	url: 'get',
@@ -36,19 +37,20 @@ $.ajax({
 				})
 			})
 		} else{
-			$('#faqContainer').html(`
-        			<div class='row d-block my-5'>
-                    	<div class='col text-center pt-4'>
-                        	<h3 class='my-3'>
-                            	FAQ가 없습니다.
-                        	</h3>
-                    	</div>
-              		</div>`)
+			$('#faqContainer').html(
+				`
+       			<div class='row d-block my-5'>
+                   	<div class='col text-center pt-4'>
+                       	<h3 class='my-3'>
+                           	FAQ가 없습니다.
+                       	</h3>
+                   	</div>
+             		</div>
+           		`)
 		}
 	}	
 })
 </script>
-<title>FAQ</title>
 <style>
     .form-control {
         height: 5.2rem;

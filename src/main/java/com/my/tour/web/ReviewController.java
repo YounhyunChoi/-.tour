@@ -135,8 +135,8 @@ public class ReviewController {
    }
    
    @PutMapping("fix")
-   public int fixReview(@RequestBody Review review) {
-      return reviewService.fixReview(review);
+   public void fixReview(@RequestBody Review review) {
+      reviewService.fixReview(review);
    }
    
    @GetMapping("view")
@@ -161,8 +161,14 @@ public class ReviewController {
 	   return reviewService.getComments(reviewNum);
    }
 	
+	@GetMapping("fix")
+	public ModelAndView fixReview(ModelAndView mv) {
+		mv.setViewName("review/fixReview");
+		return mv;
+	}
+
 	@DeleteMapping("del/{reviewNum}")
-	public int delReview(@PathVariable int reviewNum) {
-		return reviewService.delReview(reviewNum);
+	public void delReview(@PathVariable int reviewNum) {
+		reviewService.delReview(reviewNum);
 	}
 }

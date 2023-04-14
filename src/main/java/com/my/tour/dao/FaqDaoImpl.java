@@ -21,6 +21,7 @@ public class FaqDaoImpl implements FaqDao{
 	public void insertFaq(String faqQuestion, String faqAnswer, String adminId) {
 		faqMap.insertFaq(faqQuestion, faqAnswer, adminId);
 	}
+	
 	@Override
 	public void deleteFaq(String faqQuestion) {
 		faqMap.deleteFaq(faqQuestion);

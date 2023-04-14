@@ -19,10 +19,10 @@ public interface ReviewService {
 	List<ReviewImage> getReviewImages(int reviewNum);
 	List<Reservation> getReservations(String userId);
 	List<Tour> getTour(int tourNum);
-	int addReview(String reviewTitle, String reviewContent, double score,
+	void addReview(String reviewTitle, String reviewContent, double score,
 				String userId, int tourNum, int resvNum);
-	int addReviewImage(String reviewImageName, int reviewNum);
-	int delReviewImage(int reviewNum);
-	int fixReview(Review reivew);
-	int delReview(int reviewNum);
+	void addReviewImage(String reviewImageName, int reviewNum);
+	void delReviewImage(int reviewNum);
+	void fixReview(Review reivew);
+	void delReview(int reviewNum);
 }

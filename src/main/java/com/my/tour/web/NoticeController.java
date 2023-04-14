@@ -28,40 +28,40 @@ import jakarta.servlet.http.HttpSession;
 @RestController("noticeController")
 @RequestMapping("notice")
 public class NoticeController {
-   @Autowired private NoticeService noticeService;
-   @Value("${attachPath}") private String attachPath;
-   
-   @GetMapping("get")
-   @GetAccess
-   public List<Notice> getNotices(HttpServletRequest request){
-      return noticeService.getNotices();
-   }
-   
-   @GetMapping("getNotice")
-   public List<Notice> getNotice(int noticeNum){
-      return noticeService.getNotice(noticeNum);
-   }
-   
-   @GetMapping
-   public ModelAndView noticeList(ModelAndView mv) {
-      mv.setViewName("notice/noticeList");
-      return mv;
-   }
+	@Autowired private NoticeService noticeService;
+	@Value("${attachPath}") private String attachPath;
 
-   @GetMapping("view")
-   public ModelAndView noticeView(ModelAndView mv, int noticeNum) {
-      mv.setViewName("notice/noticeView");
-      mv.addObject("noticeNum", noticeNum);
-      return mv;
-   }
+	@GetMapping("get")
+	@GetAccess
+	public List<Notice> getNotices(HttpServletRequest request){
+		return noticeService.getNotices();
+	}
+
+	@GetMapping("getNotice")
+	public List<Notice> getNotice(int noticeNum){
+		return noticeService.getNotice(noticeNum);
+	}
    
-   //어드민
-   @GetMapping("adminList")
-   @AdminAccess
-   public ModelAndView adminNoticeList(ModelAndView mv, HttpSession session) {
-      mv.setViewName("admin/notice/adminNoticeList");
-      return mv;
-   }
+	@GetMapping
+	public ModelAndView noticeList(ModelAndView mv) {
+		mv.setViewName("notice/noticeList");
+		return mv;
+	}
+
+	@GetMapping("view")
+	public ModelAndView noticeView(ModelAndView mv, int noticeNum) {
+		mv.setViewName("notice/noticeView");
+		mv.addObject("noticeNum", noticeNum);
+		return mv;
+	}
+
+	//어드민
+	@GetMapping("adminList")
+	@AdminAccess
+	public ModelAndView adminNoticeList(ModelAndView mv, HttpSession session) {
+		mv.setViewName("admin/notice/adminNoticeList");
+		return mv;
+	}
 
 	@GetMapping("add")
 	@AdminAccess
@@ -82,11 +82,11 @@ public class NoticeController {
 		return mv;
 	}
 
-   @PostMapping("add")
-   public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
-      noticeService.delNotice(noticeService.getAllNotices().get(0).getNoticeNum());
-      noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));   
-   }
+	@PostMapping("add")
+	public void addNotice(String noticeTitle, String noticeContent, HttpSession session) {
+		noticeService.delNotice(noticeService.getAllNotices().get(0).getNoticeNum());
+		noticeService.addNotice(noticeTitle, noticeContent, (String) session.getAttribute("userId"));   
+	}
 
 	@GetMapping("fix")
 	@AdminAccess
@@ -137,18 +137,18 @@ public class NoticeController {
 					noticeService.addNoticeImage(filename, noticeNum);
 				}
 			}
-         return true;
-      }
-   }
+		return true;
+		}
+	}
 
-   private void saveFile(String filename, MultipartFile file) {
-      try {
-         file.transferTo(new File(filename));
-      } catch(IOException e) {}
-   }
+	private void saveFile(String filename, MultipartFile file) {
+		try {
+			file.transferTo(new File(filename));
+		} catch(IOException e) {}
+	}
    
-   @DeleteMapping("delNoticeImages")
-   public void delNoticeImages(int noticeNum) {
-      noticeService.delNoticeImage(noticeNum);
-   }
+	@DeleteMapping("delNoticeImages")
+	public void delNoticeImages(int noticeNum) {
+		noticeService.delNoticeImage(noticeNum);
+	}
 }

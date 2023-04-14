@@ -204,7 +204,7 @@ $(() => {
                 <div id='navItem'>
                     <ul class='mt-5'>
                         <li><a class='nav-link' href='logout'>로그아웃</a></li>
-                        <li><a class='nav-link' href='../user/adminList'>회원목록</a></li>
+                        <li><a class='nav-link' href='userList'>회원목록</a></li>
                         <li><a class='nav-link' href='../tour/adminList'>상품목록</a></li>
                         <li class='mt-4 text-decoration-underline'>게시판</li>
                         <li><a class='nav-link' href='../review/adminList'>후기</a></li>

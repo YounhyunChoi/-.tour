@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,7 +52,7 @@ public class UserController {
 	
 	@GetMapping("getUserDto")
 	@GetAccess
-	public List<UserDto> getUser(HttpServletRequest request, String userId) {
+	public List<UserDto> getUserDto(HttpServletRequest request, String userId) {
 		return userService.getUserOrAdmin(userId);
 	}
 	
@@ -196,6 +197,11 @@ public class UserController {
 		session.invalidate();
 	}
 	
+	@DeleteMapping("delUser/{userId}")
+	public void delUser(@PathVariable String userId, HttpSession session) {
+		userService.deleteUser(userId);
+	}
+	
 	@GetMapping("afterFixUser")
 	@LoginAccess
 	public ModelAndView afterFixUser(ModelAndView mv, HttpSession session) {
@@ -253,5 +259,25 @@ public class UserController {
 		try {
 			file.transferTo(new File(filename));
 		} catch(IOException e) {}
+	}
+	
+	@GetMapping("userList")
+	@AdminAccess
+	public ModelAndView userList(ModelAndView mv, HttpSession session) {
+		mv.setViewName("admin/user/userList");
+		return mv;
+	}
+	
+	@GetMapping("adminFix")
+	@AdminAccess
+	public ModelAndView adminFix(ModelAndView mv, HttpSession session) {
+		mv.setViewName("admin/user/fixUser");
+		return mv;
+	}
+	
+	@GetMapping("getUser")
+	@GetAccess
+	public List<User> getUser(HttpServletRequest request, String userId) {
+		return userService.getUser(userId);
 	}
 }

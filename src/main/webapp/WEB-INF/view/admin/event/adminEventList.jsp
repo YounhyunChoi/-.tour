@@ -11,13 +11,7 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script>
-$(() => {
-	$('#fixEventBtn').click(() => {
-		if($('#eventNum:checked').val()) {
-			$('#fixEventBtn').attr('href', '../event/fix?eventNum=' + $('#eventNum:checked').val())
-		}		
-	})
-	
+function listEvent() {
 	$.ajax({
 		url: 'get',
 		dataType: 'json',
@@ -43,6 +37,49 @@ $(() => {
 						'<tr><td colspan=5 class=text-center>등록된 이벤트가 없습니다.</td></tr>')
 			}
 		}
+	})
+}
+
+$(() => {
+	$('#fixEventBtn').click(() => {
+		if($('#eventNum:checked').val()) {
+			$('#fixEventBtn').attr('href', '../event/fix?eventNum=' + $('#eventNum:checked').val())
+		}		
+	})
+	listEvent()
+	
+	$('#searchBtn').click(() => {
+		if($('#eventSearch').val()) {
+			$.ajax({
+				url: 'get',
+				success: events => {
+					if(events.length) {
+						$('#events').empty()
+						
+						$.each(events, (i, event) => {
+							const eventSearchArr = []
+							if((event.eventTitle).includes($('#eventSearch').val())) {
+								eventSearchArr.push(
+									`<tr>
+			                            <td class='align-middle'>
+			                            	<input type='radio' id='eventNum' name='eventHeader' value='\${event.eventNum}'/>
+			                            </td>
+			                            <td>\${event.eventNum}</td>
+			                            <td>\${event.eventTitle}</td>
+			                            <td>\${event.eventContent}</td>
+			                            <td>\${event.eventDate}</td>
+			                        </tr>`)
+							} else {
+								$('#events').empty()
+								eventSearchArr.push(
+										'<tr><td colspan=5 class=text-center>검색된 이벤트가 없습니다.</td></tr>')
+							}
+							$('#events').append(eventSearchArr.join(''))
+						})
+					}
+				}
+			})
+		} else listEvent()
 	})
 })
 </script>
@@ -89,10 +126,10 @@ $(() => {
         <div class='mb-4'>
             <div class='row'>
                 <div class='col-6 pt-2'>
-                    <input type='text' class='form-control'/>
+                    <input type='text' class='form-control' id='eventSearch'/>
                 </div>
                 <div class='col'>
-                    <a href='#' type='button' class='btn'><i class='icon bi bi-search'></i></a>
+                    <a type='button' class='btn'><i class='icon bi bi-search' id='searchBtn'></i></a>
                 </div>
                 <div class='col'>
                     <div class='d-flex justify-content-end'>

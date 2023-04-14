@@ -48,7 +48,41 @@ $(() => {
 			$('#fixNoticeBtn').attr('href', '../notice/fix?noticeNum=' + $('#noticeNum:checked').val())
 		}
 	})	
-	listNotice()	
+	listNotice()
+	
+	$('#searchBtn').click(() => {
+		if($('#noticeSearch').val()) {
+			$.ajax({
+				url: 'get',
+				success: notices => {
+					if(notices.length) {
+						$('#notices').empty()
+						
+						$.each(notices, (i, notice) => {
+							const noticeSearchArr = []
+							if((notice.noticeTitle).includes($('#noticeSearch').val())) {
+								noticeSearchArr.push(
+									`<tr>
+			                            <td class='align-middle'>
+			                            	<input type='radio' name='noticeHeader' id='noticeNum' value='\${notice.noticeNum}'/>
+			                            </td>
+			                            <td>\${notice.noticeNum}</td>
+			                            <td>\${notice.noticeTitle}</td>
+			                            <td>\${notice.noticeContent}</td>
+			                            <td>\${notice.noticeDate}</td>
+		                        	</tr>`)
+							} else {
+								$('#notices').empty()
+								noticeSearchArr.push(
+									'<tr><td colspan=5 class=text-center>검색된 공지사항이 없습니다.</td></tr>')
+							}
+							$('#notices').append(noticeSearchArr.join(''))
+						})
+					}
+				}
+			})
+		} else listNotice()
+	})
 })
 </script>
 <title>공지사항</title>
@@ -95,7 +129,7 @@ $(() => {
         <div class='mb-4'>
             <div class='row'>
                 <div class='col-6 pt-2'>
-                    <input type='text' class='form-control' id='search'/>
+                    <input type='text' class='form-control' id='noticeSearch'/>
                 </div>
                 <div class='col'>
                     <a type='button' class='btn'><i class='icon bi bi-search' id='searchBtn'></i></a>

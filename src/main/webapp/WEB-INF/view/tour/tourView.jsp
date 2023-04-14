@@ -161,6 +161,108 @@ $(() => {
        		location.href = '../user/login'
        	}
 	})
+	
+	//리뷰 리스트
+	$.ajax({
+		url: 'getReviews',
+		dataType: 'json',
+		success: reviews => {
+			if(reviews.length) {
+				const reviewArr = []
+				
+				$.each(reviews, (i, review) => {
+					if(review.userId != `${userId}`) {
+						reviewArr.push(`
+							<div class='row mx-2 mt-5 shadow-sm border'>
+								<div class='col'>
+						            <div class='row align-items-center border-bottom'>
+						                <div class='col-4 fs-6'>후기번호
+						                	<span class='reivewNum'>\${review.reviewNum}</span>
+						                </div>
+						                <div class='col fs-5'>\${review.tourName}</div>
+						            </div>
+						            <div class='row mt-2'>
+						                <div class='col-4'>
+						                    <img class='rounded-1 shadow-sm reviewImage' src='<c:url value="/attach/` + review.reviewImageName + `"/>' id='\${review.userId}' style="max-width:100%; height:100%;"/>
+						                </div>
+						                <div class='col-6 ms-2 fs-5 text-left'>
+						                    <p class='m-0'>제목: \${review.reviewTitle}</p>
+						                    <p class='m-0' id='score\${review.userId}'></p>
+						                    <p class='m-0'>\${review.userId}</p>
+						                </div>
+						            </div>
+						            <div class='row'>
+						                <p class='text-end'>
+						                    작성일 \${review.reviewDate}
+						                </p>
+						            </div>
+						        </div>
+					        </div>
+						`)
+					} else {
+						reviewArr.push(`
+							<div class='row mx-2 mt-5 shadow-sm border'>
+								<div class='col'>
+						            <div class='row align-items-center border-bottom'>
+						                <div class='col-4 fs-6'>후기번호
+						                	<span class='reivewNum'>\${review.reviewNum}</span>
+						                </div>
+						                <div class='col fs-5'>\${review.tourName}</div>
+						            </div>
+						            <div class='row mt-2'>
+						                <div class='col-4'>
+						                	<img class='rounded-1 shadow-sm reviewImage' src='<c:url value="/attach/` + review.reviewImageName + `"/>' id='\${review.userId}' style="max-width:100%; height:100%;"/>
+						                </div>
+						                <div class='col-6 ms-2 fs-5 text-left'>
+						                    <p class='m-0'>제목: \${review.reviewTitle}</p>
+						                    <p class='m-0' id='score\${review.userId}'></p>
+						                    <p class='m-0'>\${review.userId}</p>
+						                </div>
+						            </div>
+						            <div class='row'>
+						                <p class='text-end'>
+						                    작성일: \${review.reviewDate}
+						                </p>
+						            </div>
+					            </div>
+				            </div>
+						`)
+					}
+				})
+				$('#reviewContainer').append(reviewArr.join(''))
+				
+				//평점 별 아이콘 변환
+				$.each(reviews, (i, review) => {
+					let scorehtml = '평점: '
+	
+					for(let i = 0; i < 5; i++) {
+						if(review.score - i >= 1) {
+							scorehtml += `<i class='bi bi-star-fill'></i>`
+						} else if(review.score - i == 0.5) {
+							scorehtml += `<i class='bi bi-star-half'></i>`
+						} else {
+							scorehtml += `<i class='bi bi-star'></i>`
+						}
+					}
+					
+					$(`#score\${review.userId}`).html(scorehtml)
+					
+					for(let i = 0; i < $('.reivewNum').length; i++){
+						$('.reivewNum').eq(i).text($('.reivewNum').eq(i).text().padStart(4, '0'))
+					}
+				})
+				
+				//리뷰 클릭시 이동
+				$.each(reviews, (i, review) => {
+					$(`#\${review.userId}`).click(() => {
+						location.href = `../review/view?reviewNum=\${review.reviewNum}`
+					})
+				})
+			} else {
+				$('#reviewContainer').append(`<div class='text-center fs-3'>등록된 후기가 없습니다.</div>`)
+			}
+		}
+	})	
 })
 </script>
 <title>TOUR.02 여행코스 조회</title>
@@ -196,7 +298,7 @@ $(() => {
 </header>
 <div class='navigation fixed-top'>
     <div class='float-start mt-3 ms-2'>
-    	<i class='bi bi-chevron-left' id='historyBtn' id='navBackBtn'></i>
+    	<i class='bi bi-chevron-left' id='navBackBtn'></i>
     </div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b id='tourTitle'></b></h2>
@@ -228,8 +330,8 @@ $(() => {
         </div>
         <div class='col-4'>
             <div class='row'>
-                <i id='tourShareBtn' data-bs-toggle='modal' data-bs-target='#modal' class='bi bi-share-fill ms-5 btn tourShareIcon'></i>
-                <i id='tourWishBtn' data-bs-toggle='modal' data-bs-target='#modal' class='bi bi-heart ms-3 btn tourWishIcon'></i>
+                <a id='tourShareBtn' class='bi bi-share-fill ms-5 btn tourShareIcon'></a>
+                <a id='tourWishBtn' class='bi bi-heart ms-3 btn tourWishIcon'></a>
             </div>
             <div class='row'>
                 <button type='button' id='reservationBtn' class='mt-5 ms-5 w-auto btn btn-darkBlue'>
@@ -238,53 +340,9 @@ $(() => {
             </div>
         </div>
     </div>
-    <div class='row mx-2 mt-5 shadow-sm border'>
-        <div class='col'>
-            <div class='row align-items-center border-bottom'>
-                <div class='col-4 fs-6'>후기번호 0002</div>
-                <div class='col fs-5'>도심 속 우리의 역사와 예술이야기</div>
-            </div>
-            <div class='row mt-2'>
-                <div class='col-4'>
-                    <!-- 남이 쓴 review일 경우의 링크 -->
-                    <div class='reviewImage' onclick="location.href='#'">후기이미지</div>
-                </div>
-                <div class='col-6 ms-2 fs-5 text-left'>
-                    제목 이쁘다<br>
-                    평점 ★★★★★
-                    <br>java01
-                </div>
-            </div>
-            <div class='row'>
-                <p class='text-end'>
-                    작성일 2023-02-25
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class='row mx-2 mt-5 shadow-sm border'>
-        <div class='col'>
-            <div class='row align-items-center border-bottom'>
-                <div class='col-4 fs-6'>후기번호 0001</div>
-                <div class='col fs-5'>도심 속 우리의 역사와 예술이야기</div>
-            </div>
-            <div class='row mt-2'>
-                <div class='col-4'>
-                    <!-- 내가 쓴 review일 경우의 링크 -->
-                    <div class='reviewImage' onclick="location.href='#'">후기이미지</div>
-                </div>
-                <div class='col-6 ms-2 fs-5 text-left'>
-                    제목 안녕하세요<br>
-                    평점 ★★★★★
-                    <br>java02
-                </div>
-            </div>
-            <div class='row'>
-                <p class='text-end'>
-                    작성일 2023-02-17
-                </p>
-            </div>
-        </div>
+    <div id='reviewContainer'>
+	        <!-- 리뷰 리스트 -->
+	    </div>
     </div>
 </div>
 <footer>

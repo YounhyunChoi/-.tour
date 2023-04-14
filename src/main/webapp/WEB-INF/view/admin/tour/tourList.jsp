@@ -11,7 +11,6 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script>
-//여행상품 리스트
 function tourList() {
 	$('#tourContent').empty()
 	

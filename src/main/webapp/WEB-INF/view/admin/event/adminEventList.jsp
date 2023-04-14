@@ -121,7 +121,7 @@ $(() => {
                 </table>
             </div>
             <div class='d-flex justify-content-end'>
-                <a type='button' class='btn btn-olive' href='#' id='fixEventBtn'>
+                <a type='button' class='btn btn-olive' id='fixEventBtn'>
                     <i class='bi bi-check-circle'></i>
                     &nbsp;수정
                 </a>

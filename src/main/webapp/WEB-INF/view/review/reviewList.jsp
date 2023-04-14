@@ -85,8 +85,7 @@ $(() => {
 		           </a>
 		       </div>`
 			}
-			console.log(reviewhtml)
-			$('.container').append(reviewhtml)
+			$('.container').eq(1).append(reviewhtml)
 		}
 	})
 })

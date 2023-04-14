@@ -91,15 +91,13 @@ $(() => {
     })
     
     $('#delUserBtn').click(() => {
-    	showConfirmModal('정말 탈퇴하시겠습니까?')
+    	showConfirmModal('정말 탈퇴하시겠습니까?', 'afterDelUser')
     	
     	$('#okBtn').click(() => {
     		$.ajax({
     			url: 'delUser',
     			method: 'delete'
     		})
-    		
-    	$('#okBtn').attr('href', 'afterDelUser')
     	})
     })
 })

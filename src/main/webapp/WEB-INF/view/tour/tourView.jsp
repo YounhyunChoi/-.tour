@@ -40,8 +40,8 @@ $(() => {
 			const tourArr = []
 			
 			if(!tourImages.length) {
-  				$('#tourImg').hide()
-  			} else {
+  				$('.tourCarouselBtn').hide()
+  			} else if(tourImages.length != 1) {
 				$.each(tourImages, (i, tourImage) => {
 					if(i == 0) {
 						tourArr.push(
@@ -55,8 +55,12 @@ $(() => {
 		                    </div>`)
 					}
 				})
-				$('#tourImgIn').append(tourArr.join(''))
+  			} else {
+  				$('.tourCarouselBtn').hide()
+  				
+  				tourArr.push(`<img src='<c:url value="/attach/` + tourImages[0] + `"/>' style="max-width:100%; height:100%;"/>`)
   			}
+			$('#tourImgIn').append(tourArr.join(''))
 		}
 	})
 	
@@ -267,10 +271,6 @@ $(() => {
 </script>
 <title>TOUR.02 여행코스 조회</title>
 <style>
-    #navBackBtn {
-        cursor: pointer;
-    }
-
     #tourImg {
         border: .1rem solid;
         margin: 1rem;
@@ -294,8 +294,7 @@ $(() => {
 </style>
 </head>
 <body>
-<header>
-</header>
+<header></header>
 <div class='navigation fixed-top'>
     <div class='float-start mt-3 ms-2'>
     	<i class='bi bi-chevron-left' id='historyBtn'></i>
@@ -325,8 +324,7 @@ $(() => {
         </div>
     </div>
     <div class='row'>
-        <div class='col-8' id='tourContent'>
-			
+        <div class='col-8' id='tourContent'>		
         </div>
         <div class='col-4'>
             <div class='row'>
@@ -342,10 +340,8 @@ $(() => {
     </div>
     <div id='reviewContainer'>
 	        <!-- 리뷰 리스트 -->
-	    </div>
     </div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

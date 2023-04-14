@@ -31,7 +31,7 @@ $(() => {
 				})
 				$('#tourContainer').append(tourArr.join(''))
 			} else {
-				$('#tourContainer').append(`<div class='pt-3 text-center fs-3'>여행상품이 없습니다.</div>`)
+				$('#tourContainer').append('<p class=mt-5><h5 class=text-center>등록된 여행상품이 없습니다.</h5></p><br><hr>')
 			}
 			
 			$.each(tours, (i, tour) => {
@@ -67,8 +67,7 @@ $(() => {
 </style>
 </head>
 <body>
-<header>
-</header>
+<header></header>
 <div class='navigation fixed-top'>
 	<div class='float-start mt-3 ms-2'>
 		<i class='bi bi-chevron-left' id='historyBtn'></i>
@@ -82,7 +81,6 @@ $(() => {
 		<!-- 여행상품 리스트 -->
 	</div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

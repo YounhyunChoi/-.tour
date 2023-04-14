@@ -92,65 +92,65 @@ public class ReviewController {
 				(String) session.getAttribute("userId"), tourNum, resvNum);
 	}
 	
-   @PostMapping("addReviewImages")
-   public boolean addReviewImages(@RequestParam("reviewImage") List<MultipartFile> reviewImage, HttpSession session) {   
-      if(reviewImage.size() == 0) {
-         return true;
-      } else if(reviewImage.size() > 4) {
-         return false;
-      } else {
-         int reviewNum = reviewService.getMyReviews((String) session.getAttribute("userId")).get(0).getReviewNum();
-         String filename = "";
+	@PostMapping("addReviewImages")
+	public boolean addReviewImages(@RequestParam("reviewImage") List<MultipartFile> reviewImage, HttpSession session) {   
+		if(reviewImage.size() == 0) {
+			return true;
+		} else if(reviewImage.size() > 4) {
+			return false;
+		} else {
+			int reviewNum = reviewService.getMyReviews((String) session.getAttribute("userId")).get(0).getReviewNum();
+			String filename = "";
        
-         reviewService.delReviewImage(reviewNum);
+			reviewService.delReviewImage(reviewNum);
        
-         for(MultipartFile multipartfile: reviewImage) {
-            filename = "review" + multipartfile.getOriginalFilename();
-            if(!filename.equals("review")) {
-               saveFile(attachPath + "/" + filename, multipartfile);
-               reviewService.addReviewImage(filename, reviewNum);
-            }
-         }
+			for(MultipartFile multipartfile: reviewImage) {
+				filename = "review" + multipartfile.getOriginalFilename();
+				if(!filename.equals("review")) {
+					saveFile(attachPath + "/" + filename, multipartfile);
+					reviewService.addReviewImage(filename, reviewNum);
+				}
+			}
          
-         return true;
-      }
-   }
+			return true;
+		}
+	}
 
-   private void saveFile(String filename, MultipartFile file) {
-      try {
-         file.transferTo(new File(filename));
-      } catch(IOException e) {}
-   }
+	private void saveFile(String filename, MultipartFile file) {
+		try {
+			file.transferTo(new File(filename));
+		} catch(IOException e) {}
+	}
+
+	@GetMapping("get")
+	public List<ReviewDto> getReviewDtos() {
+		return reviewService.getReviewDtos();
+	}
+
+	@GetMapping("getReviewDto")
+	public List<ReviewDto> getReviewDto(int reviewNum) {
+		return reviewService.getReview(reviewNum);
+	}
+
+	@GetMapping("fix")
+	public ModelAndView fixReview(ModelAndView mv, int reviewNum) {
+		mv.addObject("review", reviewService.getReview(reviewNum).get(0));
+		mv.setViewName("review/fixReview");
+		return mv;
+	}
+
+	@PutMapping("fix")
+	public void fixReview(@RequestBody Review review) {
+		reviewService.fixReview(review);
+	}
+
+	@GetMapping("list")
+	public ModelAndView reviewList(ModelAndView mv) {
+		mv.setViewName("review/reviewList");
+		return mv;
+	}
    
-   @GetMapping("get")
-   public List<ReviewDto> getReviewDtos() {
-	   return reviewService.getReviewDtos();
-   }
-   
-   @GetMapping("getReviewDto")
-   public List<ReviewDto> getReviewDto(int reviewNum) {
-      return reviewService.getReview(reviewNum);
-   }
-   
-   @GetMapping("fix")
-   public ModelAndView fixReview(ModelAndView mv, int reviewNum) {
-      mv.addObject("review", reviewService.getReview(reviewNum).get(0));
-      mv.setViewName("review/fixReview");
-      return mv;
-   }
-   
-   @PutMapping("fix")
-   public void fixReview(@RequestBody Review review) {
-      reviewService.fixReview(review);
-   }
-   
-   @GetMapping("list")
-   public ModelAndView reviewList(ModelAndView mv) {
-	   mv.setViewName("review/reviewList");
-	   return mv;
-   }
-   
-   @GetMapping("view")
+	@GetMapping("view")
 	public ModelAndView getReview(ModelAndView mv, HttpSession session, int reviewNum) {
 		mv.addObject("review", reviewService.getReview(reviewNum).get(0));
 		mv.addObject("userId", session.getAttribute("userId"));
@@ -167,10 +167,10 @@ public class ReviewController {
 		return mv;
 	}
    
-   @GetMapping("getComments")
-   public List<Comment> getComments(int reviewNum) {
-	   return reviewService.getComments(reviewNum);
-   }
+	@GetMapping("getComments")
+	public List<Comment> getComments(int reviewNum) {
+		return reviewService.getComments(reviewNum);
+	}
 
 	@DeleteMapping("del/{reviewNum}")
 	public void delReview(@PathVariable int reviewNum) {

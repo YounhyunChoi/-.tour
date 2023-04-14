@@ -103,21 +103,17 @@ $.ajax({
         opacity: 1;
     }
 </style>
-
 </head>
-
 <body>
-    <header>
-    </header>
-    <div class='navigation fixed-top'>
-        <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn' onclick="location.href='../main'"></i></div>
-        <div class='menuName'>
-            <h2 class='text-center pt-3'><b>자주묻는질문</b></h2>
-        </div>
+<header></header>
+<div class='navigation fixed-top'>
+    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn' onclick="location.href='../main'"></i></div>
+    <div class='menuName'>
+        <h2 class='text-center pt-3'><b>자주묻는질문</b></h2>
     </div>
-    <div id='faqContainer' class='container mt-5'>    
-    </div>
-    <footer>
-    </footer>
+</div>
+<div id='faqContainer' class='container mt-5'>    
+</div>
+<footer></footer>
 </body>
 </html>

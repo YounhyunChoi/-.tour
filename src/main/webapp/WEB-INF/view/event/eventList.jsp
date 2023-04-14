@@ -42,8 +42,7 @@ $(() => {
 </style>
 </head>
 <body>
-<header>
-</header>
+<header></header>
 <div class='navigation fixed-top'>
    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
    <div class='menuName'>
@@ -55,7 +54,6 @@ $(() => {
 		<!-- 이벤트 목록 -->
     </div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

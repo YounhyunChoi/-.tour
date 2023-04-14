@@ -23,7 +23,9 @@ function showTourImage() {
 		success: tourImages => {
 			const tourImageArr = []
 			
-			if(tourImages.length) {
+			if(tourImages.length != 1) {
+				$('.tourCarouselBtn').show()
+				
 				$.each(tourImages, (i, tourImageName) => {
 					if(i == 0) {
 						tourImageArr.push(
@@ -37,6 +39,13 @@ function showTourImage() {
 			                    </div>`)
 					}
 				})
+			} else {
+				$('.tourCarouselBtn').hide()
+				
+				tourImageArr.push(
+					`<div class='carousel-item active'>
+                        <img src='<c:url value="/attach/` + tourImages[0] + `"/>'style="max-width:100%; height:100%;"/>
+                    </div>`)
 			}
 			$('#tourImages').empty()
 			$('#tourImages').append(tourImageArr.join(''))

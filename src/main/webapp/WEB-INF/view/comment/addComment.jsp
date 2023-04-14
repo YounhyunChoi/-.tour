@@ -2,7 +2,6 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
-<meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'/>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css'/>
@@ -13,29 +12,28 @@
 <script src='../res/navigation.js'></script>
 <script src='../res/modal.js'></script>
 <script>
-    $(() => {
-    	$('#addComment').click(() => {
-    		if($('#comtContent').val()){
-    			$.ajax({
-        			url: 'add',
-        			method: 'post',
-        			data: {
-        				comtContent: $('#comtContent').val(),
-        				reviewNum: ${param.reviewNum}
-        			}
-        		})
-        		$('#addComment').attr('href', '../review/view?reviewNum=${param.reviewNum}')
-    		} else {
-    			showOkModal('댓글을 입력해주세요.')
-    		}
-    	})
-    })
+$(() => {
+	$('#addComment').click(() => {
+		if($('#comtContent').val()){
+			$.ajax({
+    			url: 'add',
+    			method: 'post',
+    			data: {
+    				comtContent: $('#comtContent').val(),
+    				reviewNum: ${param.reviewNum}
+    			}
+    		})
+    		$('#addComment').attr('href', '../review/view?reviewNum=${param.reviewNum}')
+		} else {
+			showOkModal('댓글을 입력해주세요.')
+		}
+	})
+})
 </script>
 <title>댓글쓰기</title>
 </head>
 <body>
-<header>
-</header>
+<header></header>
 <div class='navigation fixed-top'>
    <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
    <div class='menuName'>
@@ -56,7 +54,6 @@
     </div>
 </div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

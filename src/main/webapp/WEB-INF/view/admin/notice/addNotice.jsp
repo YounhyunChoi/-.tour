@@ -37,7 +37,7 @@ function showNoticeImage() {
 					}
 				})
 			} else {
-				$('.bi').hide()
+				$('.noticeCarouselBtn').hide()
 			
 				noticeImageArr.push(
 						`<div class='carousel-item active'>
@@ -194,7 +194,6 @@ $(() => {
         </div>
    </div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

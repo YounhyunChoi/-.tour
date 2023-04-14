@@ -39,7 +39,7 @@ function showNoticeImage() {
 					}
 				})
 			} else {	
-				$('.bi').hide()
+				$('.noticeCarouselBtn').hide()
 			
 				noticeImageArr.push(
 						`<div class='carousel-item active'>

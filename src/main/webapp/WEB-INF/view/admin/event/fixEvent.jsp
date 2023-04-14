@@ -23,7 +23,7 @@ function showEventImage() {
 		success: eventImages => {
 			const eventImageArr = []
 			if(eventImages.length != 1){
-				$('.bi').show()
+				$('.eventCarouselBtn').show()
 				
 				$.each(eventImages, (i, eventImage) => {
 					if(i == 1){

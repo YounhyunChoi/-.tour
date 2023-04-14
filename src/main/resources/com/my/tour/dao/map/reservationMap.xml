@@ -17,6 +17,7 @@
 			on r.tour_num = t.tour_num
 			left outer join tour.tour_images ti
 			on t.tour_num = ti.tour_num
+			where r.user_id = #{userId}
 			order by resv_num desc
 	</select>
 	

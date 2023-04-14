@@ -82,6 +82,34 @@ $.ajax({
 	               메인 페이지로 가기
 	           </a>
 	       </div>`
+					
+					reviewhtml +=`			</p>
+				    					<p class='mb-0'>\${review.userId}</p>
+				                	</div>
+				            	</div>
+				            	<div class='row'>
+				                	<p class='text-end'>
+				                    	작성일 \${review.reviewDate}
+				                	</p>
+				            	</div>
+				       	 	</div>
+				    	</div>`
+				})
+			} else {
+				reviewhtml += `<div class='col text-center'>
+	                <i class='bi bi-chat-dots'></i>
+	                <h3 class='my-3'>
+	                    작성된 후기가 없습니다.
+	                </h3>
+	            </div>
+	            <div class='col text-center mt-5'>
+		           <a type='button' href='/'
+		               class='px-5 py-2 border-0 rounded btn-darkBlue text-center text-white'>
+		               메인 페이지로 가기
+		           </a>
+		       </div>`
+			}
+			$('.container').eq(1).append(reviewhtml)
 		}
 		$('.container').append(reviewhtml)
 	}

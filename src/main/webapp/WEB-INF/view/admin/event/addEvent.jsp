@@ -37,7 +37,7 @@ function showEventImage() {
 					}
 				})
 			} else {
-				$('.bi').hide()
+				$('.eventCarouselBtn').hide()
 			
 				eventImageArr.push(
 						`<div class='carousel-item active'>

@@ -82,6 +82,79 @@ $.ajax({
 	  		}
 	  	})
 	}
+	
+$(() => {
+	$.ajax({
+		url: 'getNotice',
+		data: {
+			noticeNum: ${param.noticeNum}
+		},
+		dataType: 'json',
+		success: notices => {
+			const noticeArr = []
+			let notice = notices.at(0)
+				noticeArr.push(
+			        `<h3 class='noticeName'>
+			        	<sapn id='noticeNum'><b>\${notice.noticeNum}.</b></span>
+			        	<b>\${notice.noticeTitle}</b>
+			        </h3>
+			        <span class='col noticeDate'>
+			            <p>작성일 \${notice.noticeDate}</p>
+			        </span>
+			        <hr>
+			        <div class='row mb-2' id='cardImg'>
+		            	<div class='col'>
+		                	<div class='row me-0 py-2' id='noticeImg' style='height: 14rem;'>`)
+		  	$.ajax({
+		  		url: 'getNoticeImage',
+		  		data: {
+		  			noticeNum: ${param.noticeNum}
+		  		},
+		  		dataType: 'json',
+		  		success: noticeImages => {
+		  			if(!noticeImages.length) {
+		  				$(() => {
+		  					$('#noticeImg').hide()
+		  				})
+		  			} else if(noticeImages.length != 1) {
+		  				noticeArr.push(`<div class='carousel slide' id='noticeCarousel' data-ride='carousel'>
+		                        <div class='carousel-inner noticeImg'>`)
+						$.each(noticeImages, (i, noticeImage) => {
+							if(i == 1) {
+								noticeArr.push(
+										`<div class='carousel-item active'>
+					                        <img src='<c:url value="/attach/` + noticeImage + `"/>' style="max-width:100%; height:100%;"/>
+					                    </div>`)
+							} else {
+								noticeArr.push(
+										`<div class='carousel-item'>
+					                        <img src='<c:url value="/attach/` + noticeImage + `"/>' style="max-width:100%; height:100%;"/>
+					                    </div>`)
+							}
+						})
+		                noticeArr.push(`</div>
+		                        <a href='#noticeCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+		                            <i class="bi bi-chevron-left tourCarouselBtn"></i>
+		                            <div class="visually-hidden">Previous</div>
+		                        </a>
+		                        <a href='#noticeCarousel' class='carousel-control-next' data-bs-slide='next'>
+		                            <i class="bi bi-chevron-right tourCarouselBtn"></i>
+		                            <div class="visually-hidden">Next</div>
+		                        </a>
+		                    </div>`)                   
+		  			} else {
+		  				noticeArr.push(`<img src='<c:url value="/attach/` + noticeImages[0] + `"/>' style="max-width:100%; height:100%;"/>`)
+		  			}
+		  			noticeArr.push(`
+	  							</div>
+				            </div>
+				        </div>
+					    <span>\${notice.noticeContent}</span>`)
+					$('#noticeView').append(noticeArr.join(''))
+		  		}
+		  	})
+		}
+	})
 })
 </script>
 <title>공지 조회</title>

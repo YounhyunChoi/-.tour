@@ -18,6 +18,30 @@ $.ajax({
 		let tourText = ""
 		
 		if(tours.length) {
+
+$(() => {
+	$.ajax({
+		url: 'tour/getList',
+		success: tours => {
+			const tourArr = []
+			let tourText = ""
+			
+			if(tours.length) {
+				$.each(tours, (i, tour) => {
+					tourArr.push(
+						`<div class='col-5 p-1 d-flex-column tourText pb-4' id='tourItem\${tour.tourNum}'>
+							<div class='mt-2'>
+								<img class='rounded-1 shadow-sm' src='<c:url value="/attach/` + tour.tourImageName + `"/>' style="max-width:90%; height:90%;"/>
+							</div>
+							<div class='text-truncate align-middle pt-2'>\${tour.tourName}</div>
+						</div>`
+					)
+				})
+				$('#tourContainer').append(tourArr.join(''))
+			} else {
+				$('#tourContainer').append('<p class=mt-5><h5 class=text-center>등록된 여행상품이 없습니다.</h5></p><br><hr>')
+			}
+			
 			$.each(tours, (i, tour) => {
 				tourArr.push(
 					`<div class='col-5 p-1 d-flex-column tourText pb-4' id='tourItem\${tour.tourNum}'>

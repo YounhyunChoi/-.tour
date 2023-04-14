@@ -16,54 +16,49 @@
 $(() => {
 	selectScore()
 	
-	let resvReview
-	$.ajax({
-		url: 'getReviewByResv',
-		method: 'get',
-		data: {
-			resvNum: ${param.resvNum}
-		},
-		success: review => {
-			if(review.length) {
-				$(location).attr('href', 'my?reviewErrMsg=이미+작성된+여행코스+리뷰입니다.')
-			}
-		}
-	})
-	
     $('#reviewAddBtn').click(() => {  
     	let regexr = /[a-zA-Z가-힣0-9]{5}/
-    	
-       	if(regexr.test($('#reviewTitle').val()) && $('#reviewContent').val()) {
-       		$.ajax({
-       			url: 'add',
-       			method: 'post',
-       			data: {
-   	   				reviewTitle: $('#reviewTitle').val(),
-   	   				reviewContent: $('#reviewContent').val(),
-   	   				score: $('#rangeScore').val(),
-   	   				tourNum: ${param.tourNum},
-   	   				resvNum: ${param.resvNum}
-       	       	},
-       			success: () => {
-       				let formData = new FormData($('#reviewImageUp')[0])
-       				
-       				$.ajax({
-       					url: 'addReviewImages',
-       					method: 'post',
-       					contentType: false,
-       					processData: false,
-       					data: formData,
-       					success: isGood => {
-           					$(location).attr('href', 'my')	
-       					}
-       				})
-       			}
-       		})
-       	} else {
-       		showOkModal('제목이 5자리 미만이거나 특수문자가 포함되어 있습니다.')
-       	}
-    })
-    
+   		$.ajax({
+   			url: 'getReviewByResv',
+   			method: 'get',
+   			data: {
+   				resvNum: ${param.resvNum}
+   			},
+   			success: review => {
+   				if(review.length) {
+   					$(location).attr('href', 'my?reviewErrMsg=이미+작성된+여행코스+리뷰입니다.')
+   				} else if(regexr.test($('#reviewTitle').val()) && $('#reviewContent').val()) {
+   		       		$.ajax({
+   		       			url: 'add',
+   		       			method: 'post',
+   		       			data: {
+   		   	   				reviewTitle: $('#reviewTitle').val(),
+   		   	   				reviewContent: $('#reviewContent').val(),
+   		   	   				score: $('#rangeScore').val(),
+   		   	   				tourNum: ${param.tourNum},
+   		   	   				resvNum: ${param.resvNum}
+   		       	       	},
+   		       			success: () => {
+   		       				let formData = new FormData($('#reviewImageUp')[0])
+   		       				
+   		       				$.ajax({
+   		       					url: 'addReviewImages',
+   		       					method: 'post',
+   		       					contentType: false,
+   		       					processData: false,
+   		       					data: formData,
+   		       					success: isGood => {
+   		           					$(location).attr('href', 'my')	
+   		       					}
+   		       				})
+   		       			}
+   		       		})
+   		       	} else {
+   		       		showOkModal('제목이 5자리 미만이거나 특수문자가 포함되어 있습니다.')
+   		       	}
+   		    }
+		})
+	})
     $('#rangeScore').change(selectScore)
 })
 

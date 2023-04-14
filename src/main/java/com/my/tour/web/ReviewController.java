@@ -122,6 +122,11 @@ public class ReviewController {
       } catch(IOException e) {}
    }
    
+   @GetMapping("get")
+   public List<ReviewDto> getReviews() {
+	   return reviewService.getReviews();
+   }
+   
    @GetMapping("getReviewDto")
    public List<ReviewDto> getReviewDto(int reviewNum) {
       return reviewService.getReview(reviewNum);
@@ -137,6 +142,12 @@ public class ReviewController {
    @PutMapping("fix")
    public void fixReview(@RequestBody Review review) {
       reviewService.fixReview(review);
+   }
+   
+   @GetMapping("list")
+   public ModelAndView reviewList(ModelAndView mv) {
+	   mv.setViewName("review/reviewList");
+	   return mv;
    }
    
    @GetMapping("view")

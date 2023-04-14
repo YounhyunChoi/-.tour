@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.my.tour.domain.Reservation;
 import com.my.tour.domain.Review;
 import com.my.tour.domain.ReviewDto;
+import com.my.tour.domain.ReviewImage;
 import com.my.tour.service.ReviewService;
 
 import jakarta.servlet.http.HttpSession;
@@ -116,15 +117,20 @@ public class ReviewController {
       } catch(IOException e) {}
    }
 	
-	@GetMapping("get")
-	public ModelAndView getReview(ModelAndView mv) {
-		mv.setViewName("review/getReview");
+	@GetMapping("view")
+	public ModelAndView getReview(ModelAndView mv, int reviewNum) {
+		mv.addObject("review", reviewService.getReview(reviewNum).get(0));
+		
+		List<ReviewImage> reviewImages = reviewService.getReviewImages(reviewNum);
+		
+		if(reviewImages.size() != 0) {
+			mv.addObject("reviewImageName", 
+					reviewImages.get(0).getReviewImageName());
+		}
+		
+		mv.setViewName("review/reviewView");
+		
 		return mv;
-	}
-	
-	@PostMapping("get")
-	public List<Review> getReviews() {
-		return reviewService.getReviews();
 	}
 	
 	@GetMapping("fix")

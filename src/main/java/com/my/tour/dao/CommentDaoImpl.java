@@ -14,13 +14,8 @@ public class CommentDaoImpl implements CommentDao{
 	@Autowired private CommentMap commentMap;
 	
 	@Override
-	public List<Comment> selectComments() {
-		return commentMap.selectComments();
-	}
-	
-	@Override
-	public List<Comment> selectComment(int reviewNum){
-		return commentMap.selectComment(reviewNum);
+	public List<Comment> selectComments(int reviewNum) {
+		return commentMap.selectComments(reviewNum);
 	}
 
 	@Override

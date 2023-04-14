@@ -11,7 +11,7 @@ import com.my.tour.domain.Tour;
 public interface ReviewService {
 	List<Review> getReviews();
 	List<Review> getReviews(int resvNum);
-	List<Review> getReview(int reviewNum);
+	List<ReviewDto> getReview(int reviewNum);
 	List<ReviewDto> getMyReviews(String userId);
 	List<ReviewDto> getMyReview(String userId, int tourNum);
 	List<ReviewImage> getReviewImages(int reviewNum);

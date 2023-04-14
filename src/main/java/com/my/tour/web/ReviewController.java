@@ -160,12 +160,6 @@ public class ReviewController {
    public List<Comment> getComments(int reviewNum) {
 	   return reviewService.getComments(reviewNum);
    }
-	
-	@GetMapping("fix")
-	public ModelAndView fixReview(ModelAndView mv) {
-		mv.setViewName("review/fixReview");
-		return mv;
-	}
 
 	@DeleteMapping("del/{reviewNum}")
 	public void delReview(@PathVariable int reviewNum) {

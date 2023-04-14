@@ -5,7 +5,9 @@
 	<select id='selectComments' resultType='comment'>
 		select user_id, comt_num, comt_content, comt_date
 		from comments
-		where review_num = #{reveiwNum}
+		<if test='reviewNum != null'>
+			where review_num = #{reveiwNum}
+		</if>
 		order by comt_num desc
 	</select>
 	

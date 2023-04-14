@@ -20,6 +20,11 @@ public class CommentServiceImpl implements CommentService{
 	@Autowired private ReviewImageDao reviewImageDao;
 	
 	@Override
+	public List<Comment> getComments() {
+		return commentDao.selectComments();
+	}
+	
+	@Override
 	public List<Comment> getComments(int reviewNum) {
 		return commentDao.selectComments(reviewNum);
 	}

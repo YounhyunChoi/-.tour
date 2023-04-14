@@ -37,6 +37,11 @@ public class CommentController {
 		return commentService.addComment(comtContent, (String) session.getAttribute("userId"), reviewNum);
 	}
 	
+	@GetMapping("list")
+	public List<Comment> getCommentList() {
+		return commentService.getComments();
+	}
+	
 	@GetMapping("get")
 	public List<Comment> getComments(int reviewNum) {
 		return commentService.getComments(reviewNum);

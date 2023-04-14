@@ -12,14 +12,15 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script>
-function commentList() {	
+$(()=> {
 	$.ajax({
-		url: 'get',
+		url: 'list',
+		dataType: 'json',
 		success: commentList => {
 			if(commentList.length) {
 				comments = []
 				$.each(commentList, (i, comment) => {
-					comments.unshift(
+					comments.push(
 							`<tr>
 		                    <td>\${comment.comtNum}</td>
 		                    <td>\${comment.comtContent}</td>
@@ -39,30 +40,8 @@ function commentList() {
 					
 		}
 	})
-}
-
-$(() => {
-	commentList()
-	
-	$('#searchBtn').click(() => {
-		if($('#comtSearch').val()) {
-			$.ajax({
-				url: 'get',
-				success: comments => {
-					if(comments.length) {
-						$('#mainBody').empty()
-						
-						$.each(comments, (i, comment) => {
-							const comtSearchArr = []
-							
-							if((comment.comt))
-						}) 
-					}
-				}
-			})
-		}
-	})
 })
+
 </script>
 <title>댓글</title>
 <style>
@@ -149,35 +128,6 @@ $(() => {
             </tbody>
         </table>
     </div>
-    <nav aria-label='Page navigation example'>
-        <ul class='pagination d-flex justify-content-center  mt-5' id='indexNum'>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Previous'>
-                    <span aria-hidden='true'>&laquo;</span>
-                </a>
-            </li>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Previous'>
-                    <span aria-hidden='true'>&lsaquo;</span>
-                </a>
-            </li>
-            <li class='page-item'><a class='page-link' href='#'>1</a></li>
-            <li class='page-item'><a class='page-link' href='#'>2</a></li>
-            <li class='page-item'><a class='page-link' href='#'>3</a></li>
-            <li class='page-item'><a class='page-link' href='#'>4</a></li>
-            <li class='page-item'><a class='page-link' href='#'>5</a></li>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Next'>
-                    <span aria-hidden='true'>&rsaquo;</span>
-                </a>
-            </li>
-            <li class='page-item'>
-                <a class='page-link' href='#' aria-label='Next'>
-                    <span aria-hidden='true'>&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>
 <footer>
 </footer>

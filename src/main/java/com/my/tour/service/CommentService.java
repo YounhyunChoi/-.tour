@@ -8,6 +8,7 @@ import com.my.tour.domain.ReviewDto;
 import com.my.tour.domain.ReviewImage;
 
 public interface CommentService {
+	List<Comment> getComments();
 	List<Comment> getComments(int reviewNum);
 	List<CommentDto> getCommentDto(int comtNum);
 	List<ReviewDto> getReview(int reviewNum);

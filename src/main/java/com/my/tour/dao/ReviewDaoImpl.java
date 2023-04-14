@@ -45,8 +45,8 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	
 	@Override
-	public void updateReview(String reviewTitle, String reviewContent, double score) {
-		reviewMap.updateReview(reviewTitle, reviewContent, score);
+	public void updateReview(Review reivew) {
+		reviewMap.updateReview(reivew);
 	}
 	
 	@Override

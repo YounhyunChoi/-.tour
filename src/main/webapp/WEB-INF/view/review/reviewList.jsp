@@ -194,7 +194,6 @@
         </ul>
     </nav>
 </div>
-</div>
 <footer>
 </footer>
 </body>

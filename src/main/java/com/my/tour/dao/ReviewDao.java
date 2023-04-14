@@ -13,6 +13,6 @@ public interface ReviewDao {
 	List<ReviewDto> selectMyReview(String userId, int tourNum);
 	void insertReview(String reviewTitle, String reviewContent, double score,
 					String userId, int tourNum, int resvNum);
-	void updateReview(String reviewTitle, String reviewContent, double score);
+	void updateReview(Review reivew);
 	void deleteReview(int reviewNum);
 }

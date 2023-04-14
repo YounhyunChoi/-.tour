@@ -104,7 +104,7 @@ function wishList() {
 			            </div>
 			            <div class='col text-center mt-5'>
 			                <button id='mypageBtn' type='button' class='px-5 py-2 border-0 rounded text-center text-white btn-darkBlue'
-			                	onclick="location.href='../user/mypage'">
+			                	onclick="location.href='../user/myPage'">
 			                	마이 페이지로 가기
 			                </button>
 			            </div>

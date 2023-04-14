@@ -92,7 +92,7 @@ $(() => {
 					if(i < 3) {
 						html += `
 							<li value='\${event.eventNum}'>
-	                            <a href='../event/fixEvent?eventNum=\${event.eventNum}'>
+	                            <a href='../event/fix?eventNum=\${event.eventNum}'>
 	                            	\${event.eventTitle}
 	                            </a>
 	                            <p></p>

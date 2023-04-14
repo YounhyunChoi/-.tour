@@ -27,7 +27,7 @@ $(() => {
   
    $('#paymentBtn').click(() => {
 	   if(`${userId}`){
-		   showConfirmModal('결제하시겠습니까?', '여행코스가 예약되었습니다.', 'list')
+		   showConfirmModal('결제하시겠습니까?', 'list')
 		   $('#okBtn').click(() => {			   
 			   $.ajax({
 					url: 'add',

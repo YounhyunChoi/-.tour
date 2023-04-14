@@ -51,7 +51,7 @@
                 <h2 class='m-0'>예약내역</h2>
             </div>
             <div class='col-2'>
-                <a href='../reservation/02.html'>
+                <a href='../reservation/list'>
                     <i class='bi bi-chevron-right myPageIcon'></i>
                 </a>
             </div>
@@ -64,7 +64,7 @@
                 <h2 class='m-0'>찜내역</h2>
             </div>
             <div class='col-2'>
-                <a href='../wish/01.html'>
+                <a href='../wish'>
                     <i class='bi bi-chevron-right myPageIcon'></i>
                 </a>
             </div>

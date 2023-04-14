@@ -167,10 +167,10 @@ $.ajax({
 	                        <a class='nav-link' aria-current='page' href='../reservation/list'>예약내역</a>
 	                    </li>
 	                    <li>
-	                        <a class='nav-link' aria-current='page' href='../'>찜 내역</a>  
+	                        <a class='nav-link' aria-current='page' href='../wish'>찜 내역</a>  
 	                    </li>
 	                    <li>
-	                        <a class='nav-link' aria-current='page' href='../'>내가 쓴 후기</a> 
+	                        <a class='nav-link' aria-current='page' href='../review/my'>내가 쓴 후기</a> 
 	                    </li>
 	                </ul>
 	            </li>    
@@ -232,7 +232,7 @@ $.ajax({
     <div class='col'>
         <div class='navbar nav-item fixed-bottom mb-0 list-style-none' id='navbarFooter'>
             <div class='ps-2'>
-                <a href='#' class='btn w-auto' type='button'>
+                <a href='../tour' class='btn w-auto' type='button'>
                     <i class='icon bi-geo-alt-fill fa-3x'></i>
                 </a>
             </div>

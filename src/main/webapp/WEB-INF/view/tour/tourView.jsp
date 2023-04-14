@@ -271,10 +271,6 @@ $(() => {
 </script>
 <title>TOUR.02 여행코스 조회</title>
 <style>
-    #navBackBtn {
-        cursor: pointer;
-    }
-
     #tourImg {
         border: .1rem solid;
         margin: 1rem;

@@ -33,7 +33,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<Review> getReview(int reviewNum) {
+	public List<ReviewDto> getReview(int reviewNum) {
 		return reviewDao.selectReview(reviewNum);
 	}
 

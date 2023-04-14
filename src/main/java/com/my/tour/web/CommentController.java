@@ -37,8 +37,8 @@ public class CommentController {
 	}
 	
 	@GetMapping("get")
-	public List<Comment> getComments() {
-		return commentService.getComments();
+	public List<Comment> getComments(int reviewNum) {
+		return commentService.getComments(reviewNum);
 	}
 	
 	@GetMapping("fix")
@@ -81,10 +81,5 @@ public class CommentController {
 		mv.addObject("comment", commentService.getCommentDto(comtNum).get(0)); 
 		
 		return mv;
-	}
-	
-	@GetMapping("adminGet")
-	public List<Comment> getComment(int comtNum) {
-		return commentService.getComment(comtNum);
 	}
 }

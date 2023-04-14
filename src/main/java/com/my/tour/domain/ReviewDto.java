@@ -9,6 +9,7 @@ public class ReviewDto {
 	private int reviewNum;
 	private String tourName;
 	private String reviewTitle;
+	private String reviewContent;
 	private double score;
 	private LocalDate reviewDate;
 	private String userId;

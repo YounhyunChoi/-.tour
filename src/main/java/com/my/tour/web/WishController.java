@@ -20,8 +20,7 @@ import jakarta.servlet.http.HttpSession;
 @RestController("WishController")
 @RequestMapping("wish")
 public class WishController {
-	@Autowired
-	private WishService wishService;
+	@Autowired private WishService wishService;
 	
 	@GetMapping("get")
 	@GetAccess

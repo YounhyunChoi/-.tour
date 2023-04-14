@@ -21,7 +21,6 @@ import com.my.tour.service.ReservationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-
 @RestController
 @RequestMapping("reservation")
 public class ReservationController {
@@ -45,7 +44,6 @@ public class ReservationController {
 	public List<ReservationDto> getReservations(HttpServletRequest request, String userId) {
 		return reservationService.getResvsWithTour(userId);
 	}
-	
 	
 	@GetMapping("list")
 	@AdminAccess

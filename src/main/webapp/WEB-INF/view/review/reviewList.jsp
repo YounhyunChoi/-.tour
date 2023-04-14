@@ -10,83 +10,81 @@
 <link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
 <script>
-$(() => {
-	$.ajax({
-		url: 'get',
-		dataType: 'json',
-		success: reviews => {
-			let reviewhtml = ''
-			if(reviews.length) {
-				$.each(reviews, (i, review) => {
-					reviewhtml += `<div class='row mx-2 mt-3 shadow-sm border'>
-								<div class='col'>
-					            	<div class='row align-items-center border-bottom'>
-				                		<div class='col-4 fs-6'>후기번호 `
-				                	
-				   	for(i = (review.reviewNum + '').length; i < 4; i++) {
-				   		reviewhtml += `0`
-				   	}
-				                	
-				   	reviewhtml +=            `\${review.reviewNum}</div>
-				                	<div class='col'>\${review.tourName}</div>
-				                	<div class='col-4 text-end'>
-				                    	<a type='button' class='border-0 bg-white' href='view?reviewNum=\${review.reviewNum}'>
-				                        <span class='fs-5'>상세보기</span>
-				                        <i class='bi bi-chevron-right viewDetailBtn'></i>
-				                    	</a>
-				                	</div>
-				            	</div>
-				            	<div class='row mt-2'>`				    
-				    
-				    if(review.reviewImageName) {
-				    	reviewhtml += 	`<div class='col-3 me-4'>
-		                    			<div class='reviewImage'><img src='<c:url value="/attach/\${review.reviewImageName}"/>'/></div>
-			                		</div>`
-				    }
-				                	
-			        reviewhtml +=		`<div class='col ms-2 fs-5 text-left'>
-				                    	<p class='mb-0'>제목 \${review.reviewTitle}</p>
-				                    	<p class='mb-0 d-flex align-items-center'>평점&nbsp`
-	
-					for(let i = 0; i < 5; i++) {
-						if(review.score - i >= 1) {
-							reviewhtml += `<i class='bi bi-star-fill'></i>`
-						} else if(review.score - i == 0.5) {
-							reviewhtml += `<i class='bi bi-star-half'></i>`
-						} else {
-							reviewhtml += `<i class='bi bi-star'></i>`
-						}
+$.ajax({
+	url: 'get',
+	dataType: 'json',
+	success: reviews => {
+		let reviewhtml = ''
+		if(reviews.length) {
+			$.each(reviews, (i, review) => {
+				reviewhtml += `<div class='row mx-2 mt-3 shadow-sm border'>
+							<div class='col'>
+				            	<div class='row align-items-center border-bottom'>
+			                		<div class='col-4 fs-6'>후기번호 `
+			                	
+			   	for(i = (review.reviewNum + '').length; i < 4; i++) {
+			   		reviewhtml += `0`
+			   	}
+			                	
+			   	reviewhtml +=            `\${review.reviewNum}</div>
+			                	<div class='col'>\${review.tourName}</div>
+			                	<div class='col-4 text-end'>
+			                    	<a type='button' class='border-0 bg-white' href='view?reviewNum=\${review.reviewNum}'>
+			                        <span class='fs-5'>상세보기</span>
+			                        <i class='bi bi-chevron-right viewDetailBtn'></i>
+			                    	</a>
+			                	</div>
+			            	</div>
+			            	<div class='row mt-2'>`				    
+			    
+			    if(review.reviewImageName) {
+			    	reviewhtml += 	`<div class='col-3 me-4'>
+	                    			<div class='reviewImage'><img src='<c:url value="/attach/\${review.reviewImageName}"/>'/></div>
+		                		</div>`
+			    }
+			                	
+		        reviewhtml +=		`<div class='col ms-2 fs-5 text-left'>
+			                    	<p class='mb-0'>제목 \${review.reviewTitle}</p>
+			                    	<p class='mb-0 d-flex align-items-center'>평점&nbsp`
+
+				for(let i = 0; i < 5; i++) {
+					if(review.score - i >= 1) {
+						reviewhtml += `<i class='bi bi-star-fill'></i>`
+					} else if(review.score - i == 0.5) {
+						reviewhtml += `<i class='bi bi-star-half'></i>`
+					} else {
+						reviewhtml += `<i class='bi bi-star'></i>`
 					}
-				    	
-					reviewhtml +=`			</p>
-				    					<p class='mb-0'>\${review.userId}</p>
-				                	</div>
-				            	</div>
-				            	<div class='row'>
-				                	<p class='text-end'>
-				                    	작성일 \${review.reviewDate}
-				                	</p>
-				            	</div>
-				       	 	</div>
-				    	</div>`
-				})
-			} else {
-				reviewhtml += `<div class='col text-center'>
-	                <i class='bi bi-chat-dots'></i>
-	                <h3 class='my-3'>
-	                    작성된 후기가 없습니다.
-	                </h3>
-	            </div>
-	            <div class='col text-center mt-5'>
-		           <a type='button' href='/'
-		               class='px-5 py-2 border-0 rounded btn-darkBlue text-center text-white'>
-		               메인 페이지로 가기
-		           </a>
-		       </div>`
-			}
-			$('.container').append(reviewhtml)
+				}
+			    	
+				reviewhtml +=`			</p>
+			    					<p class='mb-0'>\${review.userId}</p>
+			                	</div>
+			            	</div>
+			            	<div class='row'>
+			                	<p class='text-end'>
+			                    	작성일 \${review.reviewDate}
+			                	</p>
+			            	</div>
+			       	 	</div>
+			    	</div>`
+			})
+		} else {
+			reviewhtml += `<div class='col text-center'>
+                <i class='bi bi-chat-dots'></i>
+                <h3 class='my-3'>
+                    작성된 후기가 없습니다.
+                </h3>
+            </div>
+            <div class='col text-center mt-5'>
+	           <a type='button' href='/'
+	               class='px-5 py-2 border-0 rounded btn-darkBlue text-center text-white'>
+	               메인 페이지로 가기
+	           </a>
+	       </div>`
 		}
-	})
+		$('.container').append(reviewhtml)
+	}
 })
 </script>
 <title></title>

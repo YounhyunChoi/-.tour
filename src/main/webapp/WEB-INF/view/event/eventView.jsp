@@ -10,80 +10,78 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../res/style.css' rel='stylesheet'/>
 <script>
-$(() => {
-	$.ajax({
-		url: 'getEvent',
-		data: {
-			eventNum: ${param.eventNum}
-		},
-		dataType: 'json',
-		success: events => {
-			const eventArr = []
-			let event = events.at(0)
-				eventArr.push(
-					`<h3 class='eventName'>
-			        	<sapn id='eventNum'><b>\${event.eventNum}.</b></span>
-			        	<b>\${event.eventTitle}</b>
-			        </h3>
-			        <span class='col eventDate'>
-			            <p>작성일 \${event.eventDate}</p>
-			        </span>
-			        <hr>
-			        <div class='row mb-2' id='cardImg'>
-	            		<div class='col'>
-	                		<div class='row me-0 py-2' id='eventImg' style='height: 10rem;'>`)
-	        $.ajax({
-	        	url: 'getEventImage',
-	        	data: {
-	        		eventNum: ${param.eventNum}
-	        	},
-	        	dataType: 'json',
-	        	success: eventImages => {
-	        		if(!eventImages.length){
-	        			$(() => {
-	        				$('#eventImg').hide()
-	        			})
-	        		} else if(eventImages.length != 1) {
-	        			eventArr.push(
-	        					`<div class='carousel slide' id='eventCarousel' data-ride='carousel'>
-		                        	<div class='carousel-inner eventImg'>`)
-		                $.each(eventImages, (i, eventImage) => {
-		                	if(i == 1) {
-		                		eventArr.push(
-		                				`<div class='carousel-item active'>
-				                        	<img src='<c:url value="/attach/` + eventImage + `"/>' style="max-width:100%; height:100%;"/>
-				                    	</div>`)
-		                	} else {
-		                		eventArr.push(
-		                				`<div class='carousel-item'>
-				                        	<img src='<c:url value="/attach/` + eventImage + `"/>' style="max-width:100%; height:100%;"/>
-				                    	</div>`)
-		                	}
-		                })
-		                eventArr.push(`</div>
-				                        <a href='#eventCarousel' class='carousel-control-prev' data-bs-slide='prev'>
-				                            <i class="bi bi-chevron-left eventCarouselBtn"></i>
-				                            <div class="visually-hidden">Previous</div>
-				                        </a>
-				                        <a href='#eventCarousel' class='carousel-control-next' data-bs-slide='next'>
-				                            <i class="bi bi-chevron-right eventCarouselBtn"></i>
-				                            <div class="visually-hidden">Next</div>
-				                        </a>
-				                    </div>`)
-	        		} else {
-	        			eventArr.push(`<img src='<c:url value="/attach/` + eventImages[0] + `"/>' style="max-width:100%; height:100%;"/>`)
-	        		}
-	        		eventArr.push(`
-	  							</div>
-				            </div>
-				        </div>
-					    <span>\${event.eventContent}</span>`)
-					$('#eventView').append(eventArr.join(''))
-	        	}
-	        })
-		}
+$.ajax({
+	url: 'getEvent',
+	data: {
+		eventNum: ${param.eventNum}
+	},
+	dataType: 'json',
+	success: events => {
+		const eventArr = []
+		let event = events.at(0)
+			eventArr.push(
+				`<h3 class='eventName'>
+		        	<sapn id='eventNum'><b>\${event.eventNum}.</b></span>
+		        	<b>\${event.eventTitle}</b>
+		        </h3>
+		        <span class='col eventDate'>
+		            <p>작성일 \${event.eventDate}</p>
+		        </span>
+		        <hr>
+		        <div class='row mb-2' id='cardImg'>
+            		<div class='col'>
+                		<div class='row me-0 py-2' id='eventImg' style='height: 10rem;'>`)
+        $.ajax({
+        	url: 'getEventImage',
+        	data: {
+        		eventNum: ${param.eventNum}
+        	},
+        	dataType: 'json',
+        	success: eventImages => {
+        		if(!eventImages.length){
+        			$(() => {
+        				$('#eventImg').hide()
+        			})
+        		} else if(eventImages.length != 1) {
+        			eventArr.push(
+        					`<div class='carousel slide' id='eventCarousel' data-ride='carousel'>
+	                        	<div class='carousel-inner eventImg'>`)
+	                $.each(eventImages, (i, eventImage) => {
+	                	if(i == 1) {
+	                		eventArr.push(
+	                				`<div class='carousel-item active'>
+			                        	<img src='<c:url value="/attach/` + eventImage + `"/>' style="max-width:100%; height:100%;"/>
+			                    	</div>`)
+	                	} else {
+	                		eventArr.push(
+	                				`<div class='carousel-item'>
+			                        	<img src='<c:url value="/attach/` + eventImage + `"/>' style="max-width:100%; height:100%;"/>
+			                    	</div>`)
+	                	}
+	                })
+	                eventArr.push(`</div>
+			                        <a href='#eventCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+			                            <i class="bi bi-chevron-left eventCarouselBtn"></i>
+			                            <div class="visually-hidden">Previous</div>
+			                        </a>
+			                        <a href='#eventCarousel' class='carousel-control-next' data-bs-slide='next'>
+			                            <i class="bi bi-chevron-right eventCarouselBtn"></i>
+			                            <div class="visually-hidden">Next</div>
+			                        </a>
+			                    </div>`)
+        		} else {
+        			eventArr.push(`<img src='<c:url value="/attach/` + eventImages[0] + `"/>' style="max-width:100%; height:100%;"/>`)
+        		}
+        		eventArr.push(`
+  							</div>
+			            </div>
+			        </div>
+				    <span>\${event.eventContent}</span>`)
+				$('#eventView').append(eventArr.join(''))
+        	}
+        })
+	}
 
-	})
 })
 </script>
 <script src='../res/navigation.js'></script>

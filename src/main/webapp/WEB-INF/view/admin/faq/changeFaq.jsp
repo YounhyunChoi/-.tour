@@ -25,40 +25,40 @@ $.ajax({
 })
 
 $(() => {
-$('#faqFixBtn').click(() => {
-		let questionRegExp = /[가-힣ㄱ-ㅎa-zA-Z0-9\s]{5,30}/
-	    if(questionRegExp.test($('#questionInput').val()) && $('#answerInput').val()){
-	    	$.ajax({
-	    		url: 'change',
-	    		method:'post',
-	    		data: {
-	    			oldFaqQuestion: `${param.faqQuestion}`,
-	    			newFaqQuestion: $('#questionInput').val(),
-	    			newFaqAnswer: $('#answerInput').val()
-	    		}
-	    	})    
-	    	location.href='adminList'
-	    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
-	    	showOkModal('제목과 내용을 입력해주세요.')
-	    } else if(!$('#answerInput').val()){
-	    	showOkModal('내용을 입력해주세요.')
-	    } else if(!questionRegExp.test($('#questionInput').val())){
-	    	showOkModal('제목을 5~30자의 영문, 한글, 숫자로 구성된 형태로 입력해주세요.')
-	    }
-})
+	$('#faqFixBtn').click(() => {
+			let questionRegExp = /[가-힣ㄱ-ㅎa-zA-Z0-9\s]{5,30}/
+		    if(questionRegExp.test($('#questionInput').val()) && $('#answerInput').val()){
+		    	$.ajax({
+		    		url: 'change',
+		    		method:'post',
+		    		data: {
+		    			oldFaqQuestion: `${param.faqQuestion}`,
+		    			newFaqQuestion: $('#questionInput').val(),
+		    			newFaqAnswer: $('#answerInput').val()
+		    		}
+		    	})    
+		    	location.href='adminList'
+		    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
+		    	showOkModal('제목과 내용을 입력해주세요.')
+		    } else if(!$('#answerInput').val()){
+		    	showOkModal('내용을 입력해주세요.')
+		    } else if(!questionRegExp.test($('#questionInput').val())){
+		    	showOkModal('제목을 5~30자의 영문, 한글, 숫자로 구성된 형태로 입력해주세요.')
+		    }
+	})
 	
-$('#faqDelBtn').click(() => {
-		showConfirmModal('FAQ를 삭제하시겠습니까?', 'adminList')
-      $('#okBtn').click(() => {
-      	$.ajax({
-      		url: 'del',
-      		method: 'delete',
-      		data: {
-      			faqQuestion: `${param.faqQuestion}`
-      		}
-      	})
-      })
-   })
+	$('#faqDelBtn').click(() => {
+			showConfirmModal('FAQ를 삭제하시겠습니까?', 'adminList')
+	      $('#okBtn').click(() => {
+	      	$.ajax({
+	      		url: 'del',
+	      		method: 'delete',
+	      		data: {
+	      			faqQuestion: `${param.faqQuestion}`
+	      		}
+	      	})
+	      })
+	 })
 })
 </script>
 <title>FAQ수정</title>
@@ -74,27 +74,27 @@ $('#faqDelBtn').click(() => {
 </head>
 <body>
 <header>
-    <div class='container-fluid'>
-        <div class='row'>
-            <div class='col'>
-                <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'>
-                        <a class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>로고이미지</a>
-                    </div>
-                    <h1 class='text-center pt-3 text-white'><b>FAQ수정</b></h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class='row'>
-        <div class='col'>
-            <div class='navigation fixed-top pt-2' id='subHeader'>
-                <h6 class='text-white p-2'>
-                    <a href='../user/adminMain'>메인</a> > <a href='../faq/adminList'>FAQ</a> > <a href=''>FAQ수정</a>
-                </h6>
-            </div>
-        </div>
-    </div>
+ <div class='container-fluid'>
+     <div class='row'>
+         <div class='col'>
+             <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
+                 <div class='float-start m-4 ms-4'>
+                     <a class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>로고이미지</a>
+                 </div>
+                 <h1 class='text-center pt-3 text-white'><b>FAQ수정</b></h1>
+             </div>
+         </div>
+     </div>
+ </div>
+ <div class='row'>
+     <div class='col'>
+         <div class='navigation fixed-top pt-2' id='subHeader'>
+             <h6 class='text-white p-2'>
+                 <a href='../user/adminMain'>메인</a> > <a href='../faq/adminList'>FAQ</a> > <a href=''>FAQ수정</a>
+             </h6>
+         </div>
+     </div>
+ </div>
 </header>
 <div class='row' id='mainBody'>
     <div class='col'>
@@ -132,7 +132,6 @@ $('#faqDelBtn').click(() => {
         </form>
    </div>
 </div>
-<footer>
-</footer>
+<footer></footer>
 </body>
 </html>

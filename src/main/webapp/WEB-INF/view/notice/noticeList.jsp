@@ -10,29 +10,25 @@
 <link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
 <script>
-$(() => {
-   	$.ajax({
-   		url: 'notice/get',
-   		dataType:'json',
-   		success: notices => {
-   			if(notices.length) {
-   				const noticeArr = []
-   				
-   				$.each(notices, (i, notice) => {
-   					noticeArr.push(
-					        	`<a href='notice/view?noticeNum=\${notice.noticeNum}' class='noticeName'><h4><b>\${notice.noticeNum}. \${notice.noticeTitle}</b></h4></a>
-					        	<span class='col noticeContent'>
-					            	<p><h5>\${notice.noticeContent}</h5></p><br>
-					            	<p>작성일 \${notice.noticeDate}</p>
-					        	</span>
-					        	<hr>`
-   							)
-   						})
-   				$('#notices').append(noticeArr.join(''))
-   			} else $('#notices').append(
-   					'<p><h5 class=text-center>게시된 공지사항이 없습니다.</h5></p><br><hr>')
-   		}
-   	})
+$.ajax({
+	url: 'notice/get',
+	dataType:'json',
+	success: notices => {
+		if(notices.length) {
+			const noticeArr = []
+			
+			$.each(notices, (i, notice) => {
+				noticeArr.push(
+		        	`<a href='notice/view?noticeNum=\${notice.noticeNum}' class='noticeName'><h4><b>\${notice.noticeNum}. \${notice.noticeTitle}</b></h4></a>
+		        	<span class='col noticeContent'>
+		            	<p><h5>\${notice.noticeContent}</h5></p><br>
+		            	<p>작성일 \${notice.noticeDate}</p>
+		        	</span>
+		        	<hr>`)
+			})
+			$('#notices').append(noticeArr.join(''))
+		} else $('#notices').append('<p><h5 class=text-center>게시된 공지사항이 없습니다.</h5></p><br><hr>')
+	}
 })
 </script>
 <title>공지 목록</title>

@@ -21,8 +21,7 @@ $.ajax({
 		if(reservationDtos.length) {
 			const resvDtoArr = []
 				$.each(reservationDtos, (i, reservationDto) => {
-					resvDtoArr.push(
-					`
+					resvDtoArr.push(`
 					<div class='row mt-4 d-flex flex-column shadow-sm border border-1'>
 				        <div class='col p-2 border-bottom'>
 				            <div class='row align-items-center'>	
@@ -51,9 +50,7 @@ $.ajax({
 				                </div>
 				            </div>
 				        </div>
-				    </div>
-					`
-					)					
+				    </div>`)					
 				})
 				$('#reservationContainer').append(resvDtoArr.join(''))
 				
@@ -63,15 +60,12 @@ $.ajax({
 			
 				$.each(reservationDtos, (i, reservationDto) => {
 					if($(`#resvBtnContainer\${reservationDto.resvNum}`).attr('whetherToCancel') == 'Y'){
-						$(`#resvBtnContainer\${reservationDto.resvNum}`).html(
-							`<span
-	                        class=' text-danger text-center'>취소됨</span>`
-	                        )
+						$(`#resvBtnContainer\${reservationDto.resvNum}`).html(`
+								<span class=' text-danger text-center'>취소됨</span>`)
 					}else if(presentDate.getTime() > new Date(reservationDto.tourEDate).getTime()){						
-						$(`#resvBtnContainer\${reservationDto.resvNum}`).html(
-								`<button type='button' id='reviewAddBtn\${reservationDto.resvNum}'
-		                        class='border border-0 rounded text-white reviewAddBtn'>후기등록</button>`
-		                        )
+						$(`#resvBtnContainer\${reservationDto.resvNum}`).html(`
+								<button type='button' id='reviewAddBtn\${reservationDto.resvNum}'
+		                        class='border border-0 rounded text-white reviewAddBtn'>후기등록</button>`)
 							}
 					$.ajax({
 						url: 'reviewGet',
@@ -106,9 +100,7 @@ $.ajax({
                             여행코스 보러 가기
                          </button>
                      </div>
-               </div>
-        	`
-        	)
+               </div>`)
 		}		
 	}
 })
@@ -136,8 +128,7 @@ $.ajax({
    }
 </style>
 </head>
-<header>
-</header>
+<header></header>
 <div class='navigation fixed-top'>
     <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn' onclick="location.href='../user/mypage.html'"></i></div>
     <div class='menuName'>

@@ -11,36 +11,33 @@
 <link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
 <script>
-$(() => {
-	$.ajax({
-		url: 'tour/getList',
-		success: tours => {
-			const tourArr = []
-			let tourText = ""
-			
-			if(tours.length) {
-				$.each(tours, (i, tour) => {
-					tourArr.push(
-						`<div class='col-5 p-1 d-flex-column tourText pb-4' id='tourItem\${tour.tourNum}'>
-							<div class='mt-2'>
-								<img class='rounded-1 shadow-sm' src='<c:url value="/attach/` + tour.tourImageName + `"/>' style="max-width:90%; height:90%;"/>
-							</div>
-							<div class='text-truncate align-middle pt-2'>\${tour.tourName}</div>
-						</div>`
-					)
-				})
-				$('#tourContainer').append(tourArr.join(''))
-			} else {
-				$('#tourContainer').append(`<div class='pt-3 text-center fs-3'>여행상품이 없습니다.</div>`)
-			}
-			
+$.ajax({
+	url: 'tour/getList',
+	success: tours => {
+		const tourArr = []
+		let tourText = ""
+		
+		if(tours.length) {
 			$.each(tours, (i, tour) => {
-				$(`#tourItem\${tour.tourNum}`).click(() => {
-					location.href = `tour/view?tourNum=\${tour.tourNum}`
-				})
+				tourArr.push(
+					`<div class='col-5 p-1 d-flex-column tourText pb-4' id='tourItem\${tour.tourNum}'>
+						<div class='mt-2'>
+							<img class='rounded-1 shadow-sm' src='<c:url value="/attach/` + tour.tourImageName + `"/>' style="max-width:90%; height:90%;"/>
+						</div>
+						<div class='text-truncate align-middle pt-2'>\${tour.tourName}</div>
+					</div>`)
 			})
+			$('#tourContainer').append(tourArr.join(''))
+		} else {
+			$('#tourContainer').append(`<div class='pt-3 text-center fs-3'>여행상품이 없습니다.</div>`)
 		}
-	})
+		
+		$.each(tours, (i, tour) => {
+			$(`#tourItem\${tour.tourNum}`).click(() => {
+				location.href = `tour/view?tourNum=\${tour.tourNum}`
+			})
+		})
+	}
 })
 </script>
 <title>여행코스 목록</title>

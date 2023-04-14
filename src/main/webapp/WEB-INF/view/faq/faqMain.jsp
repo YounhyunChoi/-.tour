@@ -58,8 +58,7 @@ $.ajax({
 			                </div>
 			            </div>
 			        </div>
-   					<hr class='row mt-3'>`
-                )
+   					<hr class='row mt-3'>`)
             })       
             $('#faqContainer').append(faqArr.join(''))	
 			$('hr').eq($('hr').length - 1).remove()
@@ -68,7 +67,7 @@ $.ajax({
             })
         } else {
         	$('#faqContainer').html(`
-        			<div class='row d-block my-5'>
+        		<div class='row d-block my-5'>
                      <div class='col text-center pt-4'>
                          <h3 class='my-3'>
                              자주묻는 질문이 없습니다.
@@ -83,7 +82,7 @@ $.ajax({
                </div>`)
         }
 	}
-   })
+})
 </script>
 <style>
     .card {

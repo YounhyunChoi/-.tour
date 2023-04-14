@@ -26,8 +26,7 @@ $.ajax({
 			            <span id='` + faqQuestion.replace(/ /gi, "") +  `' class='fs-2 align-self-center'>
 			                   \${faq.faqQuestion}
 			            </span>
-			        </div>
-					`)
+			        </div>`)
 			})
 			$('#faqContainer').append(faqArr.join(''))
 			$.each(faqs, (i, faq) => {
@@ -45,8 +44,7 @@ $.ajax({
                            	FAQ가 없습니다.
                        	</h3>
                    	</div>
-             		</div>
-           		`)
+             	</div>`)
 		}
 	}	
 })

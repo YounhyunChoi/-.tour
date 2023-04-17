@@ -116,11 +116,10 @@ $(() => {
 							}
 						}
 					})
-				}else{
+				} else {
 					showOkModal('로그인페이지로 이동합니다.', '../user/login')
 				}
 			})
-			
 		}
 	})
 	
@@ -263,13 +262,13 @@ $(() => {
 					})
 				})
 			} else {
-				$('#reviewContainer').append(`<hr><div class='text-center pt-3'><h5>등록된 후기가 없습니다.</h5></div>`)
+				$('#reviewContainer').append(`<div class='text-center fs-3'>등록된 후기가 없습니다.</div>`)
 			}
 		}
 	})	
 })
 </script>
-<title>TOUR.02 여행코스 조회</title>
+<title>여행코스 조회</title>
 <style>
     #tourImg {
         border: .1rem solid;
@@ -339,7 +338,7 @@ $(() => {
         </div>
     </div>
     <div id='reviewContainer'>
-	        <!-- 리뷰 리스트 -->
+		<!-- 리뷰 리스트 -->
     </div>
 </div>
 <footer></footer>

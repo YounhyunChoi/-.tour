@@ -28,7 +28,7 @@ function listNotice() {
 	                            </td>
 	                            <td>\${notice.noticeNum}</td>
 	                            <td>\${notice.noticeTitle}</td>
-	                            <td>\${notice.noticeContent}</td>
+	                            <td class='text-truncate' style='max-width: 150px'>\${notice.noticeContent}</td>
 	                            <td>\${notice.noticeDate}</td>
                         	</tr>`
                        )
@@ -56,7 +56,6 @@ $(() => {
 				url: 'get',
 				success: notices => {
 					if(notices.length) {
-						
 						$.each(notices, (i, notice) => {
 							const noticeSearchArr = []
 							if((notice.noticeTitle).includes($('#noticeSearch').val())) {
@@ -67,13 +66,19 @@ $(() => {
 			                            </td>
 			                            <td>\${notice.noticeNum}</td>
 			                            <td>\${notice.noticeTitle}</td>
-			                            <td>\${notice.noticeContent}</td>
+			                            <td class='text-truncate' style='max-width: 150px'>\${notice.noticeContent}</td>
 			                            <td>\${notice.noticeDate}</td>
 		                        	</tr>`)
-								}
+							} 
+							if(!noticeSearchArr.length) {
+								noticeSearchArr.push(
+										'<tr><td colspan=5 class=text-center>검색된 공지사항이 없습니다.</td></tr>')
 							}
+							
+							$('#notices').empty()
 							$('#notices').append(noticeSearchArr.join(''))
 						})
+						
 					}
 				}
 			})

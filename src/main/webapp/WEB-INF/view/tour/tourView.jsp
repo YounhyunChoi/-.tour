@@ -262,7 +262,7 @@ $(() => {
 					})
 				})
 			} else {
-				$('#reviewContainer').append(`<div class='text-center fs-3'>등록된 후기가 없습니다.</div>`)
+				$('#reviewContainer').append(`<hr><div class='text-center pt-3'><h5>등록된 후기가 없습니다.</h5></div>`)
 			}
 		}
 	})	

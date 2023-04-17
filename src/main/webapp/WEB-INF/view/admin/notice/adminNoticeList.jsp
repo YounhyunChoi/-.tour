@@ -56,7 +56,6 @@ $(() => {
 				url: 'get',
 				success: notices => {
 					if(notices.length) {
-						$('#notices').empty()
 						
 						$.each(notices, (i, notice) => {
 							const noticeSearchArr = []
@@ -71,10 +70,7 @@ $(() => {
 			                            <td>\${notice.noticeContent}</td>
 			                            <td>\${notice.noticeDate}</td>
 		                        	</tr>`)
-							} else {
-								$('#notices').empty()
-								noticeSearchArr.push(
-									'<tr><td colspan=5 class=text-center>검색된 공지사항이 없습니다.</td></tr>')
+								}
 							}
 							$('#notices').append(noticeSearchArr.join(''))
 						})

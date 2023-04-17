@@ -53,12 +53,11 @@ $(() => {
 			$.ajax({
 				url: 'getList',
 				success: tours => {
+					const tourSearchArr = []
+					let count = 0
+					
 					if(tours.length) {
-						$('#tourContent').empty()
-						
 						$.each(tours, (i, tour) => {
-							const tourSearchArr = []
-							
 							if((tour.tourName).includes($('#tourSearch').val())) {
 								tourSearchArr.push(
 									`<div class='col-3 p-1 d-flex-column tourText' id='tourItem\${tour.tourNum}'>
@@ -66,10 +65,21 @@ $(() => {
 						                <div class='text-truncate'>\${tour.tourName}</div>
 						            </div>`
 								)
+							} else {
+								count++
+								
+								if(count == tours.length) {
+									tourSearchArr.push(
+										`<div class='text-center fs-3'>검색된 여행상품이 없습니다.</div>`
+									)
+								}
 							}
-							$('#tourContent').append(tourSearchArr.join(''))
 						})
 						
+						$('#tourContent').empty()
+						$('#tourContent').append(tourSearchArr.join(''))
+						
+						//여행상품 조회로 이동
 						$.each(tours, (i, tour) => {
 							$(`#tourItem\${tour.tourNum}`).click(() => {
 								location.href = `fix?tourNum=\${tour.tourNum}`

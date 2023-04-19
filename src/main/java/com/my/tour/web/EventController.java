@@ -135,7 +135,7 @@ public class EventController {
 				filename = "event" + multipartFile.getOriginalFilename();
 				if(!filename.equals("event")) {
 					saveFile(attachPath + "/" + filename, multipartFile);
-					eventService.addEventImage(filename, eventNum);
+					eventService.addEventImages(filename, eventNum);
 				}
 			}
 			return true;

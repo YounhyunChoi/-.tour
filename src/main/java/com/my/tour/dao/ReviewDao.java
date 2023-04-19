@@ -8,7 +8,8 @@ import com.my.tour.domain.ReviewDto;
 public interface ReviewDao {
 	List<Review> selectReviews(int resvNum);
 	List<ReviewDto> selectReviewDtos();
-	List<ReviewDto> selectReview(int reviewNum);
+	List<ReviewDto> selectReviewByReviewNum(int reviewNum);
+	List<ReviewDto> selectReviewByTourNum(int tourNum);
 	List<ReviewDto> selectMyReviews(String userId);
 	List<ReviewDto> selectMyReview(String userId, int tourNum);
 	void insertReview(String reviewTitle, String reviewContent, double score,

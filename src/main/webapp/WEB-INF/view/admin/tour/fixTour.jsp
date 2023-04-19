@@ -84,7 +84,9 @@ $(() => {
 			contentType: false,
 			processData: false,
 			data: formData,
-			success: showTourImage
+			success: tourImages => {
+				showTourImage()
+			}
 		})
 	})
 	
@@ -110,7 +112,81 @@ $(() => {
 				contentType: 'application/json',
 				data: JSON.stringify(tour),
 				success: () =>  {
-					$(location).attr('href', 'adminList')
+					let html = `
+						<div class='col'>
+				            <div class='row py-4 mt-4' id='tourImg'>
+				                <div class='carousel slide' id='tourCarousel' data-ride='carousel'>
+				                    <div class='carousel-inner' id='tourImgIn'>`
+				    $.ajax({
+				    	url: 'getTourImages',
+						method: 'get',
+						data: {
+							tourNum: ${tourNum}
+						},
+						dataType: 'json',
+						success: tourImages => {
+							if(tourImages.length != 1) {
+						    	$.each(tourImages, (i, tourImage) => {
+						    		if(i == 0) {
+						    			html += 
+						    				`<div class='carousel-item active'">
+					                        	<img src='<c:url value="/attach/` + tourImage + `"/>' style="max-width:100%; height:100%;"/>
+						                    </div>`
+						    		} else {
+						    			html +=`
+						    				<div class='carousel-item'">
+						                        <img src='<c:url value="/attach/` + tourImage + `"/>' style="max-width:100%; height:100%;"/>
+						                    </div>`
+						    		}
+						    	})
+						    } else {
+						    	html += `<img src='<c:url value="/attach/` + tourImages[0] + `"/>' style="max-width:100%; height:100%;"/>`
+						    }
+							
+							html += `
+						    				</div>
+						                    <a href='#tourCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+						                        <i class="bi bi-chevron-left tourCarouselBtn"></i>
+						                        <div class="visually-hidden">Previous</div>
+						                    </a>
+						                    <a href='#tourCarousel' class='carousel-control-next' data-bs-slide='next'>
+						                        <i class="bi bi-chevron-right tourCarouselBtn"></i>
+						                        <div class="visually-hidden">Next</div>
+						                    </a>
+						                </div>
+						            </div>
+						        </div>
+						    </div>
+						    <div class='row'>
+						        <div class='col' id='tourContent'>	
+							        <div class='ms-3'>
+										<div class='d-block'>
+											<span><h5><b>` + $('#tourName').val() + `</h5></b></span>
+										</div>
+										<div class='d-block'>
+											기간:
+											<span>` + $('#tourSDate').val() + ` ~ ` + $('#tourEDate').val() + `</span>
+										</div>
+										<div class='d-block'>
+											가격:
+											<span id='tourPrice'>` + $('#tourPrice').val() + `</span>
+										</div>
+										<div class='d-block'>
+											내용:
+											<span>` + $('#tourContent').val() + `</span>
+										</div>
+									</div>
+						        </div>
+						    </div>
+					        <div class='mt-5 d-flex justify-content-end me-4'>
+								<a type='button' class='btn btn-darkblue' href='adminList'>
+			   	               		목록가기
+			   	           		</a>`
+						    $('#mainBody').html(html)  
+						}
+				    })
+				    
+				      
                 }
 			})
 		} else {

@@ -24,8 +24,13 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	
 	@Override
-	public List<ReviewDto> selectReview(int reviewNum) {
-		return reviewMap.selectReview(reviewNum);
+	public List<ReviewDto> selectReviewByReviewNum(int reviewNum) {
+		return reviewMap.selectReviewByReviewNum(reviewNum);
+	}
+	
+	@Override
+	public List<ReviewDto> selectReviewByTourNum(int tourNum) {
+		return reviewMap.selectReviewByTourNum(tourNum);
 	}
 
 	@Override

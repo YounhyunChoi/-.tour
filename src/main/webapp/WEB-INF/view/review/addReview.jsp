@@ -16,7 +16,7 @@ $(() => {
 	selectScore()
 	
     $('#reviewAddBtn').click(() => {  
-    	let regexr = /[a-zA-Z가-힣0-9]{5}/
+    	let regexr = /[a-zA-Z가-힣0-9\s]{5}/
    		$.ajax({
    			url: 'getReviewByResv',
    			method: 'get',

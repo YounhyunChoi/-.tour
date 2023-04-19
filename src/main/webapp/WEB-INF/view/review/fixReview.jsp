@@ -13,13 +13,13 @@
 <title>fixReview</title>
 <script>
 $(() => {
-   $('#reviewTitle').val(${review.reviewTitle})
-   $('#reviewContent').val(${review.reviewContent})
-   $('#rangeScore').val(${review.score})
+   $('#reviewTitle').val(`${review.reviewTitle}`)
+   $('#reviewContent').val(`${review.reviewContent}`)
+   $('#rangeScore').val(`${review.score}`)
    selectScore()
    
     $('#reviewFixBtn').click(() => {  
-       let regexr = /[a-zA-Z가-힣0-9]{5}/
+       let regexr = /[a-zA-Z가-힣0-9\s]{5}/
        
           if(regexr.test($('#reviewTitle').val()) && $('#reviewContent').val()) {
              $.ajax({
@@ -41,8 +41,8 @@ $(() => {
                       contentType: false,
                       processData: false,
                       data: formData,
-                      success: isGood => {
-                         $(location).attr('href', 'my')  
+                      success: () => {
+                    	  $(location).attr('href', 'view?reviewNum=${param.reviewNum}')  
                       }
                    })
                 }
@@ -105,7 +105,7 @@ function selectScore() {
 <body>
 <header></header>
 <div class='navigation fixed-top'>
-   <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left' onclick="location.href='../review/05.html'"></i></div>
+   <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' onclick="location.href='../review/05.html'"></i></div>
    <div class='menuName'>
       <h2 class='text-center pt-3'><b>후기 수정</b></h2>
    </div>

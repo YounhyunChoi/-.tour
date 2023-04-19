@@ -109,10 +109,10 @@ public class NoticeController {
 	//images
 	@GetMapping("getNoticeImage")
 	@AdminAccess
-	public List<String> getNoticeImages(int noticeNum){
+	public List<String> getNoticeImage(int noticeNum){
 		List<String> noticeImageName = new ArrayList<String>();
-		if(noticeService.getNoticeImages(noticeNum).size() != 0) {
-			for(NoticeImage noticeImage : noticeService.getNoticeImages(noticeNum)) {
+		if(noticeService.getNoticeImage(noticeNum).size() != 0) {
+			for(NoticeImage noticeImage : noticeService.getNoticeImage(noticeNum)) {
 				noticeImageName.add(noticeImage.getNoticeImageName());			
 			}
 		}

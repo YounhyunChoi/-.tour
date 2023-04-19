@@ -12,6 +12,8 @@
 <script src='../res/modal.js'></script>
 <script>
 $(() => {
+	$('#comtContent').val(`${param.comtContent}`)
+	
 	$('#deleteComment').click(() => {
    		showConfirmModal('댓글을 삭제하시겠습니까?', '../review/view?reviewNum=${param.reviewNum}')
    		
@@ -47,7 +49,7 @@ $(() => {
 <header>
 </header>
 <div class='navigation fixed-top'>
-   <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
+   <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
    <div class='menuName'>
       <h2 class='text-center pt-3'><b>댓글수정</b></h2>
    </div>

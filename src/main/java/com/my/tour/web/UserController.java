@@ -84,9 +84,13 @@ public class UserController {
 		if(userService.getUserDto(user.getUserId()).size() == 1) {
 			if(saveId != null && saveId.equals("on")) {	
 				Cookie cookie = new Cookie("userId", user.getUserId());
-				cookie.setMaxAge(10);
+				cookie.setMaxAge(600);
 				response.addCookie(cookie);
-			} 
+			} else {
+				Cookie cookie = new Cookie("userId", null);
+			    cookie.setMaxAge(0);
+				response.addCookie(cookie);
+			}
 			
 			String url = (String)session.getAttribute("previousPage");
 			

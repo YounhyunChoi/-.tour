@@ -85,7 +85,7 @@ public class CommentController {
 		}
 		
 		mv.setViewName("admin/comment/delComment");
-		mv.addObject("comment", commentService.getCommentDto(comtNum).get(0)); 
+		mv.addObject("comment", comment); 
 		
 		return mv;
 	}

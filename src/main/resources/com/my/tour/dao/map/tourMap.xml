@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id='selectTour' resultType='tour'>
-		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price
+		select tour_num, tour_name, tour_content, tour_sdate, tour_edate, tour_price, discount_price
 		from tours
 		where tour_num = #{tourNum}
 	</select>

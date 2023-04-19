@@ -14,7 +14,7 @@ public interface TourService {
 	List<Tour> getAllTours();
 	List<Tour> getTour(int tourNum);
 	List<TourDto> getTourList();
-	List<ReviewDto> getReviewDto();
+	List<ReviewDto> getReview(int tourNum);
 	List<ReviewImage> getReviewImages(int reviewNum);
 	void addTourTemp(int tourTempNum, String adminId);
 	void addTour(String tourName, String tourContent, LocalDate tourSDate, LocalDate tourEDate, int tourPrice, int discountPrice, String adminId);

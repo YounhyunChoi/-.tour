@@ -9,15 +9,18 @@ import org.springframework.stereotype.Service;
 import com.my.tour.dao.ReservationDao;
 import com.my.tour.dao.ReviewDao;
 import com.my.tour.dao.TourDao;
+import com.my.tour.dao.TourImageDao;
 import com.my.tour.domain.Reservation;
 import com.my.tour.domain.ReservationDto;
 import com.my.tour.domain.Review;
 import com.my.tour.domain.Tour;
+import com.my.tour.domain.TourImage;
 
 @Service
 public class ReservationServiceImpl implements ReservationService{
 	@Autowired private ReservationDao reservationDao;
 	@Autowired private TourDao tourDao;
+	@Autowired private TourImageDao tourImageDao;
 	@Autowired private ReviewDao reviewDao;
 	
 	@Override
@@ -53,5 +56,10 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public List<Review> getReview(int resvNum){
 		return reviewDao.selectReviews(resvNum);
+	}
+
+	@Override
+	public List<TourImage> getTourImage(int tourNum) {
+		return tourImageDao.selectTourImages(tourNum);
 	}
 }

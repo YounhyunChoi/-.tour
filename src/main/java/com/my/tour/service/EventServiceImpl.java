@@ -56,7 +56,7 @@ public class EventServiceImpl implements EventService {
 	}
 	
 	@Override
-	public void addEventImage(String eventImageName, int eventNum) {
+	public void addEventImages(String eventImageName, int eventNum) {
 		eventImageDao.insertEventImage(eventImageName, eventNum);
 	}
 	

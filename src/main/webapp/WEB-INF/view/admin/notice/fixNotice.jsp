@@ -53,6 +53,8 @@ function showNoticeImage() {
 }
 
 $(() => {
+	let notice
+	
 	$.ajax({
 		url: 'getNotice',
 		data: {
@@ -60,10 +62,9 @@ $(() => {
 		},
 		dataType: 'json',
 		success: notices => {
-			let notice = notices.at(0)
+			notice = notices.at(0)
 			$('#noticeTitle').val(`\${notice.noticeTitle}`)
 			$('#noticeContent').val(`\${notice.noticeContent}`)
-			
 		}
 	})
 	
@@ -97,7 +98,76 @@ $(() => {
 					noticeContent: $('#noticeContent').val()	
 				}),
 				success: () => {
-					$(location).attr('href', 'adminList')
+					let html = `
+						<div class='col'>
+				  			<div class='row mt-2'>
+				           			<h3 class='noticeName'>
+					        			<span id='noticeNum'><b>${noticeNum}.</b></span>
+					        		<b>` + $('#noticeTitle').val() + `</b>
+					        		</h3>
+					        		<span class='col noticeDate'>
+						            	<p>작성일 \${notice.noticeDate}</p>
+							        	<hr>
+						        	</span>
+						        	<div class='row mb-2' id='cardImg'>
+					            		<div class='col'>	
+					                		<div class='row me-0 py-2' id='noticeImg' style='height: 14rem;'>`
+               		$.ajax({
+           		  		url: 'getNoticeImage',
+           		  		data: {
+           		  			noticeNum: ${param.noticeNum}
+           		  		},
+           		  		dataType: 'json',
+           		  		success: noticeImages => {
+           		  			if(!noticeImages.length) {
+           		  				$(() => {
+           		  					$('#noticeImg').hide()
+           		  				})
+           		  			} else if(noticeImages.length != 1) {
+           		  				html += `<div class='carousel slide' id='noticeCarousel' data-ride='carousel'>
+           		                        <div class='carousel-inner noticeImg'>`
+           						$.each(noticeImages, (i, noticeImage) => {
+           							if(i == 1) {
+           								html +=
+           										`<div class='carousel-item active'>
+           					                        <img src='<c:url value="/attach/` + noticeImage + `"/>' style="max-width:100%; height:100%;"/>
+           					                    </div>`
+           							} else {
+           								html +=
+           										`<div class='carousel-item'>
+           					                        <img src='<c:url value="/attach/` + noticeImage + `"/>' style="max-width:100%; height:100%;"/>
+           					                    </div>`
+           							}
+           						})
+           		                html += `</div>
+           		                        <a href='#noticeCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+           		                            <i class="bi bi-chevron-left tourCarouselBtn"></i>
+           		                            <div class="visually-hidden">Previous</div>
+           		                        </a>
+           		                        <a href='#noticeCarousel' class='carousel-control-next' data-bs-slide='next'>
+           		                            <i class="bi bi-chevron-right tourCarouselBtn"></i>
+           		                            <div class="visually-hidden">Next</div>
+           		                        </a>
+           		                    </div>`               
+           		  			} else {
+           		  				html += `<img src='<c:url value="/attach/` + noticeImages[0] + `"/>' style="max-width:100%; height:100%;"/>`
+           		  			}
+           		  			html +=`
+	           	  							</div>
+	           				            </div>
+	           				        </div>
+	           					    <span>` + $('#noticeContent').val() + `</span>
+	           					</div>
+	           					<div class='mt-5 d-flex justify-content-end me-4'>
+	           						<a type='button' class='btn btn-darkblue' href='adminList'>
+			           	               목록가기
+			           	           	</a>
+	           					</div>
+	 				        </div>
+	 				    </div>`
+	 				    $('#mainBody').html(html)
+           		  		}
+           		  	})	
 				}
 			})
 		} else {

@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=utf-8' pageEncoding='utf-8' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -9,6 +10,32 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <link href='../res/style.css' rel='stylesheet'/>
 <script src='../res/navigation.js'></script>
+<script>
+$.ajax({
+	url: '../event/get',
+	dataType: 'json',
+	success: events => {
+		if(events.length) {
+			$.ajax({
+				url: '../event/getEventImage',
+				data: {
+					eventNum: events.at(0).eventNum
+				},
+				dataType: 'json',
+				success: eventImage => {
+					$('#eventImg').html(`<img src='<c:url value="/attach/\${eventImage.at(0)}"/>'/>`)
+					$('#eventImg').click(() => {
+						$(location).attr('href', '../event/view?eventNum=' + events.at(0).eventNum)
+					})
+				}
+			})
+		} else {
+			$('#eventImg').html('<h2>이벤트이미지</h2>')
+		}
+		
+	}
+})	
+</script>
 <title>myPage</title>
 <style>
     .lightBlue {
@@ -81,11 +108,10 @@
             </div>
         </div>
         <div class='row pt-4'>
-            <a href='../event/02.html'>
-            <div class='p-5 border border-2 border-dark'>
-                <div class='text-center'><h2>이벤트이미지</h2></div>
+            <div class='p-1 border border-2 border-dark'>
+                <div class='text-center' id='eventImg'>
+                </div>
             </div>
-            </a>
         </div>
     </div>
 </div>

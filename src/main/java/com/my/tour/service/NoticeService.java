@@ -13,7 +13,7 @@ public interface NoticeService {
 	void addNotice(String noticeTitle, String noticeContent, String adminId);
 	void fixNotice(Notice notice);
 	void delNotice(int noticeNum);
-	List<NoticeImage> getNoticeImages(int noticeNum);
+	List<NoticeImage> getNoticeImage(int noticeNum);
 	int addNoticeImage(String noticeImageName, int noticeNum);
 	int delNoticeImage(int noticeNum);
 }

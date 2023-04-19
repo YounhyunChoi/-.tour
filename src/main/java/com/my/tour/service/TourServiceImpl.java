@@ -44,8 +44,8 @@ public class TourServiceImpl implements TourService {
 	}
 	
 	@Override
-	public List<ReviewDto> getReviewDto() {
-		return reviewDao.selectReviewDtos();
+	public List<ReviewDto> getReview(int tourNum) {
+		return reviewDao.selectReviewByTourNum(tourNum);
 	}
 
 	@Override

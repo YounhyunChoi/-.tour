@@ -23,7 +23,8 @@ function showLogo() {
 	                    	</a>
 	                	</div>
 	                	<h1 class='text-center pt-3 text-white'><b>MAIN</b></h1>`)
-	                	
+	            $('#mainLogo').html(`<img style='max-width: 100%; max-height: 100%;'/>`)
+	            
 	        	$('img').attr('src', '<c:url value="/attach/' + logos.at(0).logoName + '"/>')
 			} else {
 				$('#adminHeader').html(`
@@ -33,6 +34,8 @@ function showLogo() {
 							</a>
 						</div>
 						<h1 class='text-center pt-3 text-white'><b>MAIN</b></h1>`)
+						
+				$('#mainLogo').html('로고이미지')
 			}
 		}
 	})
@@ -92,7 +95,7 @@ $(() => {
 					if(i < 3) {
 						html += `
 							<li value='\${event.eventNum}'>
-	                            <a href='../event/fixEvent?eventNum=\${event.eventNum}'>
+	                            <a href='../event/fix?eventNum=\${event.eventNum}'>
 	                            	\${event.eventTitle}
 	                            </a>
 	                            <p></p>
@@ -221,8 +224,8 @@ $(() => {
       <div class='col-9 mt-4' id='subBody'>
             <div class='row'>
                 <div class='col'>
-                    <div class='border border-dark p-5 mt-3 text-center'>
-                        <img style='max-width: 100%; max-height: 100%;'/>
+                    <div class='border border-dark p-5 mt-3 text-center' id='mainLogo'>
+
                     </div>
                 </div>
             </div>

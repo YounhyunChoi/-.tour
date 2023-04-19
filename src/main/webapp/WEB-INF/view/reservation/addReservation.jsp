@@ -37,11 +37,11 @@ $(() => {
 						tourNum: ${tour.tourNum},
 						resvEDate: `${tour.tourEDate}`
 					}
-			   })
-		   })
-   	   } else {
-	   	showOkModal('로그인페이지로 이동합니다.', '../user/login')
-   	}
+			   	})
+		   	})
+   	   	} else {
+   	   		$(location).attr('href', '../user/login')
+   		}
 	})
 })
 </script>
@@ -49,7 +49,7 @@ $(() => {
 <body>
 <header></header>
 <div class='navigation fixed-top'>
-	<div class='float-start mt-2 ms-2'>
+	<div class='float-start mt-3 ms-2'>
 		<i class='bi bi-chevron-left' id='historyBtn'></i>
 	</div>	
 	<div class='menuName'>

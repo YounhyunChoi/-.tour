@@ -23,7 +23,7 @@ $(() => {
 			let notice = notices.at(0)
 				noticeArr.push(
 			        `<h3 class='noticeName'>
-			        	<sapn id='noticeNum'><b>\${notice.noticeNum}.</b></span>
+			        	<span id='noticeNum'><b>\${notice.noticeNum}.</b></span>
 			        	<b>\${notice.noticeTitle}</b>
 			        </h3>
 			        <span class='col noticeDate'>
@@ -31,7 +31,7 @@ $(() => {
 			        </span>
 			        <hr>
 			        <div class='row mb-2' id='cardImg'>
-		            	<div class='col'>
+		            	<div class='col'>	
 		                	<div class='row me-0 py-2' id='noticeImg' style='height: 14rem;'>`)
 		  	$.ajax({
 		  		url: 'getNoticeImage',

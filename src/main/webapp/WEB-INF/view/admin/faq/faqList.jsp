@@ -23,11 +23,10 @@ $.ajax({
 				faqQuestion = `\${faq.faqQuestion}`
 				faqArr.push(`
 					<div class='row form-control d-flex justify-content-center'>
-			            <span id='` + faqQuestion.replace(/ /gi, "") +  `' class='fs-2 align-self-center'>
+			            <span id='` + faqQuestion.replace(/ /gi, "") +  `' class='text-truncate fs-2 align-self-center'>
 			                   \${faq.faqQuestion}
 			            </span>
-			        </div>
-					`)
+			        </div>`)
 			})
 			$('#faqContainer').append(faqArr.join(''))
 			$.each(faqs, (i, faq) => {
@@ -45,8 +44,7 @@ $.ajax({
                            	FAQ가 없습니다.
                        	</h3>
                    	</div>
-             		</div>
-           		`)
+             	</div>`)
 		}
 	}	
 })

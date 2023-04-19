@@ -28,7 +28,7 @@ function listNotice() {
 	                            </td>
 	                            <td>\${notice.noticeNum}</td>
 	                            <td>\${notice.noticeTitle}</td>
-	                            <td>\${notice.noticeContent}</td>
+	                            <td class='text-truncate' style="max-width: 150px;">\${notice.noticeContent}</td>
 	                            <td>\${notice.noticeDate}</td>
                         	</tr>`
                        )
@@ -38,19 +38,51 @@ function listNotice() {
 				$('#notices').append(
 					'<tr><td colspan=5 class=text-center>등록된 공지사항이 없습니다.</td></tr>')
 			}
-					
 		}
 	})
 }
 $(() => {
 	$('#fixNoticeBtn').click(() => {
 		if($('#noticeNum:checked').val()){
-			$('#fixNoticeBtn').attr('href', '../notice/fix?noticeNum=' + $('#noticeNum:checked').val())
+			$('#fixNoticeBtn').attr('href', 'fix?noticeNum=' + $('#noticeNum:checked').val())
 		}
-	})
-	
+	})	
 	listNotice()
 	
+	$('#searchBtn').click(() => {
+		if($('#noticeSearch').val()) {
+			$.ajax({
+				url: 'get',
+				success: notices => {
+					const noticeSearchArr = []	
+					if(notices.length) {				
+						$.each(notices, (i, notice) => {
+							if((notice.noticeTitle).includes($('#noticeSearch').val())) {
+								noticeSearchArr.push(
+									`<tr>
+			                            <td class='align-middle'>
+			                            	<input type='radio' name='noticeHeader' id='noticeNum' value='\${notice.noticeNum}'/>
+			                            </td>
+			                            <td>\${notice.noticeNum}</td>
+			                            <td>\${notice.noticeTitle}</td>
+			                            <td class='text-truncate' style="max-width: 150px;">\${notice.noticeContent}</td>
+			                            <td>\${notice.noticeDate}</td>
+		                        	</tr>`)
+							}
+						})
+					}
+					
+					if(!noticeSearchArr.length) {
+						noticeSearchArr.push(
+								'<tr><td colspan=5 class=text-center>검색된 공지사항이 없습니다.</td></tr>')
+					}
+						
+					$('#notices').empty()
+					$('#notices').append(noticeSearchArr.join(''))
+				}
+			})
+		} else listNotice()
+	})
 })
 </script>
 <title>공지사항</title>
@@ -59,45 +91,45 @@ $(() => {
 </head>
 <body>
 <header>
-    <div class='container-fluid'>
-        <div class='row'>
-            <div class='col'>
-                <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <c:if test='${logoName != null}'>
-	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
-		           			<a href='../user/adminMain'>
-	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
-	                    	</a>
-                    	</div>
-					</c:if>
-					<c:if test='${logoName == null}'>
-						<div class='float-start m-4 ms-4'>
-							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
-								로고이미지
-							</a>
-						</div>
-					</c:if>
-                    <h1 class='text-center pt-3 text-white'><b>공지사항</b></h1>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class='container-fluid'>
     <div class='row'>
         <div class='col'>
-            <div class='navigation fixed-top pt-2' id='subHeader'>
-                <h6 class='text-white p-2'>
-                    <a href='../user/adminMain'>메인</a> > <a href='../notice/adminList'>공지사항</a>
-                </h6>
+            <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
+                <c:if test='${logoName != null}'>
+	                 <div class='float-start ms-4 mt-1' style='height: 50px;'>
+	         			<a href='../user/adminMain'>
+	                 		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+	                 	</a>
+                	</div>
+				</c:if>
+				<c:if test='${logoName == null}'>
+					<div class='float-start m-4 ms-4'>
+						<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
+							로고이미지
+						</a>
+					</div>
+				</c:if>
+                <h1 class='text-center pt-3 text-white'><b>공지사항</b></h1>
             </div>
         </div>
     </div>
+</div>
+<div class='row'>
+    <div class='col'>
+        <div class='navigation fixed-top pt-2' id='subHeader'>
+            <h6 class='text-white p-2'>
+                <a href='../user/adminMain'>메인</a> > <a href='../notice/adminList'>공지사항</a>
+            </h6>
+        </div>
+    </div>
+</div>
 </header>
 <div class='row' id='mainBody'>
    <div class='col'>
         <div class='mb-4'>
             <div class='row'>
                 <div class='col-6 pt-2'>
-                    <input type='text' class='form-control' id='search'/>
+                    <input type='text' class='form-control' id='noticeSearch'/>
                 </div>
                 <div class='col'>
                     <a type='button' class='btn'><i class='icon bi bi-search' id='searchBtn'></i></a>

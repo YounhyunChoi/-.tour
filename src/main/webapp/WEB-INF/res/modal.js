@@ -11,8 +11,13 @@ function showConfirmModal(confirmMsg,url) {
    	$('#modalMsg').text(confirmMsg)
    	$('#modalBtn').show()
    	$('#modalOk').hide()
-   	$('#okBtn').click(() => location.href=url)
+   	if(url) {
+   		$('#okBtn').click(() => location.href=url)
+	}
    	$('#modal').modal('show')
+   	$('#okBtn').click(() => {
+		$('#modal').modal('hide')
+	})
 }
 
 function showOkModal(okMsg, url) {

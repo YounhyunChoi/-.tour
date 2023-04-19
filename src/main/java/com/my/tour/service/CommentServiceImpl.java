@@ -36,7 +36,7 @@ public class CommentServiceImpl implements CommentService{
 	
 	@Override
 	public List<ReviewDto> getReview(int reviewNum) {
-		return reviewDao.selectReview(reviewNum);
+		return reviewDao.selectReviewByReviewNum(reviewNum);
 	}
 
 	@Override

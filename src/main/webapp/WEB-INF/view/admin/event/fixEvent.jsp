@@ -53,6 +53,8 @@ function showEventImage() {
 }
 
 $(() => {
+	let event
+	
 	$.ajax({
 		url: 'getEvent',
 		data: {
@@ -60,7 +62,7 @@ $(() => {
 		},
 		dataType: 'json',
 		success: events => {
-			let event = events.at(0)
+			event = events.at(0)
 			$('#eventTitle').val(`\${event.eventTitle}`)
 			$('#eventContent').val(`\${event.eventContent}`)
 		}
@@ -71,7 +73,7 @@ $(() => {
 	$('#eventImageUp').find('input').change(() => {
 		let formData = new FormData($('#eventImageUp')[0])
 		$.ajax({
-			url: 'addEventImage',
+			url: 'addEventImages',
 			method: 'post',
 			contentType: false,
 			processData: false,
@@ -96,7 +98,76 @@ $(() => {
 					eventContent: $('#eventContent').val()
 				}),
 				success: () => {
-					$(location).attr('href', 'adminList')
+					let html = `
+						<div class='col'>
+				  			<div class='row mt-2'>
+				           			<h3 class='eventName'>
+					        			<span id='eventNum'><b>${eventNum}.</b></span>
+					        		<b>` + $('#eventTitle').val() + `</b>
+					        		</h3>
+					        		<span class='col eventDate'>
+						            	<p>작성일 \${event.eventDate}</p>
+							        	<hr>
+						        	</span>
+						        	<div class='row mb-2' id='cardImg'>
+					            		<div class='col'>	
+					                		<div class='row me-0 py-2' id='eventImg'>`
+               		$.ajax({
+           		  		url: 'getEventImage',
+           		  		data: {
+           		  			eventNum: ${param.eventNum}
+           		  		},
+           		  		dataType: 'json',
+           		  		success: eventImages => {
+           		  			if(!eventImages.length) {
+           		  				$(() => {
+           		  					$('#eventImg').hide()
+           		  				})
+           		  			} else if(eventImages.length != 1) {
+           		  				html += `<div class='carousel slide' id='eventCarousel' data-ride='carousel'>
+           		                        <div class='carousel-inner eventImg'>`
+           						$.each(eventImages, (i, eventImage) => {
+           							if(i == 1) {
+           								html +=
+           										`<div class='carousel-item active'>
+           					                        <img src='<c:url value="/attach/` + eventImage + `"/>' style="max-width:100%; height:100%;"/>
+           					                    </div>`
+           							} else {
+           								html +=
+           										`<div class='carousel-item'>
+           					                        <img src='<c:url value="/attach/` + eventImage + `"/>' style="max-width:100%; height:100%;"/>
+           					                    </div>`
+           							}
+           						})
+           		                html += `</div>
+           		                        <a href='#eventCarousel' class='carousel-control-prev' data-bs-slide='prev'>
+           		                            <i class="bi bi-chevron-left tourCarouselBtn"></i>
+           		                            <div class="visually-hidden">Previous</div>
+           		                        </a>
+           		                        <a href='#eventCarousel' class='carousel-control-next' data-bs-slide='next'>
+           		                            <i class="bi bi-chevron-right tourCarouselBtn"></i>
+           		                            <div class="visually-hidden">Next</div>
+           		                        </a>
+           		                    </div>`               
+           		  			} else {
+           		  				html += `<img src='<c:url value="/attach/` + eventImages[0] + `"/>' style="max-width:100%; height:100%;"/>`
+           		  			}
+           		  			html +=`
+	           	  							</div>
+	           				            </div>
+	           				        </div>
+	           					    <span>` + $('#eventContent').val() + `</span>
+	           					</div>
+	           					<div class='mt-5 d-flex justify-content-end me-4'>
+	           						<a type='button' class='btn btn-darkblue' href='adminList'>
+			           	               목록가기
+			           	           	</a>
+	           					</div>
+	 				        </div>
+	 				    </div>`
+	 				    $('#mainBody').html(html)
+           		  		}
+           		  	})	
 				}
 			})
 		} else showOkModal('누락된 필수 입력사항이 있습니다. 확인 후 입력바랍니다.')

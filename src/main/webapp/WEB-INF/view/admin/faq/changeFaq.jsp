@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=UTF-8' pageEncoding='UTF-8'%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <html>
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -35,9 +36,33 @@ $('#faqFixBtn').click(() => {
 	    			oldFaqQuestion: `${param.faqQuestion}`,
 	    			newFaqQuestion: $('#questionInput').val(),
 	    			newFaqAnswer: $('#answerInput').val()
+	    		},
+	    		success: () => {
+	    			let html = `
+		    			<div class='row mt-3'>
+				            <div class='col'>
+				                <div class='card shadow-sm'>
+				                    <div class='card-header d-flex justify-content-between'>
+				                        <div class='faqQuestion'>` +
+				                        	$('#questionInput').val() +
+				                        `</div>
+				                    </div>
+				                    <div>
+				                        <div class='faqAnswer card-body bg-white'>` +
+				                        	$('#answerInput').val() +
+				                        `</div>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				        <div class='mt-5 d-flex justify-content-end me-4'>
+	   						<a type='button' class='btn btn-darkblue' href='adminList'>
+	           	               목록가기
+	           	           	</a>
+	   					</div>`
+	   				$('#mainBody').html(html)
 	    		}
-	    	})    
-	    	location.href='adminList'
+	    	})
 	    } else if($('#questionInput').val() == '' && !$('#answerInput').val()) {
 	    	showOkModal('제목과 내용을 입력해주세요.')
 	    } else if(!$('#answerInput').val()){
@@ -67,9 +92,19 @@ $('#faqDelBtn').click(() => {
         height: 20rem;
         resize: none;
     }
+    
     textarea {
       resize: none;
    }
+   	
+   	.card {
+        background-color: lightblue;
+    }
+
+    hr {
+        color: black;
+        opacity: 1;
+    }
 </style>
 </head>
 <body>
@@ -78,9 +113,20 @@ $('#faqDelBtn').click(() => {
         <div class='row'>
             <div class='col'>
                 <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                    <div class='float-start m-4 ms-4'>
-                        <a class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>로고이미지</a>
-                    </div>
+                    <c:if test='${logoName != null}'>
+	                    <div class='float-start ms-4 mt-1' style='height: 50px;'>
+		           			<a href='../user/adminMain'>
+	                    		<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+	                    	</a>
+                    	</div>
+					</c:if>
+					<c:if test='${logoName == null}'>
+						<div class='float-start m-4 ms-4'>
+							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
+								로고이미지
+							</a>
+						</div>
+					</c:if>
                     <h1 class='text-center pt-3 text-white'><b>FAQ수정</b></h1>
                 </div>
             </div>

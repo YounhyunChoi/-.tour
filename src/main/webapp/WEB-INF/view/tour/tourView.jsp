@@ -23,7 +23,10 @@ function addWish() {
 		data: {
 			tourNum: ${param.tourNum}
 		},
-		success: showOkModal('여행코스가 찜 되었습니다.')
+		success: () => {
+			showOkModal('여행코스가 찜 되었습니다.')
+			
+		}
 	})
 }
 
@@ -117,12 +120,28 @@ $(() => {
 						}
 					})
 				}else{
-					showOkModal('로그인페이지로 이동합니다.', '../user/login')
+					$(location).attr('href', '../user/login')
 				}
 			})
-			
 		}
 	})
+	
+	if('${userId}' != '') {
+		$.ajax({
+			url: '../wish/get',
+			success: wishes => {
+				if(wishes.length) {					
+					$.each(wishes, (i, wish) => {
+						result = wishes.filter(wish => ${param.tourNum} == wish.tourNum);
+					})
+					
+					if(result.length) {
+						$('#tourWishBtn').removeClass('bi-heart').addClass('bi-heart-fill')
+					}
+				}
+			}
+		})
+   	}
 	
 	//여행코스 공유
 	$('#tourShareBtn').click(() => {
@@ -155,9 +174,11 @@ $(() => {
 							showOkModal('이미 찜한 여행코스입니다.')
 						} else {
 							addWish()
+							$('#tourWishBtn').removeClass('bi-heart').addClass('bi-heart-fill')
 						}
 					} else {
 						addWish()
+						$('#tourWishBtn').removeClass('bi-heart').addClass('bi-heart-fill')
 					}
 				}
 			})
@@ -169,69 +190,45 @@ $(() => {
 	//리뷰 리스트
 	$.ajax({
 		url: 'getReviews',
+		data: {
+			tourNum: ${param.tourNum}
+		},
 		dataType: 'json',
 		success: reviews => {
 			if(reviews.length) {
 				const reviewArr = []
 				
 				$.each(reviews, (i, review) => {
-					if(review.userId != `${userId}`) {
-						reviewArr.push(`
-							<div class='row mx-2 mt-5 shadow-sm border'>
-								<div class='col'>
-						            <div class='row align-items-center border-bottom'>
-						                <div class='col-4 fs-6'>후기번호
-						                	<span class='reivewNum'>\${review.reviewNum}</span>
-						                </div>
-						                <div class='col fs-5'>\${review.tourName}</div>
-						            </div>
-						            <div class='row mt-2'>
-						                <div class='col-4'>
-						                    <img class='rounded-1 shadow-sm reviewImage' src='<c:url value="/attach/` + review.reviewImageName + `"/>' id='\${review.userId}' style="max-width:100%; height:100%;"/>
-						                </div>
-						                <div class='col-6 ms-2 fs-5 text-left'>
-						                    <p class='m-0'>제목: \${review.reviewTitle}</p>
-						                    <p class='m-0' id='score\${review.userId}'></p>
-						                    <p class='m-0'>\${review.userId}</p>
-						                </div>
-						            </div>
-						            <div class='row'>
-						                <p class='text-end'>
-						                    작성일 \${review.reviewDate}
-						                </p>
-						            </div>
-						        </div>
-					        </div>
-						`)
-					} else {
-						reviewArr.push(`
-							<div class='row mx-2 mt-5 shadow-sm border'>
-								<div class='col'>
-						            <div class='row align-items-center border-bottom'>
-						                <div class='col-4 fs-6'>후기번호
-						                	<span class='reivewNum'>\${review.reviewNum}</span>
-						                </div>
-						                <div class='col fs-5'>\${review.tourName}</div>
-						            </div>
-						            <div class='row mt-2'>
-						                <div class='col-4'>
-						                	<img class='rounded-1 shadow-sm reviewImage' src='<c:url value="/attach/` + review.reviewImageName + `"/>' id='\${review.userId}' style="max-width:100%; height:100%;"/>
-						                </div>
-						                <div class='col-6 ms-2 fs-5 text-left'>
-						                    <p class='m-0'>제목: \${review.reviewTitle}</p>
-						                    <p class='m-0' id='score\${review.userId}'></p>
-						                    <p class='m-0'>\${review.userId}</p>
-						                </div>
-						            </div>
-						            <div class='row'>
-						                <p class='text-end'>
-						                    작성일: \${review.reviewDate}
-						                </p>
-						            </div>
+					reviewArr.push(`
+						<div class='row mx-2 mt-5 shadow-sm border'>
+							<div class='col'>
+					            <div class='row align-items-center border-bottom'>
+					                <div class='col-4 fs-6'>후기번호
+					                	<span class='reivewNum'>\${review.reviewNum}</span>
+					                </div>
+					                <div class='col fs-5'>\${review.tourName}</div>
 					            </div>
-				            </div>
-						`)
-					}
+					            <div class='row mt-2' id='\${review.reviewNum}'>`)
+					if(review.reviewImageName) {
+						reviewArr.push(`<div class='col-4'>
+			                    	<img class='rounded-1 shadow-sm reviewImage' src='<c:url value="/attach/` + review.reviewImageName + `"/>' style="max-width:100%; height:100%;"/>
+				                </div>`)
+					}					                
+					reviewArr.push(`<div class='col-6 ms-2 fs-5 text-left'>
+					                    <p class='m-0'>제목: \${review.reviewTitle}</p>
+					                    <p class='m-0' id='score\${review.userId}'></p>
+					                    <p class='m-0'>\${review.userId}</p>
+					                </div>
+					            </div>
+					            <div class='row'>
+					                <p class='text-end'>
+					                    작성일 \${review.reviewDate}
+					                </p>
+					            </div>
+					        </div>
+				        </div>
+					`)
+					
 				})
 				$('#reviewContainer').append(reviewArr.join(''))
 				
@@ -258,8 +255,8 @@ $(() => {
 				
 				//리뷰 클릭시 이동
 				$.each(reviews, (i, review) => {
-					$(`#\${review.userId}`).click(() => {
-						location.href = `../review/view?reviewNum=\${review.reviewNum}`
+					$(`#\${review.reviewNum}`).click(() => {
+						$(location).attr('href', `../review/view?reviewNum=\${review.reviewNum}`)
 					})
 				})
 			} else {

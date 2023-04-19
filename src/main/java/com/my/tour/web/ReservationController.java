@@ -30,7 +30,15 @@ public class ReservationController {
 	@GetMapping("get")
 	@GetAccess
 	public List<ReservationDto> getResvsWithTour(HttpServletRequest request, HttpSession session) {
-		return reservationService.getResvsWithTour((String)session.getAttribute("userId"));
+		List<ReservationDto> reservationDtos = reservationService.getResvsWithTour(
+												(String)session.getAttribute("userId"));
+		
+		for(ReservationDto reservationDto: reservationDtos) {
+			reservationDto.setTourImageName(reservationService.getTourImage(
+					reservationDto.getTourNum()).get(0).getTourImageName());
+		}
+
+		return reservationDtos;
 	}
 		
 	@GetMapping("reviewGet")

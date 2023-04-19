@@ -51,7 +51,7 @@ $(() => {
                           </div>
                           <div class='col-4'>
                               <div class='fs-6'>댓글번호 `
-               for(let i = comment.comtNum; i < 4; i++) {
+               for(let i = (comment.comtNum + '').length ; i < 4; i++) {
                   commenthtml += '0'
                }               
                commenthtml +=   `\${comment.comtNum}
@@ -67,7 +67,7 @@ $(() => {
                if('${userId}' == comment.userId) {
                   commenthtml += `<ul class='dropdown-menu commentMenu p-0 border-olive'>
                                  <li><a class='dropdown-item btn border-olive' 
-                                 href="../comment/fix?comtNum=\${comment.comtNum}&reviewNum=${review.reviewNum}">수정</a></li>
+                                 href="../comment/fix?comtNum=\${comment.comtNum}&reviewNum=${review.reviewNum}&comtContent=\${comment.comtContent}">수정</a></li>
                               </ul>`
                } else {
                   commenthtml += `<ul class='dropdown-menu commentMenu p-0 border-lightRed'>
@@ -87,7 +87,7 @@ $(() => {
                       <div class='row border-start border-end rounded-bottom'>
                           <div class='col'>
                               <div class='fs-6 text-end'>
-                                  \${comment.comtDate}
+                                  작성일 \${comment.comtDate}
                               </div>
                           </div>
                       </div>
@@ -106,7 +106,7 @@ $(() => {
 <body>
 <header></header>
 <div class='navigation fixed-top'>
-    <div class='float-start mt-2 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
+    <div class='float-start mt-3 ms-2'><i class='bi bi-chevron-left' id='historyBtn'></i></div>
     <div class='menuName'>
         <h2 class='text-center pt-3'><b>후기 조회</b></h2>
     </div>

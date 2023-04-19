@@ -22,18 +22,19 @@
 		order by review_num desc
 	</select>
 	
-	<select id='selectReview' resultType='reviewDto'>
+	<select id='selectReviewByReviewNum' resultType='reviewDto'>
 		select review_num, tour_name, review_title, review_content, score, review_date, user_id
 		from reviews join tours
 		using (tour_num)
-		<where>
-			<if test='reviewNum != null'>
-				and review_num = #{reviewNum}
-			</if>
-			<if test='tourNum != null'>
-				and tour_num = #{tourNum}
-			</if>
-		</where>
+		where review_num = #{reviewNum}
+		order by review_num desc
+	</select>
+	
+	<select id='selectReviewByTourNum' resultType='reviewDto'>
+		select review_num, tour_name, review_title, review_content, score, review_date, user_id
+		from reviews join tours
+		using (tour_num)
+		where tour_num = #{tourNum}
 		order by review_num desc
 	</select>
 	

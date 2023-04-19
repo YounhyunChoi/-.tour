@@ -11,17 +11,12 @@
 <link href='../../res/adminStyle.css' rel='stylesheet'/>
 <script src='../../res/adminNavigation.js'></script>
 <script>
-$(() => {
-	$('#fixEventBtn').click(() => {
-		if($('#eventNum:checked').val()) {
-			$('#fixEventBtn').attr('href', '../event/fix?eventNum=' + $('#eventNum:checked').val())
-		}		
-	})
-	
+function listEvent() {
 	$.ajax({
 		url: 'get',
 		dataType: 'json',
 		success: events => {
+			$('#events').empty()
 			if(events.length){
 				const eventArr = []
 				
@@ -33,7 +28,7 @@ $(() => {
                             </td>
                             <td>\${event.eventNum}</td>
                             <td>\${event.eventTitle}</td>
-                            <td>\${event.eventContent}</td>
+                            <td class='text-truncate' style="max-width: 150px;">\${event.eventContent}</td>
                             <td>\${event.eventDate}</td>
                         </tr>`)
 				})
@@ -44,6 +39,50 @@ $(() => {
 			}
 		}
 	})
+}
+
+$(() => {
+	$('#fixEventBtn').click(() => {
+		if($('#eventNum:checked').val()) {
+			$('#fixEventBtn').attr('href', 'fix?eventNum=' + $('#eventNum:checked').val())
+		}		
+	})
+	listEvent()
+	
+	$('#searchBtn').click(() => {
+		if($('#eventSearch').val()) {
+			$.ajax({
+				url: 'get',
+				success: events => {
+					const eventSearchArr = []
+					if(events.length) {
+						$.each(events, (i, event) => {
+							if((event.eventTitle).includes($('#eventSearch').val())) {
+								eventSearchArr.push(
+									`<tr>
+			                            <td class='align-middle'>
+			                            	<input type='radio' id='eventNum' name='eventHeader' value='\${event.eventNum}'/>
+			                            </td>
+			                            <td>\${event.eventNum}</td>
+			                            <td>\${event.eventTitle}</td>
+			                            <td class='text-truncate' style="max-width: 150px;">\${event.eventContent}</td>
+			                            <td>\${event.eventDate}</td>
+			                        </tr>`)
+							}
+						})
+					}
+					
+					if(!eventSearchArr.length) {
+						eventSearchArr.push(
+							'<tr><td colspan=5 class=text-center>검색된 이벤트가 없습니다.</td></tr>')
+					}
+					
+					$('#events').empty()
+					$('#events').append(eventSearchArr.join(''))
+				}
+			})
+		} else listEvent()
+	})
 })
 </script>
 <title>이벤트목록</title>
@@ -51,29 +90,29 @@ $(() => {
 </head>
 <body>
 <header>
-    <div class='container-fluid'>
-        <div class='row'>
-            <div class='col'>
-                <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
-                	<c:if test='${logoName != null}'>
-                		<div class='float-start ms-4 mt-1' style='height: 50px;'>
-                			<a href='../user/adminMain'>
-                				<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
-                			</a>
-                		</div>
-                	</c:if>
-                	<c:if test='${logoName == null}'>
-						<div class='float-start m-4 ms-4'>
-							<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
-								로고이미지
-							</a>
-						</div>
-					</c:if>
-                	<h1 class='text-center pt-3 text-white'><b>이벤트목록</b></h1>
-                </div>
+<div class='container-fluid'>
+    <div class='row'>
+        <div class='col'>
+            <div class='navigation fixed-top pt-2 pb-3' id='adminHeader'>
+            	<c:if test='${logoName != null}'>
+            		<div class='float-start ms-4 mt-1' style='height: 50px;'>
+            			<a href='../user/adminMain'>
+            				<img src='<c:url value="/attach/${logoName}"/>' id='logo'/>
+            			</a>
+            		</div>
+            	</c:if>
+            	<c:if test='${logoName == null}'>
+					<div class='float-start m-4 ms-4'>
+						<a  class='border border-dark text-white p-2 mt-1' href='../user/adminMain' id='logo'>
+							로고이미지
+						</a>
+					</div>
+				</c:if>
+            	<h1 class='text-center pt-3 text-white'><b>이벤트목록</b></h1>
             </div>
         </div>
     </div>
+</div>
     <div class='row'>
         <div class='col'>
             <div class='navigation fixed-top pt-2' id='subHeader'>
@@ -89,10 +128,10 @@ $(() => {
         <div class='mb-4'>
             <div class='row'>
                 <div class='col-6 pt-2'>
-                    <input type='text' class='form-control'/>
+                    <input type='text' class='form-control' id='eventSearch'/>
                 </div>
                 <div class='col'>
-                    <a href='#' type='button' class='btn'><i class='icon bi bi-search'></i></a>
+                    <a type='button' class='btn'><i class='icon bi bi-search' id='searchBtn'></i></a>
                 </div>
                 <div class='col'>
                     <div class='d-flex justify-content-end'>

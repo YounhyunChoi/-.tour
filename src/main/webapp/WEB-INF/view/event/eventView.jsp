@@ -31,7 +31,7 @@ $(() => {
 			        <hr>
 			        <div class='row mb-2' id='cardImg'>
 	            		<div class='col'>
-	                		<div class='row me-0 py-2' id='eventImg' style='height: 10rem;'>`)
+	                		<div class='row me-0 py-2' id='eventImg'>`)
 	        $.ajax({
 	        	url: 'getEventImage',
 	        	data: {

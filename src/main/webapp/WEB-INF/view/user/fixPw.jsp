@@ -48,8 +48,9 @@
                   	})
                 })
         		showOkModal('비밀번호가 변경되었습니다.', 'login')
+        	} else {
+        		showOkModal('영문, 숫자로 구성된 6~12자리 비밀번호를 입력해주세요.')
         	}
-        	
         })
     })
 </script>

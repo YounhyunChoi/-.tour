@@ -54,10 +54,12 @@ public class TourController {
 	
 	@GetMapping("getReviews")
 	@GetAccess
-	public List<ReviewDto> getReviews(HttpServletRequest request) {
-		List<ReviewDto> reviewList = tourService.getReviewDto();
+	public List<ReviewDto> getReviews(HttpServletRequest request, int tourNum) {
+		List<ReviewDto> reviewList = tourService.getReview(tourNum);
 		for(ReviewDto reviewDto: reviewList) {
-			reviewDto.setReviewImageName(tourService.getReviewImages(reviewDto.getReviewNum()).get(0).getReviewImageName());
+			if(tourService.getReviewImages(reviewDto.getReviewNum()).size() != 0) {
+				reviewDto.setReviewImageName(tourService.getReviewImages(reviewDto.getReviewNum()).get(0).getReviewImageName());
+			}
 		}
 		return reviewList;
 	}

@@ -14,6 +14,6 @@ public interface EventService {
 	void fixEvent(Event event);
 	void delEvent(int eventNum);
 	List<EventImage> getEventImages(int eventNum);
-	void addEventImage(String eventImageName, int eventNum);
+	void addEventImages(String eventImageName, int eventNum);
 	void delEventImage(int eventNum);
 }

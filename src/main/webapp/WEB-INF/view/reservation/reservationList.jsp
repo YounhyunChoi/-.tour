@@ -95,20 +95,22 @@ $.ajax({
 		}else {
 			$('#reservationContainer').html(`
         			<div class='row d-block my-5'>
-                     <div class='col text-center pt-4'>
-                     	<i class='bi bi-calendar-check-fill reservationIcon'></i>
-                        <h3 class='my-3'>
-                            예약 내역이 없습니다.
-                        </h3>
-                     </div>
-                     <div class='col text-center mt-5'>
-                         <button id='mypageBtn' type='button' class='px-5 py-2 border-0 rounded text-center text-white btn-darkBlue'
-                            onclick="location.href='../tour'">
-                            여행코스 보러 가기
-                         </button>
-                     </div>
-               </div>
-        	`
+                     	<div class='col text-center pt-4'>
+                     		<i class='bi bi-calendar-check-fill reservationIcon'></i>
+                        	<h3 class='my-3'>
+                            	예약 내역이 없습니다.
+                        	</h3>
+                    	</div>
+                    	<div class='col text-center my-4'>
+		                	<p>상품을 찜해보세요</p>
+		            	</div>
+                     	<div class='col text-center mt-5'>
+                         	<button id='mypageBtn' type='button' class='px-5 py-2 border-0 rounded text-center text-white btn-darkBlue'
+                            	onclick="location.href='../tour'">
+                            	여행코스 보러 가기
+                         	</button>
+                     	</div>
+               		</div>`
         	)
 		}		
 	}

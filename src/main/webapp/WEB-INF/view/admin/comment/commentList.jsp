@@ -21,8 +21,12 @@ $(()=> {
 				$.each(commentList, (i, comment) => {
 					comments.push(
 							`<tr>
-		                    <td>\${comment.comtNum}</td>
-		                    <td>\${comment.comtContent}</td>
+		                    <td>`)
+		            for(let i = (comment.comtNum + '').length; i < 4; i++) {
+		            	comments.push('0')
+		            }        
+		            comments.push(`\${comment.comtNum}</td>
+		                    <td class='text-truncate' style="max-width: 150px;">\${comment.comtContent}</td>
 		                    <td>\${comment.userId}</td>
 		                    <td>\${comment.comtDate}</td>
 		                    <td>

@@ -20,10 +20,10 @@ $(() => {
 		dataType: 'json',
 		success: notices => {
 			if(notices.length) {
-				$('#noticeBar').html('<h4 class="mt-3">' + notices.at(0).noticeTitle + '</h4>')
+				$('#noticeBar').html('<h4 class="mt-3 text-center">' + notices.at(0).noticeTitle + '</h4>')
 				$('#noticeBar').attr('href', 'notice/view?noticeNum=' + notices.at(0).noticeNum)
 			} else {
-				$('#noticeBar').html('<h4 class="text-center">공지사항</h4>')
+				$('#noticeBar').html('<h4 class="mt-3 text-center">공지사항</h4>')
 			}
 			
 		}
@@ -114,15 +114,15 @@ $(() => {
 </div>
 <div class='row m-0'>
     <div class='col'>
-        <div class='row py-5 mt-4' id='eventImg'>
-        	<div class='py-5 fs-4'>이벤트이미지</div>
+        <div class='row py-1 mt-4' id='eventImg'>
+        	<div class='py-1 fs-4'>이벤트이미지</div>
         </div>
     </div>
 </div>
 <div class='row m-0'>
     <div class='col'>
-        <div class='row mt-4' id='tourImg'>
-        	<div class='py-5 fs-4'>여행코스이미지</div>
+        <div class='row py-1 mt-4' id='tourImg'>
+        	<div class='py-1 fs-4'>여행코스이미지</div>
         </div>
     </div>
 </div>
